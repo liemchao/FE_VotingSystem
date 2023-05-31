@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 import { useState } from "react";
 
 // react-router-dom components
@@ -34,13 +19,33 @@ import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDInput from "components/MDInput";
 import MDButton from "components/MDButton";
-
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
 // Authentication layout components
 import BasicLayout from "layouts/authentication/components/BasicLayout";
-
 // Images
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
+const config = {
+  apiKey: "AIzaSyDFsJS8u9XsIClfCOGZJQ4vg7JsJFSNA7Q",
+  authDomain: "fvssystemswp409.firebaseapp.com",
+  projectId: "fvssystemswp409",
+  storageBucket: "fvssystemswp409.appspot.com",
+  messagingSenderId: "153807743798",
+  appId: "1:153807743798:web:388557922974c341b16197",
+  measurementId: "G-DNJR3ZB3FW",
+};
+firebase.initializeApp(config);
 
+// Configure FirebaseUI.
+const uiConfig = {
+  // Popup signin flow rather than redirect flow.
+  signInFlow: "popup",
+  // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
+  signInSuccessUrl: "/dashboard",
+  // We will display Google and Facebook as auth providers.
+  signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
+};
 function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
 
@@ -124,6 +129,7 @@ function Basic() {
           </MDBox>
         </MDBox>
       </Card>
+      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
     </BasicLayout>
   );
 }
