@@ -133,7 +133,8 @@ function HeaderOne() {
         alignItems="center"
         minHeight="100vh"
         sx={{
-          backgroundImage: ({ palette: { gradients }, functions: { linearGradient, rgba } }) => `${linearGradient(rgba(gradients.dark.main, 0.5), rgba(gradients.dark.state, 0.5))}, url(${bgImage})`,
+          // backgroundImage: ({ palette: { gradients }, functions: { linearGradient, rgba } }) => `${linearGradient(rgba(gradients.dark.main, 0.5), rgba(gradients.dark.state, 0.5))}, url(${bgImage})`,
+          backgroundImage: `url(${bgImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -168,5 +169,4 @@ function HeaderOne() {
     </MKBox>
   );
 }
-
 export default HeaderOne;
