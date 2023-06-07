@@ -4,28 +4,29 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 // @mui material components
-import Card from "@mui/material/Card";
-import Switch from "@mui/material/Switch";
+
 import Grid from "@mui/material/Grid";
-import MuiLink from "@mui/material/Link";
+// import MuiLink from "@mui/material/Link";
 
 // @mui icons
-import FacebookIcon from "@mui/icons-material/Facebook";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import GoogleIcon from "@mui/icons-material/Google";
+// import FacebookIcon from "@mui/icons-material/Facebook";
+// import GitHubIcon from "@mui/icons-material/GitHub";
+// import GoogleIcon from "@mui/icons-material/Google";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDInput from "components/MDInput";
-import MDButton from "components/MDButton";
+// import MDBox from "components/MDBox";
+// import MDTypography from "components/MDTypography";
+// import MDInput from "components/MDInput";
+// import MDButton from "components/MDButton";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
+import TextField from "@mui/material/TextField";
+import Checkbox from "@mui/material/Checkbox";
 // Authentication layout components
-import BasicLayout from "layouts/authentication/components/BasicLayout";
 // Images
-import bgImage from "assets/images/bg-sign-in-basic.jpeg";
+// import bgImage from "assets/images/bg-sign-in-basic.jpeg";
+import { Button, Typography } from "@mui/material";
 const config = {
   apiKey: "AIzaSyDFsJS8u9XsIClfCOGZJQ4vg7JsJFSNA7Q",
   authDomain: "fvssystemswp409.firebaseapp.com",
@@ -49,88 +50,52 @@ const uiConfig = {
 function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
 
-  const handleSetRememberMe = () => setRememberMe(!rememberMe);
+  // const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
   return (
-    <BasicLayout image={bgImage}>
-      <Card>
-        <MDBox
-          variant="gradient"
-          bgColor="info"
-          borderRadius="lg"
-          coloredShadow="info"
-          mx={2}
-          mt={-3}
-          p={2}
-          mb={1}
-          textAlign="center"
-        >
-          <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-            Sign in
-          </MDTypography>
-          <Grid container spacing={3} justifyContent="center" sx={{ mt: 1, mb: 2 }}>
-            <Grid item xs={2}>
-              <MDTypography component={MuiLink} href="#" variant="body1" color="white">
-                <FacebookIcon color="inherit" />
-              </MDTypography>
-            </Grid>
-            <Grid item xs={2}>
-              <MDTypography component={MuiLink} href="#" variant="body1" color="white">
-                <GitHubIcon color="inherit" />
-              </MDTypography>
-            </Grid>
-            <Grid item xs={2}>
-              <MDTypography component={MuiLink} href="#" variant="body1" color="white">
-                <GoogleIcon color="inherit" />
-              </MDTypography>
-            </Grid>
-          </Grid>
-        </MDBox>
-        <MDBox pt={4} pb={3} px={3}>
-          <MDBox component="form" role="form">
-            <MDBox mb={2}>
-              <MDInput type="email" label="Email" fullWidth />
-            </MDBox>
-            <MDBox mb={2}>
-              <MDInput type="password" label="Password" fullWidth />
-            </MDBox>
-            <MDBox display="flex" alignItems="center" ml={-1}>
-              <Switch checked={rememberMe} onChange={handleSetRememberMe} />
-              <MDTypography
-                variant="button"
-                fontWeight="regular"
-                color="text"
-                onClick={handleSetRememberMe}
-                sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
-              >
-                &nbsp;&nbsp;Remember me
-              </MDTypography>
-            </MDBox>
-            <MDBox mt={4} mb={1}>
-              <MDButton variant="gradient" color="info" fullWidth>
-                sign in
-              </MDButton>
-            </MDBox>
-            <MDBox mt={3} mb={1} textAlign="center">
-              <MDTypography variant="button" color="text">
-                Don&apos;t have an account?{" "}
-                <MDTypography
-                  component={Link}
-                  to="/authentication/sign-up"
-                  variant="button"
-                  color="info"
-                  fontWeight="medium"
-                  textGradient
-                >
-                  Sign up
-                </MDTypography>
-              </MDTypography>
-            </MDBox>
-          </MDBox>
-        </MDBox>
-      </Card>
-      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
-    </BasicLayout>
+    <Grid container spacing={2}>
+      <Grid item xs={6} sx={{ backgroundColor: "#F6911B", textAlign: "center" }}>
+        <Typography sx={{ marginTop: "5%" }} variant="h1" color="#FFFFFF">
+          Welcome to our system
+        </Typography>
+        <Typography sx={{ marginTop: "5%" }} variant="body2" color="#CBD5E1  ">
+          Hệ thống cung cấp hỗ trợ tạo chiến dịch dánh giá phù hợp với nhiều mục tiêu.
+        </Typography>
+        <Typography sx={{ marginTop: "77%" }} variant="body2" color="#FFFFFF">
+          &quot;We love Landing folio! Our desiger were using it for their project, so we alreay
+          knew what kid of desgin they want&quot;
+        </Typography>
+      </Grid>
+      <Grid item xs={6} sx={{ backgroundColor: "#FDF8EB", textAlign: "center" }}>
+        <Typography sx={{ marginTop: "5%" }} variant="h1" color="#090914">
+          Join System
+        </Typography>
+        <Typography sx={{ marginTop: "2%" }} variant="body2" color="#090914">
+          Chào mừng bạn đến với hệ thống.
+        </Typography>
+        <form style={{ textAlign: "center", marginTop: "10%" }}>
+          <span style={{ marginLeft: "-40%" }}>Email Address</span>
+          <br />
+          <TextField sx={{ width: "400px" }}></TextField> <br />
+          <span style={{ marginLeft: "-45%" }}>Password</span> <br />
+          <TextField sx={{ width: "400px" }} type="password"></TextField> <br />
+          <Checkbox sx={{ marginLeft: "3%" }}></Checkbox>
+          Remember Me
+          <a href="#" style={{ marginLeft: "10%" }}>
+            Forgot Password ?
+          </a>
+          <br />
+          <Button
+            sx={{ marginRight: "40%", backgroundColor: "#F6911B" }}
+            color="white"
+            size="large"
+          >
+            Login
+          </Button>
+          <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+        </form>
+      </Grid>
+    </Grid>
   );
 }
 
