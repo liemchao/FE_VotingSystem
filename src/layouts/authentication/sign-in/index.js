@@ -63,8 +63,6 @@ function Basic() {
     },
   });
 
-  console.log(formik);
-
   return (
     <Grid container spacing={2}>
       <Grid item xs={6} sx={{ backgroundColor: "#F6911B", textAlign: "center" }}>
