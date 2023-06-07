@@ -14,7 +14,6 @@ export const LoginAthen = (user, navigate) => {
   return async (dispatch) => {
     try {
       const res = await API("POST", URL_API + `/api/Authen/login`, user);
-      console.log(res.data.data);
       localStorage.setItem("token", res.data.data.token);
       const detoken = jwt_decode(res.data.data.token);
       dispatch(
@@ -23,7 +22,7 @@ export const LoginAthen = (user, navigate) => {
           payload: res.data.data,
         })
       );
-      if (res.data.data.roleName === "admin") {
+      if (detoken.RoleName === "admin") {
         navigate("/dashboard");
         CustomizedToast({
           message: "Thành công rồi nha",
