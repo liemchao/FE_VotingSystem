@@ -21,8 +21,9 @@
     "axios": "^1.4.0",
     "chart.js": "4.3.0",
     "chroma-js": "2.4.2",
-    "jwt-decode": "^3.1.2",
+    "eslint-config-react-app": "^6.0.0",
     "firebase": "^9.22.0",
+    "jwt-decode": "^3.1.2",
     "prop-types": "15.8.1",
     "react": "18.2.0",
     "react-chartjs-2": "5.2.0",
@@ -39,7 +40,7 @@
     "yup": "1.1.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "GENERATE_SOURCEMAP=false && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -58,6 +59,7 @@
     ]
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "eslint": "8.39.0",
     "eslint-config-prettier": "8.8.0",
     "eslint-plugin-import": "2.27.5",
