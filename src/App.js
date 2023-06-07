@@ -144,14 +144,6 @@ export default function App() {
         )}
         {layout === "vr" && <Configurator />}
         <Routes>
-          <Sidenav
-            color={sidenavColor}
-            brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-            brandName="Material Dashboard 2"
-            routes={routes}
-            onMouseEnter={handleOnMouseEnter}
-            onMouseLeave={handleOnMouseLeave}
-          />
           {getRoutes(routes)}
           <Route path="dashboard" element={<Navigate to="/dashboard" />} />
         </Routes>
@@ -177,7 +169,7 @@ export default function App() {
       {layout === "vr" && <Configurator />}
       <Routes>
         {getRoutes(routes)}
-        <Route path="*" element={<Navigate to="/headerone" />} />
+        <Route exact path="*" element={<Navigate to="/headerone" />} />
       </Routes>
     </ThemeProvider>
   );
