@@ -1,4 +1,4 @@
-import * as axios from "axios";
+import axios from "axios";
 
 export default function API(method, url, body, token) {
   return axios({

@@ -1,33 +1,34 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "App";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import { applyMiddleware, compose, createStore } from "redux";
+// import "react-toastify/dist/ReactToastify.css";
 
 // Material Dashboard 2 React Context Provider
 import { MaterialUIControllerProvider } from "context";
+import rootReducer from "redux/store/store";
+import ToastContainerConfig from "components/toast/ToastContainer";
+
+const composeEnhancers =
+  (typeof window !== "undefined" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
+const enhancer = composeEnhancers(
+  applyMiddleware(thunk)
+  // other store enhancers if any
+);
 
 const container = document.getElementById("app");
 const root = createRoot(container);
-
+const store = createStore(rootReducer, enhancer);
 root.render(
-  <BrowserRouter>
-    <MaterialUIControllerProvider>
-      <App />
-    </MaterialUIControllerProvider>
-  </BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>
+      <MaterialUIControllerProvider>
+        <ToastContainerConfig />
+        <App />
+      </MaterialUIControllerProvider>
+    </BrowserRouter>
+  </Provider>
 );

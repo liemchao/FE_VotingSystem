@@ -1,1 +1,1 @@
-export const URL_API = `http://14.225.205.162:2004`;
+export const URL_API = `http://xuanthuan-001-site1.htempurl.com`;

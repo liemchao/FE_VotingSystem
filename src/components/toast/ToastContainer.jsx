@@ -1,6 +1,7 @@
 import React from "react";
 import { ToastContainer } from "react-toastify";
 import styled from "styled-components";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function ToastContainerConfig() {
   const StyledContainer = styled(ToastContainer).attrs({
