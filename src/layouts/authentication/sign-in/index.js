@@ -22,21 +22,12 @@ import MDButton from "components/MDButton";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
-// Authentication layout components
+
+import { auth } from "../../../components/Firebase/firebase";
+
 import BasicLayout from "layouts/authentication/components/BasicLayout";
 // Images
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
-const config = {
-  apiKey: "AIzaSyDFsJS8u9XsIClfCOGZJQ4vg7JsJFSNA7Q",
-  authDomain: "fvssystemswp409.firebaseapp.com",
-  projectId: "fvssystemswp409",
-  storageBucket: "fvssystemswp409.appspot.com",
-  messagingSenderId: "153807743798",
-  appId: "1:153807743798:web:388557922974c341b16197",
-  measurementId: "G-DNJR3ZB3FW",
-};
-firebase.initializeApp(config);
-
 // Configure FirebaseUI.
 const uiConfig = {
   // Popup signin flow rather than redirect flow.
@@ -50,7 +41,6 @@ function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
-
   return (
     <BasicLayout image={bgImage}>
       <Card>
