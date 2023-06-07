@@ -8,5 +8,8 @@ export default function userReducer(state = initialState, { type, payload }) {
     case PathAction.LOGIN_USER:
       state.currentUser = payload;
       break;
+    default:
+      return { ...state };
   }
+  return { ...state };
 }

@@ -1,9 +1,10 @@
 /// gọi axios
 import * as PathAction from "./../PathAction";
 import jwt_decode from "jwt-decode";
-import API from "axios/API/API";
-import { URL_API } from "axios/Url/URL";
-import { CustomizedToast } from "components/toast/ToastCustom";
+
+import { URL_API } from "../../axios/Url/URL";
+import API from "../../axios/API/API";
+import { CustomizedToast } from "../../components/toast/ToastCustom";
 
 export const createAction = ({ type, payload }) => {
   return { type, payload };
@@ -12,22 +13,21 @@ export const createAction = ({ type, payload }) => {
 export const LoginAthen = (user, navigate) => {
   return async (dispatch) => {
     try {
-      const res = await API("POST", URL_API + `/auths/login`, user);
-      //   localStorage.setItem("token", res.data.result.access_token);
-      //   const detoken = jwt_decode(res.data.result.access_token);
+      const res = await API("POST", URL_API + `/api/Authen/login`, user);
+      console.log(res.data.data);
+      localStorage.setItem("token", res.data.data.token);
+      const detoken = jwt_decode(res.data.data.token);
       dispatch(
         createAction({
           type: PathAction.LOGIN_USER,
-          payload: res.data.result,
+          payload: res.data.data,
         })
       );
-      if (detoken.role === "admin") {
-      } else if (detoken.role === "manager") {
-      } else if (detoken.role === "kitchen") {
-      } else {
+      if (res.data.data.roleName === "admin") {
+        navigate("/dashboard");
         CustomizedToast({
-          message: "Tài khoản không có quyền truy cập",
-          type: "ERROR",
+          message: "Thành công rồi nha",
+          type: "SUCCESS",
         });
       }
     } catch (error) {

@@ -1,32 +1,20 @@
 import { useState } from "react";
 
 // react-router-dom components
-import { Link } from "react-router-dom";
-
-// @mui material components
+import { Link, useNavigate } from "react-router-dom";
 
 import Grid from "@mui/material/Grid";
-// import MuiLink from "@mui/material/Link";
-
-// @mui icons
-// import FacebookIcon from "@mui/icons-material/Facebook";
-// import GitHubIcon from "@mui/icons-material/GitHub";
-// import GoogleIcon from "@mui/icons-material/Google";
-
-// Material Dashboard 2 React components
-// import MDBox from "components/MDBox";
-// import MDTypography from "components/MDTypography";
-// import MDInput from "components/MDInput";
-// import MDButton from "components/MDButton";
+import * as yup from "yup";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
-// Authentication layout components
-// Images
-// import bgImage from "assets/images/bg-sign-in-basic.jpeg";
+import { useFormik } from "formik";
+
 import { Button, Typography } from "@mui/material";
+import { LoginAthen } from "redux/action/action";
+import { useDispatch } from "react-redux";
 const config = {
   apiKey: "AIzaSyDFsJS8u9XsIClfCOGZJQ4vg7JsJFSNA7Q",
   authDomain: "fvssystemswp409.firebaseapp.com",
@@ -47,10 +35,35 @@ const uiConfig = {
   // We will display Google and Facebook as auth providers.
   signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
 };
+
+const schema = yup.object().shape({
+  // phone: yup.string().required().trim(),
+  // password: yup.string().required().trim(),
+});
 function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  // const handleSetRememberMe = () => setRememberMe(!rememberMe);
+  const formik = useFormik({
+    validationSchema: schema,
+    validateOnMount: true,
+    validateOnBlur: true,
+    initialValues: {
+      userName: "",
+      password: "",
+    },
+
+    onSubmit: async (values) => {
+      const adminData = {
+        userName: formik.values.userName,
+        password: formik.values.password,
+      };
+      dispatch(LoginAthen(adminData, navigate));
+    },
+  });
+
+  console.log(formik);
 
   return (
     <Grid container spacing={2}>
@@ -73,12 +86,29 @@ function Basic() {
         <Typography sx={{ marginTop: "2%" }} variant="body2" color="#090914">
           Chào mừng bạn đến với hệ thống.
         </Typography>
-        <form style={{ textAlign: "center", marginTop: "10%" }}>
+        <form style={{ textAlign: "center", marginTop: "10%" }} onSubmit={formik.handleSubmit}>
           <span style={{ marginLeft: "-40%" }}>Email Address</span>
           <br />
-          <TextField sx={{ width: "400px" }}></TextField> <br />
+          <TextField
+            sx={{ width: "400px" }}
+            name="userName"
+            value={formik.values.userName}
+            onChange={(e) => {
+              formik.handleChange(e);
+            }}
+          />
+          <br />
           <span style={{ marginLeft: "-45%" }}>Password</span> <br />
-          <TextField sx={{ width: "400px" }} type="password"></TextField> <br />
+          <TextField
+            sx={{ width: "400px" }}
+            type="password"
+            name="password"
+            value={formik.values.password}
+            onChange={(e) => {
+              formik.handleChange(e);
+            }}
+          />
+          <br />
           <Checkbox sx={{ marginLeft: "3%" }}></Checkbox>
           Remember Me
           <a href="#" style={{ marginLeft: "10%" }}>
@@ -89,6 +119,7 @@ function Basic() {
             sx={{ marginRight: "40%", backgroundColor: "#F6911B" }}
             color="white"
             size="large"
+            type="submit"
           >
             Login
           </Button>
