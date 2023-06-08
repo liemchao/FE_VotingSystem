@@ -36,10 +36,7 @@ const uiConfig = {
   signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
 };
 
-const schema = yup.object().shape({
-  // phone: yup.string().required().trim(),
-  // password: yup.string().required().trim(),
-});
+const schema = yup.object().shape({});
 function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
   const dispatch = useDispatch();
