@@ -48,9 +48,10 @@ function NavItem({ item, active }) {
   };
 
   const activeRootStyle = {
-    color: "#FFCC33",
+    color: "white",
     fontWeight: "fontWeightMedium",
-    bgcolor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity),
+    backgroundColor: "#FFCC33",
+    // bgcolor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity),
   };
 
   const activeSubStyle = {

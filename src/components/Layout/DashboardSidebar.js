@@ -5,11 +5,6 @@ import { Link as RouterLink, useLocation } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { Box, Link, Button, Drawer, Typography, Avatar, Stack } from "@mui/material";
 
-// hooks
-
-// components
-
-// import Scrollbar from "../components/hook-form/Scrollbar";
 import navConfig from "./NavConfig";
 import NavSection from "./NavSection";
 import useResponsive from "./useResponsive";
