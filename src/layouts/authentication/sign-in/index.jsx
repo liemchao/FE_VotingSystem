@@ -15,6 +15,7 @@ import { useFormik } from "formik";
 import { Button, Typography } from "@mui/material";
 import { LoginAthen } from "redux/action/action";
 import { useDispatch } from "react-redux";
+import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
 const config = {
   apiKey: "AIzaSyDFsJS8u9XsIClfCOGZJQ4vg7JsJFSNA7Q",
   authDomain: "fvssystemswp409.firebaseapp.com",
@@ -110,14 +111,7 @@ function Basic() {
             Forgot Password ?
           </a>
           <br />
-          <Button
-            sx={{ marginRight: "40%", backgroundColor: "#F6911B" }}
-            color="white"
-            size="large"
-            type="submit"
-          >
-            Login
-          </Button>
+          <ButtonCustomize nameButton="hih" marginLeft="12rem" bgColor="#F6911B" type="submit" />
           <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
         </form>
       </Grid>

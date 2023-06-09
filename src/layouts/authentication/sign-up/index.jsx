@@ -15,6 +15,7 @@ import CoverLayout from "layouts/authentication/components/CoverLayout";
 
 // Images
 import bgImage from "assets/images/bg-sign-up-cover.jpeg";
+import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
 
 function Cover() {
   return (
@@ -76,18 +77,9 @@ function Cover() {
               </MDButton>
             </MDBox>
             <MDBox mt={3} mb={1} textAlign="center">
-              <MDTypography variant="button" color="text">
+              <MDTypography variant="button" color="primary">
                 Already have an account?{" "}
-                <MDTypography
-                  component={Link}
-                  to="/authentication/sign-in"
-                  variant="button"
-                  color="info"
-                  fontWeight="medium"
-                  textGradient
-                >
-                  Sign In
-                </MDTypography>
+                <ButtonCustomize to="/authentication/sign-in" nameButton="hihi" />
               </MDTypography>
             </MDBox>
           </MDBox>

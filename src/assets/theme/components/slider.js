@@ -60,6 +60,7 @@ const slider = {
       width: pxToRem(14),
       height: pxToRem(14),
       backgroundColor: white.main,
+      // backgroundColor: "red",
       zIndex: 10,
       boxShadow: sliderBoxShadow.thumb,
       border: `${borderWidth[1]} solid ${info.main}`,
