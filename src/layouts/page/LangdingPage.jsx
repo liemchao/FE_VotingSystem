@@ -5,27 +5,28 @@ import Badge from "@mui/material/Badge";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import { CardActionArea, Container } from "@mui/material";
+import { CardActionArea, Container, styled } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import letterimge from "../../assets/images/thungthu.PNG";
 import PlaceIcon from "@mui/icons-material/Place";
-import { Phone } from "@mui/icons-material";
+import { AddBoxSharp, Phone } from "@mui/icons-material";
 import EmailIcon from "@mui/icons-material/Email";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import HeaderAu from "../header/headerAuthor";
 import HeaderUnthor from "layouts/header/headerUnthor";
+import Iconify from "assets/theme/components/icon/Iconify";
+//----------------------------------------------------------------
 export default function PrimarySearchAppBar() {
   const currentYear = new Date().getFullYear();
+  const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
   return (
     <>
-      {/* <HeaderAu></HeaderAu> */}
-      <HeaderUnthor></HeaderUnthor>
+      <HeaderUnthor />
       <Box
         sx={{
           height: "5%",
@@ -209,73 +210,8 @@ export default function PrimarySearchAppBar() {
                 accumsan porta lectus ridiculus in mattis. Netus sodales in volutpat ullamcorper
                 amet adipiscing fermentum.
               </Typography>
-              <Typography
-                sx={{ marginTop: "2%", maxWidth: 500 }}
-                variant="body2"
-                color="text.secondary"
-              >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum aliquet
-                accumsan porta lectus ridiculus in mattis. Netus sodales in volutpat ullamcorper
-                amet adipiscing fermentum.
-              </Typography>
-              <Typography
-                sx={{ marginTop: "2%", maxWidth: 500 }}
-                variant="body2"
-                color="text.secondary"
-              >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum aliquet
-                accumsan porta lectus ridiculus in mattis. Netus sodales in volutpat ullamcorper
-                amet adipiscing fermentum.
-              </Typography>
             </Grid>
           </Grid>
-
-          {/* <Box sx={{ marginTop: "2%" }}>
-              <Card
-                sx={{
-                  maxWidth: 345,
-                  marginTop: "2%",
-                  backgroundColor: "#5BD1D5",
-                }}
-              >
-                <CardActionArea>
-                  <CardContent>
-                    <Typography gutterBottom variant="h2" component="div" color="#EFFAFB">
-                      8000+
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Biểu Mẫu
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-              <Card sx={{ maxWidth: 345, marginTop: "2%", backgroundColor: "#FDF8EB" }}>
-                <CardActionArea>
-                  <CardContent>
-                    <Typography gutterBottom variant="h2" component="div" color="#E8B63A">
-                      10500+
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Người dùng
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-              <Card sx={{ maxWidth: 345, margin: "2%", backgroundColor: "#FFEEE9" }}>
-                <CardActionArea>
-                  <CardContent>
-                    <Typography gutterBottom variant="h2" component="div" color="#FF5522">
-                      500+
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Chiến dịch
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </Box> */}
-          {/* <Box></Box>
-          </Grid> */}
         </Box>
         <Box
           sx={{
@@ -291,6 +227,7 @@ export default function PrimarySearchAppBar() {
             }}
           ></Badge>
         </Box>
+        <Box></Box>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Typography
@@ -466,78 +403,102 @@ export default function PrimarySearchAppBar() {
               />
             </Card>
           </Container>
-          <Grid
-            container
-            spacing={2}
-            sx={{ background: "#DEF6F7", margin: "2%", borderRadius: "20px" }}
+          <Box
+            sx={{
+              background: "#DEF6F7",
+              margin: "2%",
+              borderRadius: "20px",
+              width: "100%",
+              height: "14rem",
+            }}
           >
-            <Grid item xs={6}>
-              <Typography
-                gutterBottom
-                variant="h2"
-                color="text.secondary"
-                sx={{ marginTop: "1%", marginLeft: "3%" }}
-              >
-                Chúng tôi có thể giúp gì cho bạn?
-              </Typography>
-              <Typography
-                sx={{ marginTop: "2%", maxWidth: 400, marginLeft: "3%" }}
-                variant="body2"
-                color="text.secondary"
-              >
-                Gửi email để có thể nhận được sử hỗ trợ của chúng tôi.
-              </Typography>
-              <Container sx={{ display: "flex" }}>
-                <TextField
-                  sx={{
-                    width: "40ch",
-                    marginRight: "3%",
-                  }}
-                  id="outlined-basic"
-                  label="Email"
-                  placeholder="Your emaill address"
-                  variant="outlined"
-                />
-                <Button sx={{ marginLeft: "2%", backgroundColor: "#E8B63A" }} variant="contained">
-                  Send
-                </Button>
-              </Container>
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <Typography
+                  gutterBottom
+                  variant="h2"
+                  color="text.secondary"
+                  sx={{ marginTop: "1%", marginLeft: "3%" }}
+                >
+                  Chúng tôi có thể giúp gì cho bạn?
+                </Typography>
+
+                <Container sx={{ flexDirection: "row" }}>
+                  <Typography variant="h6">The VFS</Typography>
+                  <Typography sx={{ maxWidth: 400 }} variant="body2" color="text.secondary">
+                    Gửi email để có thể nhận được sử hỗ trợ của chúng tôi.
+                  </Typography>
+                  <TextField
+                    sx={{
+                      width: "40ch",
+                      marginRight: "3%",
+                      marginTop: "2%",
+                    }}
+                    id="outlined-basic"
+                    label="Email"
+                    placeholder="Your emaill address"
+                    variant="outlined"
+                    color="primary"
+                    inputProps={{
+                      style: {
+                        backgroundColor: "white",
+                      },
+                    }}
+                  />
+                  <Button
+                    sx={{ marginLeft: "2%", marginTop: "2%", backgroundColor: "#E8B63A" }}
+                    variant="contained"
+                  >
+                    Send
+                  </Button>
+                </Container>
+              </Grid>
+              <Grid item xs={6}>
+                <Card sx={{ backgroundColor: "#DEF6F7" }}>
+                  <CardMedia
+                    component="img"
+                    alt="My Image"
+                    height="100"
+                    with="150"
+                    image={letterimge}
+                    title="My Image"
+                  />{" "}
+                </Card>
+              </Grid>
             </Grid>
-            <Grid item xs={6}>
-              <Card sx={{ backgroundColor: "#DEF6F7" }}>
-                <CardMedia
-                  component="img"
-                  alt="My Image"
-                  height="100"
-                  with="150"
-                  image={letterimge}
-                  title="My Image"
-                />{" "}
-              </Card>
-            </Grid>
-          </Grid>
+          </Box>
         </Grid>
         <Box sx={{ marginLeft: "3%", display: "flex" }}>
           <Box>
-            <Typography variant="h3">Logo</Typography>
+            <Typography variant="h3" sx={{ marginBottom: "25px" }}>
+              LOGO
+            </Typography>
             <div>
-              <PlaceIcon />
+              <Iconify icon="ic:outline-place" width={22} height={22} color="red" />
               <span style={{ marginLeft: "2%", maxHeight: 400 }}>21/12/Lê Văn Việt</span>
             </div>
             <div>
-              <Phone colors="blue" />
+              <Iconify icon="ph:phone" width={22} height={22} color="red" />
               <span style={{ marginLeft: "2%" }}>0733898497</span>
             </div>
             <div>
-              <EmailIcon />
+              <Iconify icon="ic:outline-email" width={22} height={22} color="red" />
               <span style={{ marginLeft: "2px" }}>liemro9x@gmail.com</span>
             </div>
-            <div>
-              <TwitterIcon />
-              <FacebookIcon />
-              <InstagramIcon />
-              <YouTubeIcon />
-            </div>
+            <Box sx={{ display: "flex", flexDirection: "row", gap: 1 }}>
+              <Box>
+                <Iconify icon="iconoir:facebook" width={22} height={22} color="#5BA9D5" />
+              </Box>
+              <Box>
+                <Iconify icon="ri:twitter-line" width={22} height={22} color="#E8B63A" />
+              </Box>
+              <Box>
+                <Iconify icon="basil:linkedin-outline" width={22} height={22} color="#5BD1D5" />
+              </Box>
+              <Box>
+                <Iconify icon="ri:youtube-line" width={22} height={22} color="#FF5522" />
+              </Box>
+            </Box>
           </Box>
           <Box sx={{ marginLeft: "40%", marginRight: "20%" }}>
             <Typography variant="h3">Top Destion</Typography>

@@ -11,6 +11,7 @@ import { applyMiddleware, compose, createStore } from "redux";
 import { MaterialUIControllerProvider } from "context";
 import rootReducer from "redux/store/store";
 import ToastContainerConfig from "components/toast/ToastContainer";
+import { HelmetProvider } from "react-helmet-async";
 
 const composeEnhancers =
   (typeof window !== "undefined" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
@@ -24,11 +25,11 @@ const root = createRoot(container);
 const store = createStore(rootReducer, enhancer);
 root.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <MaterialUIControllerProvider>
-        <ToastContainerConfig />
+    <MaterialUIControllerProvider>
+      <ToastContainerConfig />
+      <HelmetProvider>
         <App />
-      </MaterialUIControllerProvider>
-    </BrowserRouter>
+      </HelmetProvider>
+    </MaterialUIControllerProvider>
   </Provider>
 );
