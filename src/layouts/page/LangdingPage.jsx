@@ -40,17 +40,24 @@ export default function PrimarySearchAppBar() {
           }}
         ></Badge>
       </Box>
-      <Box>
+      <Box sx={{}}>
         <h3 style={{ textAlign: "center", fontStyle: "normal" }}> Why choose Us ?</h3>
         <h1 style={{ textAlign: "center", maxWidth: "300" }}>
           We Let Your Sweet Memory Evenr Unforgottable
         </h1>
-        <Container sx={{ display: "flex" }}>
+        <Container sx={{ display: "flex", marginTop: "2rem" }}>
           <Card sx={{ maxWidth: 345 }}>
             <CardActionArea>
               <CardMedia
                 component="img"
-                height="100"
+                sx={{
+                  borderRadius: "50%",
+                  height: "4rem",
+                  width: "4rem",
+                  marginTop: "0.5rem",
+                  marginLeft: "1.5rem",
+                  marginRight: "0.5rem",
+                }}
                 image="https://static.thenounproject.com/png/4038155-200.png"
                 alt="green iguana"
               />
@@ -68,7 +75,14 @@ export default function PrimarySearchAppBar() {
             <CardActionArea>
               <CardMedia
                 component="img"
-                height="100"
+                sx={{
+                  borderRadius: "50%",
+                  height: "4rem",
+                  width: "4rem",
+                  marginTop: "0.5rem",
+                  marginLeft: "1.5rem",
+                  marginRight: "0.5rem",
+                }}
                 image="https://cdn.icon-icons.com/icons2/2066/PNG/512/check_mark_circle_icon_125343.png"
                 alt="green iguana"
               />
@@ -86,7 +100,13 @@ export default function PrimarySearchAppBar() {
             <CardActionArea>
               <CardMedia
                 component="img"
-                height="100"
+                sx={{
+                  height: "4rem",
+                  width: "4rem",
+                  marginTop: "0.5rem",
+                  marginLeft: "1.5rem",
+                  marginRight: "0.5rem",
+                }}
                 image="https://cdn-icons-png.flaticon.com/512/684/684833.png"
                 alt="green iguana"
               />
@@ -104,7 +124,13 @@ export default function PrimarySearchAppBar() {
             <CardActionArea>
               <CardMedia
                 component="img"
-                height="100"
+                sx={{
+                  height: "4.5rem",
+                  width: "4rem",
+                  marginTop: "0.5rem",
+                  marginLeft: "1.5rem",
+                  marginRight: "0.5rem",
+                }}
                 image="https://img.uxwing.com/wp-content/themes/uxwing/download/crime-security-military-law/shield-checkmark-line-icon.svg"
                 alt="green iguana"
               />
@@ -409,14 +435,14 @@ export default function PrimarySearchAppBar() {
               margin: "2%",
               borderRadius: "20px",
               width: "100%",
-              height: "14rem",
+              height: "20%",
             }}
           >
             <Grid container spacing={2}>
               <Grid item xs={6}>
                 <Typography
                   gutterBottom
-                  variant="h2"
+                  variant="h3"
                   color="text.secondary"
                   sx={{ marginTop: "1%", marginLeft: "3%" }}
                 >
@@ -433,6 +459,7 @@ export default function PrimarySearchAppBar() {
                       width: "40ch",
                       marginRight: "3%",
                       marginTop: "2%",
+                      marginBottom: "2%",
                     }}
                     id="outlined-basic"
                     label="Email"
@@ -446,7 +473,7 @@ export default function PrimarySearchAppBar() {
                     }}
                   />
                   <Button
-                    sx={{ marginLeft: "2%", marginTop: "2%", backgroundColor: "#E8B63A" }}
+                    sx={{ marginLeft: "2%", marginTop: "1.5rem", backgroundColor: "#E8B63A" }}
                     variant="contained"
                   >
                     Send
