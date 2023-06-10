@@ -16,8 +16,16 @@ export default function HeaderUnthor() {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    <Box
+      sx={{
+        flexGrow: 1,
+        marginBottom: "1rem",
+        marginTop: "1rem",
+        marginLeft: "2%",
+        marginRight: "2%",
+      }}
+    >
+      <AppBar position="static" sx={{ bgcolor: "white", borderRadius: "2rem" }}>
         <Toolbar>
           <IconButton
             size="large"
@@ -26,7 +34,7 @@ export default function HeaderUnthor() {
             aria-label="menu"
             sx={{ mr: 2, gap: 4 }}
           >
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: "black" }}>
               Home
             </Typography>
           </IconButton>
@@ -37,7 +45,7 @@ export default function HeaderUnthor() {
             aria-label="menu"
             sx={{ mr: 2, gap: 4 }}
           >
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: "black" }}>
               Features
             </Typography>
           </IconButton>
@@ -48,7 +56,7 @@ export default function HeaderUnthor() {
             aria-label="menu"
             sx={{ mr: 2, gap: 4 }}
           >
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: "black" }}>
               Supports
             </Typography>
           </IconButton>
@@ -61,6 +69,7 @@ export default function HeaderUnthor() {
               alignContent: "center",
               alignItems: "center",
               marginLeft: "30%",
+              color: "black",
             }}
           >
             Supports
@@ -71,8 +80,8 @@ export default function HeaderUnthor() {
             borderRadius={"25px"}
             bgColor="#F6911B"
             width="100px"
-            height="10px"
-            boxShadow="8"
+            height="2.2rem"
+            boxShadow="2"
             color="white"
             to="/authentication/sign-in"
             onClick={() => hanldeNavigate()}
