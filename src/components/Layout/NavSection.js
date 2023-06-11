@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import { NavLink as RouterLink, matchPath, useLocation } from "react-router-dom";
 // material
 import { alpha, useTheme, styled } from "@mui/material/styles";
 import { Box, List, Collapse, ListItemText, ListItemIcon, ListItemButton } from "@mui/material";
 import Iconify from "assets/theme/components/icon/Iconify";
+import { Authen } from "authenToken/AuthenToken";
+import jwt_decode from "jwt-decode";
 //
 
 // ----------------------------------------------------------------------
@@ -17,6 +19,10 @@ const ListItemStyle = styled((props) => <ListItemButton disableGutters {...props
     textTransform: "capitalize",
     color: theme.palette.text.secondary,
     borderRadius: theme.shape.borderRadius,
+    ":hover": {
+      backgroundColor: "#f0ff23",
+      color: "black",
+    },
   })
 );
 
@@ -50,7 +56,8 @@ function NavItem({ item, active }) {
   const activeRootStyle = {
     color: "white",
     fontWeight: "fontWeightMedium",
-    backgroundColor: "#FFCC33",
+    bgcolor: "#FFCC33",
+
     // bgcolor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity),
   };
 
@@ -144,14 +151,29 @@ NavSection.propTypes = {
 };
 
 //NavSection
-export default function NavSection({ navConfig, ...other }) {
+export default function NavSection({ navConfig, navConfigUser, ...other }) {
   const { pathname } = useLocation();
+  const checkRole = () => {
+    const { token } = useContext(Authen);
+    const decoded = jwt_decode(token);
+
+    switch (decoded.RoleName) {
+      case "admin":
+        return navConfig.navConfig;
+        break;
+      case "user":
+        return navConfig.navConfigUser;
+        break;
+      default:
+        break;
+    }
+  };
 
   const match = (path) => (path ? !!matchPath({ path, end: false }, pathname) : false);
   return (
     <Box {...other}>
       <List disablePadding sx={{ p: 1 }}>
-        {navConfig.map((item) => (
+        {checkRole()?.map((item) => (
           <NavItem key={item.title} item={item} active={match} />
         ))}
       </List>

@@ -1,55 +1,38 @@
-// const routes = [
-//   {
-//     type: "collapse",
-//     name: "HeaderOne",
-//     key: "headerone",
-//     route: "/headerone",
-//     component: <HeaderOne />,
-//   },
-
-//   {
-//     type: "collapse",
-//     name: "Dashboard",
-//     key: "dashboard",
-//     icon: <Icon fontSize="small">dashboard</Icon>,
-//     route: "/dashboard",
-//     component: <Dashboard />,
-//   },
-
-//   {
-//     type: "collapse",
-//     name: "Sign In",
-//     key: "sign-in",
-//     icon: <Icon fontSize="small">login</Icon>,
-//     route: "/authentication/sign-in",
-//     component: <SignIn />,
-//   },
-//   {
-//     type: "collapse",
-//     name: "Sign Up",
-//     key: "sign-up",
-//     icon: <Icon fontSize="small">assignment</Icon>,
-//     route: "/authentication/sign-up",
-//     component: <SignUp />,
-//   },
-// ];
-
-// export default routes;
 import React from "react";
-import { useRoutes } from "react-router-dom";
+import { Navigate, useNavigate, useRoutes } from "react-router-dom";
 import PrimarySearchAppBar from "layouts/page/LangdingPage";
 import Dashboard from "layouts/dashboard";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import HeaderOne from "layouts/page/LangdingPage";
+import jwt_decode from "jwt-decode";
 
 // @mui icons
-import Icon from "@mui/material/Icon";
-import Test from "layouts/authentication/sign-up/Test";
+
 import DashboardLayout from "components/Layout/DashboardLayout";
 import UserList from "layouts/page/UserList";
+import { createBrowserHistory } from "history";
+import AuthenToken from "authenToken/AuthenToken";
+import AccountPage from "layouts/page/account/AccountPage";
 
 export default function Router() {
+  const ProtectedRouteAuthen = ({ roles, children }) => {
+    const token = localStorage.getItem("token");
+
+    try {
+      const decoded = jwt_decode(token);
+      if (token === null) {
+        return <Navigate to="/" replace />;
+      } else if (token && !decoded.RoleName) {
+        return <Navigate to="/" replace />;
+      } else if (roles.includes(decoded.RoleName)) {
+        return <>{children}</>;
+      }
+    } catch (error) {
+      return <Navigate to="/" replace />;
+    }
+    return <Navigate to="/" replace />;
+  };
   return useRoutes([
     {
       path: "/",
@@ -61,8 +44,39 @@ export default function Router() {
     },
     {
       path: "/dashboard",
-      element: <DashboardLayout />,
-      children: [{ path: "user", element: <UserList /> }],
+      element: (
+        <ProtectedRouteAuthen roles="admin">
+          <DashboardLayout />
+        </ProtectedRouteAuthen>
+      ),
+      children: [
+        {
+          path: "user",
+          element: <UserList />,
+        },
+        {
+          path: "account",
+          element: <AccountPage />,
+        },
+      ],
+    },
+    {
+      path: "/dashboard",
+      element: (
+        <ProtectedRouteAuthen roles="user">
+          <DashboardLayout />
+        </ProtectedRouteAuthen>
+      ),
+      children: [
+        {
+          path: "hihi",
+          element: <UserList />,
+        },
+        {
+          path: "account",
+          element: <AccountPage />,
+        },
+      ],
     },
   ]);
 }
