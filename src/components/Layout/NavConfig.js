@@ -16,19 +16,19 @@ const navConfig = [
     children: [
       {
         title: "SubTitle 1",
-        path: "",
+        path: "/dashboard/account",
         icon: getIcon("eva:shopping-bag-fill"),
       },
       {
         title: "SubTitle 2",
         path: "",
-        icon: getIcon("ep:food"),
+        icon: getIcon("ep:foo d"),
       },
     ],
   },
   {
-    title: "Title 2",
-    path: "",
+    title: "Account",
+    path: "/dashboard/account",
     icon: getIcon("eva:people-fill"),
     // s
   },
@@ -37,13 +37,9 @@ const navConfig = [
     path: "",
     icon: getIcon("carbon:location-company"),
   },
+
   {
-    title: "Title 4",
-    path: "",
-    icon: getIcon("carbon:delivery"),
-  },
-  {
-    title: "Title 4",
+    title: "Title 9",
     path: "",
     icon: getIcon("ant-design:schedule-outlined"),
   },
@@ -61,4 +57,49 @@ const navConfig = [
   ,
 ];
 
-export default navConfig;
+const navConfigUser = [
+  {
+    title: "nè",
+    path: "/dashboard/hihi",
+    icon: getIcon("eva:pie-chart-2-fill"),
+  },
+  {
+    title: "hehe",
+    icon: getIcon("tabler:building-warehouse"),
+    children: [
+      {
+        title: "SubTitle 1",
+        path: "/dashboard/account",
+        icon: getIcon("eva:shopping-bag-fill"),
+      },
+      {
+        title: "SubTitle 2",
+        path: "",
+        icon: getIcon("ep:foo d"),
+      },
+    ],
+  },
+  {
+    title: "234",
+    path: "/dashboard/account",
+    icon: getIcon("eva:people-fill"),
+    // s
+  },
+  {
+    title: "Title 3",
+    path: "",
+    icon: getIcon("carbon:location-company"),
+  },
+  {
+    title: "Title 4",
+    path: "",
+    icon: getIcon("carbon:delivery"),
+  },
+
+  ,
+];
+const exportedObject = {
+  navConfig,
+  navConfigUser,
+};
+export default exportedObject;

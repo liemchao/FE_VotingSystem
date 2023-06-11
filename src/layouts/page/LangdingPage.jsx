@@ -11,19 +11,12 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import letterimge from "../../assets/images/thungthu.PNG";
-import PlaceIcon from "@mui/icons-material/Place";
-import { AddBoxSharp, Phone } from "@mui/icons-material";
-import EmailIcon from "@mui/icons-material/Email";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import YouTubeIcon from "@mui/icons-material/YouTube";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import InstagramIcon from "@mui/icons-material/Instagram";
 import HeaderUnthor from "layouts/header/headerUnthor";
 import Iconify from "assets/theme/components/icon/Iconify";
 //----------------------------------------------------------------
+
 export default function PrimarySearchAppBar() {
   const currentYear = new Date().getFullYear();
-  const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
   return (
     <>
       <HeaderUnthor />
