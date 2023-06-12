@@ -16,6 +16,7 @@ export const LoginAthen = (user, navigate) => {
       const res = await API("POST", URL_API + `/api/Authen/login`, user);
       localStorage.setItem("token", res.data.data.token);
       const detoken = jwt_decode(res.data.data.token);
+
       dispatch(
         createAction({
           type: PathAction.LOGIN_USER,

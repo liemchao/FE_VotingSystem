@@ -3,15 +3,15 @@ import { BrowserRouter } from "react-router-dom";
 import Router from "./routes.js";
 import ThemeProvider from "theme/index.js";
 
-import { Provider } from "authenToken/AuthenToken.jsx";
+import { ProviderToken } from "authenToken/AuthenToken.jsx";
 
 export default function App() {
   return (
     <BrowserRouter>
       <ThemeProvider>
-        <Provider>
+        <ProviderToken>
           <Router />
-        </Provider>
+        </ProviderToken>
       </ThemeProvider>
     </BrowserRouter>
   );
