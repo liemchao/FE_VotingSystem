@@ -1,13 +1,13 @@
-import React, { createContext, useEffect } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 
 //----------------------------------------------------------------
 export const Authen = createContext();
-export const Provider = ({ children }) => {
-  const token = localStorage.getItem("token");
-
+export const ProviderToken = ({ children }) => {
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+  const [decode, setDecode] = useState([]);
 
   useEffect(() => {
     if (token === null) {
@@ -15,6 +15,7 @@ export const Provider = ({ children }) => {
     }
     try {
       const decoded = jwt_decode(token);
+      setDecode(decoded);
       if (decoded.RoleName === "admin") {
         navigate("/dashboard/user");
       } else if (decoded.RoleName === "user") {
@@ -24,5 +25,5 @@ export const Provider = ({ children }) => {
     }
   }, []);
 
-  return <Authen.Provider value={{ token }}>{children}</Authen.Provider>;
+  return <Authen.Provider value={{ token, decode }}>{children}</Authen.Provider>;
 };

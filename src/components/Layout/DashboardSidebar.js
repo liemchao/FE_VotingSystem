@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 // material
 import { styled } from "@mui/material/styles";
@@ -9,6 +9,7 @@ import navConfig from "./NavConfig";
 import NavSection from "./NavSection";
 import useResponsive from "./useResponsive";
 import Scrollbar from "./Scrollbar";
+import { Authen } from "authenToken/AuthenToken";
 
 // ----------------------------------------------------------------------
 
@@ -38,6 +39,9 @@ DashboardSidebar.propTypes = {
 
 export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const { pathname } = useLocation();
+  const { decode } = useContext(Authen);
+
+  console.log(decode);
 
   const isDesktop = useResponsive("up", "lg");
 
@@ -66,10 +70,10 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
             <Avatar src="hihi" alt="photoURL" />
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: "text.primary" }}>
-                nè
+                {decode.Username}
               </Typography>
               <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                role
+                {decode.RoleName}
               </Typography>
             </Box>
           </AccountStyle>

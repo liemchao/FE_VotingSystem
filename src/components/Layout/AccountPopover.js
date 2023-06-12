@@ -1,9 +1,12 @@
-import { useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 // @mui
 import { alpha } from "@mui/material/styles";
 import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton } from "@mui/material";
 import MenuPopover from "./MenuPopover";
+import { useDispatch, useSelector } from "react-redux";
+import { Authen } from "authenToken/AuthenToken";
+import jwt_decode from "jwt-decode";
 
 // ----------------------------------------------------------------------
 
@@ -29,6 +32,7 @@ const MENU_OPTIONS = [
 
 export default function AccountPopover() {
   const anchorRef = useRef(null);
+  const dispatch = useDispatch();
 
   const [open, setOpen] = useState(null);
   const navigate = useNavigate();
@@ -37,11 +41,17 @@ export default function AccountPopover() {
     setOpen(event.currentTarget);
   };
 
+  const { token } = useContext(Authen);
+
+  const decoded = jwt_decode(token);
+
   const handleClose = () => {
     localStorage.removeItem("token");
     navigate("/");
   };
-
+  const handleCloseNotion = (event) => {
+    setOpen(!open);
+  };
   return (
     <>
       <IconButton
@@ -68,7 +78,7 @@ export default function AccountPopover() {
       <MenuPopover
         open={Boolean(open)}
         anchorEl={open}
-        onClose={handleClose}
+        onClose={handleCloseNotion}
         sx={{
           p: 0,
           mt: 1.5,
@@ -81,10 +91,10 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
-            em nè
+            {decoded.Username}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }} noWrap>
-            mail nè
+            {decoded.RoleName}
           </Typography>
         </Box>
 
@@ -96,7 +106,7 @@ export default function AccountPopover() {
               key={option.label}
               to={option.linkTo}
               component={RouterLink}
-              onClick={handleClose}
+              onClick={handleCloseNotion}
             >
               {option.label}
             </MenuItem>
