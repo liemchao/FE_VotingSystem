@@ -35,7 +35,7 @@ export default function HeaderUnthor() {
             sx={{ mr: 2, gap: 4 }}
           >
             <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: "black" }}>
-              Home
+              Trang Chủ
             </Typography>
           </IconButton>
           <IconButton
@@ -46,7 +46,7 @@ export default function HeaderUnthor() {
             sx={{ mr: 2, gap: 4 }}
           >
             <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: "black" }}>
-              Features
+              Tính năng
             </Typography>
           </IconButton>
           <IconButton
@@ -57,7 +57,7 @@ export default function HeaderUnthor() {
             sx={{ mr: 2, gap: 4 }}
           >
             <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: "black" }}>
-              Supports
+              Hỗ Trợ
             </Typography>
           </IconButton>
           <Typography
@@ -72,10 +72,10 @@ export default function HeaderUnthor() {
               color: "black",
             }}
           >
-            Supports
+            FVS Voting System
           </Typography>
           <ButtonCustomize
-            nameButton="Login"
+            nameButton="Đăng nhập"
             border="10px"
             borderRadius={"25px"}
             bgColor="#F6911B"

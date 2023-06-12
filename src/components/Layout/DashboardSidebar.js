@@ -38,7 +38,6 @@ DashboardSidebar.propTypes = {
 
 export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const { pathname } = useLocation();
-
   const isDesktop = useResponsive("up", "lg");
 
   useEffect(() => {
@@ -63,13 +62,16 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       <Box sx={{ mb: 5, mx: 2.5 }}>
         <Link underline="none" component={RouterLink} to="#">
           <AccountStyle>
-            <Avatar src="hihi" alt="photoURL" />
+            <Avatar
+              src="https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg"
+              alt="photoURL"
+            />
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: "text.primary" }}>
-                nè
+                Liem9x
               </Typography>
               <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                role
+                User
               </Typography>
             </Box>
           </AccountStyle>
@@ -88,7 +90,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
         >
           <Box
             component="img"
-            src="https://scontent.fsgn2-5.fna.fbcdn.net/v/t39.30808-6/302918650_3266017480383457_2186236725953791994_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=730e14&_nc_ohc=Tp-EINlGlcIAX-yq8kj&_nc_ht=scontent.fsgn2-5.fna&oh=00_AT9wnAyZ5meOWF3OoSNdddep9JYEqdLfy9gzOTd7bexIiw&oe=631AD9CD"
+            src="https://w7.pngwing.com/pngs/505/489/png-transparent-voting-election-ballot-computer-icons-electoral-system-politics-angle-text-people.png"
             sx={{ width: 100, position: "absolute", top: -50 }}
           />
         </Stack>

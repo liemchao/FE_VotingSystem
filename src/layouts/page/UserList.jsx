@@ -158,7 +158,7 @@ export default function UserList() {
 
   const isUserNotFound = filterFood?.length === 0;
   return (
-    <Page title="Thức ăn">
+    <Page title="Admin">
       <Container maxWidth={false}>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
@@ -168,7 +168,7 @@ export default function UserList() {
             variant="contained"
             component={RouterLink}
             to="/dashboard/admin/newfood"
-            nameButton=" Thêm thức ăn"
+            nameButton=" Tạo Biểu Mẫu"
           />
         </Stack>
 
