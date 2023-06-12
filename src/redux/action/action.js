@@ -44,3 +44,31 @@ export const LoginAthen = (user, navigate) => {
     }
   };
 };
+
+export const callAPIgetListForm = (token) => {
+  return async (dispatch) => {
+    try {
+      const res = await API("GET", URL_API + `/api/v1.0/forms`, null, token);
+      dispatch(
+        createAction({
+          type: PathAction.GET_LIST_FORM,
+          payload: res.data.data,
+        })
+      );
+    } catch (err) {}
+  };
+};
+
+export const callAPIgetListCampaigns = (token) => {
+  return async (dispatch) => {
+    try {
+      const res = await API("GET", URL_API + `/api/v1.0/campaigns`, null, token);
+      dispatch(
+        createAction({
+          type: PathAction.GET_LIST_CAMPAIGNS,
+          payload: res.data.data,
+        })
+      );
+    } catch (err) {}
+  };
+};

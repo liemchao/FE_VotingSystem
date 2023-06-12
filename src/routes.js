@@ -11,8 +11,6 @@ import jwt_decode from "jwt-decode";
 
 import DashboardLayout from "components/Layout/DashboardLayout";
 import UserList from "layouts/page/UserList";
-// import { createBrowserHistory } from "history";
-// import AuthenToken from "authenToken/AuthenToken";
 import AccountPage from "layouts/page/account/AccountPage";
 
 export default function Router() {

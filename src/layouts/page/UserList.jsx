@@ -1,7 +1,7 @@
 import { filter } from "lodash";
 import { useState } from "react";
 import * as React from "react";
-import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 // material
 import {
   Card,
@@ -21,8 +21,6 @@ import {
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
-import jwt_decode from "jwt-decode";
-
 import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
 import UserListHead from "layouts/sections/UserListHead";
 import Foodlistoolbar from "layouts/sections/Foodlistoolbar";
@@ -30,13 +28,16 @@ import Page from "components/Layout/Page";
 import Label from "components/label/Label";
 import Scrollbar from "components/Layout/Scrollbar";
 import SearchNotFound from "components/Layout/SearchNotFound";
+import { callAPIgetListForm } from "../../redux/action/action.js";
+import { useContext } from "react";
+import { Authen } from "../../authenToken/AuthenToken.jsx";
 
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
   { id: "images", name: "Hình", alignRight: false },
   { id: "name", label: "Họ và tên", alignRight: false },
-  { id: "Majo", label: "Ngành", alignRight: false },
+  { id: "Majo", label: "Câu hỏi", alignRight: false },
   { id: "Khoá", label: "Khoá", alignRight: false },
   { id: "createdAt", label: "Ngày thêm", alignRight: false },
   { id: "updatedate", label: "Ngày sửa", alignRight: false },
@@ -103,8 +104,18 @@ export default function UserList() {
 
   const dispatch = useDispatch();
   const Navigate = useNavigate();
+  const { token } = useContext(Authen);
 
-  const location = useLocation();
+  React.useEffect(() => {
+    const callAPI = async () => {
+      await dispatch(callAPIgetListForm(token));
+    };
+    callAPI();
+  }, [dispatch, token]);
+
+  const form = useSelector((state) => {
+    return state.userReducer.form;
+  });
 
   const getOptions = () => [
     { id: "active", title: "Đang bán" },
@@ -114,11 +125,6 @@ export default function UserList() {
 
   const handleDelete = async (id) => {};
 
-  //useSelector kéo data từ store(userReducer.js) zìa mà xài
-  const food = useSelector((state) => {
-    return state.userReducer.listFood;
-  });
-
   //========================================================
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -127,7 +133,7 @@ export default function UserList() {
   };
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = food.map((n) => n.name);
+      const newSelecteds = form.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -147,7 +153,7 @@ export default function UserList() {
     setFilterName(event.target.value);
   };
 
-  const filterFood = applySortFilter(food, getComparator(order, orderBy), filterName);
+  const filterform = applySortFilter(form, getComparator(order, orderBy), filterName);
 
   const handleDate = (time) => {
     const a = new Date(time).toLocaleDateString().split("/");
@@ -156,13 +162,13 @@ export default function UserList() {
     } else return `${a[2]}-${a[1]}-${a[0]}`;
   };
 
-  const isUserNotFound = filterFood?.length === 0;
+  const isUserNotFound = filterform?.length === 0;
   return (
     <Page title="Admin">
       <Container maxWidth={false}>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            {/* <Icon icon="emojione-monotone:pot-of-food" fontSize={100} /> */}
+            {/* <Icon icon="emojione-monotone:pot-of-form" fontSize={100} /> */}
           </Typography>
           <ButtonCustomize
             variant="contained"
@@ -186,57 +192,40 @@ export default function UserList() {
                   order={order}
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={food?.length}
+                  rowCount={form?.length}
                   numSelected={selected?.length}
                   onRequestSort={handleRequestSort}
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
                   {/* nhớ khởi tạo đúng tên file trong database */}
-                  {filterFood
+                  {filterform
                     ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => {
-                      const {
-                        id,
-                        name,
-                        price,
-                        description,
-                        createdAt,
-                        updatedAt,
-                        status,
-                        foodCategory,
-                        image,
-                      } = row;
+                      const { formId, name, userName, description, visibility } = row;
 
                       const isItemSelected = selected.indexOf(name) !== -1;
 
                       return (
                         <TableRow
                           hover
-                          key={id}
+                          key={formId}
                           tabIndex={-1}
                           role="checkbox"
                           selected={isItemSelected}
                           aria-checked={isItemSelected}
                         >
                           <TableCell>
-                            <Avatar alt={name} src={image} />
+                            <Avatar alt={name} />
                           </TableCell>
                           <TableCell>
                             <Typography variant="subtitle2" noWrap>
-                              {/* {name} */}
-                              Phạm Mạnh Toàn
+                              {userName}
                             </Typography>
                           </TableCell>
 
-                          <TableCell align="left">
-                            {/* {new Intl.NumberFormat("vi-VN", {
-                              style: "currency",
-                              currency: "VND",
-                            }).format(price)} */}
-                            Kĩ thuật phần mềm
-                          </TableCell>
-                          <TableCell align="left">{foodCategory.name} K14</TableCell>
+                          <TableCell align="left">{name}</TableCell>
+                          <TableCell align="left">{visibility} K14</TableCell>
                           <TableCell align="left">
                             {/* {new Date(createdAt).toLocaleDateString()} */}
                             11/02/2023
@@ -247,29 +236,14 @@ export default function UserList() {
                           </TableCell>
                           <TableCell align="left">
                             <div>
-                              {status === "inActive" && (
+                              {visibility === true && (
                                 // <Alert severity="warning">inActive</Alert>
-                                <Label color="error">Ngưng hoạt động</Label>
+                                <Label color="success">True</Label>
                               )}
                               {status === "active" && <Label color="success">hoạt động</Label>}
                             </div>
                           </TableCell>
                           <TableCell align="left">{description}</TableCell>
-                          <TableCell align="left">
-                            <ButtonCustomize
-                              variant="outlined"
-                              width="6rem"
-                              onClick={() => handleClickOpen(row)}
-                              nameButton={status === "active" ? "Ngưng bán" : "Bán"}
-                            />
-                          </TableCell>
-                          <TableCell align="left">
-                            <ButtonCustomize
-                              nameButton="Chi tiết"
-                              component={RouterLink}
-                              to={`${location.pathname}/${id}`}
-                            />
-                          </TableCell>
                         </TableRow>
                       );
                     })}
@@ -289,7 +263,7 @@ export default function UserList() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 20]}
             component="div"
-            count={food?.length}
+            count={form?.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

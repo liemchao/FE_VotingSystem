@@ -42,10 +42,6 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
 
   const { decode } = useContext(Authen);
 
-  console.log(decode);
-
-
-
   const isDesktop = useResponsive("up", "lg");
 
   useEffect(() => {
@@ -76,12 +72,10 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
             />
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: "text.primary" }}>
-
                 {decode.Username}
               </Typography>
               <Typography variant="body2" sx={{ color: "text.secondary" }}>
                 {decode.RoleName}
-
               </Typography>
             </Box>
           </AccountStyle>
