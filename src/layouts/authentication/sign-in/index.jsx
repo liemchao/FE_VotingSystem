@@ -11,8 +11,9 @@ import "firebase/compat/auth";
 import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
 import { useFormik } from "formik";
+import Box from "@mui/material/Box";
 
-import { Button, Typography } from "@mui/material";
+import { Button, Container, Typography } from "@mui/material";
 import { LoginAthen } from "redux/action/action";
 import { useDispatch } from "react-redux";
 import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
@@ -71,8 +72,8 @@ function Basic() {
           Hệ thống cung cấp hỗ trợ tạo chiến dịch dánh giá phù hợp với nhiều mục tiêu.
         </Typography>
         <Typography sx={{ marginTop: "77%" }} variant="body2" color="#FFFFFF">
-          &quot;We love Landing folio! Our desiger were using it for their project, so we alreay
-          knew what kid of desgin they want&quot;
+          &quot;Chúng tôi đưa ra một hệ thống bình chọn đưa ra ứng cử viên tốt nhất trong một chiến
+          dịch bình chọn.&quot;
         </Typography>
       </Grid>
       <Grid item xs={6} sx={{ backgroundColor: "#FDF8EB", textAlign: "center" }}>
@@ -105,14 +106,16 @@ function Basic() {
             }}
           />
           <br />
-          <Checkbox sx={{ marginLeft: "3%" }}></Checkbox>
+          <Checkbox sx={{ marginLeft: "-8%" }}></Checkbox>
           Remember Me
           <a href="#" style={{ marginLeft: "10%" }}>
             Forgot Password ?
           </a>
           <br />
-          <ButtonCustomize nameButton="hih" marginLeft="12rem" bgColor="#F6911B" type="submit" />
-          <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+          <ButtonCustomize nameButton="Login" marginLeft="10rem" bgColor="#F6911B" type="submit" />
+          <div style={{ marginLeft: "15rem", marginTop: "-7%" }}>
+            <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+          </div>
         </form>
       </Grid>
     </Grid>

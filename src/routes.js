@@ -1,9 +1,9 @@
 import React from "react";
 import { Navigate, useNavigate, useRoutes } from "react-router-dom";
-import PrimarySearchAppBar from "layouts/page/LangdingPage";
-import Dashboard from "layouts/dashboard";
+// import PrimarySearchAppBar from "layouts/page/LangdingPage";
+// import Dashboard from "layouts/dashboard";
 import SignIn from "layouts/authentication/sign-in";
-import SignUp from "layouts/authentication/sign-up";
+// import SignUp from "layouts/authentication/sign-up";
 import HeaderOne from "layouts/page/LangdingPage";
 import jwt_decode from "jwt-decode";
 
@@ -11,8 +11,8 @@ import jwt_decode from "jwt-decode";
 
 import DashboardLayout from "components/Layout/DashboardLayout";
 import UserList from "layouts/page/UserList";
-import { createBrowserHistory } from "history";
-import AuthenToken from "authenToken/AuthenToken";
+// import { createBrowserHistory } from "history";
+// import AuthenToken from "authenToken/AuthenToken";
 import AccountPage from "layouts/page/account/AccountPage";
 
 export default function Router() {
@@ -69,11 +69,11 @@ export default function Router() {
       ),
       children: [
         {
-          path: "hihi",
+          path: "form",
           element: <UserList />,
         },
         {
-          path: "account",
+          path: "chiendich",
           element: <AccountPage />,
         },
       ],
