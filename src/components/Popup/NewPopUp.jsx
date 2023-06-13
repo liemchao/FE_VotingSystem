@@ -36,9 +36,9 @@ export default function NewPopUp(props) {
     return selecteds.forEach((i) => images.push(URL.createObjectURL(i))), setInput(images);
   }
   const getOptions = () => [
-    { id: "active", title: "Đang bán" },
-    { id: "inActive", title: "Ngưng bán" },
-    { id: "All", title: "Tất cả" },
+    { id: "active", title: "Đang hoạt động" },
+    { id: "inActive", title: "Trạng thái ẩn" },
+    { id: "All", title: "Không hoạt động" },
   ];
 
   const formik = useFormik({

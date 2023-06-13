@@ -1,5 +1,5 @@
 import { filter } from "lodash";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import React from "react";
 import { styled } from "@mui/material/styles";
 import { useState } from "react";
@@ -25,6 +25,10 @@ import NewPopUp from "components/Popup/NewPopUp";
 import { useCallback } from "react";
 
 export default function AccountPage() {
+  const navigate = useNavigate();
+  const handleinvite = () => {
+    navigate("/dashboard/thamgia");
+  };
   const ColorButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText("#FFCC32"),
     backgroundColor: "#FFCC33",
@@ -90,7 +94,9 @@ export default function AccountPage() {
                 </CardContent>
                 <CardActions>
                   <Button size="small">Chia sẻ</Button>
-                  <Button size="small">Tham gia</Button>
+                  <Button type="button" size="small" onClick={handleinvite}>
+                    Tham gia
+                  </Button>
                 </CardActions>
               </Card>
             );

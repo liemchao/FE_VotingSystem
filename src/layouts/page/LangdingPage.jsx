@@ -13,6 +13,7 @@ import Button from "@mui/material/Button";
 import letterimge from "../../assets/images/bruce-mars.jpg";
 import HeaderUnthor from "layouts/header/headerUnthor";
 import Iconify from "assets/theme/components/icon/Iconify";
+import logo from "assets/images/logos/LogoFVS.svg";
 //----------------------------------------------------------------
 
 export default function PrimarySearchAppBar() {
@@ -503,9 +504,7 @@ export default function PrimarySearchAppBar() {
         </Grid>
         <Box sx={{ marginLeft: "3%", display: "flex" }}>
           <Box>
-            <Typography variant="h3" sx={{ marginBottom: "25px" }}>
-              LOGO
-            </Typography>
+            <Avatar sx={{ width: "8rem", }} src={logo} />
             <div>
               <Iconify icon="ic:outline-place" width={22} height={22} color="red" />
               <span style={{ marginLeft: "2%", maxHeight: 400 }}>21/12/Lê Văn Việt</span>

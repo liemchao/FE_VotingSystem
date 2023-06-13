@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
 import { useNavigate } from "react-router-dom";
-import logo from "../../assets/images/logo1.jpeg";
+import logo from "../../assets/images/logos/LogoFVS.svg";
 import CardMedia from "@mui/material/CardMedia";
 //----------------------------------------------------------------
 

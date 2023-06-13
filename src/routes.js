@@ -12,6 +12,7 @@ import jwt_decode from "jwt-decode";
 import DashboardLayout from "components/Layout/DashboardLayout";
 import UserList from "layouts/page/UserList";
 import AccountPage from "layouts/page/account/AccountPage";
+import JoinCampain from "./layouts/page/user/JoinCampaign";
 
 export default function Router() {
   const ProtectedRouteAuthen = ({ roles, children }) => {
@@ -73,6 +74,10 @@ export default function Router() {
         {
           path: "chiendich",
           element: <AccountPage />,
+        },
+        {
+          path: "thamgia",
+          element: <JoinCampain />,
         },
       ],
     },
