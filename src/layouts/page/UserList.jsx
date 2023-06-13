@@ -23,7 +23,7 @@ import { useSelector } from "react-redux";
 
 import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
 import UserListHead from "layouts/sections/UserListHead";
-import Foodlistoolbar from "layouts/sections/Foodlistoolbar";
+import Campaignlistoolbar from "layouts/sections/Campaignlistoolbar";
 import Page from "components/Layout/Page";
 import Label from "components/label/Label";
 import Scrollbar from "components/Layout/Scrollbar";
@@ -36,7 +36,7 @@ import { Authen } from "../../authenToken/AuthenToken.jsx";
 
 const TABLE_HEAD = [
   { id: "images", name: "Hình", alignRight: false },
-  { id: "name", label: "Họ và tên", alignRight: false },
+  { id: "name", label: "Tên người tạo", alignRight: false },
   { id: "Majo", label: "Câu hỏi", alignRight: false },
   { id: "Khoá", label: "Khoá", alignRight: false },
   { id: "createdAt", label: "Ngày thêm", alignRight: false },
@@ -179,7 +179,7 @@ export default function UserList() {
         </Stack>
 
         <Card>
-          <Foodlistoolbar
+          <Campaignlistoolbar
             numSelected={selected?.length}
             filterName={filterName}
             onFilterName={handleFilterByName}

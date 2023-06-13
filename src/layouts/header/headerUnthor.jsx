@@ -6,7 +6,8 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
 import { useNavigate } from "react-router-dom";
-
+import logo from "../../assets/images/logo1.jpeg";
+import CardMedia from "@mui/material/CardMedia";
 //----------------------------------------------------------------
 
 export default function HeaderUnthor() {
@@ -60,19 +61,29 @@ export default function HeaderUnthor() {
               Hỗ Trợ
             </Typography>
           </IconButton>
+
           <Typography
             variant="h6"
             component="div"
             sx={{
               flexGrow: 1,
-              display: "center",
-              alignContent: "center",
+              display: "flex",
               alignItems: "center",
-              marginLeft: "30%",
+              marginLeft: "13%",
               color: "black",
             }}
           >
-            FVS Voting System
+            <CardMedia
+              component="img"
+              sx={{
+                height: "5rem",
+                width: "10rem",
+                marginLeft: "1%",
+              }}
+              image={logo}
+              alt="green iguana"
+            />
+            Voting System
           </Typography>
           <ButtonCustomize
             nameButton="Đăng nhập"

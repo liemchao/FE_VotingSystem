@@ -13,7 +13,7 @@ export const createAction = ({ type, payload }) => {
 export const LoginAthen = (user, navigate) => {
   return async (dispatch) => {
     try {
-      const res = await API("POST", URL_API + `/api/Authen/login`, user);
+      const res = await API("POST", URL_API + `/api/v1/Authen/login`, user);
       localStorage.setItem("token", res.data.data.token);
       const detoken = jwt_decode(res.data.data.token);
 
@@ -24,7 +24,7 @@ export const LoginAthen = (user, navigate) => {
         })
       );
       if (detoken.RoleName === "admin") {
-        navigate("/dashboard/user");
+        navigate("/dashboard/admin");
         CustomizedToast({
           message: "Đăng nhập Admin thành công",
           type: "SUCCESS",
@@ -48,7 +48,7 @@ export const LoginAthen = (user, navigate) => {
 export const callAPIgetListForm = (token) => {
   return async (dispatch) => {
     try {
-      const res = await API("GET", URL_API + `/api/v1.0/forms`, null, token);
+      const res = await API("GET", URL_API + `/api/v1/forms`, null, token);
       dispatch(
         createAction({
           type: PathAction.GET_LIST_FORM,
@@ -62,7 +62,7 @@ export const callAPIgetListForm = (token) => {
 export const callAPIgetListCampaigns = (token) => {
   return async (dispatch) => {
     try {
-      const res = await API("GET", URL_API + `/api/v1.0/campaigns`, null, token);
+      const res = await API("GET", URL_API + `/api/v1/campaigns`, null, token);
       dispatch(
         createAction({
           type: PathAction.GET_LIST_CAMPAIGNS,

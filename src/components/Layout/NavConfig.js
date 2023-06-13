@@ -65,39 +65,38 @@ const navConfigUser = [
     path: "/dashboard/chiendich",
     icon: getIcon("eva:pie-chart-2-fill"),
   },
+  // {
+  //   title: "Form",
+  //   icon: getIcon("tabler:building-warehouse"),
+  //   children: [
+  //     {
+  //       title: "SubTitle 1",
+  //       path: "/dashboard/account",
+  //       icon: getIcon("eva:shopping-bag-fill"),
+  //     },
+  //     {
+  //       title: "SubTitle 2",
+  //       path: "",
+  //       icon: getIcon("ep:foo d"),
+  //     },
+  //   ],
+  // },
   {
-    title: "hehe",
+    title: "Form",
+    path: "/dashboard/form",
     icon: getIcon("tabler:building-warehouse"),
-    children: [
-      {
-        title: "SubTitle 1",
-        path: "/dashboard/account",
-        icon: getIcon("eva:shopping-bag-fill"),
-      },
-      {
-        title: "SubTitle 2",
-        path: "",
-        icon: getIcon("ep:foo d"),
-      },
-    ],
-  },
-  {
-    title: "234",
-    path: "/dashboard/account",
-    icon: getIcon("eva:people-fill"),
     // s
   },
-  {
-    title: "Title 3",
-    path: "",
-    icon: getIcon("carbon:location-company"),
-  },
-  {
-    title: "Title 4",
-    path: "",
-    icon: getIcon("carbon:delivery"),
-  },
-
+  // {
+  //   title: "Title 3",
+  //   path: "",
+  //   icon: getIcon("carbon:location-company"),
+  // },
+  // {
+  //   title: "Title 4",
+  //   path: "",
+  //   icon: getIcon("carbon:delivery"),
+  // },
   ,
 ];
 const exportedObject = {

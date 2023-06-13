@@ -10,7 +10,7 @@ import Avatar from "@mui/material/Avatar";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import letterimge from "../../assets/images/thungthu.PNG";
+import letterimge from "../../assets/images/bruce-mars.jpg";
 import HeaderUnthor from "layouts/header/headerUnthor";
 import Iconify from "assets/theme/components/icon/Iconify";
 //----------------------------------------------------------------
@@ -431,22 +431,27 @@ export default function PrimarySearchAppBar() {
               borderRadius: "20px",
               width: "100%",
               height: "20%",
+              textAlign: "center",
             }}
           >
-            <Grid container spacing={2}>
-              <Grid item xs={6}>
+            <Grid container spacing={1}>
+              <Grid item xs={12}>
                 <Typography
                   gutterBottom
                   variant="h3"
                   color="text.secondary"
-                  sx={{ marginTop: "1%", marginLeft: "3%" }}
+                  sx={{ marginTop: "1%", marginLeft: "7%" }}
                 >
                   Chúng tôi có thể giúp gì cho bạn?
                 </Typography>
 
                 <Container sx={{ flexDirection: "row" }}>
                   <Typography variant="h6">The VFS</Typography>
-                  <Typography sx={{ maxWidth: 400 }} variant="body2" color="text.secondary">
+                  <Typography
+                    sx={{ maxWidth: 400, marginLeft: "32%" }}
+                    variant="body2"
+                    color="text.secondary"
+                  >
                     Gửi email để có thể nhận được sử hỗ trợ của chúng tôi.
                   </Typography>
                   <TextField
@@ -468,25 +473,31 @@ export default function PrimarySearchAppBar() {
                     }}
                   />
                   <Button
-                    sx={{ marginLeft: "2%", marginTop: "1.5rem", backgroundColor: "#E8B63A" }}
+                    sx={{
+                      marginLeft: "1%",
+                      marginTop: "2rem",
+                      backgroundColor: "#E8B63A",
+                      height: "20%",
+                      height: "20%",
+                    }}
                     variant="contained"
                   >
                     Send
                   </Button>
                 </Container>
               </Grid>
-              <Grid item xs={6}>
-                <Card sx={{ backgroundColor: "#DEF6F7" }}>
+              {/* <Grid item xs={6}>
+                <Card sx={{ backgroundColor: "#DEF6F7", marginTop: "1%" }}>
                   <CardMedia
                     component="img"
                     alt="My Image"
-                    height="100"
-                    with="150"
+                    height="180"
+                    with="160"
                     image={letterimge}
                     title="My Image"
                   />{" "}
                 </Card>
-              </Grid>
+              </Grid> */}
             </Grid>
           </Box>
         </Grid>

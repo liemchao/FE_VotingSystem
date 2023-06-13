@@ -66,15 +66,12 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       <Box sx={{ mb: 5, mx: 2.5 }}>
         <Link underline="none" component={RouterLink} to="#">
           <AccountStyle>
-            <Avatar
-              src="https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg"
-              alt="photoURL"
-            />
-            <Box sx={{ ml: 2 }}>
+            <Avatar src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="photoURL" />
+            <Box sx={{ ml: 4 }}>
               <Typography variant="subtitle2" sx={{ color: "text.primary" }}>
-                {decode.Username}
+                Trang chủ
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary" }}>
+              <Typography variant="body1" sx={{ color: "text.danger" }}>
                 {decode.RoleName}
               </Typography>
             </Box>

@@ -60,7 +60,11 @@ export default function NewPopUp(props) {
     <Paper>
       <Dialog maxWidth="md" open={OpenPopUp} onClose={handleClose}>
         <DialogTitle>
-          <PageHeader title="Tạo mới nè" subTitle="Ở đây là subtitle" icon={getIcon("gala:add")} />
+          <PageHeader
+            title="Tạo mới chiến dịch"
+            subTitle="Tạo chiến dịch cho riêng bạn"
+            icon={getIcon("gala:add")}
+          />
         </DialogTitle>
         <DialogContent>
           <form onSubmit={formik.handleSubmit}>
@@ -91,7 +95,7 @@ export default function NewPopUp(props) {
                       required
                       variant="outlined"
                       name="name"
-                      label="Tên"
+                      label="Tên Chiến Dịch"
                       value={""}
                       onChange={(e) => {}}
                     />
@@ -107,7 +111,7 @@ export default function NewPopUp(props) {
                       variant="outlined"
                       name="price"
                       required
-                      label="Giá"
+                      label="Thời gian kết thúc"
                       value=""
                       onChange={(e) => {}}
                     />
@@ -115,16 +119,16 @@ export default function NewPopUp(props) {
                   <Grid item xs={12}>
                     <Box
                       sx={{
-                        display: "flex",
+                        // display: "flex",
                         flexDirection: "row",
                       }}
                     >
                       <Select
                         name="foodCategoryId"
                         required
-                        label="Loại"
-                        width="12rem"
-                        value="hihi"
+                        label="Trạng thái"
+                        width="14rem"
+                        height="10rem"
                         onChange={(e) => {
                           console.log(e);
                         }}
@@ -143,7 +147,7 @@ export default function NewPopUp(props) {
                       required
                       label="Mô tả"
                       name="description"
-                      value=""
+                      // value=""
                       //   onChange={(e) => {}}
                     />
                   </Grid>

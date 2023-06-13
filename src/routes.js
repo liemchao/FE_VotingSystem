@@ -49,7 +49,7 @@ export default function Router() {
       ),
       children: [
         {
-          path: "user",
+          path: "admin",
           element: <UserList />,
         },
         {
