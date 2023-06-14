@@ -173,7 +173,7 @@ export default function UserList() {
           <ButtonCustomize
             variant="contained"
             component={RouterLink}
-            to="/dashboard/admin/newfood"
+            to="/user/newfood"
             nameButton=" Tạo Biểu Mẫu"
           />
         </Stack>

@@ -10,6 +10,7 @@ import NavSection from "./NavSection";
 import useResponsive from "./useResponsive";
 import Scrollbar from "./Scrollbar";
 import { Authen } from "authenToken/AuthenToken";
+import logo from "../../assets/images/logos/LogoFVS.svg";
 
 // ----------------------------------------------------------------------
 
@@ -57,11 +58,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
         "& .simplebar-content": { height: 1, display: "flex", flexDirection: "column" },
       }}
     >
-      <Box sx={{ px: 2.5, py: 3, display: "inline-flex" }}>
-        {/* <Logo />
-        <h1>Admin-Mesu</h1> */}
-        Logo ở đây
-      </Box>
+      <Box sx={{ px: 2, py: 3, display: "inline-flex" }}></Box>
 
       <Box sx={{ mb: 5, mx: 2.5 }}>
         <Link underline="none" component={RouterLink} to="#">
@@ -89,11 +86,10 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
           spacing={3}
           sx={{ pt: 5, borderRadius: 2, position: "relative" }}
         >
-          <Box
-            component="img"
-            src="https://w7.pngwing.com/pngs/505/489/png-transparent-voting-election-ballot-computer-icons-electoral-system-politics-angle-text-people.png"
-            sx={{ width: 100, position: "absolute", top: -50 }}
-          />
+          <Box sx={{ width: 100, position: "absolute", top: -50 }}>
+            {" "}
+            <Avatar src={logo} />
+          </Box>
         </Stack>
       </Box>
     </Scrollbar>

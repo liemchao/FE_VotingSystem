@@ -62,17 +62,17 @@ const navConfig = [
 const navConfigUser = [
   {
     title: "Chiến dịch",
-    path: "/user/chiendich",
+    path: "/user/campaign",
     icon: getIcon("eva:pie-chart-2-fill"),
     children: [
       {
         title: "Tất cả chiến dịch",
-        path: "/user/chiendich",
+        path: "/user/campaign",
         icon: getIcon("eva:cube-outline"),
       },
       {
         title: "Chiến dịch của bản thân",
-        path: "/user/chiendich",
+        path: "/user/campaignowner",
         icon: getIcon("eva:cube-fill"),
       },
     ],

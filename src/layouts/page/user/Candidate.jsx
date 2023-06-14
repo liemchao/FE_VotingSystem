@@ -173,7 +173,7 @@ export default function CandidateList() {
           <ButtonCustomize
             variant="contained"
             component={RouterLink}
-            to="/dashboard/admin/newfood"
+            to="/user/createcandidate"
             nameButton=" Tạo Biểu Mẫu"
           />
         </Stack>

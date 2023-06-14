@@ -15,7 +15,8 @@ import AccountPage from "layouts/page/account/AccountPage";
 import JoinCampain from "./layouts/page/user/JoinCampaign";
 import CandidateList from "layouts/page/user/Candidate";
 import FeedBack from "layouts/page/user/FeedBack";
-
+import CampaignList from "layouts/page/user/Campaign";
+import CampaignOwenrList from "layouts/page/user/CampaignOwner";
 export default function Router() {
   const ProtectedRouteAuthen = ({ roles, children }) => {
     const token = localStorage.getItem("token");
@@ -75,7 +76,11 @@ export default function Router() {
         },
         {
           path: "campaign",
-          element: <AccountPage />,
+          element: <CampaignList />,
+        },
+        {
+          path: "campaignowner",
+          element: <CampaignOwenrList />,
         },
         {
           path: "candidate",
