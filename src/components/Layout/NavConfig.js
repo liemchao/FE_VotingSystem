@@ -62,9 +62,38 @@ const navConfig = [
 const navConfigUser = [
   {
     title: "Chiến dịch",
-    path: "/dashboard/chiendich",
+    path: "/user/chiendich",
     icon: getIcon("eva:pie-chart-2-fill"),
+    children: [
+      {
+        title: "Tất cả chiến dịch",
+        path: "/user/chiendich",
+        icon: getIcon("eva:cube-outline"),
+      },
+      {
+        title: "Chiến dịch của bản thân",
+        path: "/user/chiendich",
+        icon: getIcon("eva:cube-fill"),
+      },
+    ],
   },
+
+  //   title: "Form",
+  //   icon: getIcon("tabler:building-warehouse"),
+  //   children: [
+  //     {
+  //       title: "SubTitle 1",
+  //       path: "/dashboard/account",
+  //       icon: getIcon("eva:shopping-bag-fill"),
+  //     },
+  //     {
+  //       title: "SubTitle 2",
+  //       path: "",
+  //       icon: getIcon("ep:foo d"),
+  //     },
+  //   ],
+  // },
+
   // {
   //   title: "Form",
   //   icon: getIcon("tabler:building-warehouse"),
@@ -82,9 +111,27 @@ const navConfigUser = [
   //   ],
   // },
   {
-    title: "Form",
-    path: "/dashboard/form",
+    title: "Biểu Mẫu",
+    path: "/user/form",
     icon: getIcon("tabler:building-warehouse"),
+    // s
+  },
+  {
+    title: "Bản mẫu",
+    path: "/user/template",
+    icon: getIcon("eva:file-text-fill"),
+    // s
+  },
+  {
+    title: "Đánh Giá",
+    path: "/user/feedback",
+    icon: getIcon("eva:flag-fill"),
+    // s
+  },
+  {
+    title: "Ứng cử viên",
+    path: "/user/candidate",
+    icon: getIcon("eva:person-done-fill"),
     // s
   },
   // {

@@ -17,9 +17,9 @@ export const ProviderToken = ({ children }) => {
       const decoded = jwt_decode(token);
       setDecode(decoded);
       if (decoded.RoleName === "admin") {
-        navigate("/dashboard/admin");
+        navigate("/admin/dashboard");
       } else if (decoded.RoleName === "user") {
-        navigate("/dashboard/form");
+        navigate("/user/form");
       }
     } catch (error) {
       navigate("/");

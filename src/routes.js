@@ -13,6 +13,8 @@ import DashboardLayout from "components/Layout/DashboardLayout";
 import UserList from "layouts/page/UserList";
 import AccountPage from "layouts/page/account/AccountPage";
 import JoinCampain from "./layouts/page/user/JoinCampaign";
+import CandidateList from "layouts/page/user/Candidate";
+import FeedBack from "layouts/page/user/FeedBack";
 
 export default function Router() {
   const ProtectedRouteAuthen = ({ roles, children }) => {
@@ -42,7 +44,7 @@ export default function Router() {
       element: <SignIn />,
     },
     {
-      path: "/dashboard",
+      path: "/admin",
       element: (
         <ProtectedRouteAuthen roles="admin">
           <DashboardLayout />
@@ -50,7 +52,7 @@ export default function Router() {
       ),
       children: [
         {
-          path: "admin",
+          path: "dashboard",
           element: <UserList />,
         },
         {
@@ -60,7 +62,7 @@ export default function Router() {
       ],
     },
     {
-      path: "/dashboard",
+      path: "/user",
       element: (
         <ProtectedRouteAuthen roles="user">
           <DashboardLayout />
@@ -72,12 +74,25 @@ export default function Router() {
           element: <UserList />,
         },
         {
-          path: "chiendich",
+          path: "campaign",
           element: <AccountPage />,
         },
         {
-          path: "thamgia",
+          path: "candidate",
+          element: <CandidateList />,
+        },
+
+        {
+          path: "joincampain",
           element: <JoinCampain />,
+        },
+        {
+          path: "feedback",
+          element: <FeedBack />,
+        },
+        {
+          path: "template",
+          element: <FeedBack />,
         },
       ],
     },

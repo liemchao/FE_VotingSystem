@@ -24,13 +24,13 @@ export const LoginAthen = (user, navigate) => {
         })
       );
       if (detoken.RoleName === "admin") {
-        navigate("/dashboard/admin");
+        navigate("/admin/dashboard");
         CustomizedToast({
           message: "Đăng nhập Admin thành công",
           type: "SUCCESS",
         });
       } else if (detoken.RoleName === "user") {
-        navigate("/dashboard/form");
+        navigate("/user/form");
         CustomizedToast({
           message: "Đăng nhập User thành công",
           type: "SUCCESS",

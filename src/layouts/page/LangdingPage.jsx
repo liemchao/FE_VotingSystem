@@ -504,7 +504,7 @@ export default function PrimarySearchAppBar() {
         </Grid>
         <Box sx={{ marginLeft: "3%", display: "flex" }}>
           <Box>
-            <Avatar sx={{ width: "8rem", }} src={logo} />
+            <Avatar sx={{ width: "10rem", height: "4rem" }} src={logo} />
             <div>
               <Iconify icon="ic:outline-place" width={22} height={22} color="red" />
               <span style={{ marginLeft: "2%", maxHeight: 400 }}>21/12/Lê Văn Việt</span>

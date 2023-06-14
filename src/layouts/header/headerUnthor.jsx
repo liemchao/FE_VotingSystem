@@ -61,10 +61,7 @@ export default function HeaderUnthor() {
               Hỗ Trợ
             </Typography>
           </IconButton>
-
-          <Typography
-            variant="h6"
-            component="div"
+          <Box
             sx={{
               flexGrow: 1,
               display: "flex",
@@ -76,15 +73,26 @@ export default function HeaderUnthor() {
             <CardMedia
               component="img"
               sx={{
-                height: "5rem",
+                height: "6rem",
                 width: "10rem",
                 marginLeft: "1%",
               }}
               image={logo}
               alt="green iguana"
             />
-            Voting System
-          </Typography>
+            <Typography
+              variant="h2"
+              component="div"
+              sx={{
+                flexGrow: 1,
+                display: "flex",
+                alignItems: "center",
+                color: "black",
+              }}
+            >
+              Voting System
+            </Typography>
+          </Box>
           <ButtonCustomize
             nameButton="Đăng nhập"
             border="10px"
