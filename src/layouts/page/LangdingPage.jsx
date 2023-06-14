@@ -10,7 +10,6 @@ import Avatar from "@mui/material/Avatar";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import letterimge from "../../assets/images/bruce-mars.jpg";
 import HeaderUnthor from "layouts/header/headerUnthor";
 import Iconify from "assets/theme/components/icon/Iconify";
 import logo from "assets/images/logos/LogoFVS.svg";

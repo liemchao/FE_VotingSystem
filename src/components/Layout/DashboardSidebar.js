@@ -9,7 +9,7 @@ import navConfig from "./NavConfig";
 import NavSection from "./NavSection";
 import useResponsive from "./useResponsive";
 import Scrollbar from "./Scrollbar";
-import { Authen } from "authenToken/AuthenToken";
+import { Authen } from "../../context/authenToken/AuthenToken";
 import logo from "../../assets/images/logos/LogoFVS.svg";
 
 // ----------------------------------------------------------------------

@@ -16,9 +16,6 @@ import {
   Box,
 } from "@mui/material";
 import Page from "components/Layout/Page";
-import NewPopUp from "components/Popup/NewPopUp";
-import { useCallback } from "react";
-
 export default function JoinCampain() {
   return (
     <Page title="Candidate">
