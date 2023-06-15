@@ -25,24 +25,23 @@ import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
 import UserListHead from "layouts/sections/UserListHead";
 import Campaignlistoolbar from "layouts/sections/Campaignlistoolbar";
 import Page from "components/Layout/Page";
-import Label from "components/label/Label";
 import Scrollbar from "components/Layout/Scrollbar";
 import SearchNotFound from "components/Layout/SearchNotFound";
 import { callAPIgetListForm } from "../../context/redux/action/action";
 import { useContext } from "react";
 import { Authen } from "../../context/authenToken/AuthenToken";
+import Button from "components/Control/Button";
 
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
   { id: "images", name: "Hình", alignRight: false },
   { id: "name", label: "Tên người tạo", alignRight: false },
-  { id: "Majo", label: "Câu hỏi", alignRight: false },
-  { id: "Khoá", label: "Khoá", alignRight: false },
   { id: "createdAt", label: "Ngày thêm", alignRight: false },
   { id: "updatedate", label: "Ngày sửa", alignRight: false },
-  { id: "status", label: "Trạng thái", alignRight: false },
-  { id: "description", label: "Mô tả", alignRight: false },
+  { id: "Action", label: "Action", alignRight: true },
+  // { id: "status", label: "Trạng thái", alignRight: false },
+  // { id: "description", label: "Mô tả", alignRight: false },
 ];
 
 // ----------------------------------------------------------------------
@@ -114,7 +113,7 @@ export default function UserList() {
   }, [dispatch, token]);
 
   const form = useSelector((state) => {
-    return state.userReducer.form;
+    return state.form;
   });
 
   const getOptions = () => [
@@ -202,7 +201,7 @@ export default function UserList() {
                   {filterform
                     ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => {
-                      const { formId, name, userName, description, visibility } = row;
+                      const { formId, name, userId } = row;
 
                       const isItemSelected = selected.indexOf(name) !== -1;
 
@@ -218,32 +217,19 @@ export default function UserList() {
                           <TableCell>
                             <Avatar alt={name} />
                           </TableCell>
-                          <TableCell>
-                            <Typography variant="subtitle2" noWrap>
-                              {userName}
-                            </Typography>
-                          </TableCell>
 
-                          <TableCell align="left">{name}</TableCell>
-                          <TableCell align="left">{visibility} K14</TableCell>
+                          <TableCell align="left">{userId}</TableCell>
+                          {/* <TableCell align="left">{visibility} K14</TableCell> */}
                           <TableCell align="left">
                             {/* {new Date(createdAt).toLocaleDateString()} */}
                             11/02/2023
                           </TableCell>
+
+                          <TableCell align="left">11/02/2023</TableCell>
                           <TableCell align="left">
-                            {/* {new Date(updatedAt).toLocaleDateString()} */}
-                            11/02/2023
+                            <Button></Button>
+                            <></><Button>Delete</Button>
                           </TableCell>
-                          <TableCell align="left">
-                            <div>
-                              {visibility === true && (
-                                // <Alert severity="warning">inActive</Alert>
-                                <Label color="success">True</Label>
-                              )}
-                              {status === "active" && <Label color="success">hoạt động</Label>}
-                            </div>
-                          </TableCell>
-                          <TableCell align="left">{description}</TableCell>
                         </TableRow>
                       );
                     })}

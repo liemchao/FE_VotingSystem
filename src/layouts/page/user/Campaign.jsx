@@ -50,12 +50,11 @@ export default function CampaignList() {
   }, [dispatch, token]);
 
   const campaigns = useSelector((state) => {
-    return state.userReducer.campaigns;
+    return state.campaigns;
   });
 
   const handleClickOpen = useCallback(() => {
     SetOpenPopUp(true);
-    console.log(OpenPopUp);
   }, []);
 
   return (

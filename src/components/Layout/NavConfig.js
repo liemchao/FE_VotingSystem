@@ -112,7 +112,7 @@ const navConfigUser = [
   // },
   {
     title: "Biểu Mẫu",
-    path: "/user/form",
+    path: "/user/campaign",
     icon: getIcon("tabler:building-warehouse"),
     // s
   },

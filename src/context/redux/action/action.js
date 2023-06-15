@@ -30,7 +30,7 @@ export const LoginAthen = (user, navigate) => {
           type: "SUCCESS",
         });
       } else if (detoken.RoleName === "user") {
-        navigate("/user/form");
+        navigate("/user/campaign");
         CustomizedToast({
           message: "Đăng nhập User thành công",
           type: "SUCCESS",

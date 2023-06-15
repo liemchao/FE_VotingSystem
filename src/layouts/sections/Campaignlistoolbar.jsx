@@ -72,7 +72,7 @@ export default function Foodlistoolbar({ numSelected, filterName, onFilterName, 
   };
 
   const category = useSelector((state) => {
-    return state.userReducer.listCategory;
+    return state.listCategory;
   });
 
   const OptionCate = () => {

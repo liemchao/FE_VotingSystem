@@ -114,7 +114,7 @@ export default function UserList() {
   }, [dispatch, token]);
 
   const form = useSelector((state) => {
-    return state.userReducer.form;
+    return state.form;
   });
 
   const getOptions = () => [

@@ -114,7 +114,7 @@ export default function FeedBack() {
   }, [dispatch, token]);
 
   const form = useSelector((state) => {
-    return state.userReducer.form;
+    return state.form;
   });
 
   const getOptions = () => [

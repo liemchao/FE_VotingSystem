@@ -24,15 +24,15 @@ export default function JoinCampain() {
           <Card sx={{ maxWidth: 345, paddingLeft: "1rem" }}>
             <CardMedia
               sx={{ height: 140 }}
-              image="https://media.istockphoto.com/id/165515133/vi/vec-to/voting-hands-and-ballot-box.jpg?s=1024x1024&w=is&k=20&c=VKlxd59_HCpxXXTHjcVsUK_IMEgw4D8yGtYkE5CIUgo="
+              image="https://png.pngtree.com/png-clipart/20190921/original/pngtree-user-avatar-boy-png-image_4693645.jpg"
               title="green iguana"
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
-                liem
+                Nguyễn Thanh Liêm
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                liem
+                Kĩ Thuật Phần Mềm
               </Typography>
             </CardContent>
             <CardActions>

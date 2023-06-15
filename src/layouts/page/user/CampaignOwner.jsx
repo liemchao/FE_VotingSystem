@@ -50,7 +50,7 @@ export default function CampaignOwenrList() {
   }, [dispatch, token]);
 
   const campaigns = useSelector((state) => {
-    return state.userReducer.campaigns;
+    return state.campaigns;
   });
 
   const handleClickOpen = useCallback(() => {
