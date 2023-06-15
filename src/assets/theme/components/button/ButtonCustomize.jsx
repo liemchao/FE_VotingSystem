@@ -20,6 +20,9 @@ export default function ButtonCustomize(props) {
     borderRadius,
     height,
     color,
+    startIcon,
+    paddingLeft,
+    variant,
   } = props;
   const ColorButton = styled(Button)(({ theme }) => ({
     // color: theme.palette.getContrastText("#ffff"),
@@ -49,7 +52,9 @@ export default function ButtonCustomize(props) {
       onClick={onClick}
       component={component}
       to={to}
+      variant={variant}
       endIcon={endIcon}
+      startIcon={startIcon}
       sx={{
         color: { color },
         width: { width },
@@ -57,6 +62,7 @@ export default function ButtonCustomize(props) {
         marginTop: { marginTop },
         marginLeft: { marginLeft },
         paddingBottom: { paddingBottom },
+        paddingLeft: { paddingLeft },
         boxShadow: { boxShadow },
         border: { border },
         borderRadius: borderRadius,

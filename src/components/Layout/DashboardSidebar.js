@@ -3,7 +3,7 @@ import { useContext, useEffect } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 // material
 import { styled } from "@mui/material/styles";
-import { Box, Link, Button, Drawer, Typography, Avatar, Stack } from "@mui/material";
+import { Box, Link, Button, Drawer, Typography, Avatar, Stack, IconButton } from "@mui/material";
 
 import navConfig from "./NavConfig";
 import NavSection from "./NavSection";
@@ -11,6 +11,8 @@ import useResponsive from "./useResponsive";
 import Scrollbar from "./Scrollbar";
 import { Authen } from "../../context/authenToken/AuthenToken";
 import logo from "../../assets/images/logos/LogoFVS.svg";
+import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
+import Iconify from "assets/theme/components/icon/Iconify";
 
 // ----------------------------------------------------------------------
 
@@ -36,9 +38,16 @@ const AccountStyle = styled("div")(({ theme }) => ({
 DashboardSidebar.propTypes = {
   isOpenSidebar: PropTypes.bool,
   onCloseSidebar: PropTypes.func,
+  onOpenSidebar: PropTypes.func,
 };
 
-export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
+export default function DashboardSidebar({
+  onOpenSidebar,
+  isOpenSidebar,
+  onCloseSidebar,
+  handleClickOpen,
+  open,
+}) {
   const { pathname } = useLocation();
 
   const { decode } = useContext(Authen);
@@ -58,7 +67,11 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
         "& .simplebar-content": { height: 1, display: "flex", flexDirection: "column" },
       }}
     >
-      <Box sx={{ px: 2, py: 3, display: "inline-flex" }}></Box>
+      <Box sx={{ px: 2, py: 3, display: "inline-flex" }}>
+        {/* <IconButton onClick={handleClickOpen} sx={{ mr: 1, color: "text.primary" }}>
+          <Iconify icon="eva:menu-2-fill" />
+        </IconButton> */}
+      </Box>
 
       <Box sx={{ mb: 5, mx: 2.5 }}>
         <Link underline="none" component={RouterLink} to="#">
@@ -87,7 +100,6 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
           sx={{ pt: 5, borderRadius: 2, position: "relative" }}
         >
           <Box sx={{ width: 100, position: "absolute", top: -50 }}>
-            {" "}
             <Avatar src={logo} />
           </Box>
         </Stack>
@@ -109,20 +121,25 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
         </Drawer>
       )}
 
-      {isDesktop && (
+      {isDesktop && open === false ? (
         <Drawer
           open
+          // handleClickOpen
+          isOpenSidebar
           variant="persistent"
           PaperProps={{
             sx: {
               width: DRAWER_WIDTH,
               bgcolor: "background.default",
               borderRightStyle: "dashed",
+              position: "absolute",
             },
           }}
         >
           {renderContent}
         </Drawer>
+      ) : (
+        <></>
       )}
     </RootStyle>
   );

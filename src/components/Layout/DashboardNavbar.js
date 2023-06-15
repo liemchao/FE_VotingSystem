@@ -30,10 +30,18 @@ const RootStyle = styled(AppBar)(({ theme }) => ({
 
 const ToolbarStyle = styled(Toolbar)(({ theme }) => ({
   minHeight: APPBAR_MOBILE,
+  // width: "100%",
   [theme.breakpoints.up("lg")]: {
     minHeight: APPBAR_DESKTOP,
     padding: theme.spacing(0, 5),
   },
+}));
+
+const RootStyleClose = styled(AppBar)(({ theme }) => ({
+  boxShadow: "none",
+  backdropFilter: "blur(6px)",
+  WebkitBackdropFilter: "blur(6px)", // Fix on Mobile
+  backgroundColor: alpha(theme.palette.background.default, 0.72),
 }));
 
 // ----------------------------------------------------------------------
@@ -42,27 +50,47 @@ DashboardNavbar.propTypes = {
   onOpenSidebar: PropTypes.func,
 };
 
-export default function DashboardNavbar({ onOpenSidebar }) {
+export default function DashboardNavbar({ onOpenSidebar, open }) {
   return (
-    <RootStyle>
-      <ToolbarStyle>
-        <IconButton
-          onClick={onOpenSidebar}
-          sx={{ mr: 1, color: "text.primary", display: { lg: "none" } }}
-        >
-          <Iconify icon="eva:menu-2-fill" />
-        </IconButton>
+    <>
+      {open ? (
+        <RootStyle>
+          <ToolbarStyle>
+            <IconButton
+              onClick={onOpenSidebar}
+              sx={{ mr: 1, color: "text.primary", display: { lg: "none" } }}
+            >
+              <Iconify icon="eva:menu-2-fill" />
+            </IconButton>
 
-        <Box sx={{ flexGrow: 1 }} />
+            <Box sx={{ flexGrow: 1 }} />
 
-        <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
-          {/* <LanguagePopover /> */}
-          <Searchbar />
-          <NotificationsPopover />
-          <MailNotification />
-          <AccountPopover />
-        </Stack>
-      </ToolbarStyle>
-    </RootStyle>
+            <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
+              <Searchbar />
+              <NotificationsPopover />
+              <MailNotification />
+              <AccountPopover />
+            </Stack>
+          </ToolbarStyle>
+        </RootStyle>
+      ) : (
+        <RootStyleClose>
+          <ToolbarStyle>
+            <IconButton onClick={onOpenSidebar} sx={{ mr: 1, color: "text.primary" }}>
+              <Iconify icon="eva:menu-2-fill" />
+            </IconButton>
+
+            <Box sx={{ flexGrow: 1 }} />
+
+            <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
+              <Searchbar />
+              <NotificationsPopover />
+              <MailNotification />
+              <AccountPopover />
+            </Stack>
+          </ToolbarStyle>
+        </RootStyleClose>
+      )}
+    </>
   );
 }

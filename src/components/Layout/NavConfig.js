@@ -7,7 +7,7 @@ const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
 const navConfig = [
   {
     title: "Chiến dịch",
-    path: "/dashboard/account",
+    path: "/admin/dashboard",
     icon: getIcon("eva:pie-chart-2-fill"),
     // s
   },
@@ -78,41 +78,9 @@ const navConfigUser = [
     ],
   },
 
-  //   title: "Form",
-  //   icon: getIcon("tabler:building-warehouse"),
-  //   children: [
-  //     {
-  //       title: "SubTitle 1",
-  //       path: "/dashboard/account",
-  //       icon: getIcon("eva:shopping-bag-fill"),
-  //     },
-  //     {
-  //       title: "SubTitle 2",
-  //       path: "",
-  //       icon: getIcon("ep:foo d"),
-  //     },
-  //   ],
-  // },
-
-  // {
-  //   title: "Form",
-  //   icon: getIcon("tabler:building-warehouse"),
-  //   children: [
-  //     {
-  //       title: "SubTitle 1",
-  //       path: "/dashboard/account",
-  //       icon: getIcon("eva:shopping-bag-fill"),
-  //     },
-  //     {
-  //       title: "SubTitle 2",
-  //       path: "",
-  //       icon: getIcon("ep:foo d"),
-  //     },
-  //   ],
-  // },
   {
     title: "Biểu Mẫu",
-    path: "/user/campaign",
+    path: "",
     icon: getIcon("tabler:building-warehouse"),
     // s
   },
@@ -134,16 +102,6 @@ const navConfigUser = [
     icon: getIcon("eva:person-done-fill"),
     // s
   },
-  // {
-  //   title: "Title 3",
-  //   path: "",
-  //   icon: getIcon("carbon:location-company"),
-  // },
-  // {
-  //   title: "Title 4",
-  //   path: "",
-  //   icon: getIcon("carbon:delivery"),
-  // },
   ,
 ];
 const exportedObject = {

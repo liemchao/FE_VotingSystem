@@ -112,6 +112,7 @@ export default function UserList() {
     callAPI();
   }, [dispatch, token]);
 
+  //useSelect lấy data từ store =>
   const form = useSelector((state) => {
     return state.form;
   });
@@ -228,7 +229,8 @@ export default function UserList() {
                           <TableCell align="left">11/02/2023</TableCell>
                           <TableCell align="left">
                             <Button></Button>
-                            <></><Button>Delete</Button>
+                            <></>
+                            <Button>Delete</Button>
                           </TableCell>
                         </TableRow>
                       );
