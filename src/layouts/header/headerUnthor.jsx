@@ -8,10 +8,13 @@ import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logos/LogoFVS.svg";
 import CardMedia from "@mui/material/CardMedia";
+import { Authen } from "context/authenToken/AuthenToken";
+import AccountPopover from "components/Layout/AccountPopover";
 //----------------------------------------------------------------
 
 export default function HeaderUnthor() {
   const navigate = useNavigate();
+  const { token, decode } = React.useContext(Authen);
   const hanldeNavigate = () => {
     navigate("/authentication/sign-in");
   };
@@ -93,7 +96,23 @@ export default function HeaderUnthor() {
               Voting System
             </Typography>
           </Box>
-          <ButtonCustomize
+          {token ? (
+            <AccountPopover />
+          ) : (
+            <ButtonCustomize
+              nameButton="Đăng nhập"
+              border="10px"
+              borderRadius={"25px"}
+              bgColor="#F6911B"
+              width="100px"
+              height="2.2rem"
+              boxShadow="2"
+              color="white"
+              to="/authentication/sign-in"
+              onClick={() => hanldeNavigate()}
+            />
+          )}
+          {/* <ButtonCustomize
             nameButton="Đăng nhập"
             border="10px"
             borderRadius={"25px"}
@@ -104,7 +123,7 @@ export default function HeaderUnthor() {
             color="white"
             to="/authentication/sign-in"
             onClick={() => hanldeNavigate()}
-          />
+          /> */}
         </Toolbar>
       </AppBar>
     </Box>

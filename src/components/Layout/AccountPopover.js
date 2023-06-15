@@ -6,8 +6,6 @@ import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton } from "@
 import MenuPopover from "./MenuPopover";
 import { useDispatch, useSelector } from "react-redux";
 import { Authen } from "../../context/authenToken/AuthenToken";
-import jwt_decode from "jwt-decode";
-
 // ----------------------------------------------------------------------
 
 const MENU_OPTIONS = [
@@ -41,9 +39,7 @@ export default function AccountPopover() {
     setOpen(event.currentTarget);
   };
 
-  const { token } = useContext(Authen);
-
-  const decoded = jwt_decode(token);
+  const { token, decoded } = useContext(Authen);
 
   const handleClose = () => {
     localStorage.removeItem("token");
@@ -57,22 +53,36 @@ export default function AccountPopover() {
       <IconButton
         ref={anchorRef}
         onClick={handleOpen}
+        disableRipple
         sx={{
-          p: 0,
+          variant: "contained",
+          py: "-200px",
+
           ...(open && {
             "&:before": {
-              zIndex: 1,
-              content: "''",
-              width: "100%",
-              height: "100%",
-              borderRadius: "50%",
-              position: "absolute",
-              bgcolor: (theme) => alpha(theme.palette.grey[900], 0.8),
+              variant: "contained",
             },
           }),
+          "&.MuiIconButton-root": {
+            ":hover": { backgroundColor: "transparent" },
+          },
         }}
       >
-        <Avatar src="/" alt="photoURL" />
+        <Avatar src="/" alt="photoURL" sx={{ zIndex: "modal", left: "20%" }} />
+        <Box
+          paddingLeft="2.2rem"
+          paddingTop="0.4em"
+          sx={{
+            backgroundColor: "#ffee32",
+            width: 170,
+            height: 40,
+            borderRadius: 4,
+            zIndex: "toolip",
+            left: "90%",
+          }}
+        >
+          <Typography variant="subtitle2">Pham Manh Toan</Typography>
+        </Box>
       </IconButton>
 
       <MenuPopover
@@ -82,8 +92,8 @@ export default function AccountPopover() {
         sx={{
           p: 0,
           mt: 1.5,
-          ml: 0.75,
-          "& .MuiMenuItem-root": {
+          ml: -5,
+          "&.MuiMenuItem-root": {
             typography: "body2",
             borderRadius: 0.75,
           },
@@ -91,10 +101,10 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
-            {decoded.Username}
+            {decoded?.Username}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }} noWrap>
-            {decoded.RoleName}
+            {decoded?.RoleName}
           </Typography>
         </Box>
 
