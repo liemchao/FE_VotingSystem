@@ -62,7 +62,7 @@ export default function JoinCampain() {
     >
       {cards.map((card, index) => (
         <Grid item xs={12} sm={4} key={index}>
-          <Card sx={{ maxWidth: 250, paddingLeft: "1rem" }}>
+          <Card sx={{ maxWidth: 300, paddingLeft: "1rem" }}>
             <CardMedia sx={{ height: 200 }} image={card.image} title="green iguana" />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
