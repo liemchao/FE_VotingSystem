@@ -39,7 +39,7 @@ export default function AccountPopover() {
     setOpen(event.currentTarget);
   };
 
-  const { token, decoded } = useContext(Authen);
+  const { token, decode } = useContext(Authen);
 
   const handleClose = () => {
     localStorage.removeItem("token");
@@ -81,7 +81,7 @@ export default function AccountPopover() {
             left: "90%",
           }}
         >
-          <Typography variant="subtitle2">Pham Manh Toan</Typography>
+          <Typography variant="subtitle2">{decode.Username}</Typography>
         </Box>
       </IconButton>
 
@@ -101,10 +101,10 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
-            {decoded?.Username}
+            {decode.Username}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }} noWrap>
-            {decoded?.RoleName}
+            {decode.RoleName}
           </Typography>
         </Box>
 

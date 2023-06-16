@@ -1,26 +1,26 @@
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import { Avatar } from '@mui/material';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormGroup from '@mui/material/FormGroup';
-import Checkbox from '@mui/material/Checkbox';
-import Button from '@mui/material/Button';
-import SendIcon from '@mui/icons-material/Send';
-import { useTheme } from '@mui/material/styles';
+import * as React from "react";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import { Avatar } from "@mui/material";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormGroup from "@mui/material/FormGroup";
+import Checkbox from "@mui/material/Checkbox";
+import Button from "@mui/material/Button";
+import SendIcon from "@mui/icons-material/Send";
+import { useTheme } from "@mui/material/styles";
 
-
-export default function Overview() {
-
+export default function ListQuestion() {
   return (
     <>
-      <Card sx={{
-        marginTop: '20px'
-      }}>
+      <Card
+        sx={{
+          marginTop: "20px",
+        }}
+      >
         <CardContent>
           <Typography gutterBottom variant="h3" component="div">
             Câu số 1:
@@ -45,9 +45,11 @@ export default function Overview() {
         </CardContent>
       </Card>
 
-      <Card sx={{
-        marginTop: '20px'
-      }}>
+      <Card
+        sx={{
+          marginTop: "20px",
+        }}
+      >
         <CardContent>
           <Typography gutterBottom variant="h3" component="div">
             Câu số 2:
@@ -67,9 +69,11 @@ export default function Overview() {
         </CardContent>
       </Card>
 
-      <Card sx={{
-        marginTop: '20px'
-      }}>
+      <Card
+        sx={{
+          marginTop: "20px",
+        }}
+      >
         <CardContent>
           <Typography gutterBottom variant="h3" component="div">
             Câu số 3:
@@ -94,9 +98,11 @@ export default function Overview() {
         </CardContent>
       </Card>
 
-      <Card sx={{
-        marginTop: '20px'
-      }}>
+      <Card
+        sx={{
+          marginTop: "20px",
+        }}
+      >
         <CardContent>
           <Typography gutterBottom variant="h3" component="div">
             Câu số 4:
@@ -118,21 +124,23 @@ export default function Overview() {
       <FormControlLabel
         sx={{
           marginTop: 2,
-          marginLeft: 2
+          marginLeft: 2,
         }}
         value="end"
         control={<Checkbox />}
         label="Xác nhận lựa chọn kỹ rồi nha!"
         labelPlacement="end"
       />
-      <Button variant="contained"
+      <Button
+        variant="contained"
         sx={{
           marginTop: 2,
-          width: '200px',
-          height: '45px',
-          float: 'right'
+          width: "200px",
+          height: "45px",
+          float: "right",
         }}
-        endIcon={<SendIcon />}>
+        endIcon={<SendIcon />}
+      >
         Send
       </Button>
     </>

@@ -30,7 +30,7 @@ import Scrollbar from "components/Layout/Scrollbar";
 import SearchNotFound from "components/Layout/SearchNotFound";
 import { callAPIgetListForm } from "../../../context/redux/action/action";
 import { useContext } from "react";
-import { Authen } from "../../context/authenToken/AuthenToken.jsx";
+import { Authen } from "../../../context/authenToken/AuthenToken.jsx";
 
 // ----------------------------------------------------------------------
 
@@ -114,7 +114,7 @@ export default function FormList() {
   }, [dispatch, token]);
 
   const form = useSelector((state) => {
-    return state.userReducer.form;
+    return state.form;
   });
 
   const getOptions = () => [

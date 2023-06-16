@@ -77,13 +77,13 @@ const navConfigUser = [
       },
     ],
   },
-
   {
-    title: "Biểu Mẫu",
-    path: "",
-    icon: getIcon("tabler:building-warehouse"),
+    title: "Biểu mẫu",
+    path: "/user/form",
+    icon: getIcon("eva:file-text-fill"),
     // s
   },
+
   {
     title: "Bản mẫu",
     path: "/user/template",

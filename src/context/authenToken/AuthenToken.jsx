@@ -19,7 +19,7 @@ export const ProviderToken = ({ children }) => {
       if (decoded.RoleName === "admin") {
         navigate("/admin/dashboard");
       } else if (decoded.RoleName === "user") {
-        navigate("/user/form");
+        navigate("/user/campaign");
       }
     } catch (error) {
       navigate("/");

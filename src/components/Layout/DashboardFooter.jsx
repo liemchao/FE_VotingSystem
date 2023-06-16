@@ -1,7 +1,5 @@
 import { Avatar, Box, Typography } from "@mui/material";
-import Iconify from "assets/theme/components/icon/Iconify";
 import React from "react";
-import logo from "../../assets/images/logos/LogoFVS.svg";
 import { alpha, styled } from "@mui/material/styles";
 
 const RootStyleClose = styled("div")(({ theme }) => ({
@@ -18,6 +16,7 @@ const RootStyleClose = styled("div")(({ theme }) => ({
 }));
 //----------------------------------------------------------------
 export default function DashboardFooter({ open }) {
+  const currentYear = new Date().getFullYear();
   return (
     <>
       {open ? (
@@ -25,6 +24,7 @@ export default function DashboardFooter({ open }) {
           <Box>
             <Box>
               <Typography variant="body2" color="textSecondary">
+                {currentYear}
                 &copy; My Company. All Rights Reserved.
               </Typography>
             </Box>
@@ -35,6 +35,7 @@ export default function DashboardFooter({ open }) {
           <RootStyleClose>
             <Box bgcolor="grey.200">
               <Typography variant="body2" align="center" color="textSecondary">
+                {currentYear}
                 &copy; My Company. All Rights Reserved.
               </Typography>
             </Box>
