@@ -15,6 +15,7 @@ import {
   Typography,
   TableContainer,
   TablePagination,
+  Button,
 } from "@mui/material";
 // components
 
@@ -31,6 +32,8 @@ import SearchNotFound from "components/Layout/SearchNotFound";
 import { callAPIgetListForm } from "../../../context/redux/action/action";
 import { useContext } from "react";
 import { Authen } from "../../../context/authenToken/AuthenToken";
+import Iconify from "assets/theme/components/icon/Iconify";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 // ----------------------------------------------------------------------
 
@@ -162,6 +165,8 @@ export default function CandidateList() {
     } else return `${a[2]}-${a[1]}-${a[0]}`;
   };
 
+  const getIcon = (name) => <Iconify icon={name} width={20} />;
+
   const isUserNotFound = filterform?.length === 0;
   return (
     <Page title="Admin">
@@ -185,81 +190,95 @@ export default function CandidateList() {
             onFilterName={handleFilterByName}
             options={getOptions()}
           />
-          <Scrollbar>
-            <TableContainer>
-              <Table>
-                <UserListHead
-                  order={order}
-                  orderBy={orderBy}
-                  headLabel={TABLE_HEAD}
-                  rowCount={form?.length}
-                  numSelected={selected?.length}
-                  onRequestSort={handleRequestSort}
-                  onSelectAllClick={handleSelectAllClick}
-                />
+          {/* <Scrollbar> */}
+          <TableContainer>
+            <Table>
+              <UserListHead
+                order={order}
+                orderBy={orderBy}
+                headLabel={TABLE_HEAD}
+                rowCount={form?.length}
+                numSelected={selected?.length}
+                onRequestSort={handleRequestSort}
+                onSelectAllClick={handleSelectAllClick}
+              />
+              <TableBody>
+                {/* nhớ khởi tạo đúng tên file trong database */}
+                {filterform
+                  ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row) => {
+                    const { formId, name, userName, description, visibility } = row;
+
+                    const isItemSelected = selected.indexOf(name) !== -1;
+
+                    return (
+                      <TableRow
+                        hover
+                        key={formId}
+                        tabIndex={-1}
+                        role="checkbox"
+                        selected={isItemSelected}
+                        aria-checked={isItemSelected}
+                      >
+                        <TableCell>
+                          <Avatar alt={name} />
+                        </TableCell>
+                        <TableCell>
+                          <Typography variant="subtitle2" noWrap>
+                            {userName}
+                          </Typography>
+                        </TableCell>
+
+                        <TableCell align="left">{name}</TableCell>
+                        <TableCell align="left">{visibility} K14</TableCell>
+                        <TableCell align="left">
+                          {/* {new Date(createdAt).toLocaleDateString()} */}
+                          11/02/2023
+                        </TableCell>
+                        <TableCell align="left">
+                          {/* {new Date(updatedAt).toLocaleDateString()} */}
+                          11/02/2023
+                        </TableCell>
+                        <TableCell align="left">
+                          <div>
+                            {visibility === true && (
+                              // <Alert severity="warning">inActive</Alert>
+                              <Label color="success">True</Label>
+                            )}
+                            {status === "active" && <Label color="success">hoạt động</Label>}
+                          </div>
+                        </TableCell>
+                        <TableCell align="left">
+                          {
+                            <Button sx={{ bgcolor: "primary" }} startIcon={<DeleteOutlineIcon />}>
+                              Xoá
+                            </Button>
+                          }
+                          {
+                            <Button
+                              sx={{ bgcolor: "primary", marginLeft: 2 }}
+                              startIcon={getIcon("material-symbols:system-update-alt")}
+                            >
+                              Sửa
+                            </Button>
+                          }
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+              {isUserNotFound && (
                 <TableBody>
-                  {/* nhớ khởi tạo đúng tên file trong database */}
-                  {filterform
-                    ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row) => {
-                      const { formId, name, userName, description, visibility } = row;
-
-                      const isItemSelected = selected.indexOf(name) !== -1;
-
-                      return (
-                        <TableRow
-                          hover
-                          key={formId}
-                          tabIndex={-1}
-                          role="checkbox"
-                          selected={isItemSelected}
-                          aria-checked={isItemSelected}
-                        >
-                          <TableCell>
-                            <Avatar alt={name} />
-                          </TableCell>
-                          <TableCell>
-                            <Typography variant="subtitle2" noWrap>
-                              {userName}
-                            </Typography>
-                          </TableCell>
-
-                          <TableCell align="left">{name}</TableCell>
-                          <TableCell align="left">{visibility} K14</TableCell>
-                          <TableCell align="left">
-                            {/* {new Date(createdAt).toLocaleDateString()} */}
-                            11/02/2023
-                          </TableCell>
-                          <TableCell align="left">
-                            {/* {new Date(updatedAt).toLocaleDateString()} */}
-                            11/02/2023
-                          </TableCell>
-                          <TableCell align="left">
-                            <div>
-                              {visibility === true && (
-                                // <Alert severity="warning">inActive</Alert>
-                                <Label color="success">True</Label>
-                              )}
-                              {status === "active" && <Label color="success">hoạt động</Label>}
-                            </div>
-                          </TableCell>
-                          <TableCell align="left">{description}</TableCell>
-                        </TableRow>
-                      );
-                    })}
+                  <TableRow>
+                    <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
+                      <SearchNotFound searchQuery={filterName} />
+                    </TableCell>
+                  </TableRow>
                 </TableBody>
-                {isUserNotFound && (
-                  <TableBody>
-                    <TableRow>
-                      <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
-                        <SearchNotFound searchQuery={filterName} />
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                )}
-              </Table>
-            </TableContainer>
-          </Scrollbar>
+              )}
+            </Table>
+          </TableContainer>
+          {/* </Scrollbar> */}
           <TablePagination
             rowsPerPageOptions={[5, 10, 20]}
             component="div"

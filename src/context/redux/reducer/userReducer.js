@@ -18,7 +18,6 @@ export default function userReducer(state = initialState, { type, payload }) {
       break;
     default:
       return { ...state };
-      R;
   }
   return { ...state };
 }
