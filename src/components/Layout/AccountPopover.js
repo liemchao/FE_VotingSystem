@@ -28,6 +28,8 @@ const MENU_OPTIONS = [
 
 // ----------------------------------------------------------------------
 
+const WIDTH = 170;
+
 export default function AccountPopover() {
   const anchorRef = useRef(null);
   const dispatch = useDispatch();
@@ -43,7 +45,7 @@ export default function AccountPopover() {
 
   const handleClose = () => {
     localStorage.removeItem("token");
-    navigate("/");
+    window.location.reload();
   };
   const handleCloseNotion = (event) => {
     setOpen(!open);
@@ -68,20 +70,30 @@ export default function AccountPopover() {
           },
         }}
       >
-        <Avatar src="/" alt="photoURL" sx={{ zIndex: "modal", left: "20%" }} />
+        <Avatar
+          src="/"
+          alt="photoURL"
+          sx={{
+            zIndex: "modal",
+            position: "absolute",
+            left: `${(decode?.Username || decode?.Email).length * 0.01}%`,
+            // left: 3,
+          }}
+        />
         <Box
           paddingLeft="2.2rem"
           paddingTop="0.4em"
           sx={{
             backgroundColor: "#ffee32",
-            width: 170,
+            width: `${(decode?.Username || decode?.Email).length * 20}%`,
             height: 40,
             borderRadius: 4,
             zIndex: "toolip",
-            left: "90%",
           }}
         >
-          <Typography variant="subtitle2">{decode.Username}</Typography>
+
+          <Typography variant="subtitle2">{decode?.Username || decode?.Email}</Typography>
+
         </Box>
       </IconButton>
 

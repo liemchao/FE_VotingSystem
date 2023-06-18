@@ -6,13 +6,12 @@ import { styled } from "@mui/material/styles";
 import { Box, Link, Button, Drawer, Typography, Avatar, Stack, IconButton } from "@mui/material";
 
 import navConfig from "./NavConfig";
+import { makeStyles } from "@mui/styles";
 import NavSection from "./NavSection";
 import useResponsive from "./useResponsive";
 import Scrollbar from "./Scrollbar";
 import { Authen } from "../../context/authenToken/AuthenToken";
 import logo from "../../assets/images/logos/LogoFVS.svg";
-import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
-import Iconify from "assets/theme/components/icon/Iconify";
 
 // ----------------------------------------------------------------------
 
@@ -125,6 +124,7 @@ export default function DashboardSidebar({
         <Drawer
           open
           // handleClickOpen
+          display="flex"
           isOpenSidebar
           variant="persistent"
           PaperProps={{

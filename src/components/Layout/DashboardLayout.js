@@ -41,13 +41,7 @@ const MainStyle = styled("div")(({ theme }) => ({
 export default function DashboardLayout() {
   const [open, setOpen] = useState(false);
   const handleClickOpen = useCallback(() => {
-    if (open) {
-      setOpen((open) => !open);
-    } else {
-      setOpen((open) => !open);
-    }
-
-    // console.log(open);
+    setOpen((open) => !open);
   }, [open]);
 
   return (

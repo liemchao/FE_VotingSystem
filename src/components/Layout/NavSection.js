@@ -45,7 +45,7 @@ function NavItem({ item, active }) {
 
   const isActiveRoot = active(item.path);
 
-  const { title, path, icon, info, children } = item;
+  const { title, path, icon, info, children, subItems } = item;
 
   const [open, setOpen] = useState(isActiveRoot);
 
@@ -57,8 +57,6 @@ function NavItem({ item, active }) {
     color: "white",
     fontWeight: "fontWeightMedium",
     bgcolor: "#FFCC33",
-
-    // bgcolor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity),
   };
 
   const activeSubStyle = {
@@ -66,7 +64,7 @@ function NavItem({ item, active }) {
     fontWeight: "fontWeightMedium",
   };
 
-  if (children) {
+  if (children || subItems) {
     return (
       <>
         {/* menu multipe  */}
@@ -85,48 +83,53 @@ function NavItem({ item, active }) {
           />
         </ListItemStyle>
         {/* map với navConfig */}
-        <Collapse in={open} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding sx={{ left: "7%" }}>
-            {children.map((item) => {
-              const { title, path, icon } = item;
-              const isActiveSub = active(path);
-              return (
-                <ListItemStyle
-                  key={title}
-                  component={RouterLink}
-                  to={path}
-                  icon={icon}
-                  sx={{
-                    ...(isActiveSub && activeSubStyle),
-                  }}
-                >
-                  <ListItemIconStyle>
-                    <Box
-                      component="span"
-                      sx={{
-                        width: 4,
-                        height: 4,
-                        display: "flex",
-                        borderRadius: "50%",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        bgcolor: "text.disabled",
-                        transition: (theme) => theme.transitions.create("transform"),
-                        ...(isActiveSub && {
-                          transform: "scale(2)",
-                          bgcolor: "primary.main",
-                          // icon:{icon}
-                        }),
-                      }}
-                    />
-                    <ListItemIconStyle>{icon && icon}</ListItemIconStyle>
-                  </ListItemIconStyle>
-                  <ListItemText disableTypography primary={title} />
-                </ListItemStyle>
-              );
-            })}
-          </List>
-        </Collapse>
+        {(children || subItems) && (
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            {children && (
+              <List component="div" disablePadding sx={{ left: "3%" }}>
+                {children.map((child) => (
+                  <NavItem key={child.title} item={child} active={active} />
+                ))}
+              </List>
+            )}
+            {subItems && (
+              <List component="div" disablePadding sx={{ left: "7%" }}>
+                {subItems.map((subItem) => (
+                  <ListItemStyle
+                    key={subItem.title}
+                    component={RouterLink}
+                    to={subItem.subPath}
+                    sx={{
+                      ...(active(subItem.subPath) && activeSubStyle),
+                    }}
+                  >
+                    <ListItemIconStyle>
+                      <Box
+                        component="span"
+                        sx={{
+                          width: 4,
+                          height: 4,
+                          display: "flex",
+                          borderRadius: "50%",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          bgcolor: "text.disabled",
+                          transition: (theme) => theme.transitions.create("transform"),
+                          ...(active(subItem.subPath) && {
+                            transform: "scale(2)",
+                            bgcolor: "primary.main",
+                          }),
+                        }}
+                      />
+                      <ListItemIconStyle>{icon && icon}</ListItemIconStyle>
+                    </ListItemIconStyle>
+                    <ListItemText disableTypography primary={subItem.title} />
+                  </ListItemStyle>
+                ))}
+              </List>
+            )}
+          </Collapse>
+        )}
       </>
     );
   }

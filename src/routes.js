@@ -17,6 +17,9 @@ import CandidateList from "layouts/page/user/Candidate";
 import FeedBack from "layouts/page/user/FeedBack";
 import CampaignList from "layouts/page/user/Campaign";
 import CampaignOwenrList from "layouts/page/user/CampaignOwner";
+
+import TextHI from "layouts/page/Text";
+
 import ListQuestion from "layouts/page/user/Form/Voter/List Question/ListQuetion";
 import DetailCandidate from "layouts/page/user/Form/Voter/Detail Voter/DetailVoter";
 // import FormList from "layouts/page/user/Form";
@@ -82,6 +85,14 @@ export default function Router() {
         {
           path: "campaign",
           element: <CampaignList />,
+        },
+        {
+          path: "text/hihi",
+          element: <TextHI />,
+        },
+        {
+          path: "text/hhehe",
+          element: <TextHI />,
         },
         {
           path: "campaignowner",

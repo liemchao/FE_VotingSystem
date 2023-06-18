@@ -22,7 +22,7 @@ const navConfig = [
     children: [
       {
         title: "History",
-        path: "/dashboard/account",
+        subPath: "/dashboard/account",
         icon: getIcon("eva:cube-fill"),
       },
       {
@@ -32,47 +32,32 @@ const navConfig = [
       },
     ],
   },
-
-  // {
-  //   title: "Title 3",
-  //   path: "",
-  //   icon: getIcon("carbon:location-company"),
-  // },
-
-  // {
-  //   title: "Title 9",
-  //   path: "",
-  //   icon: getIcon("ant-design:schedule-outlined"),
-  // },
-  // {
-  //   title: "Title 5",
-  //   path: "",
-  //   icon: getIcon("icon-park-outline:transaction-order"),
-  // },
-
-  // {
-  //   title: "Title 6",
-  //   path: "",
-  //   icon: getIcon("fa6-solid:kitchen-set"),
-  // },
-
-  ,
 ];
 
 const navConfigUser = [
   {
-    title: "Chiến dịch",
-    path: "/user/campaign",
+    title: "Chiến dịch nè",
     icon: getIcon("eva:pie-chart-2-fill"),
     children: [
       {
         title: "Tất cả chiến dịch",
-        path: "/user/campaign",
         icon: getIcon("eva:cube-outline"),
+        subItems: [
+          {
+            title: "Chiến dịch mùa hè",
+            subPath: "/user/text/hihi",
+            icon: getIcon("eva:cube-outline"),
+          },
+          {
+            title: "Chiến dịch mùa xuân",
+            subPath: "/user/text/hhehe",
+            icon: getIcon("eva:cube-outline"),
+          },
+        ],
       },
       {
         title: "Chiến dịch của bản thân",
-        path: "/user/campaignowner",
+        path: "/user/campaign",
         icon: getIcon("eva:cube-fill"),
       },
     ],
