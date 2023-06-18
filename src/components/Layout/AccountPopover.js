@@ -28,6 +28,8 @@ const MENU_OPTIONS = [
 
 // ----------------------------------------------------------------------
 
+const WIDTH = 170;
+
 export default function AccountPopover() {
   const anchorRef = useRef(null);
   const dispatch = useDispatch();
@@ -39,11 +41,11 @@ export default function AccountPopover() {
     setOpen(event.currentTarget);
   };
 
-  const { token, decoded } = useContext(Authen);
+  const { token, decode } = useContext(Authen);
 
   const handleClose = () => {
     localStorage.removeItem("token");
-    navigate("/");
+    window.location.reload();
   };
   const handleCloseNotion = (event) => {
     setOpen(!open);
@@ -68,20 +70,28 @@ export default function AccountPopover() {
           },
         }}
       >
-        <Avatar src="/" alt="photoURL" sx={{ zIndex: "modal", left: "20%" }} />
+        <Avatar
+          src="/"
+          alt="photoURL"
+          sx={{
+            zIndex: "modal",
+            position: "absolute",
+            left: `${(decode?.Username || decode?.Email).length * 0.01}%`,
+            // left: 3,
+          }}
+        />
         <Box
           paddingLeft="2.2rem"
           paddingTop="0.4em"
           sx={{
             backgroundColor: "#ffee32",
-            width: 170,
+            width: `${(decode?.Username || decode?.Email).length * 20}%`,
             height: 40,
             borderRadius: 4,
             zIndex: "toolip",
-            left: "90%",
           }}
         >
-          <Typography variant="subtitle2">Pham Manh Toan</Typography>
+          <Typography variant="subtitle2">{decode?.Username || decode?.Email}</Typography>
         </Box>
       </IconButton>
 
@@ -101,10 +111,10 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
-            {decoded?.Username}
+            {decode.Username}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }} noWrap>
-            {decoded?.RoleName}
+            {decode.RoleName}
           </Typography>
         </Box>
 

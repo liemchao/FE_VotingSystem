@@ -5,17 +5,22 @@ import jwt_decode from "jwt-decode";
 import { URL_API } from "../../../config/axios/Url/URL";
 import API from "../../../config/axios/API/API";
 import { CustomizedToast } from "../../../components/toast/ToastCustom";
+import { Navigate } from "react-router-dom";
+import { useState } from "react";
 
 export const createAction = ({ type, payload }) => {
   return { type, payload };
 };
+
+// const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 export const LoginAthen = (user, navigate) => {
   return async (dispatch) => {
     try {
       const res = await API("POST", URL_API + `/api/v1/Authen/login`, user);
       localStorage.setItem("token", res.data.data.token);
-      const detoken = jwt_decode(res.data.data.token);
+      const token = localStorage.getItem("token");
+      const detoken = jwt_decode(token);
 
       dispatch(
         createAction({
@@ -23,20 +28,33 @@ export const LoginAthen = (user, navigate) => {
           payload: res.data.data,
         })
       );
-      if (detoken.RoleName === "admin") {
-        navigate("/admin/dashboard");
-        CustomizedToast({
-          message: "Đăng nhập Admin thành công",
-          type: "SUCCESS",
-        });
-      } else if (detoken.RoleName === "user") {
-        navigate("/user/campaign");
-        CustomizedToast({
-          message: "Đăng nhập User thành công",
-          type: "SUCCESS",
-        });
-      }
+      window.location.reload();
     } catch (error) {
+      CustomizedToast({
+        message: "Tên đăng nhập hoặc mật khẩu sai",
+        type: "ERROR",
+      });
+    }
+  };
+};
+
+export const loginFirebase = (idtoken) => {
+  return async (dispatch) => {
+    try {
+      const res = await API("POST", URL_API + `/api/v1/authen/firebase?idtoken=${idtoken}`);
+      console.log(res.data.data.token);
+      localStorage.setItem("token", res.data.data.token);
+      const token = localStorage.getItem("token");
+      const detoken = jwt_decode(token);
+      dispatch(
+        createAction({
+          type: PathAction.LOGIN_USER,
+          payload: res.data.token,
+        })
+      );
+      window.location.reload();
+    } catch (e) {
+      console.log(e);
       CustomizedToast({
         message: "Tên đăng nhập hoặc mật khẩu sai",
         type: "ERROR",

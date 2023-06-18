@@ -23,6 +23,7 @@ export default function ButtonCustomize(props) {
     startIcon,
     paddingLeft,
     variant,
+    marginRight,
   } = props;
   const ColorButton = styled(Button)(({ theme }) => ({
     // color: theme.palette.getContrastText("#ffff"),
@@ -66,6 +67,7 @@ export default function ButtonCustomize(props) {
         boxShadow: { boxShadow },
         border: { border },
         borderRadius: borderRadius,
+        marginRight: { marginRight },
       }}
     >
       {nameButton}

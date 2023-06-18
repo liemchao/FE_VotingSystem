@@ -13,6 +13,7 @@ const sidenav = {
       width: pxToRem(250),
       whiteSpace: "nowrap",
       border: "none",
+      
     },
 
     paper: {

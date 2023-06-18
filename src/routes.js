@@ -17,6 +17,7 @@ import CandidateList from "layouts/page/user/Candidate";
 import FeedBack from "layouts/page/user/FeedBack";
 import CampaignList from "layouts/page/user/Campaign";
 import CampaignOwenrList from "layouts/page/user/CampaignOwner";
+import TextHI from "layouts/page/Text";
 export default function Router() {
   const ProtectedRouteAuthen = ({ roles, children }) => {
     const token = localStorage.getItem("token");
@@ -77,6 +78,14 @@ export default function Router() {
         {
           path: "campaign",
           element: <CampaignList />,
+        },
+        {
+          path: "text/hihi",
+          element: <TextHI />,
+        },
+        {
+          path: "text/hhehe",
+          element: <TextHI />,
         },
         {
           path: "campaignowner",
