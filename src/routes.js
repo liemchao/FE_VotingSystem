@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate, useNavigate, useRoutes } from "react-router-dom";
+import { Form, Navigate, useNavigate, useRoutes } from "react-router-dom";
 // import PrimarySearchAppBar from "layouts/page/LangdingPage";
 // import Dashboard from "layouts/dashboard";
 import SignIn from "layouts/authentication/sign-in";
@@ -12,12 +12,19 @@ import jwt_decode from "jwt-decode";
 import DashboardLayout from "components/Layout/DashboardLayout";
 import UserList from "layouts/page/UserList";
 import AccountPage from "layouts/page/account/AccountPage";
-import JoinCampain from "./layouts/page/user/JoinCampaign";
+// import JoinCampain from "./layouts/page/user/JoinCampaign";
 import CandidateList from "layouts/page/user/Candidate";
 import FeedBack from "layouts/page/user/FeedBack";
 import CampaignList from "layouts/page/user/Campaign";
 import CampaignOwenrList from "layouts/page/user/CampaignOwner";
+
 import TextHI from "layouts/page/Text";
+
+import ListQuestion from "layouts/page/user/Form/Voter/List Question/ListQuetion";
+import DetailCandidate from "layouts/page/user/Form/Voter/Detail Voter/DetailVoter";
+// import FormList from "layouts/page/user/Form";
+// import JoinCampain from "layouts/page/user/Form/Voter/List Candidate/ListCandidate";
+import FormVote from "layouts/page/user/Form/Voter/Form";
 export default function Router() {
   const ProtectedRouteAuthen = ({ roles, children }) => {
     const token = localStorage.getItem("token");
@@ -73,7 +80,7 @@ export default function Router() {
       children: [
         {
           path: "form",
-          element: <UserList />,
+          element: <ListQuestion />,
         },
         {
           path: "campaign",
@@ -98,7 +105,7 @@ export default function Router() {
 
         {
           path: "joincampain",
-          element: <JoinCampain />,
+          element: <FormVote />,
         },
         {
           path: "feedback",
@@ -107,6 +114,10 @@ export default function Router() {
         {
           path: "template",
           element: <FeedBack />,
+        },
+        {
+          path: "detailcandidate",
+          element: <DetailCandidate />,
         },
       ],
     },

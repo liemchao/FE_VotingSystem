@@ -91,7 +91,9 @@ export default function AccountPopover() {
             zIndex: "toolip",
           }}
         >
+
           <Typography variant="subtitle2">{decode?.Username || decode?.Email}</Typography>
+
         </Box>
       </IconButton>
 

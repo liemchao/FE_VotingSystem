@@ -16,6 +16,7 @@ import {
   TableContainer,
   TablePagination,
   IconButton,
+  Button,
 } from "@mui/material";
 // components
 
@@ -33,7 +34,7 @@ import { callAPIgetListForm } from "../../../context/redux/action/action";
 import { useContext } from "react";
 import { Authen } from "../../../context/authenToken/AuthenToken";
 import Iconify from "assets/theme/components/icon/Iconify";
-
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
@@ -44,7 +45,7 @@ const TABLE_HEAD = [
   { id: "createdAt", label: "Ngày thêm", alignRight: false },
   { id: "updatedate", label: "Ngày sửa", alignRight: false },
   { id: "status", label: "Trạng thái", alignRight: false },
-  { id: "description", label: "Action", alignRight: false },
+  { id: "description", label: "Action", align: "center" },
 ];
 
 // ----------------------------------------------------------------------
@@ -126,6 +127,7 @@ export default function FeedBack() {
   ];
 
   const handleDelete = async (id) => {};
+  const getIcon = (name) => <Iconify icon={name} width={20} />;
 
   //========================================================
   const handleRequestSort = (event, property) => {
@@ -222,7 +224,7 @@ export default function FeedBack() {
                         </TableCell>
                         <TableCell>
                           <Typography variant="subtitle2" noWrap>
-                            {userName}
+                            Moderator
                           </Typography>
                         </TableCell>
 
@@ -238,23 +240,22 @@ export default function FeedBack() {
                         </TableCell>
                         <TableCell align="left">
                           <div>
-                            {visibility === true && (
-                              // <Alert severity="warning">inActive</Alert>
-                              <Label color="success">True</Label>
-                            )}
-                            {status === "active" && <Label color="success">hoạt động</Label>}
+                            <Label color="success">True</Label>
                           </div>
                         </TableCell>
-                        <TableCell align="left">
+                        <TableCell sx={{ marginRight: "20%" }}>
                           {
-                            <IconButton>
-                              <Iconify icon="mdi:delete-outline" />
-                            </IconButton>
+                            <Button sx={{ bgcolor: "primary" }} startIcon={<DeleteOutlineIcon />}>
+                              Xoá
+                            </Button>
                           }
                           {
-                            <IconButton>
-                              <Iconify icon="material-symbols:system-update-alt" />
-                            </IconButton>
+                            <Button
+                              sx={{ bgcolor: "primary", marginLeft: 2 }}
+                              startIcon={getIcon("material-symbols:system-update-alt")}
+                            >
+                              Sửa
+                            </Button>
                           }
                         </TableCell>
                       </TableRow>
