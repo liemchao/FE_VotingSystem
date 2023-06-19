@@ -25,6 +25,10 @@ import DetailCandidate from "layouts/page/user/Form/Voter/Detail Voter/DetailVot
 // import FormList from "layouts/page/user/Form";
 // import JoinCampain from "layouts/page/user/Form/Voter/List Candidate/ListCandidate";
 import FormVote from "layouts/page/user/Form/Voter/Form";
+import Hi from "layouts/page/Hi";
+import Profile from "layouts/page/profile/Profile";
+
+//----------------------------------------------------------------
 export default function Router() {
   const ProtectedRouteAuthen = ({ roles, children }) => {
     const token = localStorage.getItem("token");
@@ -88,11 +92,11 @@ export default function Router() {
         },
         {
           path: "text/hihi",
-          element: <TextHI />,
+          element: <Profile />,
         },
         {
           path: "text/hhehe",
-          element: <TextHI />,
+          element: <Hi />,
         },
         {
           path: "campaignowner",

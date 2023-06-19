@@ -44,21 +44,21 @@ const navConfigUser = [
         icon: getIcon("eva:cube-outline"),
         subItems: [
           {
-            title: "Chiến dịch mùa hè",
+            title: "Chiến dịch mùa hè á",
             subPath: "/user/text/hihi",
-            icon: getIcon("eva:cube-outline"),
+            icons: getIcon("icon-park:flag"),
           },
           {
             title: "Chiến dịch mùa xuân",
             subPath: "/user/text/hhehe",
-            icon: getIcon("eva:cube-outline"),
+            icons: getIcon("ph:sun-light"),
           },
         ],
       },
       {
         title: "Chiến dịch của bản thân",
         path: "/user/campaign",
-        icon: getIcon("eva:cube-fill"),
+        icon: getIcon("material-symbols:campaign"),
       },
     ],
   },
