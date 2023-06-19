@@ -20,7 +20,10 @@ function DetailCandidate() {
         <Paper>
           <Card
             sx={{
-              maxWidth: 356,
+              position: "fixed",
+              marginLeft: 10,
+              maxWidth: 500,
+              textAlign: "center",
               padding: "1rem 1rem 1rem 1rem",
               borderRadius: "18px",
             }}
