@@ -69,6 +69,10 @@ export default function Router() {
           path: "account",
           element: <AccountPage />,
         },
+        {
+          path: "history",
+          element: <HistoryUser />,
+        },
       ],
     },
     {
@@ -97,7 +101,7 @@ export default function Router() {
         },
 
         {
-          path: "allcampign",
+          path: "allcampaign",
           element: <AllCampaignList />,
         },
         {

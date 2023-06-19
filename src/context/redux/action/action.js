@@ -95,7 +95,6 @@ export const callAPIgetListHistory = (userName, token) => {
   return async (dispatch) => {
     try {
       const res = await API("GET", URL_API + `/api/v1/actionhistory/user`, userName, token);
-      console.log(res);
       dispatch(
         createAction({
           type: PathAction.GET_LIST_HISTORY,

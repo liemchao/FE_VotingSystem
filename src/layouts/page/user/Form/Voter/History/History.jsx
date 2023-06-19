@@ -42,7 +42,7 @@ const TABLE_HEAD = [
   { id: "name", label: "Tên người tạo", alignRight: false },
   { id: "Mô tả", label: "Mô tả", alignRight: false },
   { id: "Loại hành động", label: "Loại hành động", alignRight: false },
-  // { id: "createdAt", label: "Thời gian tham gia", alignRight: false },
+  { id: "Hành động", label: "Hành động", alignRight: false },
   // { id: "updatedate", label: "Nội Dung", alignRight: false },
 ];
 
@@ -204,7 +204,7 @@ export default function HistoryUser() {
                 {filterhistory
                   ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
-                    const { historyId, description } = row;
+                    const { historyId, description, actionTypeName } = row;
 
                     const isItemSelected = selected.indexOf(name) !== -1;
 
@@ -228,26 +228,28 @@ export default function HistoryUser() {
 
                         <TableCell align="left">{description}</TableCell>
 
-                        <TableCell align="left">
-                          <div>
-                            <Label color="success">True</Label>
-                          </div>
-                        </TableCell>
-                        <TableCell sx={{ width: "10%" }}>
+                        <TableCell align="left">{actionTypeName}</TableCell>
+                        <TableCell sx={{ width: "30%" }}>
                           {
                             <Button
                               sx={{ bgcolor: "secondary", background: "#FFA07A" }}
                               startIcon={<DeleteOutlineIcon />}
                             >
-                              Xoá
+                              Chi tiết
                             </Button>
                           }
                           {
                             <Button
-                              sx={{ marginTop: "2px", bgcolor: "secondary", background: "#71C043" }}
+                              sx={{
+                                marginLeft: "4px",
+                                marginTop: "2px",
+                                bgcolor: "secondary",
+                                background: "#71C043",
+                              }}
                               startIcon={getIcon("material-symbols:edit")}
                             >
-                              Sửa
+                              {" "}
+                              Chỉnh sửa
                             </Button>
                           }
                         </TableCell>

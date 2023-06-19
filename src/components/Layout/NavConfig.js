@@ -6,15 +6,15 @@ const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
 
 const navConfig = [
   {
-    title: "Chiến dịch",
+    title: "Tài khoản ứng cử viên",
     path: "/admin/dashboard",
     icon: getIcon("eva:pie-chart-2-fill"),
     // s
   },
   {
-    title: "Form",
-    path: "/dashboard/user",
-    icon: getIcon("eva:settings-2-fill"),
+    title: "Lịch sử hoạt động",
+    path: "/admin/history",
+    icon: getIcon("eva:file-text-fill"),
   },
   {
     title: "Kết quả",
@@ -45,7 +45,7 @@ const navConfigUser = [
         subItems: [
           {
             title: "Tất cả chiến dịch",
-            subPath: "/user/allcampign",
+            subPath: "/user/allcampaign",
             icon: getIcon("eva:cube-outline"),
           },
           {
