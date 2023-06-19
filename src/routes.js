@@ -18,17 +18,21 @@ import FeedBack from "layouts/page/user/FeedBack";
 import CampaignList from "layouts/page/user/Campaign";
 import CampaignOwenrList from "layouts/page/user/CampaignOwner";
 
-import TextHI from "layouts/page/Text";
-
 import ListQuestion from "layouts/page/user/Form/Voter/List Question/ListQuetion";
 import DetailCandidate from "layouts/page/user/Form/Voter/Detail Voter/DetailVoter";
 // import FormList from "layouts/page/user/Form";
 // import JoinCampain from "layouts/page/user/Form/Voter/List Candidate/ListCandidate";
+import HistoryUser from "layouts/page/user/Form/Voter/History/History";
 import FormVote from "layouts/page/user/Form/Voter/Form";
+
 import Hi from "layouts/page/Hi";
 import Profile from "layouts/page/profile/Profile";
 
 //----------------------------------------------------------------
+
+import AllCampaignList from "layouts/page/AllCampaign";
+import Text from "layouts/page/Text";
+
 export default function Router() {
   const ProtectedRouteAuthen = ({ roles, children }) => {
     const token = localStorage.getItem("token");
@@ -72,6 +76,10 @@ export default function Router() {
           path: "account",
           element: <AccountPage />,
         },
+        {
+          path: "history",
+          element: <HistoryUser />,
+        },
       ],
     },
     {
@@ -87,16 +95,30 @@ export default function Router() {
           element: <ListQuestion />,
         },
         {
-          path: "campaign",
+          path: "getcampaign",
           element: <CampaignList />,
         },
         {
+
           path: "text/hihi",
           element: <Profile />,
+
+          path: "campaign",
+          element: <Text />,
         },
         {
+          path: "history",
+          element: <HistoryUser />,
+
+        },
+
+        {
+
           path: "text/hhehe",
           element: <Hi />,
+
+          path: "allcampaign",
+          element: <AllCampaignList />,
         },
         {
           path: "campaignowner",

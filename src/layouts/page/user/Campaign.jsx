@@ -17,10 +17,10 @@ import {
 } from "@mui/material";
 import Page from "components/Layout/Page";
 import { useContext } from "react";
-import { Authen } from "../../../context/authenToken/AuthenToken";
+import { Authen } from "context/authenToken/AuthenToken";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { callAPIgetListCampaigns } from "../../../context/redux/action/action";
+import { callAPIgetListCampaigns } from "context/redux/action/action";
 import NewPopUp from "components/Popup/NewPopUp";
 import { useCallback } from "react";
 
