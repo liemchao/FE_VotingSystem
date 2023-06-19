@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import { applyMiddleware, compose, createStore } from "redux";
 import { MaterialUIControllerProvider } from "context";
-import rootReducer from "./context/redux/reducer/userReducer";
+import rootReducer from "context/redux/reducer/userReducer";
 import ToastContainerConfig from "components/toast/ToastContainer";
 import { HelmetProvider } from "react-helmet-async";
 

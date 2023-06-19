@@ -17,7 +17,7 @@ const MENU_OPTIONS = [
   {
     label: "Profile",
     icon: "eva:person-fill",
-    linkTo: "#",
+    linkTo: "/user/profile",
   },
   {
     label: "Settings",
@@ -131,6 +131,9 @@ export default function AccountPopover() {
               {option.label}
             </MenuItem>
           ))}
+          {/* <MenuItem component={RouterLink} to="/profile">
+            Profile
+          </MenuItem> */}
         </Stack>
 
         <Divider sx={{ borderStyle: "dashed" }} />

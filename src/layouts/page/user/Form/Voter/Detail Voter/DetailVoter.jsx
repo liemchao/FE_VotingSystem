@@ -16,7 +16,6 @@ import { LogoDev } from "@mui/icons-material";
 
 function DetailCandidate() {
   return (
-
     <Grid container spacing={2}>
       <Grid item xs={6}>
         <Paper>
@@ -29,48 +28,7 @@ function DetailCandidate() {
               padding: "1rem 1rem 1rem 1rem",
               borderRadius: "18px",
             }}
-          >
-            <CardMedia
-              sx={{
-                height: 320,
-                display: "cover",
-              }}
-              image="https://hanoitop10.com/wp-content/uploads/2023/01/anh-luffy-cute_1-jpg.webp"
-              title="green iguana"
-            />
-            <CardContent
-              sx={{
-                height: 120,
-                width: 400,
-              }}
-            >
-              <CardMedia
-                sx={{
-
-                  position: "relative",
-                  left: "-1rem",
-                  bottom: "-1rem",
-                  display: "inline - flex",
-                  width: "9rem",
-                  height: "3rem",
-                  background: "var(--10)",
-                  color: "var(--badge-text)",
-                  backgroundColor: "#ffcc33",
-                  boxShadow: "0 0 0.2rem 0.1rem var(--card-bg)",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  borderRadius: "30px",
-                  marginLeft: "8rem",
-                  fontSize: "1rem",
-                  fontWeight: "700",
-                  border: "0",
-                  textAlign: "center",
-                }}
-              >
-                Chi tiết
-              </Button>
-            </CardActions>
-          </Card>
+          ></Card>
         </Paper>
       </Grid>
       <Grid item xs={6}>
@@ -79,9 +37,8 @@ function DetailCandidate() {
             <ListQuestion />
           </Scrollbar>
         </Paper>
-
       </Grid>
-    </Box>
+    </Grid>
   );
 }
 

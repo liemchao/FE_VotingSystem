@@ -99,8 +99,7 @@ export default function Router() {
           element: <CampaignList />,
         },
         {
-
-          path: "text/hihi",
+          path: "profile",
           element: <Profile />,
 
           path: "campaign",
@@ -109,11 +108,9 @@ export default function Router() {
         {
           path: "history",
           element: <HistoryUser />,
-
         },
 
         {
-
           path: "text/hhehe",
           element: <Hi />,
 
