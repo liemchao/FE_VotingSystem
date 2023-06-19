@@ -40,12 +40,10 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 const TABLE_HEAD = [
   { id: "images", name: "Hình", alignRight: false },
   { id: "name", label: "Tên người tạo", alignRight: false },
-  { id: "Majo", label: "Chiến dịch", alignRight: false },
-  { id: "Khoá", label: "Khoá", alignRight: false },
-  { id: "createdAt", label: "Thời gian tham gia", alignRight: false },
-  { id: "updatedate", label: "Nội Dung", alignRight: false },
-  { id: "status", label: "Trạng thái", alignRight: false },
-  { id: "description", label: "Action", align: "center" },
+  { id: "Mô tả", label: "Chiến dịch", alignRight: false },
+  { id: "Loại hành động", label: "Khoá", alignRight: false },
+  // { id: "createdAt", label: "Thời gian tham gia", alignRight: false },
+  // { id: "updatedate", label: "Nội Dung", alignRight: false },
 ];
 
 // ----------------------------------------------------------------------
