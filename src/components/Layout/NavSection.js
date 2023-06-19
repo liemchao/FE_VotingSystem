@@ -99,7 +99,7 @@ function NavItem({ item, active }) {
                     to={subItem.subPath}
                     sx={{
                       ...(active(subItem.subPath) && activeSubStyle),
-                      ...active(subItem.subPath),
+                      // ...active(subItem.subPath),
                     }}
                   >
                     <ListItemIconStyle>
