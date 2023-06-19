@@ -44,6 +44,7 @@ const navConfigUser = [
         icon: getIcon("eva:settings-2-outline"),
         subItems: [
           {
+
             title: "Tất cả chiến dịch",
             subPath: "/user/allcampaign",
             icon: getIcon("eva:cube-outline"),

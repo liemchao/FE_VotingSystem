@@ -8,6 +8,7 @@ import {
   CardContent,
   CardActions,
   Paper,
+  Box,
 } from "@mui/material";
 import ListQuestion from "../List Question/ListQuetion";
 import Scrollbar from "components/Layout/Scrollbar";
@@ -15,6 +16,7 @@ import { LogoDev } from "@mui/icons-material";
 
 function DetailCandidate() {
   return (
+
     <Grid container spacing={2}>
       <Grid item xs={6}>
         <Paper>
@@ -42,19 +44,9 @@ function DetailCandidate() {
                 width: 400,
               }}
             >
-              <Typography gutterBottom variant="h4" component="div">
-                Liêm Chao
-              </Typography>
-              <Typography variant="h6" color="text.secondary">
-                Liêm Ngu
-              </Typography>
-              <Typography variant="body1" color="text.secondary">
-                "Liêm Gà chó"
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button
+              <CardMedia
                 sx={{
+
                   position: "relative",
                   left: "-1rem",
                   bottom: "-1rem",
@@ -87,8 +79,9 @@ function DetailCandidate() {
             <ListQuestion />
           </Scrollbar>
         </Paper>
+
       </Grid>
-    </Grid>
+    </Box>
   );
 }
 

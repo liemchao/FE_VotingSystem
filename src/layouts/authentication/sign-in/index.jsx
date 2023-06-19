@@ -18,16 +18,6 @@ import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
 import firebase, { auth } from "../../../config/Firebase/firebase.js";
 import GoogleButton from "components/Control/GoogleButton";
 
-// Configure FirebaseUI.
-// const uiConfig = {
-//   // Popup signin flow rather than redirect flow.
-//   signInFlow: "popup",
-//   // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
-//   signInSuccessUrl: "/user/form",
-//   // We will display Google and Facebook as auth providers.
-//   signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
-// };
-
 const ggProvider = new firebase.auth.GoogleAuthProvider();
 
 const schema = yup.object().shape({});

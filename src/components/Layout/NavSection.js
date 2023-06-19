@@ -2,13 +2,11 @@ import { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import { NavLink as RouterLink, matchPath, useLocation } from "react-router-dom";
 // material
-import { alpha, useTheme, styled } from "@mui/material/styles";
+import { useTheme, styled } from "@mui/material/styles";
 import { Box, List, Collapse, ListItemText, ListItemIcon, ListItemButton } from "@mui/material";
 import Iconify from "assets/theme/components/icon/Iconify";
 import { Authen } from "../../context/authenToken/AuthenToken";
 import jwt_decode from "jwt-decode";
-//
-
 // ----------------------------------------------------------------------
 
 const ListItemStyle = styled((props) => <ListItemButton disableGutters {...props} />)(
@@ -84,7 +82,7 @@ function NavItem({ item, active }) {
         </ListItemStyle>
         {/* map với navConfig */}
         {(children || subItems) && (
-          <Collapse in={open} timeout="auto" unmountOnExit>
+          <Collapse in={open} timeout="auto">
             {children && (
               <List component="div" disablePadding sx={{ left: "3%" }}>
                 {children.map((child) => (
@@ -93,7 +91,7 @@ function NavItem({ item, active }) {
               </List>
             )}
             {subItems && (
-              <List component="div" disablePadding sx={{ left: "7%" }}>
+              <List component="div" disablePadding sx={{ left: "6%" }}>
                 {subItems.map((subItem) => (
                   <ListItemStyle
                     key={subItem.title}
@@ -101,6 +99,7 @@ function NavItem({ item, active }) {
                     to={subItem.subPath}
                     sx={{
                       ...(active(subItem.subPath) && activeSubStyle),
+                      // ...active(subItem.subPath),
                     }}
                   >
                     <ListItemIconStyle>
@@ -121,7 +120,7 @@ function NavItem({ item, active }) {
                           }),
                         }}
                       />
-                      <ListItemIconStyle>{icon && icon}</ListItemIconStyle>
+                      <ListItemIconStyle>{subItem.icons && subItem.icons}</ListItemIconStyle>
                     </ListItemIconStyle>
                     <ListItemText disableTypography primary={subItem.title} />
                   </ListItemStyle>
