@@ -91,7 +91,7 @@ export default function Router() {
           element: <CampaignList />,
         },
         {
-          path: "text/hihi",
+          path: "profile",
           element: <Profile />,
         },
         {
