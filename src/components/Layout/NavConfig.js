@@ -36,12 +36,12 @@ const navConfig = [
 
 const navConfigUser = [
   {
-    title: "Chiến dịch nè",
+    title: "Chiến dịch",
     icon: getIcon("eva:pie-chart-2-fill"),
     children: [
       {
-        title: "Tất cả chiến dịch",
-        icon: getIcon("eva:cube-outline"),
+        title: "Quản lý chiến dịch",
+        icon: getIcon("eva:settings-2-outline"),
         subItems: [
           {
             title: "Chiến dịch mùa hè á",
@@ -60,18 +60,12 @@ const navConfigUser = [
         path: "/user/campaign",
         icon: getIcon("material-symbols:campaign"),
       },
+
     ],
   },
   {
-    title: "Biểu mẫu",
-    path: "/user/form",
-    icon: getIcon("eva:file-text-fill"),
-    // s
-  },
-
-  {
-    title: "Bản mẫu",
-    path: "/user/template",
+    title: "Lịch sử hoạt động",
+    path: "/user/history",
     icon: getIcon("eva:file-text-fill"),
     // s
   },
@@ -82,12 +76,43 @@ const navConfigUser = [
     // s
   },
   {
-    title: "Ứng cử viên",
-    path: "/user/candidate",
-    icon: getIcon("eva:person-done-fill"),
-    // s
+    title: "Vai Trò",
+    icon: getIcon("eva:people-fill"),
+    children: [
+      {
+        title: "Ứng cử viên",
+        icon: getIcon("eva:person-fill"),
+        subItems: [
+          {
+            title: "Chiến dịch đã tham gia",
+            // subPath: "/user/text/hihi",
+            icon: getIcon("eva:cube-outline"),
+          },
+          {
+            title: "Hồ sơ bản thân",
+            // subPath: "/user/text/hhehe",
+            icon: getIcon("eva:cube-outline"),
+          },
+        ],
+      },
+      {
+        title: "Người điều hành",
+        icon: getIcon("eva:person-outline"),
+        subItems: [
+          {
+            title: "Biểu Mẫu",
+            // subPath: "/user/text/hihi",
+            icon: getIcon("eva:cube-outline"),
+          },
+          {
+            title: "Bản Mẫu",
+            // subPath: "/user/text/hhehe",
+            icon: getIcon("eva:cube-outline"),
+          },
+        ],
+      },
+    ],
   },
-  ,
 ];
 const exportedObject = {
   navConfig,

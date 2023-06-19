@@ -1,11 +1,28 @@
 import * as React from "react";
+import { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Avatar } from "@mui/material";
 import ListCandidate from "./List Candidate/ListCandidate";
-
+import Container from "@mui/material/Container";
+import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
+import SearchIcon from "@mui/icons-material/Search";
+import Pagination from "@mui/material/Pagination";
+import Box from "@mui/material/Box";
+import Select from "components/Control/Select";
 export default function FormVote() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const getOptions = () => [
+    { id: "active", title: "Đang hoạt động" },
+    { id: "inActive", title: "Trạng thái ẩn" },
+    { id: "All", title: "Không hoạt động" },
+  ];
+
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
   return (
     <>
       <Card sx={{ maxheight: "690px" }}>
@@ -31,6 +48,46 @@ export default function FormVote() {
           </Typography>
         </CardContent>
       </Card>
+      <Box sx={{ display: "flex", alignItems: "center" }}>
+        <TextField variant="outlined" label="Search by name" sx={{ mr: 1, mt: 1 }} />
+        {/* <Button variant="contained" color="primary" sx={{ mr: 1 }}>
+        Filter
+      </Button> */}
+        <Pagination sx={{ ml: 21 }} count={4} color="primary" />
+
+        <Box sx={{ display: "flex", marginLeft: "2%", marginTop: "1%" }}>
+          <Select
+            sx={{ ml: 21, mt: 2 }}
+            name="foodCategoryId"
+            required
+            label="Trạng thái"
+            width="13rem"
+            height="10rem"
+            onChange={(e) => {}}
+            options={getOptions()}
+          />
+          <Select
+            sx={{ ml: 21, mt: 2 }}
+            name="foodCategoryId"
+            required
+            label="Trạng thái"
+            width="13rem"
+            height="10rem"
+            onChange={(e) => {}}
+            options={getOptions()}
+          />
+          <Select
+            sx={{ ml: 21, mt: 2 }}
+            name="foodCategoryId"
+            required
+            label="Trạng thái"
+            width="13rem"
+            height="10rem"
+            onChange={(e) => {}}
+            options={getOptions()}
+          />
+        </Box>
+      </Box>
       <ListCandidate />
     </>
   );

@@ -40,10 +40,10 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 const TABLE_HEAD = [
   { id: "images", name: "Hình", alignRight: false },
   { id: "name", label: "Tên người tạo", alignRight: false },
-  { id: "Majo", label: "Câu hỏi", alignRight: false },
+  { id: "Majo", label: "Chiến dịch", alignRight: false },
   { id: "Khoá", label: "Khoá", alignRight: false },
-  { id: "createdAt", label: "Ngày thêm", alignRight: false },
-  { id: "updatedate", label: "Ngày sửa", alignRight: false },
+  { id: "createdAt", label: "Thời gian tạo", alignRight: false },
+  { id: "updatedate", label: "Nội dung", alignRight: false },
   { id: "status", label: "Trạng thái", alignRight: false },
   { id: "description", label: "Action", align: "center" },
 ];
@@ -178,7 +178,7 @@ export default function FeedBack() {
             variant="contained"
             component={RouterLink}
             to="/dashboard/admin/newfood"
-            nameButton=" Tạo Biểu Mẫu"
+            nameButton="Export File"
           />
         </Stack>
 
@@ -243,16 +243,19 @@ export default function FeedBack() {
                             <Label color="success">True</Label>
                           </div>
                         </TableCell>
-                        <TableCell sx={{ marginRight: "20%" }}>
+                        <TableCell sx={{ width: "10%" }}>
                           {
-                            <Button sx={{ bgcolor: "primary" }} startIcon={<DeleteOutlineIcon />}>
+                            <Button
+                              sx={{ bgcolor: "secondary", background: "#FFA07A" }}
+                              startIcon={<DeleteOutlineIcon />}
+                            >
                               Xoá
                             </Button>
                           }
                           {
                             <Button
-                              sx={{ bgcolor: "primary", marginLeft: 2 }}
-                              startIcon={getIcon("material-symbols:system-update-alt")}
+                              sx={{ marginTop: "2px", bgcolor: "secondary", background: "#71C043" }}
+                              startIcon={getIcon("material-symbols:edit")}
                             >
                               Sửa
                             </Button>
