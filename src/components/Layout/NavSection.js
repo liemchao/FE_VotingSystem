@@ -7,8 +7,6 @@ import { Box, List, Collapse, ListItemText, ListItemIcon, ListItemButton } from 
 import Iconify from "assets/theme/components/icon/Iconify";
 import { Authen } from "../../context/authenToken/AuthenToken";
 import jwt_decode from "jwt-decode";
-//
-
 // ----------------------------------------------------------------------
 
 const ListItemStyle = styled((props) => <ListItemButton disableGutters {...props} />)(

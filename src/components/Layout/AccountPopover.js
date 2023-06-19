@@ -76,7 +76,7 @@ export default function AccountPopover() {
           sx={{
             zIndex: "modal",
             position: "absolute",
-            left: `${(decode?.Username || decode?.Email).length * 0.01}%`,
+            left: `${(decode?.Username || decode?.Email)?.length * 0.01}%`,
             // left: 3,
           }}
         />
@@ -85,15 +85,13 @@ export default function AccountPopover() {
           paddingTop="0.4em"
           sx={{
             backgroundColor: "#ffee32",
-            width: `${(decode?.Username || decode?.Email).length * 20}%`,
+            width: `${(decode?.Username || decode?.Email)?.length * 20}%`,
             height: 40,
             borderRadius: 4,
             zIndex: "toolip",
           }}
         >
-
           <Typography variant="subtitle2">{decode?.Username || decode?.Email}</Typography>
-
         </Box>
       </IconButton>
 
