@@ -38,7 +38,7 @@ NavItem.propTypes = {
   active: PropTypes.func,
 };
 
-function NavItem({ item, active }) {
+function NavItem({ item, active, onSubItemClick }) {
   const theme = useTheme();
 
   const isActiveRoot = active(item.path);
@@ -86,7 +86,12 @@ function NavItem({ item, active }) {
             {children && (
               <List component="div" disablePadding sx={{ left: "3%" }}>
                 {children.map((child) => (
-                  <NavItem key={child.title} item={child} active={active} />
+                  <NavItem
+                    key={child.title}
+                    item={child}
+                    active={active}
+                    // onSubItemClick={onSubItemClick}
+                  />
                 ))}
               </List>
             )}
@@ -97,6 +102,10 @@ function NavItem({ item, active }) {
                     key={subItem.title}
                     component={RouterLink}
                     to={subItem.subPath}
+                    // onClick={() => {
+                    //   // onSubItemClick();
+                    //   setOpen(true); // set the state of NavItem to keep the Collapse open
+                    // }}
                     sx={{
                       ...(active(subItem.subPath) && activeSubStyle),
                       // ...active(subItem.subPath),
