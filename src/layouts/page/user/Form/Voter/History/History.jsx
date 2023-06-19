@@ -30,7 +30,7 @@ import Page from "components/Layout/Page";
 import Label from "components/label/Label";
 import Scrollbar from "components/Layout/Scrollbar";
 import SearchNotFound from "components/Layout/SearchNotFound";
-import { callAPIgetListForm } from "context/redux/action/action";
+import { callAPIgetListHistory } from "context/redux/action/action";
 import { useContext } from "react";
 import { Authen } from "context/authenToken/AuthenToken";
 import Iconify from "assets/theme/components/icon/Iconify";
@@ -40,8 +40,8 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 const TABLE_HEAD = [
   { id: "images", name: "Hình", alignRight: false },
   { id: "name", label: "Tên người tạo", alignRight: false },
-  { id: "Mô tả", label: "Chiến dịch", alignRight: false },
-  { id: "Loại hành động", label: "Khoá", alignRight: false },
+  { id: "Mô tả", label: "Mô tả", alignRight: false },
+  { id: "Loại hành động", label: "Loại hành động", alignRight: false },
   // { id: "createdAt", label: "Thời gian tham gia", alignRight: false },
   // { id: "updatedate", label: "Nội Dung", alignRight: false },
 ];
@@ -105,17 +105,17 @@ export default function HistoryUser() {
 
   const dispatch = useDispatch();
   const Navigate = useNavigate();
-  const { token } = useContext(Authen);
+  const { token, decode } = useContext(Authen);
 
   React.useEffect(() => {
     const callAPI = async () => {
-      await dispatch(callAPIgetListForm(token));
+      await dispatch(callAPIgetListHistory(decode.userName, token));
     };
     callAPI();
   }, [dispatch, token]);
 
-  const form = useSelector((state) => {
-    return state.form;
+  const history = useSelector((state) => {
+    return state.history;
   });
 
   const getOptions = () => [
@@ -135,7 +135,7 @@ export default function HistoryUser() {
   };
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = form.map((n) => n.name);
+      const newSelecteds = history.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -155,7 +155,7 @@ export default function HistoryUser() {
     setFilterName(event.target.value);
   };
 
-  const filterform = applySortFilter(form, getComparator(order, orderBy), filterName);
+  const filterhistory = applySortFilter(history, getComparator(order, orderBy), filterName);
 
   const handleDate = (time) => {
     const a = new Date(time).toLocaleDateString().split("/");
@@ -164,13 +164,13 @@ export default function HistoryUser() {
     } else return `${a[2]}-${a[1]}-${a[0]}`;
   };
 
-  const isUserNotFound = filterform?.length === 0;
+  const isUserNotFound = filterhistory?.length === 0;
   return (
     <Page title="Admin">
       <Container maxWidth={false}>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            {/* <Icon icon="emojione-monotone:pot-of-form" fontSize={100} /> */}
+            {/* <Icon icon="emojione-monotone:pot-of-history" fontSize={100} /> */}
           </Typography>
           <ButtonCustomize
             variant="contained"
@@ -194,24 +194,24 @@ export default function HistoryUser() {
                 order={order}
                 orderBy={orderBy}
                 headLabel={TABLE_HEAD}
-                rowCount={form?.length}
+                rowCount={history?.length}
                 numSelected={selected?.length}
                 onRequestSort={handleRequestSort}
                 onSelectAllClick={handleSelectAllClick}
               />
               <TableBody>
                 {/* nhớ khởi tạo đúng tên file trong database */}
-                {filterform
+                {filterhistory
                   ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
-                    const { formId, name, userName, description, visibility } = row;
+                    const { historyId, description } = row;
 
                     const isItemSelected = selected.indexOf(name) !== -1;
 
                     return (
                       <TableRow
                         hover
-                        key={formId}
+                        key={historyId}
                         tabIndex={-1}
                         role="checkbox"
                         selected={isItemSelected}
@@ -222,20 +222,12 @@ export default function HistoryUser() {
                         </TableCell>
                         <TableCell>
                           <Typography variant="subtitle2" noWrap>
-                            Moderator
+                            User
                           </Typography>
                         </TableCell>
 
-                        <TableCell align="left">{name}</TableCell>
-                        <TableCell align="left">{visibility} K14</TableCell>
-                        <TableCell align="left">
-                          {/* {new Date(createdAt).toLocaleDateString()} */}
-                          11/02/2023
-                        </TableCell>
-                        <TableCell align="left">
-                          {/* {new Date(updatedAt).toLocaleDateString()} */}
-                          11/02/2023
-                        </TableCell>
+                        <TableCell align="left">{description}</TableCell>
+
                         <TableCell align="left">
                           <div>
                             <Label color="success">True</Label>
@@ -278,7 +270,7 @@ export default function HistoryUser() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 20]}
             component="div"
-            count={form?.length}
+            count={history?.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

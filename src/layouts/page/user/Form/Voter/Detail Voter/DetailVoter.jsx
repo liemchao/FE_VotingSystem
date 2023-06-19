@@ -30,7 +30,7 @@ function DetailCandidate() {
           >
             <CardMedia
               sx={{
-                height: 200,
+                height: 320,
                 display: "cover",
               }}
               image="https://hanoitop10.com/wp-content/uploads/2023/01/anh-luffy-cute_1-jpg.webp"
@@ -39,6 +39,7 @@ function DetailCandidate() {
             <CardContent
               sx={{
                 height: 120,
+                width: 400,
               }}
             >
               <Typography gutterBottom variant="h4" component="div">
@@ -67,22 +68,14 @@ function DetailCandidate() {
                   justifyContent: "center",
                   alignItems: "center",
                   borderRadius: "30px",
-                  marginLeft: "1rem",
+                  marginLeft: "8rem",
                   fontSize: "1rem",
                   fontWeight: "700",
                   border: "0",
+                  textAlign: "center",
                 }}
               >
-                Bình chọn
-              </Button>
-              <Button
-                sx={{
-                  right: "-4rem",
-                  bottom: "-1rem",
-                }}
-                size="small"
-              >
-                Chia sẻ
+                Chi tiết
               </Button>
             </CardActions>
           </Card>

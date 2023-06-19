@@ -25,6 +25,7 @@ import DetailCandidate from "layouts/page/user/Form/Voter/Detail Voter/DetailVot
 import HistoryUser from "layouts/page/user/Form/Voter/History/History";
 import FormVote from "layouts/page/user/Form/Voter/Form";
 import AllCampaignList from "layouts/page/AllCampaign";
+import Text from "layouts/page/Text";
 export default function Router() {
   const ProtectedRouteAuthen = ({ roles, children }) => {
     const token = localStorage.getItem("token");
@@ -88,7 +89,7 @@ export default function Router() {
         },
         {
           path: "campaign",
-          element: <CampaignList />,
+          element: <Text />,
         },
         {
           path: "history",

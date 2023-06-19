@@ -3,6 +3,7 @@ const initialState = {
   currentUser: [],
   form: [],
   campaigns: [],
+  history: [],
 };
 
 export default function userReducer(state = initialState, { type, payload }) {
@@ -15,6 +16,9 @@ export default function userReducer(state = initialState, { type, payload }) {
       break;
     case PathAction.GET_LIST_CAMPAIGNS:
       state.campaigns = payload;
+      break;
+    case PathAction.GET_LIST_HISTORY:
+      state.history = payload;
       break;
     default:
       return { ...state };

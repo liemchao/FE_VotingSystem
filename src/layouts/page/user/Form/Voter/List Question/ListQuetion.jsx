@@ -135,8 +135,8 @@ export default function ListQuestion() {
         variant="contained"
         sx={{
           marginTop: 2,
-          width: "200px",
-          height: "45px",
+          // width: "200px",
+          // height: "45px",
           float: "right",
         }}
         endIcon={<SendIcon />}

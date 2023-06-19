@@ -50,7 +50,7 @@ const navConfigUser = [
           },
           {
             title: "Chiến dịch của bản thân",
-            path: "/user/campaign",
+            path: "/user/campaign/hihi",
             icon: getIcon("eva:cube-fill"),
           },
         ],
