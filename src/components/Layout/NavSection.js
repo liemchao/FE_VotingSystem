@@ -1,4 +1,4 @@
-import { useContext, useMemo, useState } from "react";
+import { useCallback, useContext, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { NavLink as RouterLink, matchPath, useLocation } from "react-router-dom";
 // material
@@ -38,7 +38,7 @@ NavItem.propTypes = {
   active: PropTypes.func,
 };
 
-function NavItem({ item, active, onSubItemClick }) {
+function NavItem({ item, active }) {
   const theme = useTheme();
   const { title, path, icon, info, children, subItems } = item;
 
@@ -50,13 +50,24 @@ function NavItem({ item, active, onSubItemClick }) {
 
   const isActiveRoot = active(path);
 
-  const handleOpen = useMemo(() => {
-    setOpen((prev) => !prev);
+  const handleOpen = useCallback(() => {
+    setOpen((prev) => {
+      if (prev) {
+        return false;
+      }
+      return true;
+    });
   }, []);
 
-  const handleSubOpen = () => {
-    setSubOpen((prev) => !prev);
-  };
+  // const handleOpen = () => {
+  //   setOpen((prev) => !prev);
+  // };
+
+  const handleSubOpen = useCallback(() => {
+    setTimeout(() => {
+      setSubOpen((prev) => !prev);
+    }, 8000);
+  }, []);
 
   const activeRootStyle = {
     color: "white",
@@ -89,18 +100,12 @@ function NavItem({ item, active, onSubItemClick }) {
         </ListItemStyle>
         {/* map với navConfig */}
         {(children || subItems) && (
-          <Collapse in={open || subOpen} timeout="auto">
-            {" "}
+          <Collapse in={open} timeout="auto">
             {/* Use the "open" state variable for this Collapse component */}
             {children && (
               <List component="div" disablePadding sx={{ left: "3%" }}>
                 {children.map((child) => (
-                  <NavItem
-                    key={child.title}
-                    item={child}
-                    active={active}
-                    onSubItemClick={onSubItemClick}
-                  />
+                  <NavItem key={child.title} item={child} active={active} />
                 ))}
               </List>
             )}
@@ -112,7 +117,7 @@ function NavItem({ item, active, onSubItemClick }) {
                     component={RouterLink}
                     to={subItem.subPath}
                     onClick={() => {
-                      onSubItemClick(subItem.title); // Call the onSubItemClick function passed down from parent
+                      // onSubItemClick(subItem.title); // Call the onSubItemClick function passed down from parent
                       setSubOpen((prev) => !prev); // Set the local "subOpen" state variable to true
                     }}
                     sx={{
@@ -155,9 +160,7 @@ function NavItem({ item, active, onSubItemClick }) {
       component={RouterLink}
       to={path}
       onClick={() => {
-        onSubItemClick();
         handleOpen();
-        // handleSubOpen(); // Set the local "open" state variable to true when the root item is clicked
       }}
       sx={{
         ...(isActiveRoot && activeRootStyle),
@@ -175,7 +178,7 @@ NavSection.propTypes = {
 };
 
 //NavSection
-export default function NavSection({ navConfig, navConfigUser, onSubItemClick, ...other }) {
+export default function NavSection({ navConfig, navConfigUser, ...other }) {
   const { pathname } = useLocation();
   const checkRole = () => {
     const { token } = useContext(Authen);
@@ -198,7 +201,7 @@ export default function NavSection({ navConfig, navConfigUser, onSubItemClick, .
     <Box {...other}>
       <List disablePadding sx={{ p: 1 }}>
         {checkRole()?.map((item) => (
-          <NavItem key={item.title} item={item} active={match} onSubItemClick={onSubItemClick} />
+          <NavItem key={item.title} item={item} active={match} />
         ))}
       </List>
     </Box>
