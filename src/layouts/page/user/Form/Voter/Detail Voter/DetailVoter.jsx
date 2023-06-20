@@ -12,32 +12,23 @@ import {
 } from "@mui/material";
 import ListQuestion from "../List Question/ListQuetion";
 import Scrollbar from "components/Layout/Scrollbar";
-import { LogoDev } from "@mui/icons-material";
+import ListCandidate from "../List Candidate/ListCandidate";
 
 function DetailCandidate() {
   return (
     <Grid container spacing={2}>
-      <Grid item xs={6}>
+      <Grid item xs={12}>
         <Paper>
-          <Card
-            sx={{
-              position: "fixed",
-              marginLeft: 10,
-              maxWidth: 500,
-              textAlign: "center",
-              padding: "1rem 1rem 1rem 1rem",
-              borderRadius: "18px",
-            }}
-          ></Card>
+          <ListCandidate />
         </Paper>
       </Grid>
-      <Grid item xs={6}>
+      {/* <Grid item xs={4}>
         <Paper>
           <Scrollbar>
             <ListQuestion />
           </Scrollbar>
         </Paper>
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 }

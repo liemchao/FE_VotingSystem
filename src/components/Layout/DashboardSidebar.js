@@ -93,14 +93,8 @@ export default function DashboardSidebar({
       <Box sx={{ flexGrow: 1 }} />
 
       <Box sx={{ px: 2.5, pb: 3, mt: 10 }}>
-        <Stack
-          alignItems="center"
-          spacing={3}
-          sx={{ pt: 5, borderRadius: 2, position: "relative" }}
-        >
-          <Box sx={{ width: 100, position: "absolute", top: -50 }}>
-            <Avatar src={logo} />
-          </Box>
+        <Stack alignItems="center" spacing={3} sx={{ borderRadius: 2, position: "relative" }}>
+          <Avatar sx={{ width: 400, height: 200 }} src={logo} />
         </Stack>
       </Box>
     </Scrollbar>

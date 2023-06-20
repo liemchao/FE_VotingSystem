@@ -123,7 +123,7 @@ export default function Profile() {
                 </CardAvatar>
 
                 <CardBody profile>
-                  <h6 className={classes.cardCategory}>Giang vien</h6>
+                  <h6 className={classes.cardCategory}>Hình đại diện</h6>
                   {/* <h4
                   className={classes.cardTitle}
                 >{`${profiles.profile?.fullName}`}</h4>
@@ -165,8 +165,8 @@ export default function Profile() {
               <Card>
                 <CardHeader color="primary">
                   <h4 className={classes.cardTitleWhite}>Chỉnh sửa trang cá nhân</h4>
-                  {/* <p className={classes.cardCategoryWhite}>www.Mesub.com</p> */}
-                  <p>www.HIHI.com</p>
+
+                  <p>FVS Voting System</p>
                 </CardHeader>
                 <CardBody>
                   <Box
@@ -257,7 +257,7 @@ export default function Profile() {
                       </Grid>
 
                       <Box>
-                        <Stack width="200px" marginTop={"2rem"} ml={"7rem"} mb={"1rem"}>
+                        <Stack width="200px" marginTop={"2rem"} ml={"4rem"} mb={"1rem"}>
                           <ButtonCustomize
                             variant="contained"
                             type="submit"

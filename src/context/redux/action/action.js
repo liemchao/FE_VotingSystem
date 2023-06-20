@@ -95,9 +95,10 @@ export const callAPIgetListCandidates = (token) => {
   return async (dispatch) => {
     try {
       const res = await API("GET", URL_API + `/api/v1/candidates`, null, token);
+      console.log(res);
       dispatch(
         createAction({
-          type: PathAction.GET_LIST_CAMPAIGNS,
+          type: PathAction.GET_LIST_CANDIDATE,
           payload: res.data.data,
         })
       );

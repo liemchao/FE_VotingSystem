@@ -16,7 +16,6 @@ import {
   TableContainer,
   TablePagination,
   IconButton,
-  Button,
 } from "@mui/material";
 // components
 
@@ -27,25 +26,24 @@ import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
 import UserListHead from "layouts/sections/UserListHead";
 import Campaignlistoolbar from "layouts/sections/Campaignlistoolbar";
 import Page from "components/Layout/Page";
-import Label from "components/label/Label";
-import Scrollbar from "components/Layout/Scrollbar";
 import SearchNotFound from "components/Layout/SearchNotFound";
-import { callAPIgetListHistory } from "context/redux/action/action";
 import { useContext } from "react";
 import { Authen } from "context/authenToken/AuthenToken";
+import Button from "components/Control/Button";
+import { callAPIgetListCandidates } from "context/redux/action/action";
 import Iconify from "assets/theme/components/icon/Iconify";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import EditIcon from "@mui/icons-material/Edit";
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
   { id: "images", name: "Hình", alignRight: false },
-  { id: "name", label: "Tên người tạo", alignRight: false },
-  { id: "Loại hành động", label: "Loại hành động", alignRight: false },
-  { id: "Mô tả", label: "Mô tả", alignRight: false },
-  { id: "Xóa", label: "Xóa", alignRight: false },
-  { id: "Sửa", label: "Sửa", alignRight: false },
-
-  // { id: "updatedate", label: "Nội Dung", alignRight: false },
+  { id: "name", label: "Tên", alignRight: false },
+  { id: "email", label: "Email", alignRight: false },
+  { id: "gender", label: "Giới tính", alignRight: false },
+  { id: "phone", label: "Số điện thoại", alignRight: false },
+  { id: "description", label: "Tham gia chiến dịch", alignRight: false },
+  { id: "Action", label: "Action", alignRight: true },
 ];
 
 // ----------------------------------------------------------------------
@@ -74,13 +72,16 @@ function applySortFilter(array, comparator, query) {
     return a[1] - b[1];
   });
   if (query) {
-    return filter(array, (_user) => _user.name.toLowerCase().indexOf(query.toLowerCase()) !== -1);
+    return filter(
+      array,
+      (candidate) => candidate.fullName.toLowerCase().indexOf(query.toLowerCase()) !== -1
+    );
   }
   return stabilizedThis?.map((el) => el[0]);
 }
 //getICon
 
-export default function HistoryUser() {
+export default function CandidiateAccountList() {
   const [page, setPage] = useState(0);
 
   const [order, setOrder] = useState("asc");
@@ -107,17 +108,18 @@ export default function HistoryUser() {
 
   const dispatch = useDispatch();
   const Navigate = useNavigate();
-  const { token, decode } = useContext(Authen);
+  const { token } = useContext(Authen);
 
   React.useEffect(() => {
     const callAPI = async () => {
-      await dispatch(callAPIgetListHistory(decode.userName, token));
+      await dispatch(callAPIgetListCandidates(token));
     };
     callAPI();
   }, [dispatch, token]);
 
-  const history = useSelector((state) => {
-    return state.history;
+  //useSelect lấy data từ store =>
+  const candidate = useSelector((state) => {
+    return state.candidate;
   });
 
   const getOptions = () => [
@@ -125,9 +127,9 @@ export default function HistoryUser() {
     { id: "inActive", title: "Ngưng bán" },
     { id: "All", title: "Tất cả" },
   ];
+  const getIcon = (name) => <Iconify icon={name} width={20} />;
 
   const handleDelete = async (id) => {};
-  const getIcon = (name) => <Iconify icon={name} width={20} />;
 
   //========================================================
   const handleRequestSort = (event, property) => {
@@ -137,7 +139,7 @@ export default function HistoryUser() {
   };
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = history.map((n) => n.name);
+      const newSelecteds = candidate.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -157,7 +159,7 @@ export default function HistoryUser() {
     setFilterName(event.target.value);
   };
 
-  const filterhistory = applySortFilter(history, getComparator(order, orderBy), filterName);
+  const filterCandidate = applySortFilter(candidate, getComparator(order, orderBy), filterName);
 
   const handleDate = (time) => {
     const a = new Date(time).toLocaleDateString().split("/");
@@ -166,19 +168,19 @@ export default function HistoryUser() {
     } else return `${a[2]}-${a[1]}-${a[0]}`;
   };
 
-  const isUserNotFound = filterhistory?.length === 0;
+  const isUserNotFound = filterCandidate?.length === 0;
   return (
     <Page title="Admin">
       <Container maxWidth={false}>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            {/* <Icon icon="emojione-monotone:pot-of-history" fontSize={100} /> */}
+            {/* <Icon icon="emojione-monotone:pot-of-form" fontSize={100} /> */}
           </Typography>
           <ButtonCustomize
             variant="contained"
             component={RouterLink}
             to="/dashboard/admin/newfood"
-            nameButton="Export File"
+            nameButton="Tạo tài khoản"
           />
         </Stack>
 
@@ -196,50 +198,46 @@ export default function HistoryUser() {
                 order={order}
                 orderBy={orderBy}
                 headLabel={TABLE_HEAD}
-                rowCount={history?.length}
+                rowCount={candidate?.length}
                 numSelected={selected?.length}
                 onRequestSort={handleRequestSort}
                 onSelectAllClick={handleSelectAllClick}
               />
               <TableBody>
                 {/* nhớ khởi tạo đúng tên file trong database */}
-                {filterhistory
+                {filterCandidate
                   ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
-                    const { historyId, description, actionTypeName } = row;
+                    const { candidateId, fullName, email, gender, description, avatarUrl, phone } =
+                      row;
 
                     const isItemSelected = selected.indexOf(name) !== -1;
 
                     return (
                       <TableRow
                         hover
-                        key={historyId}
+                        key={candidateId}
                         tabIndex={-1}
                         role="checkbox"
                         selected={isItemSelected}
                         aria-checked={isItemSelected}
                       >
                         <TableCell>
-                          <Avatar alt={name} />
+                          <Avatar alt={avatarUrl} />
                         </TableCell>
-                        <TableCell>
-                          <Typography variant="subtitle2" noWrap>
-                            User
-                          </Typography>
-                        </TableCell>
-                        <TableCell align="left">
-                          {actionTypeName === "đã thay đổi" && (
-                            <Label color="warning">Đã thay đổi</Label>
-                          )}
-                          {actionTypeName === "đã bình chọn" && (
-                            <Label color="success">Đã bình chọn</Label>
-                          )}
-                        </TableCell>
+                        <TableCell align="left">{fullName}</TableCell>
+                        <TableCell align="left">{email}</TableCell>
+                        <TableCell align="left">{gender}</TableCell>
+                        <TableCell align="left">{phone}</TableCell>
                         <TableCell align="left">{description}</TableCell>
-                        <TableCell width="2%">
-                          {<IconButton>{getIcon("ic:baseline-delete")}</IconButton>}
+                        <TableCell align="left" sx={{ width: "13%" }}>
+                          <IconButton aria-label="delete" color="secondary">
+                            <DeleteOutlineIcon />
+                          </IconButton>
+                          <IconButton aria-label="edit" color="primary">
+                            <EditIcon />
+                          </IconButton>
                         </TableCell>
-                        <TableCell>{<IconButton>{getIcon("tabler:edit")}</IconButton>}</TableCell>
                       </TableRow>
                     );
                   })}
@@ -259,7 +257,7 @@ export default function HistoryUser() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 20]}
             component="div"
-            count={history?.length}
+            count={candidate?.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
@@ -273,5 +271,101 @@ export default function HistoryUser() {
         </Card>
       </Container>
     </Page>
+    // <Page title="Admin">
+    //   <Container maxWidth={false}>
+    //     <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+    //       <Typography variant="h4" gutterBottom>
+    //         {/* <Icon icon="emojione-monotone:pot-of-form" fontSize={100} /> */}
+    //       </Typography>
+    //       <ButtonCustomize
+    //         variant="contained"
+    //         component={RouterLink}
+    //         to="/user/newfood"
+    //         nameButton=" Tạo Tài Khoản"
+    //       />
+    //     </Stack>
+
+    //     <Card>
+    //       <Campaignlistoolbar
+    //         numSelected={selected?.length}
+    //         filterName={filterName}
+    //         onFilterName={handleFilterByName}
+    //         options={getOptions()}
+    //       />
+    //       <Scrollbar>
+    //         <TableContainer>
+    //           <Table>
+    //             <UserListHead
+    //               order={order}
+    //               orderBy={orderBy}
+    //               headLabel={TABLE_HEAD}
+    //               rowCount={candidate?.length}
+    //               numSelected={selected?.length}
+    //               onRequestSort={handleRequestSort}
+    //               onSelectAllClick={handleSelectAllClick}
+    //             />
+    //             <TableBody>
+    //               {/* nhớ khởi tạo đúng tên file trong database */}
+    //               {filterCandidate
+    //                 ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+    //                 .map((row) => {
+    //                   const { candidateId, fullName, email, gender, description, avatarUrl } = row;
+
+    //                   const isItemSelected = selected.indexOf(name) !== -1;
+
+    //                   return (
+    //                     <TableRow
+    //                       hover
+    //                       key={candidateId}
+    //                       tabIndex={-1}
+    //                       role="checkbox"
+    //                       selected={isItemSelected}
+    //                       aria-checked={isItemSelected}
+    //                     >
+    //                       <TableCell>
+    //                         <Avatar alt={avatarUrl} />
+    //                       </TableCell>
+
+    //                       <TableCell align="left">{fullName}</TableCell>
+    //                       <TableCell align="left">{email}</TableCell>
+    //                       <TableCell align="left">{gender}</TableCell>
+    //                       <TableCell align="left">{description}</TableCell>
+    //                       <TableCell align="left">
+    //                         <Button>Update</Button>
+    //                         <Button>Ban</Button>
+    //                       </TableCell>
+    //                     </TableRow>
+    //                   );
+    //                 })}
+    //             </TableBody>
+    //             {isUserNotFound && (
+    //               <TableBody>
+    //                 <TableRow>
+    //                   <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
+    //                     <SearchNotFound searchQuery={filterName} />
+    //                   </TableCell>
+    //                 </TableRow>
+    //               </TableBody>
+    //             )}
+    //           </Table>
+    //         </TableContainer>
+    //       </Scrollbar>
+    //       <TablePagination
+    //         rowsPerPageOptions={[5, 10, 20]}
+    //         component="div"
+    //         count={candidate?.length}
+    //         rowsPerPage={rowsPerPage}
+    //         page={page}
+    //         onPageChange={handleChangePage}
+    //         onRowsPerPageChange={handleChangeRowsPerPage}
+    //         // fix languge in footer tables
+    //         labelRowsPerPage={"Số hàng trên một trang"}
+    //         labelDisplayedRows={({ from, to, count }) => {
+    //           return "" + from + "-" + to + " của " + count;
+    //         }}
+    //       />
+    //     </Card>
+    //   </Container>
+    // </Page>
   );
 }

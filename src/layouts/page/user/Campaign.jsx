@@ -27,7 +27,7 @@ import { useCallback } from "react";
 export default function CampaignList() {
   const navigate = useNavigate();
   const handleinvite = () => {
-    navigate("/user/joincampain");
+    navigate("/user/campaignstage");
   };
   const ColorButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText("#FFCC32"),

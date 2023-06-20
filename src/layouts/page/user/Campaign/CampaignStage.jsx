@@ -4,32 +4,24 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Avatar } from "@mui/material";
-import ListCandidate from "./List Candidate/ListCandidate";
-import Container from "@mui/material/Container";
+import CampaignStageList from "./CampaignStageList";
 import TextField from "@mui/material/TextField";
-import InputAdornment from "@mui/material/InputAdornment";
-import SearchIcon from "@mui/icons-material/Search";
 import Pagination from "@mui/material/Pagination";
 import Box from "@mui/material/Box";
 import Select from "components/Control/Select";
-export default function FormVote() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const getOptions = () => [
-    { id: "active", title: "Đang hoạt động" },
-    { id: "inActive", title: "Trạng thái ẩn" },
-    { id: "All", title: "Không hoạt động" },
-  ];
 
+export default function CampaignStage() {
+  const [searchTerm, setSearchTerm] = useState("");
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
   };
   return (
     <>
-      <Card sx={{ maxheight: "690px" }}>
+      <Card sx={{ maxheight: "100px" }}>
         <Avatar
           alt="Remy Sharp"
           src="https://hanoitop10.com/wp-content/uploads/2023/01/anh-luffy-cute_1-jpg.webp"
-          sx={{ width: 56, height: 56 }}
+          sx={{ width: 100, height: 100 }}
         />
         <CardContent>
           <Typography gutterBottom variant="h2" component="div">
@@ -49,13 +41,13 @@ export default function FormVote() {
         </CardContent>
       </Card>
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        <TextField variant="outlined" label="Search by name" sx={{ mr: 1, mt: 1 }} />
+        {/* <TextField variant="outlined" label="Search by name" sx={{ mr: 1, mt: 1 }} /> */}
         {/* <Button variant="contained" color="primary" sx={{ mr: 1 }}>
         Filter
       </Button> */}
-        <Pagination sx={{ ml: 21 }} count={4} color="primary" />
+        {/* <Pagination sx={{ ml: 21 }} count={4} color="primary" /> */}
 
-        <Box sx={{ display: "flex", marginLeft: "2%", marginTop: "1%" }}>
+        {/* <Box sx={{ display: "flex", marginLeft: "2%", marginTop: "1%" }}>
           <Select
             sx={{ ml: 21, mt: 2 }}
             name="foodCategoryId"
@@ -86,9 +78,9 @@ export default function FormVote() {
             onChange={(e) => {}}
             options={getOptions()}
           />
-        </Box>
+        </Box> */}
       </Box>
-      <ListCandidate />
+      <CampaignStageList />
     </>
   );
 }

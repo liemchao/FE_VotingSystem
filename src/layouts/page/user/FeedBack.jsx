@@ -236,7 +236,7 @@ export default function FeedBack() {
                         </TableCell>
                         <TableCell align="left">
                           {/* {new Date(updatedAt).toLocaleDateString()} */}
-                          11/02/2023
+                          Ứng dụng xài rất tốt
                         </TableCell>
                         <TableCell align="left">
                           <div>
