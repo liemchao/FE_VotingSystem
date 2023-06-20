@@ -50,8 +50,12 @@ export default function DashboardSidebar({
   const { pathname } = useLocation();
 
   const { decode } = useContext(Authen);
-
   const isDesktop = useResponsive("up", "lg");
+
+  function handleSubItemClick(title) {
+    console.log(`Sub-item clicked: ${title}`);
+    // Code to handle sub-item click
+  }
 
   useEffect(() => {
     if (isOpenSidebar) {
@@ -88,7 +92,7 @@ export default function DashboardSidebar({
         </Link>
       </Box>
 
-      <NavSection navConfig={navConfig} />
+      <NavSection navConfig={navConfig} onSubItemClick={handleSubItemClick} />
 
       <Box sx={{ flexGrow: 1 }} />
 
