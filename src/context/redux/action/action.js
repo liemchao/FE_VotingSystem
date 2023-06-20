@@ -90,3 +90,31 @@ export const callAPIgetListCampaigns = (token) => {
     } catch (err) {}
   };
 };
+
+export const callAPIgetListCandidates = (token) => {
+  return async (dispatch) => {
+    try {
+      const res = await API("GET", URL_API + `/api/v1/candidates`, null, token);
+      dispatch(
+        createAction({
+          type: PathAction.GET_LIST_CAMPAIGNS,
+          payload: res.data.data,
+        })
+      );
+    } catch (err) {}
+  };
+};
+
+export const callAPIgetListHistory = (userName, token) => {
+  return async (dispatch) => {
+    try {
+      const res = await API("GET", URL_API + `/api/v1/actionhistory/user`, userName, token);
+      dispatch(
+        createAction({
+          type: PathAction.GET_LIST_HISTORY,
+          payload: res.data.data,
+        })
+      );
+    } catch (err) {}
+  };
+};

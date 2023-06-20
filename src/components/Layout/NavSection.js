@@ -2,7 +2,7 @@ import { useContext, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { NavLink as RouterLink, matchPath, useLocation } from "react-router-dom";
 // material
-import { alpha, useTheme, styled } from "@mui/material/styles";
+import { useTheme, styled } from "@mui/material/styles";
 import { Box, List, Collapse, ListItemText, ListItemIcon, ListItemButton } from "@mui/material";
 import Iconify from "assets/theme/components/icon/Iconify";
 import { Authen } from "../../context/authenToken/AuthenToken";
@@ -100,6 +100,7 @@ function NavItem({ item, active, onSubItemClick }) {
                     item={child}
                     active={active}
                     onSubItemClick={onSubItemClick}
+
                   />
                 ))}
               </List>
@@ -115,6 +116,7 @@ function NavItem({ item, active, onSubItemClick }) {
                       onSubItemClick(subItem.title); // Call the onSubItemClick function passed down from parent
                       setSubOpen((prev) => !prev); // Set the local "subOpen" state variable to true
                     }}
+
                     sx={{
                       ...(active(subItem.subPath) && activeSubStyle),
                     }}
