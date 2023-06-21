@@ -2,27 +2,24 @@
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import { Card, Button, Typography, CardMedia, CardContent, CardActions, Grid } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { handleGetCandidateByIdCampaign } from "context/redux/action/action";
+import { Authen } from "context/authenToken/AuthenToken";
+import { useContext } from "react";
+
 export default function CampaignStageList() {
+  const stateList = useSelector((state) => {
+    return state.campaignStage;
+  });
+  const { token } = useContext(Authen);
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
-  const handleinvite = () => {
+  const handleinvite = (id, token) => {
+    dispatch(handleGetCandidateByIdCampaign(id, token));
     navigate("/user/detailcandidate");
   };
-  const items = [
-    {
-      title: "CanpaignStage 1 ",
-      subtitle: "Giai đoạn khởi đầu",
-      slogan: "01/05/2023-01/06/2023",
-      image:
-        "https://cdn.tgdd.vn/Files/2020/03/30/1245645/vector-landscape-wallpaper-by-wallsbyjfl-_2048x1152-800-resize.jpg",
-    },
-    {
-      title: "CanpaignStage 2",
-      subtitle: "Giai đoạn nước rút",
-      slogan: "01/06/2023-01/08/2023",
-      image:
-        "https://cdn.tgdd.vn/Files/2020/03/30/1245645/vector-landscape-wallpaper-by-wallsbyjfl-_2048x1152-800-resize.jpg",
-    },
-  ];
+
   return (
     <Grid
       container
@@ -31,11 +28,11 @@ export default function CampaignStageList() {
         marginTop: 2,
       }}
     >
-      {items.map((card, index) => (
+      {stateList.map((card, index) => (
         <Grid item xs={6} md={4} key={index}>
           <Card
             sx={{
-              maxWidth: 356,
+              maxWidth: 500,
               padding: "1rem 1rem 1rem 1rem",
               borderRadius: "18px",
             }}
@@ -45,7 +42,7 @@ export default function CampaignStageList() {
                 height: 200,
                 display: "cover",
               }}
-              image={card.image}
+              image="https://ben.com.vn/tin-tuc/wp-content/uploads/2021/10/hinh-nen-dep-dien-thoai.jpg"
               title="green iguana"
             />
             <CardContent
@@ -53,14 +50,14 @@ export default function CampaignStageList() {
                 height: 120,
               }}
             >
-              <Typography gutterBottom variant="h4" component="div">
+              <Typography gutterBottom variant="h5" component="div">
                 {card.title}
               </Typography>
               <Typography variant="h6" color="text.secondary">
                 {card.subtitle}
               </Typography>
               <Typography variant="body1" color="text.secondary">
-                "{card.slogan}"
+                "Hãy giúp chúng tôi bình chọn 1 người xứng đáng cho vị trí lớp trưởng"
               </Typography>
             </CardContent>
             <CardActions>
@@ -84,7 +81,9 @@ export default function CampaignStageList() {
                   fontWeight: "700",
                   border: "0",
                 }}
-                onClick={handleinvite}
+                onClick={() => {
+                  handleinvite(card.campaignId, token);
+                }}
               >
                 Tham Gia
               </Button>

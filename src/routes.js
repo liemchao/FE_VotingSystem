@@ -95,17 +95,17 @@ export default function Router() {
           element: <ListQuestion />,
         },
         {
-          path: "getcampaign",
+          path: "campaign",
           element: <CampaignList />,
         },
         {
           path: "profile",
           element: <Profile />,
         },
-        {
-          path: "campaign",
-          element: <Text />,
-        },
+        // {
+        //   path: "campaign",
+        //   element: <Text />,
+        // },
         {
           path: "history",
           element: <HistoryUser />,
@@ -129,7 +129,7 @@ export default function Router() {
         },
 
         {
-          path: "campaignstage",
+          path: "campaign/:id",
           element: <CampaignStage />,
         },
         {

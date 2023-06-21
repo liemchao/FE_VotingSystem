@@ -73,7 +73,7 @@ export default function DashboardSidebar({
       </Box>
 
       <Box sx={{ mb: 5, mx: 2.5 }}>
-        <Link underline="none" component={RouterLink} to="getcampaign">
+        <Link underline="none" component={RouterLink} to="campaign">
           <AccountStyle>
             <Avatar src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="photoURL" />
             <Box sx={{ ml: 4 }}>

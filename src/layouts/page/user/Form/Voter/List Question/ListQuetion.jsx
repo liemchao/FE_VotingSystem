@@ -16,11 +16,7 @@ import { useTheme } from "@mui/material/styles";
 export default function ListQuestion() {
   return (
     <>
-      <Card
-        sx={{
-          marginTop: "20px",
-        }}
-      >
+      <Card sx={{ maxHeight: 345, marginTop: "10px" }}>
         <CardContent>
           <Typography gutterBottom variant="h3" component="div">
             Câu số 1:
@@ -47,7 +43,7 @@ export default function ListQuestion() {
 
       <Card
         sx={{
-          marginTop: "20px",
+          marginTop: "10px",
         }}
       >
         <CardContent>

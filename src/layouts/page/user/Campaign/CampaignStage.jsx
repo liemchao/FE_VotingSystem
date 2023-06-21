@@ -1,4 +1,3 @@
-import * as React from "react";
 import { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -8,39 +7,37 @@ import CampaignStageList from "./CampaignStageList";
 import TextField from "@mui/material/TextField";
 import Pagination from "@mui/material/Pagination";
 import Box from "@mui/material/Box";
-import Select from "components/Control/Select";
-
+import { useSelector } from "react-redux";
 export default function CampaignStage() {
   const [searchTerm, setSearchTerm] = useState("");
+
+  // const stateList = useSelector((state) => {
+  //   return state.campaignStage;
+  // });
+
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
   };
+
   return (
     <>
-      <Card sx={{ maxheight: "100px" }}>
+      <Card sx={{ maxheight: "100px", marginTop: "-2%" }}>
         <Avatar
           alt="Remy Sharp"
-          src="https://hanoitop10.com/wp-content/uploads/2023/01/anh-luffy-cute_1-jpg.webp"
-          sx={{ width: 100, height: 100 }}
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyBp3-DrQ2g6NbgtBg0AOobNA1MEY7MC4_OQ&usqp=CAU"
+          sx={{ width: 75, height: 75 }}
         />
         <CardContent>
-          <Typography gutterBottom variant="h2" component="div">
-            Chiến dịch Bình Chọn Ứng Viên Tiêu Biểu
+          <Typography gutterBottom variant="h3" component="div">
+            Chào mừng bạn đến với chiến dịch này
           </Typography>
           <Typography variant="body1" color="text.secondary">
-            Dino là chú khủng long rất yêu thể thao. Chú thích chơi tất cả các môn thể thao: nào
-            bóng đá, quần vợt, rồi bóng rổ.. Không những vậy, chú còn là một vận động viên trượt
-            tuyết cừ khôi nhất. Có lần, trong lúc chơi quần vợt, chú vô tình dẫm lên một bông hoa
-            rất đẹp.
-            <br /> – Ôi, tôi xin lỗi!- Dino vội nói. Nhưng bông hoa không thể trả lời chú vì đã bị
-            dẫm nát. Điều đó làm Dino buồn bã và hối hận suốt một tuần.
-            <br />– Mình sẽ không bao giờ dẫm lên ai nữa. Từ bây giờ trở đi, lúc nào mình cũng sẽ đi
-            nhón chân nhẹ nhàng. Và thế là thay vì trở thành vận động viên thể thao, Dino đã trở
-            thành một nghệ sĩ múa.
+            Tại lớp "Software SE140482" có những ứng củ viên xuất xuất cho vị trí lớp trưởng. Hãy
+            giúp chúng tôi bình chọn ra người xứng đáng nhất.
           </Typography>
         </CardContent>
       </Card>
-      <Box sx={{ display: "flex", alignItems: "center" }}>
+      <Box sx={{ display: "flex", alignItems: "center", marginTop: "-2%" }}>
         {/* <TextField variant="outlined" label="Search by name" sx={{ mr: 1, mt: 1 }} /> */}
         {/* <Button variant="contained" color="primary" sx={{ mr: 1 }}>
         Filter
@@ -79,8 +76,8 @@ export default function CampaignStage() {
             options={getOptions()}
           />
         </Box> */}
+        <CampaignStageList />
       </Box>
-      <CampaignStageList />
     </>
   );
 }
