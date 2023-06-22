@@ -68,7 +68,7 @@ export default function DashboardNavbar({ onOpenSidebar, open }) {
             <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
               <Searchbar />
               <NotificationsPopover />
-              <MailNotification />
+              {/* <MailNotification /> */}
               <AccountPopover />
             </Stack>
           </ToolbarStyle>
@@ -85,7 +85,7 @@ export default function DashboardNavbar({ onOpenSidebar, open }) {
             <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
               <Searchbar />
               <NotificationsPopover />
-              <MailNotification />
+              {/* <MailNotification /> */}
               <AccountPopover />
             </Stack>
           </ToolbarStyle>
