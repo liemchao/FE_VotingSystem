@@ -10,8 +10,8 @@ import jwt_decode from "jwt-decode";
 // @mui icons
 
 import DashboardLayout from "components/Layout/DashboardLayout";
-import UserList from "layouts/page/UserList";
-import AccountPage from "layouts/page/account/AccountPage";
+import CandidiateAccountList from "layouts/page/admin/CandidateList";
+
 // import JoinCampain from "./layouts/page/user/JoinCampaign";
 import CandidateList from "layouts/page/user/Candidate";
 import FeedBack from "layouts/page/user/FeedBack";
@@ -23,7 +23,7 @@ import DetailCandidate from "layouts/page/user/Form/Voter/Detail Voter/DetailVot
 // import FormList from "layouts/page/user/Form";
 // import JoinCampain from "layouts/page/user/Form/Voter/List Candidate/ListCandidate";
 import HistoryUser from "layouts/page/user/Form/Voter/History/History";
-import FormVote from "layouts/page/user/Form/Voter/Form";
+import CampaignStage from "layouts/page/user/Campaign/CampaignStage";
 
 import Hi from "layouts/page/Hi";
 import Profile from "layouts/page/profile/Profile";
@@ -68,13 +68,13 @@ export default function Router() {
         </ProtectedRouteAuthen>
       ),
       children: [
-        {
-          path: "dashboard",
-          element: <UserList />,
-        },
+        // {
+        //   path: "dashboard",
+        //   element: <UserList />,
+        // },
         {
           path: "account",
-          element: <AccountPage />,
+          element: <CandidiateAccountList />,
         },
         {
           path: "history",
@@ -95,16 +95,17 @@ export default function Router() {
           element: <ListQuestion />,
         },
         {
-          path: "getcampaign",
+          path: "campaign",
           element: <CampaignList />,
         },
         {
           path: "profile",
           element: <Profile />,
-
-          path: "campaign",
-          element: <Text />,
         },
+        // {
+        //   path: "campaign",
+        //   element: <Text />,
+        // },
         {
           path: "history",
           element: <HistoryUser />,
@@ -113,7 +114,8 @@ export default function Router() {
         {
           path: "text/hhehe",
           element: <Hi />,
-
+        },
+        {
           path: "allcampaign",
           element: <AllCampaignList />,
         },
@@ -127,8 +129,8 @@ export default function Router() {
         },
 
         {
-          path: "joincampain",
-          element: <FormVote />,
+          path: "campaign/:id",
+          element: <CampaignStage />,
         },
         {
           path: "feedback",

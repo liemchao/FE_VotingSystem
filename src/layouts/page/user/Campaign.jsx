@@ -1,4 +1,4 @@
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { Link as RouterLink, useLocation, useNavigate, useParams } from "react-router-dom";
 import React from "react";
 import { styled } from "@mui/material/styles";
 import { useState } from "react";
@@ -14,20 +14,32 @@ import {
   CardActions,
   Box,
   LinearProgress,
+  Icon,
 } from "@mui/material";
+import Badge from "@mui/material/Badge";
+import Avatar from "@mui/material/Avatar";
 import Page from "components/Layout/Page";
 import { useContext } from "react";
 import { Authen } from "context/authenToken/AuthenToken";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { callAPIgetListCampaigns } from "context/redux/action/action";
+import { callAPIgetListCampaigns, handleGetCampaignById } from "context/redux/action/action";
 import NewPopUp from "components/Popup/NewPopUp";
 import { useCallback } from "react";
+import BadgeAvatars from "./icontop/icontop";
+import Iconify from "assets/theme/components/icon/Iconify";
+
+export const createAction = ({ type, payload }) => {
+  return { type, payload };
+};
 
 export default function CampaignList() {
+  const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
+  const param = useParams();
+  const location = useLocation;
   const navigate = useNavigate();
   const handleinvite = () => {
-    navigate("/user/joincampain");
+    navigate("/user/campaignstage");
   };
   const ColorButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText("#FFCC32"),
@@ -52,10 +64,50 @@ export default function CampaignList() {
   const campaigns = useSelector((state) => {
     return state.campaigns;
   });
+  // console.log(campaigns.campaignId);
 
   const handleClickOpen = useCallback(() => {
     SetOpenPopUp(true);
   }, []);
+  console.log(location.pathname);
+
+  const handleCampaignStage = async (id, token) => {
+    await dispatch(handleGetCampaignById(id, token));
+  };
+
+  const StyledBadge = styled(Badge)(({ theme }) => ({
+    "& .MuiBadge-badge": {
+      backgroundColor: "#44b700",
+      color: "#44b700",
+      boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+      "&::after": {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        borderRadius: "50%",
+        animation: "ripple 1.2s infinite ease-in-out",
+        border: "1px solid currentColor",
+      },
+    },
+    "@keyframes ripple": {
+      "0%": {
+        transform: "scale(.8)",
+        opacity: 1,
+      },
+      "100%": {
+        transform: "scale(2.4)",
+        opacity: 0,
+      },
+    },
+  }));
+
+  const SmallAvatar = styled(Avatar)(({ theme }) => ({
+    width: 22,
+    height: 22,
+    border: `2px solid ${theme.palette.background.paper}`,
+  }));
 
   return (
     <Page title="User">
@@ -77,7 +129,7 @@ export default function CampaignList() {
         <Box>
           {campaigns.map((item) => {
             return (
-              <Card sx={{ maxWidth: 1000, maxHeight: 400, paddingLeft: "1rem", marginTop: "2%" }}>
+              <Card sx={{ maxWidth: 1000, maxHeight: 400, paddingLeft: "1rem" }}>
                 <CardMedia
                   sx={{ height: 70 }}
                   image="https://media.istockphoto.com/id/165515133/vi/vec-to/voting-hands-and-ballot-box.jpg?s=1024x1024&w=is&k=20&c=VKlxd59_HCpxXXTHjcVsUK_IMEgw4D8yGtYkE5CIUgo="
@@ -92,18 +144,73 @@ export default function CampaignList() {
                   </Typography>
                   <LinearProgress
                     variant="determinate"
-                    value={20}
+                    value={10}
                     sx={{ borderRadius: 10, bgcolor: "primary.main", height: 10 }}
                   />
                   <Typography variant="h6" component="div" sx={{ mt: 1 }}>
                     50%
                   </Typography>
+                  <Box sx={{ display: "flex", gap: 2 }}>
+                    <BadgeAvatars
+                      BadgeAvatars={getIcon("icon-sl:square")}
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8oYLzVhre_UBu4mPsjYf9EUh9mhvwXApssaTHmLjyfw&s"
+                    />
+                    <BadgeAvatars
+                      BadgeAvatars={getIcon("icon-park-outline:gold-medal")}
+                      src="https://cdn.pixabay.com/photo/2016/06/05/01/41/african-american-1436661_960_720.jpg"
+                    />
+
+                    <BadgeAvatars
+                      BadgeAvatars={getIcon("icon-park-outline:gold-medal")}
+                      src="https://congluan-cdn.congluan.vn/files/content/2022/03/02/1-09505723.jpg"
+                    />
+                  </Box>
+
+                  {/* <StyledBadge
+                    overlap="circular"
+                    anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                    variant="dot"
+                  >
+                    <Avatar
+                      alt="Remy Sharp"
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8oYLzVhre_UBu4mPsjYf9EUh9mhvwXApssaTHmLjyfw&s"
+                    />
+                  </StyledBadge>
+                  <StyledBadge
+                    sx={{ marginLeft: "1%" }}
+                    overlap="circular"
+                    anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                    variant="dot"
+                  >
+                    <Avatar
+                      alt="Remy Sharp"
+                      src="https://cdn.pixabay.com/photo/2016/06/05/01/41/african-american-1436661_960_720.jpg"
+                    />
+                  </StyledBadge>
+                  <StyledBadge
+                    sx={{ marginLeft: "1%" }}
+                    overlap="circular"
+                    anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                    variant="dot"
+                  >
+                    <Avatar
+                      alt="Remy Sharp"
+                      src="https://congluan-cdn.congluan.vn/files/content/2022/03/02/1-09505723.jpg"
+                    />
+                  </StyledBadge> */}
                 </CardContent>
                 <CardActions sx={{ marginLeft: "80%" }}>
                   <Button sx={{ marginLeft: "-4%" }} size="small">
                     <ColorButton>Chia sẻ</ColorButton>
                   </Button>
-                  <Button type="button" size="small" onClick={handleinvite}>
+                  <Button
+                    type="button"
+                    size="small"
+                    onClick={() => {
+                      handleCampaignStage(item.campaignId, token);
+                      navigate(`/user/campaign/${item.campaignId}`);
+                    }}
+                  >
                     <ColorButton>Tham gia</ColorButton>
                   </Button>
                 </CardActions>

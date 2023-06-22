@@ -95,9 +95,10 @@ export const callAPIgetListCandidates = (token) => {
   return async (dispatch) => {
     try {
       const res = await API("GET", URL_API + `/api/v1/candidates`, null, token);
+      console.log(res);
       dispatch(
         createAction({
-          type: PathAction.GET_LIST_CAMPAIGNS,
+          type: PathAction.GET_LIST_CANDIDATE,
           payload: res.data.data,
         })
       );
@@ -116,5 +117,79 @@ export const callAPIgetListHistory = (userName, token) => {
         })
       );
     } catch (err) {}
+  };
+};
+export const handleGetCampaignById = (id, token) => {
+  return async (dispatch) => {
+    try {
+      const req = await API("GET", URL_API + `/api/v1/stages/campaign/${id}`, null, token);
+
+      dispatch(
+        createAction({
+          type: PathAction.GET_LIST_CAMPAINGSTAGEID,
+          payload: req.data.data,
+        })
+      );
+    } catch (error) {}
+  };
+};
+
+export const handleGetCandidateByIdCampaign = (id, token) => {
+  return async (dispatch) => {
+    try {
+      const req = await API("GET", URL_API + `/api/v1/candidates/campaign/${id}`, null, token);
+
+      dispatch(
+        createAction({
+          type: PathAction.GET_LIST_CANDIDATE_CAMPAIGN,
+          payload: req.data.data,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const handleGetQuestByIdCampaign = (id, token) => {
+  return async (dispatch) => {
+    try {
+      const req = await API("GET", URL_API + `/api/v1/questions/form/${id}`, null, token);
+
+      dispatch(
+        createAction({
+          type: PathAction.GET_LIST_QUESTIONS,
+          payload: req.data.data,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const handleVote = (token, data) => {
+  return async (dispatch) => {
+    try {
+      const req = await API("POST", URL_API + `/api/v1/vote`, data, token);
+
+      dispatch(
+        createAction({
+          type: PathAction.SUBMIT_VOTE,
+          payload: req.data.data,
+        })
+      );
+
+      CustomizedToast({
+        message: "thành công rồi nè",
+        type: "SUCCESS",
+      });
+    } catch (error) {
+      console.log(error);
+      CustomizedToast({
+        message: "thất bài rồi nè",
+        type: "SUCCESS",
+      });
+    }
   };
 };

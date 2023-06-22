@@ -7,7 +7,7 @@ const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
 const navConfig = [
   {
     title: "Tài khoản ứng cử viên",
-    path: "/admin/dashboard",
+    path: "/admin/account",
     icon: getIcon("eva:pie-chart-2-fill"),
     // s
   },
@@ -44,15 +44,14 @@ const navConfigUser = [
         icon: getIcon("eva:settings-2-outline"),
         subItems: [
           {
-
             title: "Tất cả chiến dịch",
             subPath: "/user/allcampaign",
-            icon: getIcon("eva:cube-outline"),
+            icons: getIcon("ic:baseline-campaign"),
           },
           {
             title: "Chiến dịch của bản thân",
-            path: "/user/campaign/hihi",
-            icon: getIcon("eva:cube-fill"),
+            subPath: "/user/text/hhehe",
+            icons: getIcon("material-symbols:campaign-outline-sharp"),
           },
         ],
       },
@@ -67,12 +66,12 @@ const navConfigUser = [
   {
     title: "Đánh Giá",
     path: "/user/feedback",
-    icon: getIcon("eva:flag-fill"),
+    icon: getIcon("fluent:person-feedback-16-filled"),
     // s
   },
   {
     title: "Vai Trò",
-    icon: getIcon("eva:people-fill"),
+    icon: getIcon("carbon:user-role"),
     children: [
       {
         title: "Ứng cử viên",
@@ -81,12 +80,12 @@ const navConfigUser = [
           {
             title: "Chiến dịch đã tham gia",
             // subPath: "/user/text/hihi",
-            icon: getIcon("eva:cube-outline"),
+            icons: getIcon("material-symbols:campaign"),
           },
           {
             title: "Hồ sơ bản thân",
             // subPath: "/user/text/hhehe",
-            icon: getIcon("eva:cube-outline"),
+            icons: getIcon("gg:profile"),
           },
         ],
       },
@@ -97,12 +96,12 @@ const navConfigUser = [
           {
             title: "Biểu Mẫu",
             // subPath: "/user/text/hihi",
-            icon: getIcon("eva:cube-outline"),
+            icons: getIcon("clarity:form-line"),
           },
           {
             title: "Bản Mẫu",
             // subPath: "/user/text/hhehe",
-            icon: getIcon("eva:cube-outline"),
+            icons: getIcon("eva:cube-outline"),
           },
         ],
       },

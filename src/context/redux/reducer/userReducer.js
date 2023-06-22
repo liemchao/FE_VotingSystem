@@ -4,6 +4,10 @@ const initialState = {
   form: [],
   campaigns: [],
   history: [],
+  candidate: [],
+  campaignStage: [],
+  candidateList: [],
+  question: [],
 };
 
 export default function userReducer(state = initialState, { type, payload }) {
@@ -19,6 +23,19 @@ export default function userReducer(state = initialState, { type, payload }) {
       break;
     case PathAction.GET_LIST_HISTORY:
       state.history = payload;
+      break;
+    case PathAction.GET_LIST_CANDIDATE:
+      state.candidate = payload;
+      break;
+    case PathAction.GET_LIST_CAMPAINGSTAGEID:
+      state.campaignStage = payload;
+
+      break;
+    case PathAction.GET_LIST_CANDIDATE_CAMPAIGN:
+      state.candidateList = payload;
+      break;
+    case PathAction.GET_LIST_QUESTIONS:
+      state.question = payload;
       break;
     default:
       return { ...state };
