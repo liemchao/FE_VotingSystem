@@ -26,6 +26,9 @@ import Iconify from "assets/theme/components/icon/Iconify";
 import ListQuestion from "layouts/page/user/Form/Voter/List Question/ListQuetion";
 import { useDispatch, useSelector } from "react-redux";
 import { Authen } from "context/authenToken/AuthenToken";
+import API from "config/axios/API/API";
+import { URL_API } from "config/axios/Url/URL";
+import { CustomizedToast } from "components/toast/ToastCustom";
 
 const schema = yup.object().shape({});
 
@@ -45,7 +48,7 @@ export default function QuestionPopUp(props) {
   const [idState, setIDState] = useState();
   const [isChecked, setIsChecked] = useState(false);
   const [checkIdQuestion, setCheckIdQuestion] = useState("");
-  const { decode } = useContext(Authen);
+  const { decode, token } = useContext(Authen);
   const handleClose = () => {
     SetOpenPopUp(false);
   };
@@ -101,22 +104,18 @@ export default function QuestionPopUp(props) {
         votingDetail: answer,
       };
       try {
-        try {
-          const req = await API("POST", URL_API + `/api/v1/vote`, data, token);
-          console.log(req);
-          CustomizedToast({
-            message: "thành công rồi nè",
-            type: "SUCCESS",
-          });
-        } catch (error) {
-          console.log(error);
-          CustomizedToast({
-            message: "thất bài rồi nè",
-            type: "SUCCESS",
-          });
-        }
+        const req = await API("POST", URL_API + `/api/v1/vote`, data, token);
+        console.log(req);
+        CustomizedToast({
+          message: "thành công rồi nè",
+          type: "SUCCESS",
+        });
       } catch (error) {
-        handleClose();
+        console.log(error);
+        CustomizedToast({
+          message: "thất bài rồi nè",
+          type: "SUCCESS",
+        });
       }
     },
   });
