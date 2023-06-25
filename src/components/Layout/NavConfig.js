@@ -64,6 +64,12 @@ const navConfigUser = [
     // s
   },
   {
+    title: "Text QR",
+    path: "/user/text",
+    icon: getIcon("eva:file-text-fill"),
+    // s
+  },
+  {
     title: "Đánh Giá",
     path: "/user/feedback",
     icon: getIcon("fluent:person-feedback-16-filled"),

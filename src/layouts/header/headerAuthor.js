@@ -1,234 +1,126 @@
 import * as React from "react";
-import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
-import Badge from "@mui/material/Badge";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
+import IconButton from "@mui/material/IconButton";
+import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
+import { useNavigate } from "react-router-dom";
+import logo from "../../assets/images/logos/LogoFVS.svg";
+import CardMedia from "@mui/material/CardMedia";
+import { Authen } from "context/authenToken/AuthenToken";
+import AccountPopover from "components/Layout/AccountPopover";
+//----------------------------------------------------------------
 
-function headerAu() {
-  const Search = styled("div")(({ theme }) => ({
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(3),
-      width: "auto",
-    },
-  }));
-
-  const SearchIconWrapper = styled("div")(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  }));
-
-  const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: "inherit",
-    "& .MuiInputBase-input": {
-      padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-      transition: theme.transitions.create("width"),
-      width: "100%",
-      [theme.breakpoints.up("md")]: {
-        width: "20ch",
-      },
-    },
-  }));
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
+export default function HeaderUnthor() {
+  const navigate = useNavigate();
+  const { token, decode } = React.useContext(Authen);
+  const hanldeNavigate = () => {
+    navigate("/authentication/sign-in");
   };
 
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-
-  const menuId = "primary-search-account-menu";
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
-
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
   return (
     <Box
       sx={{
         flexGrow: 1,
-        backgroundColor: "#FFFFFF",
-        borderRadius: "20px",
-        height: "80%",
-        margin: "1%",
+        marginBottom: "1rem",
+        marginTop: "1rem",
+        marginLeft: "3rem",
+        marginRight: "3rem",
+        "@media(max-width: 768px)": {
+          marginLeft: "0",
+          marginRight: "0",
+          padding: "1rem",
+          marginTop: "2rem",
+          marginBottom: "2rem",
+        },
       }}
     >
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
-          ></Typography>
-
-          <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase placeholder="Search…" inputProps={{ "aria-label": "search" }} />
-            </Search>
-            <IconButton size="large" color="inherit">
-              <Badge color="error">
-                <CalendarTodayIcon />
-              </Badge>
-            </IconButton>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
+      <AppBar position="static" sx={{ bgcolor: "white", borderRadius: "2rem", padding: "1rem" }}>
+        <Toolbar
+          sx={{
+            justifyContent: "space-between",
+            "@media(max-width: 768px)": {
+              flexDirection: "column",
+              alignItems: "center",
+              textAlign: "center",
+            },
+          }}
+        >
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <CardMedia
+              component="img"
+              sx={{
+                height: "6rem",
+                width: "10rem",
+                marginRight: "1rem",
+              }}
+              image={logo}
+              alt="green iguana"
+            />
+            <Typography variant="h2" component="div" sx={{ flexGrow: 1, color: "black" }}>
+              Voting System
+            </Typography>
           </Box>
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              "@media(max-width: 768px)": { marginTop: "1rem" },
+            }}
+          >
             <IconButton
               size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
+              edge="start"
               color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2, gap: 4 }}
             >
-              <CalendarTodayIcon />
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: "black" }}>
+                Trang Chủ
+              </Typography>
             </IconButton>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2, gap: 4 }}
+            >
+              <Typography variant="h6" component="div" sx={{ flexGrow: "1%", color: "black" }}>
+                Tính năng
+              </Typography>
+            </IconButton>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2, gap: 4 }}
+            >
+              <Typography variant="h6" component="div" sx={{ flexGrow: "1%", color: "black" }}>
+                Hỗ Trợ
+              </Typography>
+            </IconButton>
+            {token ? (
+              <AccountPopover />
+            ) : (
+              <ButtonCustomize
+                nameButton="Đăng nhập"
+                border="10px"
+                borderRadius={"25px"}
+                bgColor="#F6911B"
+                width="100px"
+                height="2.2rem"
+                boxShadow="2"
+                color="white"
+                to="/authentication/sign-in"
+                onClick={() => hanldeNavigate()}
+              />
+            )}
           </Box>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
     </Box>
   );
 }
-
-export default headerAu;

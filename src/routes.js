@@ -27,11 +27,10 @@ import CampaignStage from "layouts/page/user/Campaign/CampaignStage";
 
 import Hi from "layouts/page/Hi";
 import Profile from "layouts/page/profile/Profile";
+import AllCampaignList from "layouts/page/AllCampaign";
+import TextT from "layouts/page/Text";
 
 //----------------------------------------------------------------
-
-import AllCampaignList from "layouts/page/AllCampaign";
-import Text from "layouts/page/Text";
 
 export default function Router() {
   const ProtectedRouteAuthen = ({ roles, children }) => {
@@ -101,6 +100,10 @@ export default function Router() {
         {
           path: "profile",
           element: <Profile />,
+        },
+        {
+          path: "text",
+          element: <TextT />,
         },
         // {
         //   path: "campaign",

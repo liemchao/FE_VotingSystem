@@ -25,105 +25,100 @@ export default function HeaderUnthor() {
         flexGrow: 1,
         marginBottom: "1rem",
         marginTop: "1rem",
-        marginLeft: "2%",
-        marginRight: "2%",
+        marginLeft: "3rem",
+        marginRight: "3rem",
+        "@media(max-width: 768px)": {
+          marginLeft: "0",
+          marginRight: "0",
+          padding: "1rem",
+          marginTop: "2rem",
+          marginBottom: "2rem",
+        },
       }}
     >
-      <AppBar position="static" sx={{ bgcolor: "white", borderRadius: "2rem" }}>
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2, gap: 4 }}
-          >
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: "black" }}>
-              Trang Chủ
-            </Typography>
-          </IconButton>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2, gap: 4 }}
-          >
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: "black" }}>
-              Tính năng
-            </Typography>
-          </IconButton>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2, gap: 4 }}
-          >
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: "black" }}>
-              Hỗ Trợ
-            </Typography>
-          </IconButton>
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: "flex",
+      <AppBar position="static" sx={{ bgcolor: "white", borderRadius: "2rem", padding: "1rem" }}>
+        <Toolbar
+          sx={{
+            justifyContent: "space-between",
+            "@media(max-width: 768px)": {
+              flexDirection: "column",
               alignItems: "center",
-              marginLeft: "13%",
-              color: "black",
-            }}
-          >
+              textAlign: "center",
+            },
+          }}
+        >
+          <Box sx={{ display: "flex", alignItems: "center" }}>
             <CardMedia
               component="img"
               sx={{
                 height: "6rem",
                 width: "10rem",
-                marginLeft: "1%",
+                marginRight: "1rem",
               }}
               image={logo}
               alt="green iguana"
             />
-            <Typography
-              variant="h2"
-              component="div"
-              sx={{
-                flexGrow: 1,
-                display: "flex",
-                alignItems: "center",
-                color: "black",
-              }}
-            >
+            <Typography variant="h2" component="div" sx={{ flexGrow: 1, color: "black" }}>
               Voting System
             </Typography>
           </Box>
-          {token ? (
-            <AccountPopover />
-          ) : (
-            <ButtonCustomize
-              nameButton="Đăng nhập"
-              border="10px"
-              borderRadius={"25px"}
-              bgColor="#F6911B"
-              width="100px"
-              height="2.2rem"
-              boxShadow="2"
-              color="white"
-              to="/authentication/sign-in"
-              onClick={() => hanldeNavigate()}
-            />
-          )}
-          {/* <ButtonCustomize
-            nameButton="Đăng nhập"
-            border="10px"
-            borderRadius={"25px"}
-            bgColor="#F6911B"
-            width="100px"
-            height="2.2rem"
-            boxShadow="2"
-            color="white"
-            to="/authentication/sign-in"
-            onClick={() => hanldeNavigate()}
-          /> */}
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              "@media(max-width: 768px)": { marginTop: "1rem" },
+            }}
+          >
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2, gap: 4 }}
+            >
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: "black" }}>
+                Trang Chủ
+              </Typography>
+            </IconButton>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2, gap: 4 }}
+            >
+              <Typography variant="h6" component="div" sx={{ flexGrow: "1%", color: "black" }}>
+                Tính năng
+              </Typography>
+            </IconButton>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2, gap: 4 }}
+            >
+              <Typography variant="h6" component="div" sx={{ flexGrow: "1%", color: "black" }}>
+                Hỗ Trợ
+              </Typography>
+            </IconButton>
+            {token ? (
+              <AccountPopover />
+            ) : (
+              <ButtonCustomize
+                nameButton="Đăng nhập"
+                border="10px"
+                borderRadius={"25px"}
+                bgColor="#F6911B"
+                width="100px"
+                height="2.2rem"
+                boxShadow="2"
+                color="white"
+                to="/authentication/sign-in"
+                onClick={() => hanldeNavigate()}
+              />
+            )}
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>
