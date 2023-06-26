@@ -77,8 +77,8 @@ export default function CampaignList() {
   }, []);
   console.log(location.pathname);
 
-  const handleCampaignStage = async (id, token) => {
-    await dispatch(handleGetCampaignById(id, token));
+  const handleCampaignStage = async (id, navigate) => {
+    await dispatch(handleGetCampaignById(id, navigate));
   };
 
   const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -184,8 +184,7 @@ export default function CampaignList() {
                     type="button"
                     size="small"
                     onClick={() => {
-                      handleCampaignStage(item.campaignId, token);
-                      navigate(`/user/campaign/${item.campaignId}`);
+                      handleCampaignStage(item.campaignId, navigate);
                     }}
                   >
                     <ColorButton>Tham gia</ColorButton>

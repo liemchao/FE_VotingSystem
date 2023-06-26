@@ -1,6 +1,9 @@
 import React, { createContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import jwt_decode from "jwt-decode";
+import { useDispatch } from "react-redux";
+import { handleGetCandidateByIdCampaign } from "context/redux/action/action";
+import { handleGetCampaignById } from "context/redux/action/action";
 
 //----------------------------------------------------------------
 export const Authen = createContext();
@@ -9,22 +12,15 @@ export const ProviderToken = ({ children }) => {
   const token = localStorage.getItem("token");
   const [decode, setDecode] = useState([]);
 
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const { id } = useParams();
+  // console.log(id);
+
   useEffect(() => {
-    if (token === null) {
-      navigate("/");
-    }
-    try {
-      const decoded = jwt_decode(token);
-      setDecode(decoded);
-      if (decoded.RoleName === "admin") {
-        navigate("/admin/account");
-      } else if (decoded.RoleName === "user") {
-        navigate("/user/campaign");
-      }
-    } catch (error) {
-      navigate("/");
-    }
-  }, []);
+    const decoded = jwt_decode(token);
+    setDecode(decoded);
+  }, [dispatch, id]);
 
   return <Authen.Provider value={{ token, decode }}>{children}</Authen.Provider>;
 };

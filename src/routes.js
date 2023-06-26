@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Navigate, useNavigate, useRoutes } from "react-router-dom";
+import { Form, Navigate, useLocation, useNavigate, useRoutes } from "react-router-dom";
 // import PrimarySearchAppBar from "layouts/page/LangdingPage";
 // import Dashboard from "layouts/dashboard";
 import SignIn from "layouts/authentication/sign-in";
@@ -32,26 +32,36 @@ import TextT from "layouts/page/Text";
 import ProfileCandidata from "layouts/page/user/Candidate/ProfileCandidate";
 
 //----------------------------------------------------------------
-
+// const routePublic = ["/user/campaign/"];
 export default function Router() {
-  const ProtectedRouteAuthen = ({ roles, children }) => {
+  const ProtectedRouteAuthen = ({ roles, children, routePublics }) => {
     const token = localStorage.getItem("token");
 
-    // try {
-    //   const decoded = jwt_decode(token);
-    //   if (token === null) {
-    //     return <Navigate to="/" replace />;
-    //   } else if (token && !decoded.RoleName) {
-    //     return <Navigate to="/" replace />;
-    //   } else if (roles.includes(decoded.RoleName)) {
-    //     return <>{children}</>;
-    //   }
-    // } catch (error) {
-    //   return <Navigate to="/" replace />;
-    // }
-    // return <Navigate to="/" replace />;
-    return <>{children}</>;
+    try {
+      const decoded = jwt_decode(token);
+      if (token === null) {
+        return <Navigate to="/" replace />;
+      } else if (token && !decoded.RoleName) {
+        return <Navigate to="/" replace />;
+      } else if (roles.includes(decoded.RoleName)) {
+        return <>{children}</>;
+      }
+    } catch (error) {
+      return <Navigate to="/" replace />;
+    }
+    return <Navigate to="/" replace />;
   };
+
+  const ProtectedRouteAuthorization = ({ children, isPublic }) => {
+    const token = localStorage.getItem("token");
+    if (isPublic) {
+      return <>{children}</>;
+    } else {
+      //
+      return <Navigate to="/" replace />;
+    }
+  };
+
   return useRoutes([
     {
       path: "/",
@@ -86,9 +96,9 @@ export default function Router() {
     {
       path: "/user",
       element: (
-        <ProtectedRouteAuthen roles="user">
-          <DashboardLayout />
-        </ProtectedRouteAuthen>
+        // <ProtectedRouteAuthen roles="user">
+        <DashboardLayout />
+        // </ProtectedRouteAuthen>
       ),
       children: [
         {
@@ -107,10 +117,6 @@ export default function Router() {
           path: "text",
           element: <TextT />,
         },
-        // {
-        //   path: "campaign",
-        //   element: <Text />,
-        // },
         {
           path: "history",
           element: <HistoryUser />,
@@ -132,10 +138,13 @@ export default function Router() {
           path: "candidate",
           element: <CandidateList />,
         },
-
         {
           path: "campaign/:id",
-          element: <CampaignStage />,
+          element: (
+            // <ProtectedRouteAuthorization isPublic={true}>
+            <CampaignStage />
+            // </ProtectedRouteAuthorization>
+          ),
         },
         {
           path: "feedback",

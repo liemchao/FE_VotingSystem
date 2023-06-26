@@ -1,20 +1,31 @@
 // import { filter } from "lodash";
-import { useNavigate } from "react-router-dom";
-import React from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import React, { useEffect } from "react";
 import { Card, Button, Typography, CardMedia, CardContent, CardActions, Grid } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { handleGetCandidateByIdCampaign } from "context/redux/action/action";
 import { Authen } from "context/authenToken/AuthenToken";
 import { useContext } from "react";
+import { handleGetCampaignById } from "context/redux/action/action";
 
 export default function CampaignStageList() {
+  //------------
+  const { token } = useContext(Authen);
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  const navigate = useNavigate();
+  //------------
   const stateList = useSelector((state) => {
     return state.campaignStage;
   });
-  const { token } = useContext(Authen);
-  const dispatch = useDispatch();
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    const callAPIgetList = async () => {
+      dispatch(handleGetCampaignById(id, navigate));
+    };
+    callAPIgetList();
+  }, [id]);
+
   const handleinvite = (id, token) => {
     dispatch(handleGetCandidateByIdCampaign(id, token));
     navigate("/user/detailcandidate");

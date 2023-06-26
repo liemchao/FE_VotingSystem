@@ -45,7 +45,7 @@ export default function AccountPopover() {
 
   const handleClose = () => {
     localStorage.removeItem("token");
-    window.location.reload();
+    navigate("/");
   };
   const handleCloseNotion = (event) => {
     setOpen(!open);

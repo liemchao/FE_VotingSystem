@@ -48,6 +48,22 @@ export default function ListCandidate() {
     return state.campaignStage;
   });
 
+  const hanlleAuthenVote = () => {
+    const token = localStorage.getItem("token");
+    try {
+      const decoded = jwt_decode(token);
+      if (token === null) {
+        // popups ' ban chua dang nhap cam ==> login
+      } else if (token && !decoded.RoleName) {
+        // popups 'authention ban khong xin' ==> login
+      } else if (roles.includes(decoded.RoleName)) {
+        // vote goi api vote o day
+      }
+    } catch (error) {
+      // error sommingthing
+    }
+  };
+
   // lấy ID form
   const getIdForm = () => {
     for (let index = 0; index < state.length; index++) {

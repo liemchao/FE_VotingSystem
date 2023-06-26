@@ -156,18 +156,15 @@ NavSection.propTypes = {
 export default function NavSection({ navConfig, navConfigUser, ...other }) {
   const { pathname } = useLocation();
   const checkRole = () => {
-    const { token } = useContext(Authen);
-    const decoded = jwt_decode(token);
+    const { token, decode } = useContext(Authen);
 
-    switch (decoded.RoleName) {
+    switch (decode.RoleName) {
       case "admin":
         return navConfig.navConfig;
-        break;
       case "user":
         return navConfig.navConfigUser;
-        break;
       default:
-        break;
+        return navConfig.navConfigUser;
     }
   };
 

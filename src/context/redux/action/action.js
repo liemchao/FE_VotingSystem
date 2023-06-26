@@ -28,7 +28,15 @@ export const LoginAthen = (user, navigate) => {
           payload: res.data.data,
         })
       );
-      window.location.reload();
+      if (detoken.RoleName === "user") {
+        navigate("/user/campaign");
+        CustomizedToast({
+          message: "Thành công rồi nha",
+          type: "SUCCESS",
+        });
+      } else if (detoken.RoleName === "admin") {
+        // như trên
+      }
     } catch (error) {
       CustomizedToast({
         message: "Tên đăng nhập hoặc mật khẩu sai",
@@ -52,7 +60,6 @@ export const loginFirebase = (idtoken) => {
           payload: res.data.token,
         })
       );
-      window.location.reload();
     } catch (e) {
       console.log(e);
       CustomizedToast({
@@ -119,11 +126,12 @@ export const callAPIgetListHistory = (userName, token) => {
     } catch (err) {}
   };
 };
-export const handleGetCampaignById = (id, token) => {
+export const handleGetCampaignById = (id, navigate) => {
   return async (dispatch) => {
     try {
-      const req = await API("GET", URL_API + `/api/v1/stages/campaign/${id}`, null, token);
-
+      const req = await API("GET", URL_API + `/api/v1/stages/campaign/${id}`, null);
+      navigate(`/user/campaign/${id}`);
+      console.log(req);
       dispatch(
         createAction({
           type: PathAction.GET_LIST_CAMPAINGSTAGEID,

@@ -8,6 +8,7 @@ import TextField from "@mui/material/TextField";
 import Pagination from "@mui/material/Pagination";
 import Box from "@mui/material/Box";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 export default function CampaignStage() {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -18,6 +19,9 @@ export default function CampaignStage() {
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
   };
+
+  const { id } = useParams();
+  console.log(id);
 
   return (
     <>
