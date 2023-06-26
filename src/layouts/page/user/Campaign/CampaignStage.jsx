@@ -11,9 +11,9 @@ import { useSelector } from "react-redux";
 export default function CampaignStage() {
   const [searchTerm, setSearchTerm] = useState("");
 
-  // const stateList = useSelector((state) => {
-  //   return state.campaignStage;
-  // });
+  const stateList = useSelector((state) => {
+    return state.campaignStage;
+  });
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
