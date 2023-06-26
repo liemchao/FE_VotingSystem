@@ -16,6 +16,7 @@ import {
   LinearProgress,
   Icon,
 } from "@mui/material";
+import QRPopUp from "components/Popup/QRPopUp";
 import Badge from "@mui/material/Badge";
 import Avatar from "@mui/material/Avatar";
 import Page from "components/Layout/Page";
@@ -38,9 +39,10 @@ export default function CampaignList() {
   const param = useParams();
   const location = useLocation;
   const navigate = useNavigate();
-  const handleinvite = () => {
-    navigate("/user/campaignstage");
-  };
+  const [qrCodeUrl, setQRCodeUrl] = useState("");
+  const [Link, setLink] = useState(window.location.href);
+  const [open, setopen] = useState(false);
+
   const ColorButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText("#FFCC32"),
     backgroundColor: "#FFCC33",
@@ -64,7 +66,11 @@ export default function CampaignList() {
   const campaigns = useSelector((state) => {
     return state.campaigns;
   });
-  // console.log(campaigns.campaignId);
+  const handleGetQR = (id) => {
+    setopen(true);
+    setLink(window.location.href + "/" + id);
+  };
+  console.log(campaigns.campaignId);
 
   const handleClickOpen = useCallback(() => {
     SetOpenPopUp(true);
@@ -165,42 +171,13 @@ export default function CampaignList() {
                       src="https://congluan-cdn.congluan.vn/files/content/2022/03/02/1-09505723.jpg"
                     />
                   </Box>
-
-                  {/* <StyledBadge
-                    overlap="circular"
-                    anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-                    variant="dot"
-                  >
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8oYLzVhre_UBu4mPsjYf9EUh9mhvwXApssaTHmLjyfw&s"
-                    />
-                  </StyledBadge>
-                  <StyledBadge
-                    sx={{ marginLeft: "1%" }}
-                    overlap="circular"
-                    anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-                    variant="dot"
-                  >
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="https://cdn.pixabay.com/photo/2016/06/05/01/41/african-american-1436661_960_720.jpg"
-                    />
-                  </StyledBadge>
-                  <StyledBadge
-                    sx={{ marginLeft: "1%" }}
-                    overlap="circular"
-                    anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-                    variant="dot"
-                  >
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="https://congluan-cdn.congluan.vn/files/content/2022/03/02/1-09505723.jpg"
-                    />
-                  </StyledBadge> */}
                 </CardContent>
                 <CardActions sx={{ marginLeft: "80%" }}>
-                  <Button sx={{ marginLeft: "-4%" }} size="small">
+                  <Button
+                    sx={{ marginLeft: "-4%" }}
+                    onClick={() => handleGetQR(item.campaignId)}
+                    size="small"
+                  >
                     <ColorButton>Chia sẻ</ColorButton>
                   </Button>
                   <Button
@@ -219,6 +196,7 @@ export default function CampaignList() {
           })}
         </Box>
       </Container>
+      <QRPopUp OpenPopUp={open} SetOpenPopUp={setopen} link={Link} />;
       <NewPopUp OpenPopUp={OpenPopUp} SetOpenPopUp={SetOpenPopUp} />
     </Page>
   );

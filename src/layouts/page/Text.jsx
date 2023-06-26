@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Box, Button } from "@mui/material";
 import QRPopUp from "components/Popup/QRPopUp";
 
+
 export default function Text() {
   const [qrCodeUrl, setQRCodeUrl] = useState("");
   const [Link, setLink] = useState(window.location.href);

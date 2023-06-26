@@ -17,8 +17,8 @@ const schema = yup.object().shape({});
 //geticon link https://icon-sets.iconify.design/
 const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
 
-const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
-const checkedIcon = <CheckBoxIcon fontSize="small" />;
+// const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+// const checkedIcon = <CheckBoxIcon fontSize="small" />;
 //hih
 export default function NewPopUp(props) {
   const { OpenPopUp, SetOpenPopUp } = props;

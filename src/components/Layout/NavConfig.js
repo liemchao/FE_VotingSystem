@@ -63,12 +63,12 @@ const navConfigUser = [
     icon: getIcon("eva:file-text-fill"),
     // s
   },
-  {
-    title: "Text QR",
-    path: "/user/text",
-    icon: getIcon("eva:file-text-fill"),
-    // s
-  },
+  // {
+  //   title: "Text QR",
+  //   path: "/user/text",
+  //   icon: getIcon("eva:file-text-fill"),
+  //   // s
+  // },
   {
     title: "Đánh Giá",
     path: "/user/feedback",
@@ -89,8 +89,8 @@ const navConfigUser = [
             icons: getIcon("material-symbols:campaign"),
           },
           {
-            title: "Hồ sơ bản thân",
-            // subPath: "/user/text/hhehe",
+            title: "Hồ sơ ứng cử viên",
+            subPath: "/user/profilecandidate",
             icons: getIcon("gg:profile"),
           },
         ],

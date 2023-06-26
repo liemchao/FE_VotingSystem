@@ -29,6 +29,7 @@ import Hi from "layouts/page/Hi";
 import Profile from "layouts/page/profile/Profile";
 import AllCampaignList from "layouts/page/AllCampaign";
 import TextT from "layouts/page/Text";
+import ProfileCandidata from "layouts/page/user/Candidate/ProfileCandidate";
 
 //----------------------------------------------------------------
 
@@ -36,19 +37,20 @@ export default function Router() {
   const ProtectedRouteAuthen = ({ roles, children }) => {
     const token = localStorage.getItem("token");
 
-    try {
-      const decoded = jwt_decode(token);
-      if (token === null) {
-        return <Navigate to="/" replace />;
-      } else if (token && !decoded.RoleName) {
-        return <Navigate to="/" replace />;
-      } else if (roles.includes(decoded.RoleName)) {
-        return <>{children}</>;
-      }
-    } catch (error) {
-      return <Navigate to="/" replace />;
-    }
-    return <Navigate to="/" replace />;
+    // try {
+    //   const decoded = jwt_decode(token);
+    //   if (token === null) {
+    //     return <Navigate to="/" replace />;
+    //   } else if (token && !decoded.RoleName) {
+    //     return <Navigate to="/" replace />;
+    //   } else if (roles.includes(decoded.RoleName)) {
+    //     return <>{children}</>;
+    //   }
+    // } catch (error) {
+    //   return <Navigate to="/" replace />;
+    // }
+    // return <Navigate to="/" replace />;
+    return <>{children}</>;
   };
   return useRoutes([
     {
@@ -146,6 +148,10 @@ export default function Router() {
         {
           path: "detailcandidate",
           element: <DetailCandidate />,
+        },
+        {
+          path: "profilecandidate",
+          element: <ProfileCandidata />,
         },
       ],
     },
