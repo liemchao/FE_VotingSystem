@@ -34,7 +34,7 @@ import ProfileCandidata from "layouts/page/user/Candidate/ProfileCandidate";
 //----------------------------------------------------------------
 // const routePublic = ["/user/campaign/"];
 export default function Router() {
-  const ProtectedRouteAuthen = ({ roles, children, routePublics }) => {
+  const ProtectedRouteAuthen = ({ roles, children }) => {
     const token = localStorage.getItem("token");
 
     try {
@@ -79,10 +79,6 @@ export default function Router() {
         </ProtectedRouteAuthen>
       ),
       children: [
-        // {
-        //   path: "dashboard",
-        //   element: <UserList />,
-        // },
         {
           path: "account",
           element: <CandidiateAccountList />,

@@ -81,7 +81,7 @@ export default function DashboardSidebar({
                 Trang chủ
               </Typography>
               <Typography variant="body1" sx={{ color: "text.danger" }}>
-                {decode.RoleName}
+                {decode?.RoleName}
               </Typography>
             </Box>
           </AccountStyle>

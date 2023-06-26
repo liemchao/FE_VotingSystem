@@ -18,8 +18,12 @@ export const ProviderToken = ({ children }) => {
   // console.log(id);
 
   useEffect(() => {
-    const decoded = jwt_decode(token);
-    setDecode(decoded);
+    if (token) {
+      const decoded = jwt_decode(token);
+      setDecode(decoded);
+    } else {
+      navigate(window.location.href);
+    }
   }, [dispatch, id]);
 
   return <Authen.Provider value={{ token, decode }}>{children}</Authen.Provider>;
