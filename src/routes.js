@@ -24,14 +24,13 @@ import DetailCandidate from "layouts/page/user/Form/Voter/Detail Voter/DetailVot
 // import JoinCampain from "layouts/page/user/Form/Voter/List Candidate/ListCandidate";
 import HistoryUser from "layouts/page/user/Form/Voter/History/History";
 import CampaignStage from "layouts/page/user/Campaign/CampaignStage";
-
 import Hi from "layouts/page/Hi";
 import Profile from "layouts/page/profile/Profile";
 
 //----------------------------------------------------------------
 
 import AllCampaignList from "layouts/page/AllCampaign";
-import Text from "layouts/page/Text";
+import CampaignCard from "layouts/page/Dashboard";
 
 export default function Router() {
   const ProtectedRouteAuthen = ({ roles, children }) => {
@@ -55,6 +54,10 @@ export default function Router() {
     {
       path: "/",
       element: <HeaderOne />,
+    },
+    {
+      path: "/DashBoardPage",
+      element: <CampaignCard />,
     },
     {
       path: "/authentication/sign-in",
