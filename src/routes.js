@@ -25,11 +25,13 @@ import DetailCandidate from "layouts/page/user/Form/Voter/Detail Voter/DetailVot
 import HistoryUser from "layouts/page/user/Form/Voter/History/History";
 import CampaignStage from "layouts/page/user/Campaign/CampaignStage";
 
-import Hi from "layouts/page/Hi";
+// import Hi from "layouts/page/Hi";
 import Profile from "layouts/page/profile/Profile";
 import AllCampaignList from "layouts/page/AllCampaign";
 import TextT from "layouts/page/Text";
 import ProfileCandidata from "layouts/page/user/Candidate/ProfileCandidate";
+import Hi from "layouts/page/Hi";
+import Overview from "layouts/profile";
 
 //----------------------------------------------------------------
 
@@ -107,19 +109,19 @@ export default function Router() {
           path: "text",
           element: <TextT />,
         },
-        // {
-        //   path: "campaign",
-        //   element: <Text />,
-        // },
+        {
+          path: "hi",
+          element: <Hi />,
+        },
         {
           path: "history",
           element: <HistoryUser />,
         },
 
-        {
-          path: "text/hhehe",
-          element: <Hi />,
-        },
+        // {
+        //   path: "text/hhehe",
+        //   element: <Hi />,
+        // },
         {
           path: "allcampaign",
           element: <AllCampaignList />,
@@ -151,7 +153,7 @@ export default function Router() {
         },
         {
           path: "profilecandidate",
-          element: <ProfileCandidata />,
+          element: <Overview />,
         },
       ],
     },

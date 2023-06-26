@@ -63,12 +63,19 @@ const navConfigUser = [
     icon: getIcon("eva:file-text-fill"),
     // s
   },
-  // {
-  //   title: "Text QR",
-  //   path: "/user/text",
-  //   icon: getIcon("eva:file-text-fill"),
-  //   // s
-  // },
+  {
+    title: "Voting Start",
+    path: "/user/text",
+    icon: getIcon("eva:file-text-fill"),
+    // s
+  },
+
+  {
+    title: "Voting like",
+    path: "/user/hi",
+    icon: getIcon("eva:file-text-fill"),
+    // s
+  },
   {
     title: "Đánh Giá",
     path: "/user/feedback",
