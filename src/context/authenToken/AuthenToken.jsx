@@ -22,7 +22,7 @@ export const ProviderToken = ({ children }) => {
       const decoded = jwt_decode(token);
       setDecode(decoded);
     } else {
-      navigate(window.location.href);
+      navigate("/");
     }
   }, [dispatch, id]);
 
