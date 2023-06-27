@@ -21,7 +21,6 @@ export default function CampaignStage() {
   };
 
   const { id } = useParams();
-  console.log(id);
 
   return (
     <>

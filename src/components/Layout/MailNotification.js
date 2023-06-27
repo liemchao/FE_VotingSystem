@@ -130,7 +130,7 @@ export default function MailNotification() {
           <Box sx={{ flexGrow: 1 }}>
             <Typography variant="subtitle1">Notifications</Typography>
             <Typography variant="body2" sx={{ color: "text.secondary" }}>
-              You have {totalUnRead} unread messages
+              Bạn có {totalUnRead} thông báo chưa đọc
             </Typography>
           </Box>
 

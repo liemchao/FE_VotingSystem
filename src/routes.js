@@ -16,7 +16,7 @@ import CandidiateAccountList from "layouts/page/admin/CandidateList";
 import CandidateList from "layouts/page/user/Candidate";
 import FeedBack from "layouts/page/user/FeedBack";
 import CampaignList from "layouts/page/user/Campaign";
-import CampaignOwenrList from "layouts/page/user/CampaignOwner";
+// import CampaignOwenrList from "layouts/page/user/CampaignOwner";
 
 import ListQuestion from "layouts/page/user/Form/Voter/List Question/ListQuetion";
 import DetailCandidate from "layouts/page/user/Form/Voter/Detail Voter/DetailVoter";
@@ -29,8 +29,8 @@ import Hi from "layouts/page/Hi";
 import Profile from "layouts/page/profile/Profile";
 import AllCampaignList from "layouts/page/AllCampaign";
 import TextT from "layouts/page/Text";
-import ProfileCandidata from "layouts/page/user/Candidate/ProfileCandidate";
-
+import ProfileCandidate from "layouts/page/user/Candidate/ProfileCandidate";
+import CampaignOwenrList from "layouts/page/user/Campaign/CampaignOwner";
 //----------------------------------------------------------------
 // const routePublic = ["/user/campaign/"];
 export default function Router() {
@@ -106,6 +106,10 @@ export default function Router() {
           element: <CampaignList />,
         },
         {
+          path: "campaignOwner",
+          element: <CampaignOwenrList />,
+        },
+        {
           path: "profile",
           element: <Profile />,
         },
@@ -126,10 +130,10 @@ export default function Router() {
           path: "allcampaign",
           element: <AllCampaignList />,
         },
-        {
-          path: "campaignowner",
-          element: <CampaignOwenrList />,
-        },
+        // {
+        //   path: "campaignowner",
+        //   element: <CampaignOwenrList />,
+        // },
         {
           path: "candidate",
           element: <CandidateList />,
@@ -156,7 +160,7 @@ export default function Router() {
         },
         {
           path: "profilecandidate",
-          element: <ProfileCandidata />,
+          element: <ProfileCandidate />,
         },
       ],
     },

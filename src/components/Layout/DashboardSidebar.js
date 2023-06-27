@@ -80,9 +80,9 @@ export default function DashboardSidebar({
               <Typography variant="subtitle2" sx={{ color: "text.primary" }}>
                 Trang chủ
               </Typography>
-              <Typography variant="body1" sx={{ color: "text.danger" }}>
+              {/* <Typography variant="body1" sx={{ color: "text.primary" }}>
                 {decode?.RoleName}
-              </Typography>
+              </Typography> */}
             </Box>
           </AccountStyle>
         </Link>

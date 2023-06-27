@@ -2,8 +2,8 @@ import React, { createContext, useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { useDispatch } from "react-redux";
-import { handleGetCandidateByIdCampaign } from "context/redux/action/action";
-import { handleGetCampaignById } from "context/redux/action/action";
+// import { handleGetCandidateByIdCampaign } from "context/redux/action/action";
+// import { handleGetCampaignById } from "context/redux/action/action";
 
 //----------------------------------------------------------------
 export const Authen = createContext();

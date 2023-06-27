@@ -23,6 +23,7 @@ import MenuPopover from "./MenuPopover";
 
 import Scrollbar from "./Scrollbar";
 import Iconify from "assets/theme/components/icon/Iconify";
+import img1 from "assets/images/liem.jpg";
 // import Iconify from "assets/theme/components/icon/Iconify";
 
 // ----------------------------------------------------------------------
@@ -30,17 +31,17 @@ import Iconify from "assets/theme/components/icon/Iconify";
 const NOTIFICATIONS = [
   {
     id: 123,
-    title: "Your order is placed",
-    description: "waiting for shipping",
-    avatar: null,
+    title: "Bạn đã được mời làm ứng cử viên",
+    description: "Confrirm the feedback",
+    avatar: "assets/images/liem.jpg",
     type: "order_placed",
     createdAt: set(new Date(), { hours: 10, minutes: 30 }),
     isUnRead: true,
   },
   {
     id: 124,
-    title: "hihi",
-    description: "answered to your comment on the Minimal",
+    title: "Bạn đã bình chọn",
+    description: "Confrirm the feedback",
     avatar: "/static/mock-images/avatars/avatar_2.jpg",
     type: "friend_interactive",
     createdAt: sub(new Date(), { hours: 3, minutes: 30 }),
@@ -48,27 +49,27 @@ const NOTIFICATIONS = [
   },
   {
     id: 125,
-    title: "You have new message",
-    description: "5 unread messages",
-    avatar: null,
+    title: "Bạn đã bình chọn",
+    description: "sent from Voter",
+    avatar: "/assets/images/liem.jpg",
     type: "chat_message",
     createdAt: sub(new Date(), { days: 1, hours: 3, minutes: 30 }),
     isUnRead: false,
   },
   {
     id: 126,
-    title: "You have new mail",
-    description: "sent from Guido Padberg",
-    avatar: null,
+    title: "Bạn đã bình chọn",
+    description: "sent from Admin",
+    avatar: "/assets/images/liem.jpg",
     type: "mail",
     createdAt: sub(new Date(), { days: 2, hours: 3, minutes: 30 }),
     isUnRead: false,
   },
   {
     id: 127,
-    title: "Delivery processing",
-    description: "Your order is being shipped",
-    avatar: null,
+    title: "Bạn đã bình chọn",
+    description: "sent from Candidate",
+    avatar: "/assets/images/liem.jpg",
     type: "order_shipped",
     createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
     isUnRead: false,
@@ -126,9 +127,9 @@ export default function NotificationsPopover() {
       >
         <Box sx={{ display: "flex", alignItems: "center", py: 2, px: 2.5 }}>
           <Box sx={{ flexGrow: 1 }}>
-            <Typography variant="subtitle1">Notifications</Typography>
+            <Typography variant="subtitle1">Thông báo</Typography>
             <Typography variant="body2" sx={{ color: "text.secondary" }}>
-              You have {totalUnRead} unread messages
+              Bạn có {totalUnRead} thông báo chưa đọc
             </Typography>
           </Box>
 
@@ -148,7 +149,7 @@ export default function NotificationsPopover() {
             disablePadding
             subheader={
               <ListSubheader disableSticky sx={{ py: 1, px: 2.5, typography: "overline" }}>
-                hehe
+                Mới nhất
               </ListSubheader>
             }
           >
@@ -161,7 +162,7 @@ export default function NotificationsPopover() {
             disablePadding
             subheader={
               <ListSubheader disableSticky sx={{ py: 1, px: 2.5, typography: "overline" }}>
-                Before that
+                Trước đó
               </ListSubheader>
             }
           >

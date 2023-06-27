@@ -50,7 +50,7 @@ const navConfigUser = [
           },
           {
             title: "Chiến dịch của bản thân",
-            subPath: "/user/text/hhehe",
+            subPath: "/user/campaignOwner",
             icons: getIcon("material-symbols:campaign-outline-sharp"),
           },
         ],

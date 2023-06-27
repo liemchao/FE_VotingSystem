@@ -6,8 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleGetCandidateByIdCampaign } from "context/redux/action/action";
 import { Authen } from "context/authenToken/AuthenToken";
 import { useContext } from "react";
+import Iconify from "assets/theme/components/icon/Iconify";
 
 export default function Element() {
+  const getIcon = (name) => <Iconify icon={name} height={30} width={30} marginTop={-0.4} />;
   const stateList = [
     {
       image:
@@ -54,16 +56,15 @@ export default function Element() {
   return (
     <Grid
       container
-      spacing={2}
+      spacing={1}
       sx={{
-        marginTop: 2,
+        marginTop: 1,
       }}
     >
       {stateList.map((card, index) => (
-        <Grid item xs={12} md={12} key={index}>
+        <Grid item xs={12} md={3} key={index}>
           <Card
             sx={{
-              maxWidth: "1000",
               padding: "1rem 1rem 1rem 1rem",
               borderRadius: "18px",
             }}
@@ -99,8 +100,8 @@ export default function Element() {
                   left: "-1rem",
                   bottom: "-1rem",
                   display: "inline - flex",
-                  width: "9rem",
-                  height: "3rem",
+                  width: "7rem",
+                  height: "2rem",
                   background: "var(--10)",
                   color: "var(--badge-text)",
                   backgroundColor: "#ffcc33",
@@ -121,13 +122,26 @@ export default function Element() {
               </Button>
               <Button
                 sx={{
-                  right: "-4rem",
+                  position: "center",
+                  left: "-1rem",
                   bottom: "-1rem",
+                  display: "inline - flex",
+                  width: "7rem",
+                  height: "2rem",
+                  background: "var(--10)",
+                  color: "var(--badge-text)",
+                  backgroundColor: "#ffcc33",
+                  boxShadow: "0 0 0.2rem 0.1rem var(--card-bg)",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: "30px",
+                  marginLeft: "2rem",
+                  fontSize: "1rem",
+                  fontWeight: "700",
+                  border: "0",
                 }}
-                size="small"
-              >
-                Chỉnh sửa
-              </Button>
+                startIcon={getIcon("material-symbols:edit")}
+              ></Button>
             </CardActions>
           </Card>
         </Grid>

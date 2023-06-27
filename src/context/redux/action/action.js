@@ -31,7 +31,7 @@ export const LoginAthen = (user, navigate) => {
       if (detoken.RoleName === "user") {
         navigate("/user/campaign");
         CustomizedToast({
-          message: "Thành công rồi nha",
+          message: "Đăng nhập thành công",
           type: "SUCCESS",
         });
       } else if (detoken.RoleName === "admin") {
@@ -159,6 +159,23 @@ export const handleGetCandidateByIdCampaign = (id, token) => {
   };
 };
 
+export const GetCampaignbyUserId = (id, token) => {
+  return async (dispatch) => {
+    try {
+      const req = await API("GET", URL_API + `/api/v1/campaigns/user/${id}`, null, token);
+
+      dispatch(
+        createAction({
+          type: PathAction.GET_CAMPAIGN_OWNER,
+          payload: req.data.data,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export const handleGetQuestByIdCampaign = (id, token) => {
   return async (dispatch) => {
     try {
@@ -189,13 +206,13 @@ export const handleVote = (token, data) => {
       );
 
       CustomizedToast({
-        message: "thành công rồi nè",
+        message: "Bình chọn thành công ",
         type: "SUCCESS",
       });
     } catch (error) {
       console.log(error);
       CustomizedToast({
-        message: "thất bài rồi nè",
+        message: "Bình chọn thất bại",
         type: "SUCCESS",
       });
     }

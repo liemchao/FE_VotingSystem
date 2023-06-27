@@ -8,6 +8,7 @@ const initialState = {
   campaignStage: [],
   candidateList: [],
   question: [],
+  campainOwner: [],
 };
 
 export default function userReducer(state = initialState, { type, payload }) {
@@ -36,6 +37,9 @@ export default function userReducer(state = initialState, { type, payload }) {
       break;
     case PathAction.GET_LIST_QUESTIONS:
       state.question = payload;
+      break;
+    case PathAction.GET_CAMPAIGN_OWNER:
+      state.campainOwner = payload;
       break;
     default:
       return { ...state };
