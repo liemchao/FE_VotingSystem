@@ -7,7 +7,8 @@ import MenuPopover from "./MenuPopover";
 import { useDispatch, useSelector } from "react-redux";
 import { Authen } from "../../context/authenToken/AuthenToken";
 // ----------------------------------------------------------------------
-
+import jwt_decode from "jwt-decode";
+import { isFirstDayOfMonth } from "date-fns/esm";
 const MENU_OPTIONS = [
   {
     label: "Home",
@@ -33,6 +34,7 @@ const WIDTH = 170;
 export default function AccountPopover() {
   const anchorRef = useRef(null);
   const dispatch = useDispatch();
+  const { token } = useContext(Authen);
 
   const [open, setOpen] = useState(null);
   const navigate = useNavigate();
@@ -40,8 +42,20 @@ export default function AccountPopover() {
   const handleOpen = (event) => {
     setOpen(event.currentTarget);
   };
+  const hanldenullToken = () => {
+    const isNonPeople = "Ẩn danh";
+    const arr = [];
+    if (token === null || token === undefined || !token) {
+      return isNonPeople;
+    } else {
+      const decode = jwt_decode(token);
+      arr.push(decode);
+      return arr;
+    }
+  };
+  hanldenullToken();
 
-  const { token, decode } = useContext(Authen);
+  console.log(hanldenullToken()[0]);
 
   const handleClose = () => {
     localStorage.removeItem("token");
@@ -76,22 +90,26 @@ export default function AccountPopover() {
           sx={{
             zIndex: "modal",
             position: "absolute",
-            left: `${(decode?.Username || decode?.Email)?.length * 0.01}%`,
+            left: `${
+              (hanldenullToken()[0]?.Username || hanldenullToken()[0]?.Email)?.length * 0.03
+            }%`,
             // left: 3,
           }}
         />
         <Box
-          paddingLeft="2.2rem"
+          paddingLeft="3rem"
           paddingTop="0.4em"
           sx={{
-            backgroundColor: "#ffee32",
-            width: `${(decode?.Username || decode?.Email)?.length * 20}%`,
+            // width: `${(decode?.Username || decode?.Email)?.length * 20}%`,
             height: 40,
             borderRadius: 4,
             zIndex: "toolip",
+            marginRight: "2%",
           }}
         >
-          <Typography variant="subtitle2">{decode?.Username || decode?.Email}</Typography>
+          <Typography variant="h5">
+            {hanldenullToken()[0]?.Username || hanldenullToken()[0]?.Email}
+          </Typography>
         </Box>
       </IconButton>
 
@@ -111,10 +129,10 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
-            {decode.Username}
+            {hanldenullToken()[0]?.Username}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }} noWrap>
-            {decode.RoleName}
+            {hanldenullToken()[0]?.RoleName}
           </Typography>
         </Box>
 

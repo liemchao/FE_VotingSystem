@@ -78,7 +78,7 @@ export default function DashboardSidebar({
             <Avatar src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="photoURL" />
             <Box sx={{ ml: 4 }}>
               <Typography variant="subtitle2" sx={{ color: "text.primary" }}>
-                Trang chủ
+                Trang Chủ
               </Typography>
               {/* <Typography variant="body1" sx={{ color: "text.primary" }}>
                 {decode?.RoleName}

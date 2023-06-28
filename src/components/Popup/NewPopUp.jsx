@@ -11,6 +11,7 @@ import Select from "components/Control/Select";
 import Input from "components/Control/Input";
 import PageHeader from "components/Layout/PageHeader";
 import Iconify from "assets/theme/components/icon/Iconify";
+import DateTime from "components/Control/DateTime";
 
 const schema = yup.object().shape({});
 
@@ -106,14 +107,24 @@ export default function NewPopUp(props) {
                       </FormHelperText>
                     )} */}
                   </Grid>
-                  <Grid item xs={12}>
-                    <Input
-                      variant="outlined"
-                      name="price"
+                  <Grid item xs={10}>
+                    <DateTime
                       required
+                      variant="outlined"
+                      name="name"
+                      label="Thời gian bắt đầu"
+                      value={""}
+                      // onChange={(e) => {}}
+                    />
+                  </Grid>
+                  <Grid item xs={10}>
+                    <DateTime
+                      required
+                      variant="outlined"
+                      name="name"
                       label="Thời gian kết thúc"
-                      value=""
-                      onChange={(e) => {}}
+                      value={""}
+                      // onChange={(e) => {}}
                     />
                   </Grid>
                   <Grid item xs={12}>

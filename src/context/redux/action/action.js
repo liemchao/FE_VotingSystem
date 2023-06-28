@@ -46,7 +46,7 @@ export const LoginAthen = (user, navigate) => {
   };
 };
 
-export const loginFirebase = (idtoken) => {
+export const loginFirebase = (idtoken, navigate) => {
   return async (dispatch) => {
     try {
       const res = await API("POST", URL_API + `/api/v1/authen/firebase?idtoken=${idtoken}`);
@@ -60,6 +60,15 @@ export const loginFirebase = (idtoken) => {
           payload: res.data.token,
         })
       );
+      if (detoken.RoleName === "user") {
+        navigate("/user/campaign");
+        CustomizedToast({
+          message: "Đăng nhập thành công",
+          type: "SUCCESS",
+        });
+      } else if (detoken.RoleName === "admin") {
+        // như trên
+      }
     } catch (e) {
       console.log(e);
       CustomizedToast({

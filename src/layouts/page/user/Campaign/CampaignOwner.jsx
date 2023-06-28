@@ -23,6 +23,7 @@ import { useDispatch, useSelector } from "react-redux";
 import NewPopUp from "components/Popup/NewPopUp";
 import { useCallback } from "react";
 import { GetCampaignbyUserId } from "context/redux/action/action";
+import jwt_decode from "jwt-decode";
 
 export default function CampaignOwenrList() {
   //   const handleinvite = () => {
@@ -39,7 +40,10 @@ export default function CampaignOwenrList() {
 
   const [OpenPopUp, SetOpenPopUp] = useState(false);
 
-  const { token, decode } = useContext(Authen);
+  const { token } = useContext(Authen);
+  const decode = jwt_decode(token);
+  // console.log(token + "token");
+  // console.log(decode + "decode");
   const dispatch = useDispatch();
   useEffect(() => {
     const callAPI = async () => {

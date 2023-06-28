@@ -34,6 +34,7 @@ export default function ProfileCandidata() {
       <Box sx={{ display: "flex", alignItems: "center", marginTop: "-2%" }}>
         <Element />
       </Box>
+    
     </>
   );
 }

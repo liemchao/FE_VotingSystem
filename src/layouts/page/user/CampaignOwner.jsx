@@ -98,6 +98,14 @@ export default function HistoryUser() {
     setOpen(true);
     setValue(item);
   }, []);
+  const ColorButton = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText("#FFCC32"),
+    backgroundColor: "#FFCC33",
+    "&:hover": {
+      backgroundColor: "#ffee32",
+    },
+    display: "center",
+  }));
 
   const handleClose = React.useCallback(() => {
     setOpen(false);
@@ -172,12 +180,16 @@ export default function HistoryUser() {
           <Typography variant="h4" gutterBottom>
             {/* <Icon icon="emojione-monotone:pot-of-history" fontSize={100} /> */}
           </Typography>
-          <ButtonCustomize
+          <ColorButton
             variant="contained"
-            component={RouterLink}
-            to="/dashboard/admin/newfood"
-            nameButton="Export File"
-          />
+            // component={RouterLink}
+            // to="#"
+            // onClick={() => {
+            //   handleClickOpen();
+            // }}
+          >
+            Export File
+          </ColorButton>
         </Stack>
 
         <Card>

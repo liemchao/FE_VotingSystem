@@ -63,12 +63,18 @@ const navConfigUser = [
     icon: getIcon("eva:file-text-fill"),
     // s
   },
-  // {
-  //   title: "Text QR",
-  //   path: "/user/text",
-  //   icon: getIcon("eva:file-text-fill"),
-  //   // s
-  // },
+  {
+    title: "Voting Like",
+    path: "/user/test1",
+    icon: getIcon("eva:file-text-fill"),
+    // s
+  },
+  {
+    title: "Voting Start",
+    path: "/user/test2",
+    icon: getIcon("eva:file-text-fill"),
+    // s
+  },
   {
     title: "Đánh Giá",
     path: "/user/feedback",
@@ -101,7 +107,7 @@ const navConfigUser = [
         subItems: [
           {
             title: "Biểu Mẫu",
-            // subPath: "/user/text/hihi",
+            subPath: "/user/form",
             icons: getIcon("clarity:form-line"),
           },
           {

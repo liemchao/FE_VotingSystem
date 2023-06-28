@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
 import firebase, { auth } from "../../../config/Firebase/firebase.js";
 import GoogleButton from "components/Control/GoogleButton";
+import AdSlider from "components/Control/SilderLogin";
 
 const ggProvider = new firebase.auth.GoogleAuthProvider();
 
@@ -32,7 +33,7 @@ function Basic() {
   const hanldeLoginWithgg = async () => {
     const hihi = await auth.signInWithPopup(ggProvider);
     auth.onAuthStateChanged((user) => {
-      dispatch(loginFirebase(user._delegate.accessToken));
+      dispatch(loginFirebase(user._delegate.accessToken, navigate));
     });
   };
 
@@ -58,26 +59,34 @@ function Basic() {
   return (
     <Box height="100vh" display="flex">
       <Grid container spacing={2}>
-        <Grid item xs={6} sx={{ backgroundColor: "#F6911B", textAlign: "center" }}>
-          <Typography sx={{ marginTop: "5%" }} variant="h1" color="#FFFFFF">
-            Welcome to our system
+        <Grid item xs={6} sx={{ backgroundColor: "#FDF8EB", textAlign: "center" }}>
+          <Typography sx={{ marginTop: "5%" }} variant="h2" color="#090914">
+            Chào mừng bạn đến với hệ thống của chúng tôi
           </Typography>
-          <Typography sx={{ marginTop: "5%" }} variant="body2" color="#CBD5E1  ">
+          <Typography sx={{ marginTop: "5%" }} variant="body1" color="#090914">
             Hệ thống cung cấp hỗ trợ tạo chiến dịch dánh giá phù hợp với nhiều mục tiêu.
           </Typography>
-          <Typography sx={{ marginTop: "77%" }} variant="body2" color="#FFFFFF">
+          <Box>
+            <AdSlider />
+          </Box>
+          <Typography
+            sx={{ marginTop: "10%", textAlign: "center" }}
+            variant="body1"
+            color="#090914"
+            maxHeight={10}
+          >
             &quot;Chúng tôi đưa ra một hệ thống bình chọn đưa ra ứng cử viên tốt nhất trong một
             chiến dịch bình chọn.&quot;
           </Typography>
         </Grid>
         <Grid item xs={6} sx={{ backgroundColor: "#FDF8EB", textAlign: "center" }}>
-          <Typography sx={{ marginTop: "5%" }} variant="h1" color="#090914">
-            Join System
+          <Typography sx={{ marginTop: "5%" }} variant="h2" color="#090914">
+            Tham gia vào hệ thống
           </Typography>
-          <Typography sx={{ marginTop: "2%" }} variant="body2" color="#090914">
+          <Typography sx={{ marginTop: "13%" }} variant="body1" color="#090914">
             Chào mừng bạn đến với hệ thống.
           </Typography>
-          <form style={{ textAlign: "center", marginTop: "10%" }} onSubmit={formik.handleSubmit}>
+          <form style={{ textAlign: "center", marginTop: "18%" }} onSubmit={formik.handleSubmit}>
             <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
               <Grid container spacing={2} sx={{ display: "flex", justifyContent: "center" }}>
                 <Grid item xs={8}>
