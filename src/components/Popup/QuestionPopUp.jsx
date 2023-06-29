@@ -107,13 +107,13 @@ export default function QuestionPopUp(props) {
         const req = await API("POST", URL_API + `/api/v1/vote`, data, token);
         console.log(req);
         CustomizedToast({
-          message: "thành công rồi nè",
+          message: "Bình chọn thành công",
           type: "SUCCESS",
         });
       } catch (error) {
         console.log(error);
         CustomizedToast({
-          message: "thất bài rồi nè",
+          message: "Bình chọn thất bại",
           type: "SUCCESS",
         });
       }

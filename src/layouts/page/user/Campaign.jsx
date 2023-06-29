@@ -158,7 +158,7 @@ export default function CampaignList() {
                   </Typography>
                   <Box sx={{ display: "flex", gap: 2 }}>
                     <BadgeAvatars
-                      BadgeAvatars={getIcon("icon-sl:square")}
+                      BadgeAvatars={getIcon("icon-park-outline:gold-medal")}
                       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8oYLzVhre_UBu4mPsjYf9EUh9mhvwXApssaTHmLjyfw&s"
                     />
                     <BadgeAvatars

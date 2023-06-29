@@ -42,8 +42,7 @@ export default function CampaignOwenrList() {
 
   const { token } = useContext(Authen);
   const decode = jwt_decode(token);
-  // console.log(token + "token");
-  // console.log(decode + "decode");
+  
   const dispatch = useDispatch();
   useEffect(() => {
     const callAPI = async () => {

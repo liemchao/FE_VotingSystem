@@ -214,16 +214,80 @@ export const handleVote = (token, data) => {
         })
       );
 
+      // CustomizedToast({
+      //   message: "Bình chọn thành công ",
+      //   type: "SUCCESS",
+      // });
+    } catch (error) {
+      console.log(error);
+      // CustomizedToast({
+      //   message: "Bình chọn thất bại",
+      //   type: "SUCCESS",
+      // });
+    }
+  };
+};
+
+export const handleCreateForm = (token, data) => {
+  return async (dispatch) => {
+    try {
+      const req = await API("POST", URL_API + `/api/v1/forms`, data, token);
+
+      dispatch(
+        createAction({
+          type: PathAction.CREATE_FORM,
+          payload: req.data.data,
+        })
+      );
+
+      // CustomizedToast({
+      //   message: "Bình chọn thành công ",
+      //   type: "SUCCESS",
+      // });
+    } catch (error) {
+      // console.log(error);
+      // CustomizedToast({
+      //   message: "Bình chọn thất bại",
+      //   type: "SUCCESS",
+      // });
+    }
+  };
+};
+export const handleCreateQuestion = (token, data) => {
+  return async (dispatch) => {
+    try {
+      const req = await API("POST", URL_API + `/api/v1/questions`, data, token);
+
+      dispatch(
+        createAction({
+          type: PathAction.CREATE_QUESTION,
+          payload: req.data.data,
+        })
+      );
+
       CustomizedToast({
-        message: "Bình chọn thành công ",
+        message: "Thêm câu hỏi thành công ",
         type: "SUCCESS",
       });
     } catch (error) {
       console.log(error);
       CustomizedToast({
-        message: "Bình chọn thất bại",
+        message: "Thêm câu hỏi thất bại",
         type: "SUCCESS",
       });
     }
+  };
+};
+export const getAllCategory = (token) => {
+  return async (dispatch) => {
+    try {
+      const res = await API("GET", URL_API + `/api/v1/categories`, null, token);
+      dispatch(
+        createAction({
+          type: PathAction.GET_CATEGORY,
+          payload: res.data.data,
+        })
+      );
+    } catch (err) {}
   };
 };

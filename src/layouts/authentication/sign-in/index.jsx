@@ -59,11 +59,11 @@ function Basic() {
   return (
     <Box height="100vh" display="flex">
       <Grid container spacing={2}>
-        <Grid item xs={6} sx={{ backgroundColor: "#FDF8EB", textAlign: "center" }}>
-          <Typography sx={{ marginTop: "5%" }} variant="h2" color="#090914">
+        <Grid item xs={6} sx={{ backgroundColor: "#F7941D", textAlign: "center" }}>
+          <Typography sx={{ marginTop: "5%" }} variant="h2" color="white">
             Chào mừng bạn đến với hệ thống của chúng tôi
           </Typography>
-          <Typography sx={{ marginTop: "5%" }} variant="body1" color="#090914">
+          <Typography sx={{ marginTop: "5%" }} variant="body1" color="white">
             Hệ thống cung cấp hỗ trợ tạo chiến dịch dánh giá phù hợp với nhiều mục tiêu.
           </Typography>
           <Box>
@@ -72,7 +72,7 @@ function Basic() {
           <Typography
             sx={{ marginTop: "10%", textAlign: "center" }}
             variant="body1"
-            color="#090914"
+            color="white"
             maxHeight={10}
           >
             &quot;Chúng tôi đưa ra một hệ thống bình chọn đưa ra ứng cử viên tốt nhất trong một

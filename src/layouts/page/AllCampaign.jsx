@@ -2,6 +2,7 @@ import { Link as RouterLink, useNavigate } from "react-router-dom";
 import React from "react";
 import { styled } from "@mui/material/styles";
 import { useState } from "react";
+import Iconify from "assets/theme/components/icon/Iconify";
 // material
 import {
   Card,
@@ -23,17 +24,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { callAPIgetListCampaigns } from "../../context/redux/action/action";
 import NewPopUp from "components/Popup/NewPopUp";
 import { useCallback } from "react";
+import BadgeAvatars from "./user/icontop/icontop";
 
 export default function AllCampaignList() {
+  const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
   const navigate = useNavigate();
   const handleinvite = () => {
     navigate("/user/allcampaign");
   };
   const ColorButton = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText("#FFCC32"),
-    backgroundColor: "#FFCC33",
+    color: theme.palette.getContrastText("#FFEE32"),
+    backgroundColor: "#FFEE32",
     "&:hover": {
-      backgroundColor: "#ffee32",
+      backgroundColor: "#FFEE32",
     },
     display: "center",
   }));
@@ -98,6 +101,21 @@ export default function AllCampaignList() {
                   <Typography variant="h6" component="div" sx={{ mt: 1 }}>
                     50%
                   </Typography>
+                  <Box sx={{ display: "flex", gap: 2 }}>
+                    <BadgeAvatars
+                      BadgeAvatars={getIcon("icon-park-outline:gold-medal")}
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8oYLzVhre_UBu4mPsjYf9EUh9mhvwXApssaTHmLjyfw&s"
+                    />
+                    <BadgeAvatars
+                      BadgeAvatars={getIcon("icon-park-outline:gold-medal")}
+                      src="https://cdn.pixabay.com/photo/2016/06/05/01/41/african-american-1436661_960_720.jpg"
+                    />
+
+                    <BadgeAvatars
+                      BadgeAvatars={getIcon("icon-park-outline:gold-medal")}
+                      src="https://congluan-cdn.congluan.vn/files/content/2022/03/02/1-09505723.jpg"
+                    />
+                  </Box>
                 </CardContent>
                 <CardActions sx={{ marginLeft: "80%" }}>
                   <Button sx={{ marginLeft: "-4%" }} size="small">

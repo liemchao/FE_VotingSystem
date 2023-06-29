@@ -64,25 +64,25 @@ const navConfigUser = [
     // s
   },
   {
-    title: "Voting Like",
+    title: "Voting like",
     path: "/user/test1",
     icon: getIcon("eva:file-text-fill"),
     // s
   },
   {
-    title: "Voting Start",
+    title: "Voting start",
     path: "/user/test2",
     icon: getIcon("eva:file-text-fill"),
     // s
   },
   {
-    title: "Đánh Giá",
+    title: "Đánh giá",
     path: "/user/feedback",
     icon: getIcon("fluent:person-feedback-16-filled"),
     // s
   },
   {
-    title: "Vai Trò",
+    title: "Vai trò",
     icon: getIcon("carbon:user-role"),
     children: [
       {
@@ -106,12 +106,12 @@ const navConfigUser = [
         icon: getIcon("eva:person-outline"),
         subItems: [
           {
-            title: "Biểu Mẫu",
+            title: "Biểu mẫu",
             subPath: "/user/form",
             icons: getIcon("clarity:form-line"),
           },
           {
-            title: "Bản Mẫu",
+            title: "Bản mẫu",
             // subPath: "/user/text/hhehe",
             icons: getIcon("eva:cube-outline"),
           },

@@ -6,5 +6,10 @@ export const GET_LIST_HISTORY = "GET_LIST_HISTORY";
 export const GET_LIST_CAMPAINGSTAGEID = "GET_LIST_CAMPAINGSTAGEID";
 export const GET_LIST_CANDIDATE_CAMPAIGN = "GET_LIST_CANDIDATE_CAMPAIGN";
 export const GET_LIST_QUESTIONS = "GET_LIST_QUESTIONS";
-export const SUBMIT_VOTE = "SUBMIT_VOTE";
 export const GET_CAMPAIGN_OWNER = "GET_CAMPAIGN_OWNER";
+export const GET_CATEGORY = "GET_CATEGORY";
+
+//-----------------------------------------------------
+export const SUBMIT_VOTE = "SUBMIT_VOTE";
+export const CREATE_FORM = "CREATE_FORM";
+export const CREATE_QUESTION = "CREATE_QUESTION";
