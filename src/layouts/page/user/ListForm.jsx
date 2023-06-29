@@ -192,84 +192,81 @@ export default function ListForm() {
             onFilterName={handleFilterByName}
             options={getOptions()}
           />
-          <Scrollbar>
-            <TableContainer>
-              <Table>
-                <UserListHead
-                  order={order}
-                  orderBy={orderBy}
-                  headLabel={TABLE_HEAD}
-                  rowCount={form?.length}
-                  numSelected={selected?.length}
-                  onRequestSort={handleRequestSort}
-                  onSelectAllClick={handleSelectAllClick}
-                />
-                <TableBody>
-                  {/* nhớ khởi tạo đúng tên file trong database */}
-                  {filterform
-                    ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row) => {
-                      const { formId, name, description, visibility } = row;
+          {/* <Scrollbar> */}
+          <TableContainer>
+            <Table>
+              <UserListHead
+                order={order}
+                orderBy={orderBy}
+                headLabel={TABLE_HEAD}
+                rowCount={form?.length}
+                numSelected={selected?.length}
+                onRequestSort={handleRequestSort}
+                onSelectAllClick={handleSelectAllClick}
+              />
+              <TableBody>
+                {/* nhớ khởi tạo đúng tên file trong database */}
+                {filterform
+                  ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row) => {
+                    const { formId, name, userName, description, visibility } = row;
 
-                      const isItemSelected = selected.indexOf(name) !== -1;
+                    const isItemSelected = selected.indexOf(name) !== -1;
 
-                      return (
-                        <TableRow
-                          hover
-                          key={formId}
-                          tabIndex={-1}
-                          role="checkbox"
-                          selected={isItemSelected}
-                          aria-checked={isItemSelected}
-                        >
-                          <TableCell>
-                            <Avatar alt={name} />
-                          </TableCell>
-                          <TableCell>
-                            <Typography variant="subtitle2" noWrap>
-                              {/* {userName} */} user
-                            </Typography>
-                          </TableCell>
+                    return (
+                      <TableRow
+                        hover
+                        key={formId}
+                        tabIndex={-1}
+                        role="checkbox"
+                        selected={isItemSelected}
+                        aria-checked={isItemSelected}
+                      >
+                        <TableCell>
+                          <Avatar alt={name} />
+                        </TableCell>
+                        <TableCell>
+                          <Typography variant="subtitle2" noWrap>
+                            Moderator
+                          </Typography>
+                        </TableCell>
 
-                          <TableCell align="left">{name}</TableCell>
-                          <TableCell align="left">K14</TableCell>
-                          <TableCell align="left">
-                            {/* {new Date(createdAt).toLocaleDateString()} */}
-                            11/02/2023
-                          </TableCell>
-                          <TableCell align="left">
-                            {/* {new Date(updatedAt).toLocaleDateString()} */}
-                            11/02/2023
-                          </TableCell>
-                          <TableCell align="left">
-                            <div>
-                              {visibility === "public" && (
-                                // <Alert severity="warning">inActive</Alert>
-                                <Label color="success">Công khai</Label>
-                              )}
-                              {status === "active" && <Label color="success">Cái nhân</Label>}
-                            </div>
-                          </TableCell>
-                          <TableCell width="2%">
+                        <TableCell align="left">{name}</TableCell>
+                        <TableCell align="left">{visibility} K14</TableCell>
+                        <TableCell align="left">
+                          {/* {new Date(createdAt).toLocaleDateString()} */}
+                          11/02/2023
+                        </TableCell>
+                        <TableCell align="left">
+                          {/* {new Date(updatedAt).toLocaleDateString()} */}
+                          Ứng dụng xài rất tốt
+                        </TableCell>
+                        <TableCell align="left">
+                          <div>
+                            <Label color="success">True</Label>
+                          </div>
+                        </TableCell>
+                        <TableCell width="2%">
                             {<IconButton>{getIcon("ic:baseline-delete")}</IconButton>}
                           </TableCell>
                           <TableCell>{<IconButton>{getIcon("tabler:edit")}</IconButton>}</TableCell>
-                        </TableRow>
-                      );
-                    })}
+
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+              {isUserNotFound && (
+                <TableBody>
+                  <TableRow>
+                    <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
+                      <SearchNotFound searchQuery={filterName} />
+                    </TableCell>
+                  </TableRow>
                 </TableBody>
-                {isUserNotFound && (
-                  <TableBody>
-                    <TableRow>
-                      <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
-                        <SearchNotFound searchQuery={filterName} />
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                )}
-              </Table>
-            </TableContainer>
-          </Scrollbar>
+              )}
+            </Table>
+          </TableContainer>
+          {/* </Scrollbar> */}
           <TablePagination
             rowsPerPageOptions={[5, 10, 20]}
             component="div"
