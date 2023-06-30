@@ -32,6 +32,7 @@ import TextT from "layouts/page/Text";
 import ProfileCandidate from "layouts/page/user/Candidate/ProfileCandidate";
 import CampaignOwenrList from "layouts/page/user/Campaign/CampaignOwner";
 import ListForm from "layouts/page/user/ListForm";
+import NewStage from "layouts/page/stage/NewStage";
 
 //----------------------------------------------------------------
 // const routePublic = ["/user/campaign/"];
@@ -147,6 +148,10 @@ export default function Router() {
             <CampaignStage />
             // </ProtectedRouteAuthorization>
           ),
+        },
+        {
+          path: "campaign/newStage/:id",
+          element: <NewStage />,
         },
         {
           path: "feedback",

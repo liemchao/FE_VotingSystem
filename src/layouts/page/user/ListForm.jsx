@@ -27,7 +27,7 @@ import UserListHead from "layouts/sections/UserListHead";
 import Campaignlistoolbar from "layouts/sections/Campaignlistoolbar";
 import Page from "components/Layout/Page";
 import Label from "components/label/Label";
-import Scrollbar from "components/Layout/Scrollbar";
+import jwt_decode from "jwt-decode";
 import SearchNotFound from "components/Layout/SearchNotFound";
 import { callAPIgetListForm } from "../../../context/redux/action/action";
 import { useContext } from "react";
@@ -247,10 +247,9 @@ export default function ListForm() {
                           </div>
                         </TableCell>
                         <TableCell width="2%">
-                            {<IconButton>{getIcon("ic:baseline-delete")}</IconButton>}
-                          </TableCell>
-                          <TableCell>{<IconButton>{getIcon("tabler:edit")}</IconButton>}</TableCell>
-
+                          {<IconButton>{getIcon("ic:baseline-delete")}</IconButton>}
+                        </TableCell>
+                        <TableCell>{<IconButton>{getIcon("tabler:edit")}</IconButton>}</TableCell>
                       </TableRow>
                     );
                   })}

@@ -10,6 +10,8 @@ const initialState = {
   question: [],
   campainOwner: [],
   category: [],
+  type: [],
+  formByid: [],
 };
 
 export default function userReducer(state = initialState, { type, payload }) {
@@ -44,6 +46,10 @@ export default function userReducer(state = initialState, { type, payload }) {
     case PathAction.GET_CATEGORY:
       state.category = payload;
       break;
+    case PathAction.GET_TYPE:
+      state.type = payload;
+    case PathAction.GET_FORM_BY_ID:
+      state.formByid = payload;
 
     default:
       return { ...state };

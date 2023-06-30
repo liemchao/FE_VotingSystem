@@ -239,17 +239,8 @@ export const handleCreateForm = (token, data) => {
           payload: req.data.data,
         })
       );
-
-      // CustomizedToast({
-      //   message: "Bình chọn thành công ",
-      //   type: "SUCCESS",
-      // });
     } catch (error) {
-      // console.log(error);
-      // CustomizedToast({
-      //   message: "Bình chọn thất bại",
-      //   type: "SUCCESS",
-      // });
+      console.log("🚀 ~ file: action.js:243 ~ return ~ error:", error);
     }
   };
 };
@@ -285,6 +276,34 @@ export const getAllCategory = (token) => {
       dispatch(
         createAction({
           type: PathAction.GET_CATEGORY,
+          payload: res.data.data,
+        })
+      );
+    } catch (err) {}
+  };
+};
+
+export const getAllType = (token) => {
+  return async (dispatch) => {
+    try {
+      const res = await API("GET", URL_API + `/api/v1/types`, null, token);
+      dispatch(
+        createAction({
+          type: PathAction.GET_TYPE,
+          payload: res.data.data,
+        })
+      );
+    } catch (err) {}
+  };
+};
+
+export const getFormId = (token, id) => {
+  return async (dispatch) => {
+    try {
+      const res = await API("GET", URL_API + `/api/v1/forms/${id}`, null, token);
+      dispatch(
+        createAction({
+          type: PathAction.GET_FORM_BY_ID,
           payload: res.data.data,
         })
       );

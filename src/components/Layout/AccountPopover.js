@@ -55,8 +55,6 @@ export default function AccountPopover() {
   };
   hanldenullToken();
 
-  console.log(hanldenullToken()[0]);
-
   const handleClose = () => {
     localStorage.removeItem("token");
     navigate("/");

@@ -13,3 +13,6 @@ export const GET_CATEGORY = "GET_CATEGORY";
 export const SUBMIT_VOTE = "SUBMIT_VOTE";
 export const CREATE_FORM = "CREATE_FORM";
 export const CREATE_QUESTION = "CREATE_QUESTION";
+
+export const GET_TYPE = "GET_TYPE";
+export const GET_FORM_BY_ID = "GET_FORM_BY_ID";

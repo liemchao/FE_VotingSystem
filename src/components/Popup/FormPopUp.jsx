@@ -1,17 +1,22 @@
 import { Dialog, DialogContent, DialogTitle, Grid, Paper, Button, Box } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
-import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import jwt_decode from "jwt-decode";
 import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
-import Controls from "components/Control/Controls";
 import TextArea from "components/Control/TextArea";
 import Select from "components/Control/Select";
 import Input from "components/Control/Input";
 import PageHeader from "components/Layout/PageHeader";
 import Iconify from "assets/theme/components/icon/Iconify";
-import DateTime from "components/Control/DateTime";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllCategory } from "context/redux/action/action";
+import { Authen } from "context/authenToken/AuthenToken";
+import { useContext } from "react";
+import { URL_API } from "config/axios/Url/URL";
+import API from "config/axios/API/API";
+import { CustomizedToast } from "components/toast/ToastCustom";
+import { getAllType } from "context/redux/action/action";
 
 const schema = yup.object().shape({});
 
@@ -23,186 +28,341 @@ const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
 //hih
 export default function FormPopup(props) {
   const { OpenPopUp, SetOpenPopUp } = props;
+  const dispatch = useDispatch();
+  const [display, setDisplay] = useState();
+  const [typeId, setTypeId] = useState();
   const [input, setInput] = useState([]);
+  const [formId, setformId] = useState();
+
   const handleClose = () => {
     SetOpenPopUp(false);
   };
 
-  function _treat(e) {
-    const { files } = e.target;
-    let images = [];
-    const selecteds = [...[...files]];
+  const { token } = useContext(Authen);
+  const detoken = jwt_decode(token);
 
-    return selecteds.forEach((i) => images.push(URL.createObjectURL(i))), setInput(images);
-  }
+  useEffect(() => {
+    const getAPIcatagory = async () => {
+      await dispatch(getAllCategory(token));
+      await dispatch(getAllType(token));
+    };
+    getAPIcatagory();
+  }, []);
+
   const getOptions = () => [
-    { id: "active", title: "Bình chọn sao" },
-    { id: "inActive", title: "Bình chọn câu hỏi" },
-    { id: "All", title: "Bình chọn yêu thích" },
+    { id: "public", title: "Hiển thị" },
+    { id: "private", title: "Không hiển thị" },
   ];
+
+  const category = useSelector((state) => {
+    return state.category;
+  });
+  const type = useSelector((state) => {
+    return state.type;
+  });
+
+  const getCategoryOption = () => {
+    const CategoryOption = [];
+    for (var i = 0; i < category.length; i++) {
+      CategoryOption.push({
+        id: category[i].categoryId,
+        title: category[i].name,
+      });
+    }
+    return CategoryOption;
+  };
+  const getTypeOption = () => {
+    const TypeOption = [];
+    for (var i = 0; i < type.length; i++) {
+      TypeOption.push({
+        id: type[i].typeId,
+        title: type[i].name,
+      });
+    }
+    return TypeOption;
+  };
+
+  const formikAddQuestion = useFormik({
+    validationSchema: schema,
+    validateOnMount: true,
+    validateOnBlur: true,
+    initialValues: {
+      title: "",
+      content: "",
+      formId: formId,
+      typeId: "",
+      element: [
+        {
+          content: "",
+          rate: 0,
+        },
+      ],
+    },
+    onSubmit: async (values) => {
+      const data = {
+        title: "",
+        content: "",
+        formId: "",
+        typeId: "",
+        element: [
+          {
+            content: "",
+            rate: 0,
+          },
+        ],
+      };
+
+      try {
+        const req = await API("POST", URL_API + `/api/v1/forms`, data, token);
+        if (req) {
+          console.log("🚀 ~ file: FormPopUp.jsx:105 ~ onSubmit: ~ req:", req);
+          setformId(req.data.data.formId);
+        }
+      } catch (error) {
+        console.log("🚀 ~ file: FormPopUp.jsx:108 ~ onSubmit: ~ error:", error);
+
+        CustomizedToast({
+          message: "Thêm câu hỏi thất bại",
+          type: "ERROR",
+        });
+      }
+    },
+  });
 
   const formik = useFormik({
     validationSchema: schema,
     validateOnMount: true,
     validateOnBlur: true,
-    initialValues: {},
+    initialValues: {
+      name: "",
+      visibility: "",
+      categoryId: "",
+      userId: "",
+    },
     onSubmit: async (values) => {
-      const data = {};
+      const data = {
+        name: formik.values.name,
+        visibility: display,
+        categoryId: formik.values.categoryId,
+        userId: detoken.Username,
+      };
+
       try {
-        //code nè
+        const req = await API("POST", URL_API + `/api/v1/forms`, data, token);
+        if (req) {
+          console.log("🚀 ~ file: FormPopUp.jsx:105 ~ onSubmit: ~ req:", req);
+          setformId(req.data.data.formId);
+        }
       } catch (error) {
-        handleClose();
+        console.log("🚀 ~ file: FormPopUp.jsx:108 ~ onSubmit: ~ error:", error);
+
+        CustomizedToast({
+          message: "Thêm câu hỏi thất bại",
+          type: "ERROR",
+        });
       }
     },
   });
-
   return (
     <Paper>
       <Dialog maxWidth="md" open={OpenPopUp} onClose={handleClose}>
         <DialogTitle>
           <PageHeader
-            title="Tạo mới biểu mẫu"
-            subTitle="Tạo biểu mẫu cho riêng bạn"
+            title={formId ? "Tạo câu hỏi " : "Tạo mới biểu mẫu"}
+            subTitle={formId ? "Thêm câu hỏi " : "Tạo biểu mẫu cho riêng bạn"}
             icon={getIcon("gala:add")}
           />
         </DialogTitle>
-        <DialogContent>
-          <form onSubmit={formik.handleSubmit}>
-            <Box
-              sx={{
-                borderRadius: 2,
-                bgcolor: "background.paper",
-                m: 1,
-                display: "flex",
-                justifyContent: "center",
-                boxShadow: 12,
-                paddingLeft: "7%",
-                maxWidth: "xl",
-                // marginLeft: "20%",
-              }}
-            >
-              {/* // à nhớ bỏ cái form ở đây thì nó mới hiểu và làm onsubmit đc */}
 
+        <DialogContent>
+          {formId ? (
+            //id form có thì hiển thị add câu hỏi
+            //dưới đây là form add câu hỏi tuỳ filee trên API mà bỏ zô
+            <form onSubmit={formikAddQuestion.handleSubmit}>
               <Box
-                sx={{ float: "left", width: "60%", flexGrow: 1, mt: "2rem" }}
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
+                sx={{
+                  borderRadius: 2,
+                  bgcolor: "background.paper",
+                  m: 1,
+                  display: "flex",
+                  justifyContent: "center",
+                  boxShadow: 12,
+                  paddingLeft: "7%",
+                  maxWidth: "xl",
+                }}
               >
-                <Grid container spacing={1.5}>
-                  <Grid item xs={12}>
-                    <Input
-                      required
-                      variant="outlined"
-                      name="name"
-                      label="Tên Biểu Mẫu"
-                      value={""}
-                      onChange={(e) => {}}
-                    />
-                    {/* nếu sai thì nó đỏ */}
-                    {/* {formik.touched.name && formik.errors.name && (
-                      <FormHelperText error id="standard-weight-helper-text-username-login">
-                        {formik.errors.name}
-                      </FormHelperText>
-                    )} */}
+                <Box
+                  sx={{ float: "left", width: "60%", flexGrow: 1, mt: "2rem" }}
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  <Grid container spacing={1.5}>
+                    <Grid item xs={12}>
+                      <Input
+                        required
+                        variant="outlined"
+                        name="title"
+                        label="Tên câu hỏi"
+                        value={formikAddQuestion.values.title}
+                        onChange={(event) => {
+                          formik.handleChange(event);
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Input
+                        required
+                        variant="outlined"
+                        name="content"
+                        label="Nội dung"
+                        value={formikAddQuestion.values.name}
+                        onChange={(event) => {
+                          formik.handleChange(event);
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Box
+                        sx={{
+                          flexDirection: "row",
+                        }}
+                      >
+                        <Select
+                          name="typeId"
+                          required
+                          label="Loại biểu mẫu"
+                          width="14rem"
+                          height="10rem"
+                          onChange={(e) => {
+                            const a = type.find((c) => c.typeId === e.target.value);
+                            formikAddQuestion.setFieldValue("typeId", a.typeId);
+                            console.log(a.typeId);
+                            setTypeId(a.typeId);
+                          }}
+                          options={getTypeOption()}
+                        />
+                      </Box>
+                    </Grid>
+                    {typeId === "f83e19ad-b21d-4295-bd2b-2e6eb4a94387" && (
+                      // có ID thì ren der ra tạo câu trả lời
+                      <Grid item xs={12}>
+                        <Box
+                          sx={{
+                            flexDirection: "row",
+                          }}
+                        >
+                          <Input
+                            required
+                            variant="outlined"
+                            name="content"
+                            label="Nội dung"
+                            value={formikAddQuestion.values.content}
+                            onChange={(event) => {
+                              formik.handleChange(event);
+                            }}
+                          />
+                        </Box>
+                      </Grid>
+                    )}
+
+                    <Box width="200px" marginTop={"10%"} ml={"12rem"} mb={"2rem"}>
+                      <ButtonCustomize
+                        variant="contained"
+                        type="submit"
+                        nameButton="Thêm"
+                        bgColor="#F6911B"
+                      />
+                    </Box>
                   </Grid>
-                  <Grid item xs={10}>
+                </Box>
+              </Box>
+            </form>
+          ) : (
+            <form onSubmit={formik.handleSubmit}>
+              <Box
+                sx={{
+                  borderRadius: 2,
+                  bgcolor: "background.paper",
+                  m: 1,
+                  display: "flex",
+                  justifyContent: "center",
+                  boxShadow: 12,
+                  paddingLeft: "7%",
+                  maxWidth: "xl",
+                }}
+              >
+                <Box
+                  sx={{ float: "left", width: "60%", flexGrow: 1, mt: "2rem" }}
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  <Grid container spacing={1.5}>
                     <Grid item xs={12}>
                       <Input
                         required
                         variant="outlined"
                         name="name"
-                        label="Loại câu hỏi"
-                        value={""}
-                        onChange={(e) => {}}
-                      />
-                      {/* nếu sai thì nó đỏ */}
-                      {/* {formik.touched.name && formik.errors.name && (
-                      <FormHelperText error id="standard-weight-helper-text-username-login">
-                        {formik.errors.name}
-                      </FormHelperText>
-                    )} */}
-                    </Grid>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Box
-                      sx={{
-                        // display: "flex",
-                        flexDirection: "row",
-                      }}
-                    >
-                      <Select
-                        name="foodCategoryId"
-                        required
-                        label="Loại biểu mẫu"
-                        width="14rem"
-                        height="10rem"
-                        onChange={(e) => {
-                          console.log(e);
+                        label="Tên Biểu Mẫu"
+                        value={formik.values.name}
+                        onChange={(event) => {
+                          formik.handleChange(event);
                         }}
-                        options={getOptions()}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Box
+                        sx={{
+                          flexDirection: "row",
+                        }}
+                      >
+                        <Select
+                          name="categoryId"
+                          required
+                          label="Loại biểu mẫu"
+                          width="14rem"
+                          height="10rem"
+                          onChange={(e) => {
+                            const a = category.find((c) => c.categoryId === e.target.value);
+                            formik.setFieldValue("categoryId", a.categoryId);
+                          }}
+                          options={getCategoryOption()}
+                        />
+                      </Box>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Box
+                        sx={{
+                          flexDirection: "row",
+                        }}
+                      >
+                        <Select
+                          name="visibility"
+                          required
+                          label="Hiển thị"
+                          width="14rem"
+                          height="10rem"
+                          onChange={(e) => {
+                            setDisplay(e.target.value);
+                          }}
+                          options={getOptions()}
+                        />
+                      </Box>
+                    </Grid>
+                    <Box width="200px" marginTop={"10%"} ml={"12rem"} mb={"2rem"}>
+                      <ButtonCustomize
+                        variant="contained"
+                        type="submit"
+                        nameButton="Thêm"
+                        bgColor="#F6911B"
                       />
                     </Box>
                   </Grid>
-                  <Grid item xs={12}>
-                    <TextArea
-                      columns={12}
-                      width="85%"
-                      row={6}
-                      maxRows={6}
-                      multiline
-                      variant="outlined"
-                      required
-                      label="Mô tả"
-                      name="description"
-                      // value=""
-                      //   onChange={(e) => {}}
-                    />
-                  </Grid>
-
-                  <Box width="200px" marginTop={"10%"} ml={"12rem"} mb={"2rem"}>
-                    <ButtonCustomize
-                      variant="contained"
-                      type="submit"
-                      nameButton="Thêm"
-                      bgColor="#F6911B"
-                    />
-                  </Box>
-                </Grid>
+                </Box>
               </Box>
-
-              <Box sx={{ float: "left", width: "30%", mt: "2rem" }}>
-                <label htmlFor="contained-button-file">
-                  <input
-                    accept="image/*"
-                    id="contained-button-file"
-                    multiple
-                    type="file"
-                    onChange={_treat}
-                    style={{ display: "none" }}
-                  />
-                  <Button variant="contained" component="span" sx={{ marginLeft: "10%" }}>
-                    Tải lên...
-                  </Button>
-                  <Box
-                    sx={{
-                      height: 165,
-                      width: 165,
-                      maxHeight: { xs: 233, md: 167 },
-                      maxWidth: { xs: 350, md: 250 },
-                      marginTop: "10%",
-                      marginLeft: "11%",
-                    }}
-                  >
-                    {/* hiển thị hình lên  */}
-                    {input.map((i) => (
-                      <img key={i} src={i} alt="hihi" />
-                    ))}
-                  </Box>
-                </label>
-              </Box>
-            </Box>
-          </form>
+            </form>
+          )}
         </DialogContent>
       </Dialog>
     </Paper>
