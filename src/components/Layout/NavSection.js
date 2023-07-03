@@ -7,6 +7,7 @@ import { Box, List, Collapse, ListItemText, ListItemIcon, ListItemButton } from 
 import Iconify from "assets/theme/components/icon/Iconify";
 import { Authen } from "../../context/authenToken/AuthenToken";
 import jwt_decode from "jwt-decode";
+import { whiteColor } from "assets/jss/material-dashboard-react";
 // ----------------------------------------------------------------------
 
 const ListItemStyle = styled((props) => <ListItemButton disableGutters {...props} />)(
@@ -15,11 +16,11 @@ const ListItemStyle = styled((props) => <ListItemButton disableGutters {...props
     height: 48,
     position: "relative",
     // textTransform: "capitalize",
-    color: theme.palette.text.secondary,
+    color: whiteColor,
     borderRadius: theme.shape.borderRadius,
     ":hover": {
-      backgroundColor: "#F7941D",
-      color: "black",
+      backgroundColor: "#F27323",
+      color: "white",
     },
   })
 );
@@ -54,11 +55,11 @@ function NavItem({ item, active }) {
   const activeRootStyle = {
     color: "white",
     fontWeight: "fontWeightMedium",
-    bgcolor: "#F7941D",
+    bgcolor: "orange",
   };
 
   const activeSubStyle = {
-    color: "#F7941D",
+    color: "white",
     fontWeight: "fontWeightMedium",
   };
 
@@ -84,14 +85,14 @@ function NavItem({ item, active }) {
         {(children || subItems) && (
           <Collapse in={open} timeout="auto">
             {children && (
-              <List component="div" disablePadding sx={{ left: "3%" }}>
+              <List component="div" disablePadding sx={{ left: "1%" }}>
                 {children.map((child) => (
                   <NavItem key={child.title} item={child} active={active} />
                 ))}
               </List>
             )}
             {subItems && (
-              <List component="div" disablePadding sx={{ left: "6%" }}>
+              <List component="div" disablePadding sx={{ left: "4%" }}>
                 {subItems.map((subItem) => (
                   <ListItemStyle
                     key={subItem.title}

@@ -16,7 +16,7 @@ import API from "config/axios/API/API";
 import { URL_API } from "config/axios/Url/URL";
 
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
-import ViewForm from "components/Popup/ViewForm";
+import ViewForm from "components/Popup/create/ViewForm";
 
 const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
 
@@ -53,6 +53,9 @@ export default function NewStage() {
     }
     return item;
   };
+  const handleNavigate = () => {
+    Navigate(`/user/campaign/${id}`);
+  };
 
   const formik = useFormik({
     //gắn schema để so sánh
@@ -83,7 +86,7 @@ export default function NewStage() {
       try {
         const res = await API("POST", URL_API + "/api/v1/stages", data, token);
         CustomizedToast({
-          message: `Đã tạo thành công ${formik.values.name}`,
+          message: `Đã tạo thành công ${formik.values.title}`,
           type: "SUCCESS",
         });
       } catch (error) {
@@ -102,7 +105,7 @@ export default function NewStage() {
       <PageHeader
         width="60%"
         marginLeft="20%"
-        title="Toạ chiến dịch"
+        title="Tạo giai đoạn"
         subTitle="Vui lòng điền đầy đủ thông tin "
         icon={getIcon("emojione-monotone:pot-of-food")}
       />
@@ -131,9 +134,9 @@ export default function NewStage() {
                 <Controls.Input
                   required
                   variant="outlined"
-                  name="name"
+                  name="title"
                   label="Tên"
-                  value={formik.values.title || ""}
+                  value={formik.values.title}
                   onChange={(e) => {
                     formik.handleChange(e);
                   }}
@@ -244,10 +247,22 @@ export default function NewStage() {
                   </FormHelperText>
                 )}
               </Grid>
+              <Box>
+                <Stack width="200px" marginTop={"10%"} ml={"9rem"} mb={"2rem"}>
+                  <ButtonCustomize
+                    variant="contained"
+                    type="button"
+                    onClick={() => {
+                      handleNavigate();
+                    }}
+                    nameButton="Trở về"
+                  />
+                </Stack>
+              </Box>
 
               <Box>
                 <Stack width="200px" marginTop={"10%"} ml={"9rem"} mb={"2rem"}>
-                  <ButtonCustomize variant="contained" type="submit" nameButton="Thêm Candidate" />
+                  <ButtonCustomize variant="contained" type="submit" nameButton="Thêm giai đoạn" />
                 </Stack>
               </Box>
             </Grid>

@@ -20,12 +20,10 @@ import { getAllType } from "context/redux/action/action";
 
 const schema = yup.object().shape({});
 
-//geticon link https://icon-sets.iconify.design/
+
 const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
 
-// const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
-// const checkedIcon = <CheckBoxIcon fontSize="small" />;
-//hih
+
 export default function FormPopup(props) {
   const { OpenPopUp, SetOpenPopUp } = props;
   const dispatch = useDispatch();

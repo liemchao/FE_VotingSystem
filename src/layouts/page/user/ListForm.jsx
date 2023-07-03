@@ -32,8 +32,8 @@ import SearchNotFound from "components/Layout/SearchNotFound";
 import { callAPIgetListForm } from "../../../context/redux/action/action";
 import { useContext } from "react";
 import { Authen } from "../../../context/authenToken/AuthenToken.jsx";
-import FormPopup from "components/Popup/FormPopUp";
 import Iconify from "assets/theme/components/icon/Iconify";
+import FormPopup from "components/Popup/create/FormPopUp";
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [

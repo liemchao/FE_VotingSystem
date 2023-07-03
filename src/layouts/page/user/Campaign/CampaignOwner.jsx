@@ -1,4 +1,4 @@
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { Link as RouterLink, useLocation, useNavigate, useParams } from "react-router-dom";
 import React from "react";
 import { styled } from "@mui/material/styles";
 import { useState } from "react";
@@ -20,18 +20,22 @@ import { useContext } from "react";
 import { Authen } from "context/authenToken/AuthenToken";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import NewPopUp from "components/Popup/NewPopUp";
+
 import { useCallback } from "react";
 import { GetCampaignbyUserId } from "context/redux/action/action";
 import jwt_decode from "jwt-decode";
+import NewPopUp from "components/Popup/create/NewPopUp";
+import { handleGetCampaignById } from "context/redux/action/action";
 
 export default function CampaignOwenrList() {
+  const navigate = useNavigate();
+
   //   const handleinvite = () => {
   //     navigate("/user/allcampaign");
   //   };
   const ColorButton = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText("#FFCC32"),
-    backgroundColor: "#FFCC33",
+    color: "#FFFFFF",
+    backgroundColor: "#2BB557",
     "&:hover": {
       backgroundColor: "#ffee32",
     },
@@ -42,7 +46,7 @@ export default function CampaignOwenrList() {
 
   const { token } = useContext(Authen);
   const decode = jwt_decode(token);
-  
+
   const dispatch = useDispatch();
   useEffect(() => {
     const callAPI = async () => {
@@ -55,6 +59,10 @@ export default function CampaignOwenrList() {
     return state.campainOwner;
   });
 
+  const handleCampaignStage = async (id, navigate) => {
+    await dispatch(handleGetCampaignById(id, navigate));
+  };
+
   const handleClickOpen = useCallback(() => {
     SetOpenPopUp(true);
   }, []);
@@ -62,7 +70,7 @@ export default function CampaignOwenrList() {
   return (
     <Page title="User">
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+        <Stack direction="row" alignItems="center" justifyContent="flex-end" mb={5}>
           <Typography variant="h4" gutterBottom>
             <ColorButton
               variant="contained"
@@ -108,7 +116,13 @@ export default function CampaignOwenrList() {
                   <Button type="button" size="small">
                     <ColorButton>Tham gia</ColorButton>
                   </Button>
-                  <Button type="button" size="small">
+                  <Button
+                    onClick={() => {
+                      handleCampaignStage(item.campaignId, navigate);
+                    }}
+                    type="button"
+                    size="small"
+                  >
                     <ColorButton>Cài đặt</ColorButton>
                   </Button>
                 </CardActions>

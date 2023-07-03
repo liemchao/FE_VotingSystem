@@ -7,7 +7,7 @@ import { handleGetCandidateByIdCampaign } from "context/redux/action/action";
 import { Authen } from "context/authenToken/AuthenToken";
 import { useContext } from "react";
 import Iconify from "assets/theme/components/icon/Iconify";
-import ElementPopUp from "components/Popup/ElementPopUp";
+import ElementPopUp from "components/Popup/create/ElementPopUp";
 
 export default function Element() {
   const [OpenPopUp, SetOpenPopUp] = useState(false);

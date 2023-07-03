@@ -17,11 +17,11 @@ import Iconify from "assets/theme/components/icon/Iconify";
 import Box from "@mui/material/Box";
 import Select from "components/Control/Select";
 import { styled } from "@mui/material/styles";
-import QuestionPopUp from "components/Popup/QuestionPopUp";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { handleGetQuestByIdCampaign } from "context/redux/action/action";
 import { Authen } from "context/authenToken/AuthenToken";
+import QuestionPopUp from "components/Popup/create/CreateQuestionPopUp";
 
 export default function ListCandidate() {
   const [OpenPopUp, SetOpenPopUp] = useState(false);

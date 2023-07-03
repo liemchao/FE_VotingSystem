@@ -22,9 +22,9 @@ import { Authen } from "../../context/authenToken/AuthenToken";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { callAPIgetListCampaigns } from "../../context/redux/action/action";
-import NewPopUp from "components/Popup/NewPopUp";
 import { useCallback } from "react";
 import BadgeAvatars from "./user/icontop/icontop";
+import NewPopUp from "components/Popup/create/NewPopUp";
 
 export default function AllCampaignList() {
   const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
@@ -33,10 +33,10 @@ export default function AllCampaignList() {
     navigate("/user/allcampaign");
   };
   const ColorButton = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText("#FFEE32"),
-    backgroundColor: "#FFEE32",
+    color: "#FFFFFF",
+    backgroundColor: "#2BB557",
     "&:hover": {
-      backgroundColor: "#FFEE32",
+      backgroundColor: "#71C043",
     },
     display: "center",
   }));
@@ -63,7 +63,7 @@ export default function AllCampaignList() {
   return (
     <Page title="User">
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+        <Stack direction="row" alignItems="center" justifyContent="flex-end" mb={5}>
           <Typography variant="h4" gutterBottom>
             <ColorButton
               variant="contained"

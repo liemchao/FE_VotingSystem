@@ -16,7 +16,7 @@ import {
   LinearProgress,
   Icon,
 } from "@mui/material";
-import QRPopUp from "components/Popup/QRPopUp";
+import QRPopUp from "components/Popup/create/QRPopUp";
 import Badge from "@mui/material/Badge";
 import Avatar from "@mui/material/Avatar";
 import Page from "components/Layout/Page";
@@ -25,10 +25,11 @@ import { Authen } from "context/authenToken/AuthenToken";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { callAPIgetListCampaigns, handleGetCampaignById } from "context/redux/action/action";
-import NewPopUp from "components/Popup/NewPopUp";
+
 import { useCallback } from "react";
 import BadgeAvatars from "./icontop/icontop";
 import Iconify from "assets/theme/components/icon/Iconify";
+import NewPopUp from "components/Popup/create/NewPopUp";
 
 export const createAction = ({ type, payload }) => {
   return { type, payload };
@@ -44,10 +45,10 @@ export default function CampaignList() {
   const [open, setopen] = useState(false);
 
   const ColorButton = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText("#FFCC32"),
-    backgroundColor: "#FFCC33",
+    color: "#FFFFFF",
+    backgroundColor: "#2BB557",
     "&:hover": {
-      backgroundColor: "#ffee32",
+      backgroundColor: "#71C043",
     },
     display: "center",
   }));
@@ -70,12 +71,10 @@ export default function CampaignList() {
     setopen(true);
     setLink(window.location.href + "/" + id);
   };
-  console.log(campaigns.campaignId);
 
   const handleClickOpen = useCallback(() => {
     SetOpenPopUp(true);
   }, []);
-  console.log(location.pathname);
 
   const handleCampaignStage = async (id, navigate) => {
     await dispatch(handleGetCampaignById(id, navigate));
@@ -118,12 +117,10 @@ export default function CampaignList() {
   return (
     <Page title="User">
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+        <Stack direction="row" alignItems="center" justifyContent="flex-end" mb={5}>
           <Typography variant="h4" gutterBottom>
             <ColorButton
               variant="contained"
-              // component={RouterLink}
-              // to="#"
               onClick={() => {
                 handleClickOpen();
               }}
@@ -135,7 +132,7 @@ export default function CampaignList() {
         <Box>
           {campaigns.map((item) => {
             return (
-              <Card sx={{ maxWidth: 1000, maxHeight: 400, paddingLeft: "1rem" }}>
+              <Card sx={{ maxWidth: 1300, maxHeight: 400, paddingLeft: "1rem" }}>
                 <CardMedia
                   sx={{ height: 70 }}
                   image="https://media.istockphoto.com/id/165515133/vi/vec-to/voting-hands-and-ballot-box.jpg?s=1024x1024&w=is&k=20&c=VKlxd59_HCpxXXTHjcVsUK_IMEgw4D8yGtYkE5CIUgo="
@@ -172,7 +169,7 @@ export default function CampaignList() {
                     />
                   </Box>
                 </CardContent>
-                <CardActions sx={{ marginLeft: "80%" }}>
+                <CardActions sx={{ justifyContent: "flex-end" }}>
                   <Button
                     sx={{ marginLeft: "-4%" }}
                     onClick={() => handleGetQR(item.campaignId)}
