@@ -25,16 +25,18 @@ export default function ButtonCustomize(props) {
     paddingLeft,
     variant,
     marginRight,
+    hovercolor,
   } = props;
   const ColorButton = styled(Button)(({ theme }) => ({
     // color: theme.palette.getContrastText("#ffff"),
     backgroundColor: bgColor,
     "&:hover": {
-      backgroundColor: orange[700],
+      backgroundColor: hovercolor,
       color: "white",
     },
     display: "center",
     textTransform: "none",
+    color: "white",
     fontFamily: [
       "-apple-system",
       "BlinkMacSystemFont",

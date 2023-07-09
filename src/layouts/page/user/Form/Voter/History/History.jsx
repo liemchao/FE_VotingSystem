@@ -18,6 +18,8 @@ import {
   IconButton,
   Button,
 } from "@mui/material";
+import jwt_decode from "jwt-decode";
+
 // components
 
 import { useDispatch } from "react-redux";
@@ -81,6 +83,7 @@ function applySortFilter(array, comparator, query) {
 //getICon
 
 export default function HistoryUser() {
+  const navigate = useNavigate();
   const [page, setPage] = useState(0);
 
   const [order, setOrder] = useState("asc");
@@ -92,6 +95,8 @@ export default function HistoryUser() {
   const [filterName, setFilterName] = useState("");
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const { token } = useContext(Authen);
+  const decode = jwt_decode(token);
 
   // const [open, setOpen] = React.useState(false);
   const [open, setOpen] = React.useState(false);
@@ -107,11 +112,10 @@ export default function HistoryUser() {
 
   const dispatch = useDispatch();
   const Navigate = useNavigate();
-  const { token, decode } = useContext(Authen);
 
   React.useEffect(() => {
     const callAPI = async () => {
-      await dispatch(callAPIgetListHistory(decode.userName, token));
+      await dispatch(callAPIgetListHistory(decode.Username, token));
     };
     callAPI();
   }, [dispatch, token]);
@@ -228,8 +232,8 @@ export default function HistoryUser() {
                           </Typography>
                         </TableCell>
                         <TableCell align="left">
-                          {actionTypeName === "đã thay đổi" && (
-                            <Label color="warning">Đã thay đổi</Label>
+                          {actionTypeName === "Chưa bình chọn" && (
+                            <Label color="warning">Chưa bình chọn</Label>
                           )}
                           {actionTypeName === "đã bình chọn" && (
                             <Label color="success">Đã bình chọn</Label>

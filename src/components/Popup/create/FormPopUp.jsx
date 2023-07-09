@@ -20,9 +20,7 @@ import { getAllType } from "context/redux/action/action";
 
 const schema = yup.object().shape({});
 
-
 const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
-
 
 export default function FormPopup(props) {
   const { OpenPopUp, SetOpenPopUp } = props;
@@ -31,6 +29,8 @@ export default function FormPopup(props) {
   const [typeId, setTypeId] = useState();
   const [input, setInput] = useState([]);
   const [formId, setformId] = useState();
+  const [rate, setRate] = useState();
+  const [answer, setAnsewer] = useState();
 
   const handleClose = () => {
     SetOpenPopUp(false);
@@ -46,11 +46,22 @@ export default function FormPopup(props) {
     };
     getAPIcatagory();
   }, []);
+  const getRate = () => [
+    { id: "1", title: "1" },
+    { id: "2", title: "2" },
+    { id: "3", title: "3" },
+    { id: "4", title: "4" },
+  ];
 
   const getOptions = () => [
     { id: "public", title: "Hiển thị" },
     { id: "private", title: "Không hiển thị" },
   ];
+  const handlegetRate = (e) => {
+    setRate(e.target.value);
+  };
+
+  // useEffect(() => {}, []);
 
   const category = useSelector((state) => {
     return state.category;
@@ -91,30 +102,36 @@ export default function FormPopup(props) {
       typeId: "",
       element: [
         {
-          content: "",
-          rate: 0,
+          answer: "",
+          rate: " ",
         },
       ],
     },
     onSubmit: async (values) => {
-      const data = {
-        title: "",
-        content: "",
-        formId: "",
-        typeId: "",
+      const dataquetion = {
+        title: formik.values.title,
+        content: formik.values.content,
+        formId: formId,
+        typeId: typeId,
         element: [
           {
-            content: "",
-            rate: 0,
+            answer: answer,
+            rate: rate,
+          },
+          {
+            answer: answer,
+            rate: rate,
           },
         ],
       };
 
       try {
-        const req = await API("POST", URL_API + `/api/v1/forms`, data, token);
-        if (req) {
-          console.log("🚀 ~ file: FormPopUp.jsx:105 ~ onSubmit: ~ req:", req);
-          setformId(req.data.data.formId);
+        const res = await API("POST", URL_API + `/api/v1/questions/elements`, dataquetion, token);
+        if (res) {
+          CustomizedToast({
+            message: "Thêm câu hỏi thành công",
+            type: "SUCCESS",
+          });
         }
       } catch (error) {
         console.log("🚀 ~ file: FormPopUp.jsx:108 ~ onSubmit: ~ error:", error);
@@ -155,7 +172,7 @@ export default function FormPopup(props) {
         console.log("🚀 ~ file: FormPopUp.jsx:108 ~ onSubmit: ~ error:", error);
 
         CustomizedToast({
-          message: "Thêm câu hỏi thất bại",
+          message: "Thêm biểu mẫu thất bại",
           type: "ERROR",
         });
       }
@@ -247,19 +264,36 @@ export default function FormPopup(props) {
                       <Grid item xs={12}>
                         <Box
                           sx={{
-                            flexDirection: "row",
+                            display: "flex",
                           }}
                         >
-                          <Input
-                            required
-                            variant="outlined"
-                            name="content"
-                            label="Nội dung"
-                            value={formikAddQuestion.values.content}
-                            onChange={(event) => {
-                              formik.handleChange(event);
+                          <Box
+                            sx={{
+                              width: "30rem",
                             }}
-                          />
+                          >
+                            <Input
+                              required
+                              variant="outlined"
+                              name="answer"
+                              label="Câu trả lời"
+                              value={formikAddQuestion.values.answer}
+                              onChange={(event) => {
+                                setAnsewer(event.target.value);
+                              }}
+                            />
+                          </Box>
+                          <Box sx={{ width: "6rem" }}>
+                            <Select
+                              name="rate"
+                              required
+                              label="Điểm"
+                              onChange={(e) => {
+                                handlegetRate(e);
+                              }}
+                              options={getRate()}
+                            />
+                          </Box>
                         </Box>
                       </Grid>
                     )}
@@ -269,7 +303,8 @@ export default function FormPopup(props) {
                         variant="contained"
                         type="submit"
                         nameButton="Thêm"
-                        bgColor="#F6911B"
+                        bgColor="#71C043"
+                        hovercolor="#2BB557"
                       />
                     </Box>
                   </Grid>

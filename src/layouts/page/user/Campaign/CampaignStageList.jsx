@@ -1,7 +1,16 @@
 // import { filter } from "lodash";
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect } from "react";
-import { Card, Button, Typography, CardMedia, CardContent, CardActions, Grid } from "@mui/material";
+import {
+  Card,
+  Button,
+  Typography,
+  CardMedia,
+  CardContent,
+  CardActions,
+  Grid,
+  Rating,
+} from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { handleGetCandidateByIdCampaign } from "context/redux/action/action";
 import { Authen } from "context/authenToken/AuthenToken";
@@ -70,6 +79,7 @@ export default function CampaignStageList() {
               <Typography variant="body1" color="text.secondary">
                 "Hãy giúp chúng tôi bình chọn 1 người xứng đáng cho vị trí lớp trưởng"
               </Typography>
+              <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
             </CardContent>
             <CardActions>
               <Button

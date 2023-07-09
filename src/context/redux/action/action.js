@@ -125,7 +125,12 @@ export const callAPIgetListCandidates = (token) => {
 export const callAPIgetListHistory = (userName, token) => {
   return async (dispatch) => {
     try {
-      const res = await API("GET", URL_API + `/api/v1/actionhistory/user`, userName, token);
+      const res = await API(
+        "GET",
+        URL_API + `/api/v1/action-histories/user/${userName}`,
+        null,
+        token
+      );
       dispatch(
         createAction({
           type: PathAction.GET_LIST_HISTORY,
@@ -283,6 +288,20 @@ export const getAllCategory = (token) => {
   };
 };
 
+export const getAllUser = (token) => {
+  return async (dispatch) => {
+    try {
+      const res = await API("GET", URL_API + `/api/v1/account`, null, token);
+      dispatch(
+        createAction({
+          type: PathAction.GET_LIST_CANDIDATE_ACCOUNT,
+          payload: res.data.data,
+        })
+      );
+    } catch (err) {}
+  };
+};
+
 export const getAllType = (token) => {
   return async (dispatch) => {
     try {
@@ -308,5 +327,39 @@ export const getFormId = (token, id) => {
         })
       );
     } catch (err) {}
+  };
+};
+export const getCampaignId = (id, token) => {
+  return async (dispatch) => {
+    try {
+      const res = await API("GET", URL_API + `/api/v1/campaigns/${id}`, null, token);
+      dispatch(
+        createAction({
+          type: PathAction.GET_CAMPAIGN_BY_ID,
+          payload: res.data.data,
+        })
+      );
+    } catch (err) {}
+  };
+};
+
+export const DeleteCampaignId = (id, data, token) => {
+  return async (dispatch) => {
+    try {
+      const res = await API("DELETE", URL_API + `/api/v1/campaigns/${id}`, data, token);
+      if (res) {
+        console.log(res);
+        CustomizedToast({
+          message: "Thêm câu hỏi thành công ",
+          type: "SUCCESS",
+        });
+      }
+    } catch (err) {
+      console.log(err);
+      CustomizedToast({
+        message: "Thêm câu hỏi thất bại",
+        type: "ERROR",
+      });
+    }
   };
 };

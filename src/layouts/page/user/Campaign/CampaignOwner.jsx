@@ -26,6 +26,14 @@ import { GetCampaignbyUserId } from "context/redux/action/action";
 import jwt_decode from "jwt-decode";
 import NewPopUp from "components/Popup/create/NewPopUp";
 import { handleGetCampaignById } from "context/redux/action/action";
+import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
+import UpdateCampaign from "components/Popup/updatePopup/UpdateCampaign";
+import API from "config/axios/API/API";
+import { URL_API } from "config/axios/Url/URL";
+import data from "layouts/dashboard/components/Projects/data";
+import { getCampaignId } from "context/redux/action/action";
+import AlertDialog from "components/Popup/delete/Dialog";
+import AddCandidate from "components/Popup/add/AddCandidate";
 
 export default function CampaignOwenrList() {
   const navigate = useNavigate();
@@ -43,7 +51,10 @@ export default function CampaignOwenrList() {
   }));
 
   const [OpenPopUp, SetOpenPopUp] = useState(false);
-
+  const [OpenDiaLog, SetOpenDialog] = useState(false);
+  const [OpenUpdate, SetOpenUpdate] = useState(false);
+  const [newCandidate, setNewCandidate] = useState(false);
+  const [id, setId] = useState();
   const { token } = useContext(Authen);
   const decode = jwt_decode(token);
 
@@ -67,32 +78,46 @@ export default function CampaignOwenrList() {
     SetOpenPopUp(true);
   }, []);
 
+  const handleClickOpenDialog = useCallback(
+    (id) => {
+      setId(id);
+      SetOpenDialog(true);
+    },
+    [id]
+  );
+  const handleClickUpdate = useCallback(
+    (id) => {
+      setId(id);
+      dispatch(getCampaignId(id, token));
+      SetOpenUpdate(true);
+    },
+    [id]
+  );
+  const handleClickNewUser = useCallback((id) => {
+    setId(id);
+    setNewCandidate(true);
+  }, []);
+
   return (
     <Page title="User">
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="flex-end" mb={5}>
           <Typography variant="h4" gutterBottom>
-            <ColorButton
-              variant="contained"
-              // component={RouterLink}
-              // to="#"
+            <ButtonCustomize
+              nameButton="Thêm Chiến Dịch"
+              bgColor="#71C043"
+              hovercolor="#2BB557"
               onClick={() => {
                 handleClickOpen();
               }}
-            >
-              Thêm Chiến Dịch
-            </ColorButton>
+            />
           </Typography>
         </Stack>
         <Box>
           {campainOwner.map((item) => {
             return (
-              <Card sx={{ maxWidth: 1000, maxHeight: 400, paddingLeft: "1rem", marginTop: "2%" }}>
-                <CardMedia
-                  sx={{ height: 70 }}
-                  image="https://media.istockphoto.com/id/165515133/vi/vec-to/voting-hands-and-ballot-box.jpg?s=1024x1024&w=is&k=20&c=VKlxd59_HCpxXXTHjcVsUK_IMEgw4D8yGtYkE5CIUgo="
-                  title="green iguana"
-                />
+              <Card sx={{ maxWidth: 1300, maxHeight: 400, paddingLeft: "1rem", marginTop: "2%" }}>
+                <CardMedia sx={{ height: 70 }} image={item.imgUrl} title="green iguana" />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     {item.title}
@@ -100,23 +125,35 @@ export default function CampaignOwenrList() {
                   <Typography variant="body2" color="text.secondary">
                     {item.userName}
                   </Typography>
-                  <LinearProgress
-                    variant="determinate"
-                    value={20}
-                    sx={{ borderRadius: 10, bgcolor: "primary.main", height: 10 }}
-                  />
-                  <Typography variant="h6" component="div" sx={{ mt: 1 }}>
-                    50%
-                  </Typography>
                 </CardContent>
-                <CardActions sx={{ marginLeft: "70%" }}>
-                  <Button sx={{ marginLeft: "-4%" }} size="small">
-                    <ColorButton>Chia sẻ</ColorButton>
-                  </Button>
-                  <Button type="button" size="small">
-                    <ColorButton>Tham gia</ColorButton>
-                  </Button>
-                  <Button
+                <CardActions sx={{ justifyContent: "flex-end" }}>
+                  <ButtonCustomize nameButton="Chia sẻ" bgColor="#71C043" hovercolor="#2BB557" />
+                  <ButtonCustomize
+                    nameButton="Cài đặt"
+                    bgColor="#71C043"
+                    hovercolor="#2BB557"
+                    onClick={() => {
+                      handleCampaignStage(item.campaignId, navigate);
+                    }}
+                  />
+                  <ButtonCustomize
+                    nameButton="Kết quả"
+                    bgColor="#71C043"
+                    hovercolor="#2BB557"
+                    onClick={() => {
+                      // handleCampaignStage(item.campaignId, navigate);
+                    }}
+                  />
+
+                  <ButtonCustomize
+                    nameButton="Chỉnh sửa"
+                    bgColor="#71C043"
+                    hovercolor="#2BB557"
+                    onClick={() => {
+                      handleClickUpdate(item.campaignId);
+                    }}
+                  />
+                  {/* <Button
                     onClick={() => {
                       handleCampaignStage(item.campaignId, navigate);
                     }}
@@ -124,13 +161,33 @@ export default function CampaignOwenrList() {
                     size="small"
                   >
                     <ColorButton>Cài đặt</ColorButton>
-                  </Button>
+                  </Button> */}
+                  <ButtonCustomize
+                    nameButton="Xóa"
+                    bgColor="#71C043"
+                    hovercolor="#2BB557"
+                    onClick={() => {
+                      handleClickOpenDialog(item.campaignId);
+                    }}
+                  />
+
+                  <ButtonCustomize
+                    nameButton="Thêm ứng cử viên"
+                    bgColor="#71C043"
+                    hovercolor="#2BB557"
+                    onClick={() => {
+                      handleClickNewUser(item.campaignId);
+                    }}
+                  />
                 </CardActions>
               </Card>
             );
           })}
         </Box>
       </Container>
+      <AddCandidate OpenPopUp={newCandidate} SetOpenPopUp={setNewCandidate} id={id} />
+      <UpdateCampaign OpenEditCampaign={OpenUpdate} SetOpenEditCampaign={SetOpenUpdate} id={id} />
+      <AlertDialog OpenDialog={OpenDiaLog} SetOpenDialog={SetOpenDialog} id={id} />
       <NewPopUp OpenPopUp={OpenPopUp} SetOpenPopUp={SetOpenPopUp} />
     </Page>
   );

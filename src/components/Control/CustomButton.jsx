@@ -14,9 +14,7 @@ const ColorButton = styled(Button)(({ theme }) => ({
 export default function CustomButton() {
   return (
     <Stack spacing={2} direction="row" width="200px">
-      <ColorButton variant="contained" to="">
-        Create{" "}
-      </ColorButton>
+      <ColorButton variant="outline" to=""></ColorButton>
     </Stack>
   );
 }

@@ -16,6 +16,7 @@ import { getAllCategory } from "context/redux/action/action";
 import { CustomizedToast } from "components/toast/ToastCustom";
 import { URL_API } from "config/axios/Url/URL";
 import API from "config/axios/API/API";
+import moment from "moment";
 import { GetCampaignbyUserId } from "context/redux/action/action";
 
 const schema = yup.object().shape({});
@@ -30,17 +31,22 @@ export default function NewPopUp(props) {
   const [display, setDisplay] = useState();
   const [dateCreate, setDateCreate] = useState();
   const [dateEnd, setDateEnd] = useState();
-  const formdata = new FormData();
+  const formData = new FormData();
   const handleClose = () => {
     SetOpenPopUp(false);
   };
   const decode = jwt_decode(token);
+
   function _treat(e) {
     const { files } = e.target;
     let images = [];
     const selecteds = [...[...files]];
-
-    return selecteds.forEach((i) => images.push(URL.createObjectURL(i))), setInput(images);
+    formik.setFieldValue("ImageFile", e.target.files[0]);
+    return (
+      selecteds.forEach((i) => images.push(URL.createObjectURL(i))),
+      formData.append("File", selecteds),
+      setInput(images)
+    );
   }
 
   useEffect(() => {
@@ -79,29 +85,23 @@ export default function NewPopUp(props) {
       startTime: "",
       userId: "",
       categoryId: "",
+      endTime: "",
+      ImageFile: "",
     },
     onSubmit: async (values) => {
-      formdata.append("title", formik.values.title);
-      formdata.append("startTime", dateCreate);
-      formdata.append("endTime", dateEnd);
-      formdata.append("visibility", display);
-      formdata.append("categoryId", formik.values.categoryId);
-      formdata.append("userId", decode.Username);
-
-      // const data = {
-      //   title: formik.values.title,
-      //   startTime: dateCreate,
-      //   endTime: dateEnd,
-      //   visibility: display,
-      //   categoryId: formik.values.categoryId,
-      //   userId: detoken.Username,
-      // };
-
+      formData.append("title", formik.values.title);
+      formData.append("startTime", moment(dateCreate).format("YYYY/MM/DD hh:mm:ss"));
+      formData.append("endTime", moment(dateEnd).format("YYYY/MM/DD hh:mm:ss"));
+      formData.append("visibility", display);
+      formData.append("categoryId", formik.values.categoryId);
+      formData.append("userId", decode.Username);
+      formData.append("ImageFile", formik.values.ImageFile);
       try {
-        console.log(formdata);
-        const req = await API("POST", URL_API + `/api/v1/campaigns`, formdata, token);
+        const req = await API("POST", URL_API + `/api/v1/campaigns`, formData, token);
+        console.log(req);
         if (req) {
-          // dispatch(GetCampaignbyUserId(decode.Username, token));
+          dispatch(GetCampaignbyUserId(decode.Username, token));
+
           CustomizedToast({
             message: "Thêm chiến dịch thành công",
             type: "SUCCESS",
@@ -115,7 +115,6 @@ export default function NewPopUp(props) {
       }
     },
   });
-
   return (
     <Paper>
       <Dialog maxWidth="md" open={OpenPopUp} onClose={handleClose}>
@@ -236,7 +235,8 @@ export default function NewPopUp(props) {
                       variant="contained"
                       type="submit"
                       nameButton="Thêm"
-                      bgColor="#F6911B"
+                      bgColor="#71C043"
+                      hovercolor="#2BB557"
                     />
                   </Box>
                 </Grid>
@@ -252,9 +252,8 @@ export default function NewPopUp(props) {
                     onChange={_treat}
                     style={{ display: "none" }}
                   />
-                  <Button variant="contained" component="span" sx={{ marginLeft: "10%" }}>
-                    Tải lên...
-                  </Button>
+                  <ButtonCustomize bgColor="#71C043" hovercolor="#2BB557" nameButton="Tải lên..." />
+
                   <Box
                     sx={{
                       height: 165,

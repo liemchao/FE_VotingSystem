@@ -2,7 +2,7 @@ import { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { Avatar, Button, Grid } from "@mui/material";
+import { Avatar, Button, Container, Grid } from "@mui/material";
 import CampaignStageList from "./CampaignStageList";
 import TextField from "@mui/material/TextField";
 import Pagination from "@mui/material/Pagination";
@@ -10,7 +10,6 @@ import Box from "@mui/material/Box";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { orange } from "@mui/material/colors";
-
 //----------------------------------------------------------------
 export default function CampaignStage() {
   const [searchTerm, setSearchTerm] = useState("");
