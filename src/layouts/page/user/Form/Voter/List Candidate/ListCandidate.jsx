@@ -1,6 +1,6 @@
 // import { filter } from "lodash";
 import { useNavigate } from "react-router-dom";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   Card,
   Button,
@@ -12,6 +12,7 @@ import {
   OutlinedInput,
   InputAdornment,
   Container,
+  TextField,
 } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import Iconify from "assets/theme/components/icon/Iconify";
@@ -25,6 +26,9 @@ import { Authen } from "context/authenToken/AuthenToken";
 import QuestionPopUp from "components/Popup/create/CreateQuestionPopUp";
 import MultipleInteractionCard from "components/Cards/CardCandidate";
 import Page from "components/Layout/Page";
+import { debounce } from "lodash";
+import { useRef } from "react";
+
 export default function ListCandidate() {
   const [OpenPopUp, SetOpenPopUp] = useState(false);
   const [idForm, setIdForm] = useState();
@@ -37,10 +41,10 @@ export default function ListCandidate() {
       duration: theme.transitions.duration.shorter,
     }),
     "&.Mui-focused": { width: 320, boxShadow: "0.7 rem" },
-    "& fieldset": {
-      borderWidth: `1px !important`,
-      borderColor: `${theme.palette.grey[500_32]} !important`,
-    },
+    // "& fieldset": {
+    //   borderWidth: `1px !important`,
+    //   borderColor: `${theme.palette.grey[500_32]} !important`,
+    // },
   }));
   const candidateList = useSelector((state) => {
     return state.candidateList;
@@ -88,13 +92,72 @@ export default function ListCandidate() {
     { id: "inActive", title: "Trạng thái ẩn" },
     { id: "All", title: "Không hoạt động" },
   ];
+  const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isTyping, setIsTyping] = useState(false);
+  const candidatesPerPage = 6; // number of candidates to be displayed per page
+
+  const filteredCandidates = useSelector((state) =>
+    state.candidateList.filter((candidate) =>
+      candidate.fullName.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  );
+
+  // const debouncedFilter = debounce((value) => {
+  //   setSearchTerm(value);
+  //   setCurrentPage(1); // reset current page to 1 when search term changes
+  //   setIsTyping(false);
+  // }, 3300);
+
+  // const handleSearchChange = (event) => {
+  //   const value = event.target.value;
+  //   setSearchTerm(value);
+  //   setIsTyping(true);
+  //   if (!isTyping) {
+  //     debouncedFilter(value);
+  //   }
+  // };
+
+  const searchInputRef = useRef(null);
+  const prevSearchValueRef = useRef("");
+
+  const handleSearchChange = () => {
+    const currentValue = searchInputRef.current.value;
+    if (currentValue !== prevSearchValueRef.current) {
+      setSearchTerm(currentValue);
+      setCurrentPage(1); // reset current page to 1 when search term changes
+      prevSearchValueRef.current = currentValue;
+    }
+  };
+
+  // calculate the total number of pages
+  const totalPages = Math.ceil(filteredCandidates.length / candidatesPerPage);
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  // get the current page of candidates based on the current page number
+  const getCurrentCandidates = () => {
+    const startIndex = (currentPage - 1) * candidatesPerPage;
+    const endIndex = startIndex + candidatesPerPage;
+    return filteredCandidates.slice(startIndex, endIndex);
+  };
+
+  useEffect(() => {
+    const searchInput = searchInputRef.current;
+    searchInput.addEventListener("input", handleSearchChange);
+    return () => {
+      searchInput.removeEventListener("input", handleSearchChange);
+    };
+  }, []);
   return (
     <Page title="User">
       <Container>
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          <SearchStyle
-            value=""
-            onChange=""
+          {/* <SearchStyle
+            // value={searchTerm}
+            inputRef={searchInputRef}
+            // onChange={handleSearchChange}
             placeholder="Tìm kiếm..."
             startAdornment={
               <InputAdornment position="start">
@@ -104,9 +167,33 @@ export default function ListCandidate() {
                 />
               </InputAdornment>
             }
-          />
-          <Pagination sx={{ ml: 25 }} count={4} color="primary" />
+            inputProps={{ "aria-label": "search candidate" }}
+            // onChange={handleSearchChange}
+          /> */}
+          <Box
+            component="form"
+            sx={{
+              "& > :not(style)": { m: 1, width: "25ch" },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField
+              inputProps={{ "aria-label": "search candidate" }}
+              id="outlined-basic"
+              inputRef={searchInputRef}
+              label="Tìm kiếm..."
+              variant="outlined"
+            />
+          </Box>
 
+          <Pagination
+            sx={{ ml: 25 }}
+            color="primary"
+            count={totalPages}
+            page={currentPage}
+            onChange={handlePageChange}
+          />
           <Box sx={{ marginTop: "1%", marginLeft: "20%" }}>
             <Select
               required
@@ -118,81 +205,13 @@ export default function ListCandidate() {
             />
           </Box>
         </Box>
-        <Grid container  spacing={3} mt={3} bottom={2} sx={{ gap: 10 }}>
-          {candidateList.map((card, index) => (
-            <Grid item xs={6} md={3} key={index}>
-              <MultipleInteractionCard image={card?.avatarUrl} name={card?.fullName}  />
-              {/* <Card
-                sx={{
-                  maxWidth: 356,
-                  padding: "1rem 2rem 1rem 1rem",
-                  borderRadius: "18px",
-                  border: "1px solid #ccc",
-                }}
-              >
-                <CardMedia
-                  sx={{
-                    height: 340,
-                    display: "cover",
-                  }}
-                  image={card?.avatarUrl}
-                  title="green iguana"
-                  border="2px red"
-                />
-                <CardContent
-                  sx={{
-                    height: 120,
-                  }}
-                >
-                  <Typography gutterBottom variant="h4" component="div">
-                    {card.fullName}
-                  </Typography>
-                  <Typography variant="h6" color="text.secondary">
-                   
-                  </Typography>
-                  <Typography variant="body1" color="text.secondary">
-                  "Đẹp trai nhất lớp"
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button
-                    sx={{
-                      position: "relative",
-                      left: "-1rem",
-                      bottom: "-1rem",
-                      display: "inline - flex",
-                      width: "9rem",
-                      height: "3rem",
-                      background: "var(--10)",
-                      color: "var(--badge-text)",
-                      backgroundColor: "#ffcc33",
-                      boxShadow: "0 0 0.2rem 0.1rem var(--card-bg)",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      borderRadius: "30px",
-                      marginLeft: "1rem",
-                      fontSize: "1rem",
-                      fontWeight: "700",
-                      border: "0",
-                    }}
-                    onClick={() => {
-                      hanldeGetQuestion(token);
-                    }}
-                  >
-                    Bình chọn
-                  </Button>
-                  <Button
-                    sx={{
-                      right: "-4rem",
-                      bottom: "-1rem",
-                    }}
-                    size="small"
-                  >
-                    Chi tiết
-                  </Button>
-                </CardActions>
-              </Card> */}
-            </Grid>
+        <Grid container spacing={3} mt={3} p={2} sx={{ gap: 10 }}>
+          {getCurrentCandidates().map((card, index) => (
+            <div key={index}>
+              <Grid item xs={6} md={3} key={index}>
+                <MultipleInteractionCard image={card?.avatarUrl} name={card?.fullName} />
+              </Grid>
+            </div>
           ))}
         </Grid>
       </Container>
