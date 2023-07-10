@@ -20,9 +20,6 @@ const RootStyle = styled("div")({
   overflow: "hidden",
 });
 
-const RootStyleClose = styled("div")({
-  overflow: "hidden",
-});
 const MainStyle = styled("div")(({ theme }) => ({
   flexGrow: 1,
   overflow: "auto",
@@ -40,50 +37,29 @@ const MainStyle = styled("div")(({ theme }) => ({
 
 export default function DashboardLayout() {
   const [open, setOpen] = useState(false);
-  const handleClickOpen = useCallback(() => {
-    setOpen((open) => !open);
-  }, [open]);
 
   return (
-    <>
-      {!open ? (
-        <RootStyle>
-          <DashboardNavbar onOpenSidebar={() => setOpen(true)} />
-          <Box sx={{ zIndex: "tooltip" }}>
-            <IconButton
-              onClick={handleClickOpen}
-              sx={{
-                position: "absolute",
-                marginLeft: "16.4rem",
-                boxShadow: 1,
-                marginTop: "4rem",
-              }}
-            >
-              <Iconify color="red" icon="flat-color-icons:previous" width="1rem" height="1rem" />
-            </IconButton>
-          </Box>
-          <DashboardSidebar
-            open={open}
-            handleClickOpen={handleClickOpen}
-            onOpenSidebar={() => setOpen(true)}
-            onCloseSidebar={() => setOpen(false)}
-          />
+    <RootStyle>
+      <DashboardNavbar onOpenSidebar={() => setOpen(true)} />
+      <DashboardSidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)} />
+      <MainStyle>
+        <Outlet />
+        <Box
+          sx={{
+            position: "fixed",
+            bottom: 0,
+            left: "20%",
+            right: 0,
+          }}
+        >
+          <DashboardFooter />
+        </Box>
+        ;
+      </MainStyle>
+    </RootStyle>
+  );
 
-          <MainStyle>
-            <Outlet />
-            <Box
-              sx={{
-                position: "fixed",
-                bottom: 0,
-                left: "20%",
-                right: 0,
-              }}
-            >
-              <DashboardFooter />
-            </Box>
-          </MainStyle>
-        </RootStyle>
-      ) : (
+  /* ) : (
         <RootStyleClose>
           <DashboardNavbar onOpenSidebar={() => setOpen(false)} />
           <DashboardSidebar
@@ -97,19 +73,29 @@ export default function DashboardLayout() {
           </MainStyle>
           <DashboardFooter />
         </RootStyleClose>
-      )}
-    </>
-    // <RootStyle>
-    //   <DashboardNavbar onOpenSidebar={() => setOpen(true)} />
-    //   <DashboardSidebar
-    //     open={open}
-    //     handleClickOpen={handleClickOpen}
-    //     onOpenSidebar={() => setOpen(true)}
-    //     onCloseSidebar={() => setOpen(false)}
-    //   />
-    //   <MainStyle>
-    //     <Outlet />
-    //   </MainStyle>
-    // </RootStyle>
-  );
+      )} */
 }
+
+// <RootStyle>
+//   <DashboardNavbar onOpenSidebar={() => setOpen(true)} />
+//   <DashboardSidebar
+//     open={open}
+//     handleClickOpen={handleClickOpen}
+//     onOpenSidebar={() => setOpen(true)}
+//     onCloseSidebar={() => setOpen(false)}
+//   />
+//   <MainStyle>
+//     <Outlet />
+//   </MainStyle>
+// </RootStyle>
+
+// <Box
+//   sx={{
+//     position: "fixed",
+//     bottom: 0,
+//     left: "20%",
+//     right: 0,
+//   }}
+// >
+//   <DashboardFooter />
+// </Box>;
