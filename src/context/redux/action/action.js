@@ -335,7 +335,7 @@ export const getCampaignId = (id, token) => {
       const res = await API("GET", URL_API + `/api/v1/campaigns/${id}`, null, token);
       dispatch(
         createAction({
-          type: PathAction.GET_CAMPAIGN_BY_ID,
+          type: PathAction.GET_CAMPAIGN_ID,
           payload: res.data.data,
         })
       );

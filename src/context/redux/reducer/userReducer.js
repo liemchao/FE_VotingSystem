@@ -13,6 +13,7 @@ const initialState = {
   type: [],
   formByid: [],
   campaignById: [],
+  getcampaignById: {},
   useToAddCandidate: [],
 };
 
@@ -59,6 +60,9 @@ export default function userReducer(state = initialState, { type, payload }) {
       break;
     case PathAction.GET_LIST_CANDIDATE_ACCOUNT:
       state.useToAddCandidate = payload;
+      break;
+    case PathAction.GET_CAMPAIGN_ID:
+      state.getcampaignById = payload;
       break;
 
     default:

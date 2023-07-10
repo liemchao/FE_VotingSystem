@@ -118,11 +118,11 @@ export default function ListCandidate() {
             />
           </Box>
         </Box>
-        <Grid container textAlign={"center"} spacing={1} mt={3} bottom={2} sx={{ gap: 10 }}>
+        <Grid container  spacing={3} mt={3} bottom={2} sx={{ gap: 10 }}>
           {candidateList.map((card, index) => (
-            // <MultipleInteractionCard />
-            <Grid item xs={6} md={4} key={index}>
-              <Card
+            <Grid item xs={6} md={3} key={index}>
+              <MultipleInteractionCard image={card?.avatarUrl} name={card?.fullName}  />
+              {/* <Card
                 sx={{
                   maxWidth: 356,
                   padding: "1rem 2rem 1rem 1rem",
@@ -148,10 +148,10 @@ export default function ListCandidate() {
                     {card.fullName}
                   </Typography>
                   <Typography variant="h6" color="text.secondary">
-                    {/* {card.email}SE140842 */}
+                   
                   </Typography>
                   <Typography variant="body1" color="text.secondary">
-                    {/* "{card.gender}" */}"Đẹp trai nhất lớp"
+                  "Đẹp trai nhất lớp"
                   </Typography>
                 </CardContent>
                 <CardActions>
@@ -191,7 +191,7 @@ export default function ListCandidate() {
                     Chi tiết
                   </Button>
                 </CardActions>
-              </Card>
+              </Card> */}
             </Grid>
           ))}
         </Grid>

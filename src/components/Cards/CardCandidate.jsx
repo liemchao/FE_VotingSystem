@@ -8,15 +8,20 @@ import Typography from "@mui/joy/Typography";
 import IconButton from "@mui/joy/IconButton";
 import Link from "@mui/joy/Link";
 import Favorite from "@mui/icons-material/Favorite";
+import HowToVoteIcon from "@mui/icons-material/HowToVote";
+import ShareIcon from "@mui/icons-material/Share";
 
-export default function MultipleInteractionCard() {
+export default function MultipleInteractionCard(props) {
+  const { name, image, description, gender, onClickVote, onClickLike, onClickShare } = props;
+
   return (
     <Card variant="outlined" sx={{ width: 320 }}>
       <CardOverflow>
-        <AspectRatio ratio="2">
+        <AspectRatio ratio="1">
           <img
-            src="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318"
-            srcSet="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318&dpr=2 2x"
+            style={{ display: "over", objectFit: "cover" }}
+            src={image}
+            srcSet={image}
             loading="lazy"
             alt=""
           />
@@ -25,7 +30,44 @@ export default function MultipleInteractionCard() {
           aria-label="Like minimal photography"
           size="md"
           variant="solid"
-          color="danger"
+          color="success"
+          onClick={onClickVote}
+          sx={{
+            position: "absolute",
+            zIndex: 2,
+            borderRadius: "50%",
+            right: "1rem",
+            bottom: 0,
+            transform: "translateY(50%)",
+          }}
+        >
+          <ShareIcon />
+        </IconButton>
+
+        <IconButton
+          aria-label="Like minimal photography"
+          size="md"
+          variant="solid"
+          color="success"
+          onClick={onClickVote}
+          sx={{
+            position: "absolute",
+            zIndex: 2,
+            borderRadius: "50%",
+            right: "4rem",
+            bottom: 0,
+            transform: "translateY(50%)",
+          }}
+        >
+          <HowToVoteIcon />
+        </IconButton>
+
+        {/* <IconButton
+          aria-label="Like minimal photography"
+          size="md"
+          variant="solid"
+          color="success"
+          onClick={onClickLike}
           sx={{
             position: "absolute",
             zIndex: 2,
@@ -36,27 +78,27 @@ export default function MultipleInteractionCard() {
           }}
         >
           <Favorite />
-        </IconButton>
+        </IconButton> */}
       </CardOverflow>
       <CardContent>
         <Typography level="h2" fontSize="md">
           <Link href="#multiple-actions" overlay underline="none">
-            Yosemite National Park
+            {name}
           </Link>
         </Typography>
         <Typography level="body2" sx={{ mt: 0.5 }}>
-          <Link href="#multiple-actions">California</Link>
+          <Link href="#multiple-actions">{description}</Link>
         </Typography>
       </CardContent>
       <CardOverflow variant="soft" sx={{ bgcolor: "background.level1" }}>
         <Divider inset="context" />
         <CardContent orientation="horizontal">
           <Typography level="body3" sx={{ fontWeight: "md", color: "text.secondary" }}>
-            6.3k views
+            21 tuổi
           </Typography>
           <Divider orientation="vertical" />
           <Typography level="body3" sx={{ fontWeight: "md", color: "text.secondary" }}>
-            1 hour ago
+            {gender}
           </Typography>
         </CardContent>
       </CardOverflow>
