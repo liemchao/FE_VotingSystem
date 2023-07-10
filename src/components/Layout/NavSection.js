@@ -8,6 +8,7 @@ import Iconify from "assets/theme/components/icon/Iconify";
 import { Authen } from "../../context/authenToken/AuthenToken";
 import jwt_decode from "jwt-decode";
 import { whiteColor } from "assets/jss/material-dashboard-react";
+import { alpha } from "@mui/material/styles";
 // ----------------------------------------------------------------------
 
 const ListItemStyle = styled((props) => <ListItemButton disableGutters {...props} />)(
@@ -15,13 +16,14 @@ const ListItemStyle = styled((props) => <ListItemButton disableGutters {...props
     ...theme.typography.body2,
     height: 48,
     position: "relative",
-    // textTransform: "capitalize",
-    color: whiteColor,
+    textTransform: "capitalize",
+    color: theme.palette.text.secondary,
     borderRadius: theme.shape.borderRadius,
     ":hover": {
-      backgroundColor: "#F27323",
+      backgroundColor: "orange",
       color: "white",
     },
+    fontSize: 16,
   })
 );
 
@@ -56,10 +58,11 @@ function NavItem({ item, active }) {
     color: "white",
     fontWeight: "fontWeightMedium",
     bgcolor: "orange",
+    // bgcolor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity),
   };
 
   const activeSubStyle = {
-    color: "white",
+    color: "orange",
     fontWeight: "fontWeightMedium",
   };
 
@@ -78,21 +81,21 @@ function NavItem({ item, active }) {
           {info && info}
           <Iconify
             icon={open ? "eva:arrow-ios-downward-fill" : "eva:arrow-ios-forward-fill"}
-            sx={{ width: 16, height: 16, ml: 1 }}
+            sx={{ width: 15, height: 15 }}
           />
         </ListItemStyle>
         {/* map với navConfig */}
         {(children || subItems) && (
           <Collapse in={open} timeout="auto">
             {children && (
-              <List component="div" disablePadding sx={{ left: "1%" }}>
+              <List component="div" disablePadding>
                 {children.map((child) => (
                   <NavItem key={child.title} item={child} active={active} />
                 ))}
               </List>
             )}
             {subItems && (
-              <List component="div" disablePadding sx={{ left: "4%" }}>
+              <List component="div" disablePadding sx={{ left: "3%" }}>
                 {subItems.map((subItem) => (
                   <ListItemStyle
                     key={subItem.title}
@@ -116,7 +119,7 @@ function NavItem({ item, active }) {
                           bgcolor: "text.disabled",
                           transition: (theme) => theme.transitions.create("transform"),
                           ...(active(subItem.subPath) && {
-                            transform: "scale(2)",
+                            transform: "scale(1)",
                             bgcolor: "primary.main",
                           }),
                         }}
