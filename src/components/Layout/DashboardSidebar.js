@@ -12,15 +12,17 @@ import useResponsive from "./useResponsive";
 import Scrollbar from "./Scrollbar";
 import { Authen } from "../../context/authenToken/AuthenToken";
 import logo from "../../assets/images/logos/LogoFVS.svg";
+import Iconify from "assets/theme/components/icon/Iconify";
 
 // ----------------------------------------------------------------------
 
-const DRAWER_WIDTH = 280;
+const DRAWER_WIDTH = 230;
 
 const RootStyle = styled("div")(({ theme }) => ({
   [theme.breakpoints.up("lg")]: {
     flexShrink: 0,
     width: DRAWER_WIDTH,
+    bgcolor: "red",
   },
 }));
 
@@ -29,7 +31,7 @@ const AccountStyle = styled("div")(({ theme }) => ({
   alignItems: "center",
   padding: theme.spacing(2, 2.5),
   borderRadius: Number(theme.shape.borderRadius) * 1.5,
-  backgroundColor: theme.palette.grey[500_12],
+  backgroundColor: theme.palette.grey[500_44],
 }));
 
 // ----------------------------------------------------------------------
@@ -47,6 +49,8 @@ export default function DashboardSidebar({
   handleClickOpen,
   open,
 }) {
+  const getIcon = (name) => <Iconify icon={name} width={50} height={50} color="white" />;
+
   const { pathname } = useLocation();
 
   const { decode } = useContext(Authen);
@@ -62,23 +66,27 @@ export default function DashboardSidebar({
   const renderContent = (
     <Scrollbar
       sx={{
-        height: 1,
-        "& .simplebar-content": { height: 1, display: "flex", flexDirection: "column" },
+        "& .simplebar-content": {
+          height: 1,
+          display: "flex",
+          flexDirection: "column",
+          overflowX: "none",
+        },
       }}
     >
-      <Box sx={{ px: 2, py: 3, display: "inline-flex" }}>
-        {/* <IconButton onClick={handleClickOpen} sx={{ mr: 1, color: "text.primary" }}>
-          <Iconify icon="eva:menu-2-fill" />
-        </IconButton> */}
+      <Box sx={{ mr: -4, ml: -4, pb: -2, mt: -1, backgroundColor: "white" }}>
+        <Stack alignItems="center" spacing={1} sx={{ borderRadius: 2, position: "relative" }}>
+          <Avatar sx={{ width: 300, height: 150 }} src={logo} />
+        </Stack>
       </Box>
 
-      <Box sx={{ mb: 5, mx: 2.5 }}>
+      <Box sx={{ mb: 1, mx: 2.5, ml: -0.8 }}>
         <Link underline="none" component={RouterLink} to="campaign">
           <AccountStyle>
-            <Avatar src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="photoURL" />
-            <Box sx={{ ml: 4 }}>
-              <Typography variant="subtitle2" sx={{ color: "text.primary" }}>
-                Trang chủ
+            <IconButton>{getIcon("ion:home")}</IconButton>
+            <Box sx={{ ml: 1 }}>
+              <Typography variant="subtitle2" sx={{ color: "white" }}>
+                Trang Chủ
               </Typography>
               {/* <Typography variant="body1" sx={{ color: "text.primary" }}>
                 {decode?.RoleName}
@@ -91,12 +99,6 @@ export default function DashboardSidebar({
       <NavSection navConfig={navConfig} />
 
       <Box sx={{ flexGrow: 1 }} />
-
-      <Box sx={{ px: 2.5, pb: 3, mt: 10 }}>
-        <Stack alignItems="center" spacing={3} sx={{ borderRadius: 2, position: "relative" }}>
-          <Avatar sx={{ width: 400, height: 200 }} src={logo} />
-        </Stack>
-      </Box>
     </Scrollbar>
   );
 
@@ -124,7 +126,7 @@ export default function DashboardSidebar({
           PaperProps={{
             sx: {
               width: DRAWER_WIDTH,
-              bgcolor: "background.default",
+              bgcolor: "#F7941D",
               borderRightStyle: "dashed",
               position: "absolute",
             },

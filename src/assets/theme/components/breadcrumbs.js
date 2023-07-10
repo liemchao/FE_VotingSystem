@@ -28,7 +28,7 @@ const breadcrumbs = {
 
     separator: {
       fontSize: size.sm,
-      color: grey[600],
+      color: grey[100],
     },
   },
 };

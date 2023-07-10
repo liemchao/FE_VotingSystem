@@ -1,42 +1,76 @@
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { Link as RouterLink, useNavigate, useParams } from "react-router-dom";
 import React from "react";
 import { styled } from "@mui/material/styles";
 import { useState } from "react";
+import Iconify from "assets/theme/components/icon/Iconify";
 // material
-import {
-  Card,
-  Stack,
-  Button,
-  Container,
-  Typography,
-  CardMedia,
-  CardContent,
-  CardActions,
-  Box,
-  LinearProgress,
-} from "@mui/material";
+import { Card, Stack, Button, Container, Typography, Box } from "@mui/material";
 import Page from "components/Layout/Page";
 import { useContext } from "react";
 import { Authen } from "../../context/authenToken/AuthenToken";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { callAPIgetListCampaigns } from "../../context/redux/action/action";
-import NewPopUp from "components/Popup/NewPopUp";
 import { useCallback } from "react";
+import NewPopUp from "components/Popup/create/NewPopUp";
+import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
+import UserCard from "components/Cards/cardCampaign";
+import moment from "moment";
+import QRPopUp from "components/Popup/create/QRPopUp";
 
 export default function AllCampaignList() {
+  const param = useParams();
   const navigate = useNavigate();
+  const [Link, setLink] = useState(window.location.href);
+  const [open, setopen] = useState(false);
   const handleinvite = () => {
     navigate("/user/allcampaign");
   };
   const ColorButton = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText("#FFCC32"),
-    backgroundColor: "#FFCC33",
+    color: "#FFFFFF",
+    backgroundColor: "#2BB557",
     "&:hover": {
-      backgroundColor: "#ffee32",
+      backgroundColor: "#71C043",
     },
     display: "center",
   }));
+
+  const BootstrapButton = styled(Button)({
+    boxShadow: "none",
+    textTransform: "none",
+    fontSize: 16,
+    padding: "6px 12px",
+    border: "1px solid",
+    lineHeight: 1.5,
+    color: "black",
+    backgroundColor: "#0063cc",
+    borderColor: "#0063cc",
+    fontFamily: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Segoe UI"',
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(","),
+    "&:hover": {
+      backgroundColor: "#0069d9",
+      borderColor: "#0062cc",
+      boxShadow: "none",
+    },
+    "&:active": {
+      boxShadow: "none",
+      backgroundColor: "#0062cc",
+      borderColor: "#005cbf",
+    },
+    "&:focus": {
+      boxShadow: "0 0 0 0.2rem rgba(0,123,255,.5)",
+    },
+  });
 
   const [OpenPopUp, SetOpenPopUp] = useState(false);
 
@@ -52,66 +86,59 @@ export default function AllCampaignList() {
   const campaigns = useSelector((state) => {
     return state.campaigns;
   });
+  const handleGetQR = useCallback((id) => {
+    setopen(true);
+    setLink(window.location.href + "/" + id);
+  }, []);
 
   const handleClickOpen = useCallback(() => {
     SetOpenPopUp(true);
   }, []);
 
+  const handleCampaignStage = useCallback(
+    async (id, navigate) => {
+      await dispatch(handleGetCampaignById(id, navigate));
+    },
+    [dispatch]
+  );
+
   return (
     <Page title="User">
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+        <Stack direction="row" alignItems="center" justifyContent="flex-end" mb={3}>
           <Typography variant="h4" gutterBottom>
-            <ColorButton
-              variant="contained"
-              // component={RouterLink}
-              // to="#"
+            <ButtonCustomize
+              nameButton="Thêm Chiến Dịch"
+              bgColor="#71C043"
+              hovercolor="#2BB557"
               onClick={() => {
                 handleClickOpen();
               }}
-            >
-              Thêm Chiến Dịch
-            </ColorButton>
+            />
           </Typography>
         </Stack>
-        <Box>
-          {campaigns.map((item) => {
-            return (
-              <Card sx={{ maxWidth: 1000, maxHeight: 400, paddingLeft: "1rem", marginTop: "2%" }}>
-                <CardMedia
-                  sx={{ height: 70 }}
-                  image="https://media.istockphoto.com/id/165515133/vi/vec-to/voting-hands-and-ballot-box.jpg?s=1024x1024&w=is&k=20&c=VKlxd59_HCpxXXTHjcVsUK_IMEgw4D8yGtYkE5CIUgo="
-                  title="green iguana"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    {item.title}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {item.userName}
-                  </Typography>
-                  <LinearProgress
-                    variant="determinate"
-                    value={20}
-                    sx={{ borderRadius: 10, bgcolor: "primary.main", height: 10 }}
-                  />
-                  <Typography variant="h6" component="div" sx={{ mt: 1 }}>
-                    50%
-                  </Typography>
-                </CardContent>
-                <CardActions sx={{ marginLeft: "80%" }}>
-                  <Button sx={{ marginLeft: "-4%" }} size="small">
-                    <ColorButton>Chia sẻ</ColorButton>
-                  </Button>
-                  <Button type="button" size="small" onClick={handleinvite}>
-                    <ColorButton>Tham gia</ColorButton>
-                  </Button>
-                </CardActions>
-              </Card>
-            );
-          })}
-        </Box>
+
+        {campaigns.map((item) => {
+          return (
+            <Box sx={{ gap: 2 }}>
+              <UserCard
+                id={item.campaignId}
+                title={item.title}
+                creater={"Moderator"}
+                url={item.imgUrl}
+                dayEnd={moment(item.end).format("DD-MM-YYYY HH:mm:ss")}
+                onClickShare={() => {
+                  handleGetQR(item.campaignId);
+                }}
+                onClickJoin={() => {
+                  handleCampaignStage(item.campaignId, navigate);
+                }}
+              />
+            </Box>
+          );
+        })}
       </Container>
+      <QRPopUp OpenPopUp={open} SetOpenPopUp={setopen} link={Link} />;
       <NewPopUp OpenPopUp={OpenPopUp} SetOpenPopUp={SetOpenPopUp} />
     </Page>
   );

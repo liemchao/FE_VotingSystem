@@ -1,6 +1,7 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
 import { Button } from "@mui/material";
+import { orange } from "@mui/material/colors";
 
 export default function ButtonCustomize(props) {
   const {
@@ -24,16 +25,18 @@ export default function ButtonCustomize(props) {
     paddingLeft,
     variant,
     marginRight,
+    hovercolor,
   } = props;
   const ColorButton = styled(Button)(({ theme }) => ({
     // color: theme.palette.getContrastText("#ffff"),
     backgroundColor: bgColor,
     "&:hover": {
-      backgroundColor: "#ffee32",
-      color: "black",
+      backgroundColor: hovercolor,
+      color: "white",
     },
     display: "center",
     textTransform: "none",
+    color: "white",
     fontFamily: [
       "-apple-system",
       "BlinkMacSystemFont",

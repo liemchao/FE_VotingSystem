@@ -33,8 +33,11 @@ const NOTIFICATIONS = [
     id: 123,
     title: "Bạn đã được mời làm ứng cử viên",
     description: "Confrirm the feedback",
-    avatar: liemAvatar,
-    type: "friend_interactive",
+
+    avatar:
+      "https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg",
+    type: "",
+
     createdAt: set(new Date(), { hours: 10, minutes: 30 }),
     isUnRead: true,
   },
@@ -42,8 +45,11 @@ const NOTIFICATIONS = [
     id: 124,
     title: "Bạn đã bình chọn",
     description: "Confrirm the feedback",
-    avatar: avatarlogo,
-    type: "friend_interactive",
+
+    avatar:
+      "https://png.pngtree.com/png-vector/20190704/ourlarge/pngtree-businessman-user-avatar-free-vector-png-image_1538405.jpg",
+    type: "",
+
     createdAt: sub(new Date(), { hours: 3, minutes: 30 }),
     isUnRead: true,
   },
@@ -51,8 +57,11 @@ const NOTIFICATIONS = [
     id: 125,
     title: "Bạn đã bình chọn nè ",
     description: "sent from Voter",
-    avatar: liemAvatar,
-    type: "friend_interactive",
+
+    avatar:
+      "https://png.pngtree.com/png-vector/20190704/ourlarge/pngtree-businessman-user-avatar-free-vector-png-image_1538405.jpg",
+    type: "",
+
     createdAt: sub(new Date(), { days: 1, hours: 3, minutes: 30 }),
     isUnRead: true,
   },
@@ -60,8 +69,10 @@ const NOTIFICATIONS = [
     id: 126,
     title: "Bạn đã bình chọn ha",
     description: "sent from Admin",
-    avatar: avatarlogo,
-    type: "mail",
+    avatar:
+      "https://png.pngtree.com/png-vector/20190704/ourlarge/pngtree-businessman-user-avatar-free-vector-png-image_1538405.jpg",
+    type: "",
+
     createdAt: sub(new Date(), { days: 2, hours: 3, minutes: 30 }),
     isUnRead: false,
   },
@@ -69,8 +80,11 @@ const NOTIFICATIONS = [
     id: 127,
     title: "Bạn đã bình chọn ồ hố",
     description: "sent from Candidate",
-    avatar: avatarlogo,
-    type: "order_shipped",
+
+    avatar:
+      "https://png.pngtree.com/png-vector/20190704/ourlarge/pngtree-businessman-user-avatar-free-vector-png-image_1538405.jpg",
+    type: "",
+
     createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
     isUnRead: false,
   },
@@ -265,7 +279,7 @@ function renderContent(notification) {
       title,
     };
   }
-  if (notification.type === "chat_message") {
+  if (notification.type === " ") {
     return {
       avatar: <img alt={notification.title} src="/static/icons/ic_notification_chat.svg" />,
       title,

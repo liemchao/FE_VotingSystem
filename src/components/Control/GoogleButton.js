@@ -1,16 +1,16 @@
 import { Button, Icon } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { red } from "@mui/material/colors";
+import { orange } from "@mui/material/colors";
 import Iconify from "assets/theme/components/icon/Iconify";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: red[500],
+    backgroundColor: orange[500],
     height: "2.5rem",
 
     color: theme.palette.common.white,
     "&:hover": {
-      backgroundColor: red[700],
+      backgroundColor: orange[700],
     },
   },
   icon: {

@@ -46,7 +46,7 @@ export const LoginAthen = (user, navigate) => {
   };
 };
 
-export const loginFirebase = (idtoken) => {
+export const loginFirebase = (idtoken, navigate) => {
   return async (dispatch) => {
     try {
       const res = await API("POST", URL_API + `/api/v1/authen/firebase?idtoken=${idtoken}`);
@@ -60,6 +60,15 @@ export const loginFirebase = (idtoken) => {
           payload: res.data.token,
         })
       );
+      if (detoken.RoleName === "user") {
+        navigate("/user/campaign");
+        CustomizedToast({
+          message: "Đăng nhập thành công",
+          type: "SUCCESS",
+        });
+      } else if (detoken.RoleName === "admin") {
+        // như trên
+      }
     } catch (e) {
       console.log(e);
       CustomizedToast({
@@ -116,7 +125,12 @@ export const callAPIgetListCandidates = (token) => {
 export const callAPIgetListHistory = (userName, token) => {
   return async (dispatch) => {
     try {
-      const res = await API("GET", URL_API + `/api/v1/actionhistory/user`, userName, token);
+      const res = await API(
+        "GET",
+        URL_API + `/api/v1/action-histories/user/${userName}`,
+        null,
+        token
+      );
       dispatch(
         createAction({
           type: PathAction.GET_LIST_HISTORY,
@@ -205,15 +219,146 @@ export const handleVote = (token, data) => {
         })
       );
 
+      // CustomizedToast({
+      //   message: "Bình chọn thành công ",
+      //   type: "SUCCESS",
+      // });
+    } catch (error) {
+      console.log(error);
+      // CustomizedToast({
+      //   message: "Bình chọn thất bại",
+      //   type: "SUCCESS",
+      // });
+    }
+  };
+};
+
+export const handleCreateForm = (token, data) => {
+  return async (dispatch) => {
+    try {
+      const req = await API("POST", URL_API + `/api/v1/forms`, data, token);
+
+      dispatch(
+        createAction({
+          type: PathAction.CREATE_FORM,
+          payload: req.data.data,
+        })
+      );
+    } catch (error) {
+      console.log("🚀 ~ file: action.js:243 ~ return ~ error:", error);
+    }
+  };
+};
+export const handleCreateQuestion = (token, data) => {
+  return async (dispatch) => {
+    try {
+      const req = await API("POST", URL_API + `/api/v1/questions`, data, token);
+
+      dispatch(
+        createAction({
+          type: PathAction.CREATE_QUESTION,
+          payload: req.data.data,
+        })
+      );
+
       CustomizedToast({
-        message: "Bình chọn thành công ",
+        message: "Thêm câu hỏi thành công ",
         type: "SUCCESS",
       });
     } catch (error) {
       console.log(error);
       CustomizedToast({
-        message: "Bình chọn thất bại",
+        message: "Thêm câu hỏi thất bại",
         type: "SUCCESS",
+      });
+    }
+  };
+};
+export const getAllCategory = (token) => {
+  return async (dispatch) => {
+    try {
+      const res = await API("GET", URL_API + `/api/v1/categories`, null, token);
+      dispatch(
+        createAction({
+          type: PathAction.GET_CATEGORY,
+          payload: res.data.data,
+        })
+      );
+    } catch (err) {}
+  };
+};
+
+export const getAllUser = (token) => {
+  return async (dispatch) => {
+    try {
+      const res = await API("GET", URL_API + `/api/v1/account`, null, token);
+      dispatch(
+        createAction({
+          type: PathAction.GET_LIST_CANDIDATE_ACCOUNT,
+          payload: res.data.data,
+        })
+      );
+    } catch (err) {}
+  };
+};
+
+export const getAllType = (token) => {
+  return async (dispatch) => {
+    try {
+      const res = await API("GET", URL_API + `/api/v1/types`, null, token);
+      dispatch(
+        createAction({
+          type: PathAction.GET_TYPE,
+          payload: res.data.data,
+        })
+      );
+    } catch (err) {}
+  };
+};
+
+export const getFormId = (token, id) => {
+  return async (dispatch) => {
+    try {
+      const res = await API("GET", URL_API + `/api/v1/forms/${id}`, null, token);
+      dispatch(
+        createAction({
+          type: PathAction.GET_FORM_BY_ID,
+          payload: res.data.data,
+        })
+      );
+    } catch (err) {}
+  };
+};
+export const getCampaignId = (id, token) => {
+  return async (dispatch) => {
+    try {
+      const res = await API("GET", URL_API + `/api/v1/campaigns/${id}`, null, token);
+      dispatch(
+        createAction({
+          type: PathAction.GET_CAMPAIGN_BY_ID,
+          payload: res.data.data,
+        })
+      );
+    } catch (err) {}
+  };
+};
+
+export const DeleteCampaignId = (id, data, token) => {
+  return async (dispatch) => {
+    try {
+      const res = await API("DELETE", URL_API + `/api/v1/campaigns/${id}`, data, token);
+      if (res) {
+        console.log(res);
+        CustomizedToast({
+          message: "Thêm câu hỏi thành công ",
+          type: "SUCCESS",
+        });
+      }
+    } catch (err) {
+      console.log(err);
+      CustomizedToast({
+        message: "Thêm câu hỏi thất bại",
+        type: "ERROR",
       });
     }
   };

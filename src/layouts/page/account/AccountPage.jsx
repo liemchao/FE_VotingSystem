@@ -30,8 +30,8 @@ export default function AccountPage() {
     navigate("/dashboard/thamgia");
   };
   const ColorButton = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText("#FFCC32"),
-    backgroundColor: "#FFCC33",
+    color: "#FFFFFF",
+    backgroundColor: "#2BB557",
     "&:hover": {
       backgroundColor: "#ffee32",
     },
@@ -61,7 +61,7 @@ export default function AccountPage() {
   return (
     <Page title="User">
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+        <Stack direction="row" alignItems="center" justifyContent="flex-end" mb={5}>
           <Typography variant="h4" gutterBottom>
             <ColorButton
               variant="contained"

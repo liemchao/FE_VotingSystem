@@ -1,14 +1,17 @@
 // import { filter } from "lodash";
 import { useNavigate } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import { Card, Button, Typography, CardMedia, CardContent, CardActions, Grid } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { handleGetCandidateByIdCampaign } from "context/redux/action/action";
 import { Authen } from "context/authenToken/AuthenToken";
 import { useContext } from "react";
 import Iconify from "assets/theme/components/icon/Iconify";
+import ElementPopUp from "components/Popup/create/ElementPopUp";
 
 export default function Element() {
+  const [OpenPopUp, SetOpenPopUp] = useState(false);
+
   const getIcon = (name) => <Iconify icon={name} height={30} width={30} marginTop={-0.4} />;
   const stateList = [
     {
@@ -52,7 +55,9 @@ export default function Element() {
     dispatch(handleGetCandidateByIdCampaign(id, token));
     navigate("/user/detailcandidate");
   };
-
+  const handleAdd = () => {
+    SetOpenPopUp(true);
+  };
   return (
     <Grid
       container
@@ -114,9 +119,7 @@ export default function Element() {
                   fontWeight: "700",
                   border: "0",
                 }}
-                onClick={() => {
-                  handleinvite(card.campaignId, token);
-                }}
+                onClick={() => handleAdd()}
               >
                 Tạo
               </Button>
@@ -146,6 +149,7 @@ export default function Element() {
           </Card>
         </Grid>
       ))}
+      <ElementPopUp OpenPopUp={OpenPopUp} SetOpenPopUp={SetOpenPopUp} />
     </Grid>
   );
 }

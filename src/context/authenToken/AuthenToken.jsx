@@ -2,8 +2,6 @@ import React, { createContext, useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { useDispatch } from "react-redux";
-// import { handleGetCandidateByIdCampaign } from "context/redux/action/action";
-// import { handleGetCampaignById } from "context/redux/action/action";
 
 //----------------------------------------------------------------
 export const Authen = createContext();
@@ -21,10 +19,11 @@ export const ProviderToken = ({ children }) => {
     if (token) {
       const decoded = jwt_decode(token);
       setDecode(decoded);
+
     } else {
-      navigate("/");
+
     }
-  }, [dispatch, id]);
+  }, [dispatch, id, setDecode]);
 
   return <Authen.Provider value={{ token, decode }}>{children}</Authen.Provider>;
 };

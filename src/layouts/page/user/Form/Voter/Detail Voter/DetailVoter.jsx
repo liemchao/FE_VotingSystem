@@ -22,13 +22,6 @@ function DetailCandidate() {
           <ListCandidate />
         </Paper>
       </Grid>
-      {/* <Grid item xs={4}>
-        <Paper>
-          <Scrollbar>
-            <ListQuestion />
-          </Scrollbar>
-        </Paper>
-      </Grid> */}
     </Grid>
   );
 }

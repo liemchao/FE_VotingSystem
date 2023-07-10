@@ -31,6 +31,11 @@ import AllCampaignList from "layouts/page/AllCampaign";
 import TextT from "layouts/page/Text";
 import ProfileCandidate from "layouts/page/user/Candidate/ProfileCandidate";
 import CampaignOwenrList from "layouts/page/user/Campaign/CampaignOwner";
+import ListForm from "layouts/page/user/ListForm";
+import NewStage from "layouts/page/stage/NewStage";
+import ProfilePage from "layouts/profile/ProfilePage";
+import MultipleInteractionCard from "components/Cards/CardCandidate";
+
 //----------------------------------------------------------------
 // const routePublic = ["/user/campaign/"];
 export default function Router() {
@@ -99,7 +104,7 @@ export default function Router() {
       children: [
         {
           path: "form",
-          element: <ListQuestion />,
+          element: <ListForm />,
         },
         {
           path: "campaign",
@@ -114,18 +119,18 @@ export default function Router() {
           element: <Profile />,
         },
         {
-          path: "text",
+          path: "test2",
           element: <TextT />,
+        },
+        {
+          path: "test1",
+          element: <MultipleInteractionCard />,
         },
         {
           path: "history",
           element: <HistoryUser />,
         },
 
-        {
-          path: "text/hhehe",
-          element: <Hi />,
-        },
         {
           path: "allcampaign",
           element: <AllCampaignList />,
@@ -147,6 +152,10 @@ export default function Router() {
           ),
         },
         {
+          path: "campaign/newStage/:id",
+          element: <NewStage />,
+        },
+        {
           path: "feedback",
           element: <FeedBack />,
         },
@@ -158,10 +167,15 @@ export default function Router() {
           path: "detailcandidate",
           element: <DetailCandidate />,
         },
+        // {
+        //   path: "profilecandidate",
+        //   element: <ProfileCandidate />,
+        // },
         {
           path: "profilecandidate",
-          element: <ProfileCandidate />,
+          element: < ProfilePage/>,
         },
+
       ],
     },
   ]);

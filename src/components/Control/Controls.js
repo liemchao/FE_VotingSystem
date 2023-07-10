@@ -6,13 +6,12 @@ import DatePicker from "./DatePicker";
 import Button from "./Button";
 
 const Controls = {
-    Input,
-    RadioGroup,
-    Select,
-    Checkbox,
-    DatePicker,
-    Button
-
-}
+  Input,
+  RadioGroup,
+  Select,
+  Checkbox,
+  DatePicker,
+  Button,
+};
 
 export default Controls;
