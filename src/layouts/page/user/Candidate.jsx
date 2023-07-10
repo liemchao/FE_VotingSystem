@@ -169,7 +169,7 @@ export default function CandidateList() {
 
   const isUserNotFound = filterform?.length === 0;
   return (
-    <Page title="Admin">
+    <Page title="User">
       <Container maxWidth={false}>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>

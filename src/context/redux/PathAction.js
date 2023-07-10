@@ -12,13 +12,10 @@ export const GET_CATEGORY = "GET_CATEGORY";
 export const GET_TYPE = "GET_TYPE";
 export const GET_FORM_BY_ID = "GET_FORM_BY_ID";
 export const GET_CAMPAIGN_BY_ID = "GET_CAMPAIGN_BY_ID";
+export const GET_CAMPAIGN_ID = "GET_CAMPAIGN_ID";
 export const GET_LIST_CANDIDATE_ACCOUNT = "GET_LIST_CANDIDATE_ACCOUNT";
 
 //-----------------------------------------------------
 export const SUBMIT_VOTE = "SUBMIT_VOTE";
 export const CREATE_FORM = "CREATE_FORM";
 export const CREATE_QUESTION = "CREATE_QUESTION";
-
-
-
-

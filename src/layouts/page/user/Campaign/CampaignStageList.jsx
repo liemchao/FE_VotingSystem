@@ -10,12 +10,15 @@ import {
   CardActions,
   Grid,
   Rating,
+  Box,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { handleGetCandidateByIdCampaign } from "context/redux/action/action";
 import { Authen } from "context/authenToken/AuthenToken";
 import { useContext } from "react";
 import { handleGetCampaignById } from "context/redux/action/action";
+import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
+import StageCard from "components/Cards/StageCard";
 
 export default function CampaignStageList() {
   //------------
@@ -50,7 +53,13 @@ export default function CampaignStageList() {
     >
       {stateList.map((card, index) => (
         <Grid item xs={6} md={4} key={index}>
-          <Card
+          <StageCard
+            title={card.title}
+            onClickJoin={() => {
+              handleinvite(card.campaignId, token);
+            }}
+          />
+          {/* <Card
             sx={{
               maxWidth: 500,
               padding: "1rem 1rem 1rem 1rem",
@@ -82,43 +91,27 @@ export default function CampaignStageList() {
               <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
             </CardContent>
             <CardActions>
-              <Button
-                sx={{
-                  position: "relative",
-                  left: "-1rem",
-                  bottom: "-1rem",
-                  display: "inline - flex",
-                  width: "9rem",
-                  height: "3rem",
-                  background: "var(--10)",
-                  color: "var(--badge-text)",
-                  backgroundColor: "#ffcc33",
-                  boxShadow: "0 0 0.2rem 0.1rem var(--card-bg)",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  borderRadius: "30px",
-                  marginLeft: "1rem",
-                  fontSize: "1rem",
-                  fontWeight: "700",
-                  border: "0",
-                }}
-                onClick={() => {
-                  handleinvite(card.campaignId, token);
-                }}
-              >
-                Tham Gia
-              </Button>
-              <Button
-                sx={{
-                  right: "-4rem",
-                  bottom: "-1rem",
-                }}
-                size="small"
-              >
-                Chi tiết
-              </Button>
+              <Box sx={{ marginTop: 2, gap: 17, display: "flex" }}>
+                <ButtonCustomize
+                  nameButton="Tham gia"
+                  bgColor="#71C043"
+                  hovercolor="#2BB557"
+                  onClick={() => {
+                    handleinvite(card.campaignId, token);
+                  }}
+                />
+        
+                <ButtonCustomize
+                  nameButton="Chi tiết"
+                  bgColor="#71C043"
+                  hovercolor="#2BB557"
+                  onClick={() => {
+                    handleinvite(card.campaignId, token);
+                  }}
+                />
+              </Box>
             </CardActions>
-          </Card>
+          </Card> */}
         </Grid>
       ))}
     </Grid>
