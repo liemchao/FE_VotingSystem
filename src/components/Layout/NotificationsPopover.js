@@ -20,10 +20,10 @@ import {
   ListItemButton,
 } from "@mui/material";
 import MenuPopover from "./MenuPopover";
-
 import Scrollbar from "./Scrollbar";
 import Iconify from "assets/theme/components/icon/Iconify";
-import img1 from "assets/images/liem.jpg";
+import liemAvatar from "../../assets/images/liem.jpg";
+import avatarlogo from "../../assets/images/logo1.jpeg";
 // import Iconify from "assets/theme/components/icon/Iconify";
 
 // ----------------------------------------------------------------------
@@ -33,9 +33,11 @@ const NOTIFICATIONS = [
     id: 123,
     title: "Bạn đã được mời làm ứng cử viên",
     description: "Confrirm the feedback",
+
     avatar:
       "https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg",
     type: "",
+
     createdAt: set(new Date(), { hours: 10, minutes: 30 }),
     isUnRead: true,
   },
@@ -43,39 +45,46 @@ const NOTIFICATIONS = [
     id: 124,
     title: "Bạn đã bình chọn",
     description: "Confrirm the feedback",
+
     avatar:
       "https://png.pngtree.com/png-vector/20190704/ourlarge/pngtree-businessman-user-avatar-free-vector-png-image_1538405.jpg",
     type: "",
+
     createdAt: sub(new Date(), { hours: 3, minutes: 30 }),
     isUnRead: true,
   },
   {
     id: 125,
-    title: "Bạn đã bình chọn",
+    title: "Bạn đã bình chọn nè ",
     description: "sent from Voter",
+
     avatar:
       "https://png.pngtree.com/png-vector/20190704/ourlarge/pngtree-businessman-user-avatar-free-vector-png-image_1538405.jpg",
     type: "",
+
     createdAt: sub(new Date(), { days: 1, hours: 3, minutes: 30 }),
-    isUnRead: false,
+    isUnRead: true,
   },
   {
     id: 126,
-    title: "Bạn đã bình chọn",
+    title: "Bạn đã bình chọn ha",
     description: "sent from Admin",
     avatar:
       "https://png.pngtree.com/png-vector/20190704/ourlarge/pngtree-businessman-user-avatar-free-vector-png-image_1538405.jpg",
     type: "",
+
     createdAt: sub(new Date(), { days: 2, hours: 3, minutes: 30 }),
     isUnRead: false,
   },
   {
     id: 127,
-    title: "Bạn đã bình chọn",
+    title: "Bạn đã bình chọn ồ hố",
     description: "sent from Candidate",
+
     avatar:
       "https://png.pngtree.com/png-vector/20190704/ourlarge/pngtree-businessman-user-avatar-free-vector-png-image_1538405.jpg",
     type: "",
+
     createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
     isUnRead: false,
   },
@@ -233,7 +242,6 @@ function NotificationItem({ notification }) {
             }}
           >
             <Iconify icon="eva:clock-outline" sx={{ mr: 0.5, width: 16, height: 16 }} />
-            {/* {fToNow(notification.createdAt)} */}
           </Typography>
         }
       />

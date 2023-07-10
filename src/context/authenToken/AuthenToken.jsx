@@ -19,6 +19,9 @@ export const ProviderToken = ({ children }) => {
     if (token) {
       const decoded = jwt_decode(token);
       setDecode(decoded);
+
+    } else {
+
     }
   }, [dispatch, id, setDecode]);
 
