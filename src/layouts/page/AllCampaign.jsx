@@ -10,7 +10,7 @@ import { useContext } from "react";
 import { Authen } from "../../context/authenToken/AuthenToken";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { callAPIgetListCampaigns } from "../../context/redux/action/action";
+import { callAPIgetListCampaigns, handleGetCampaignById } from "../../context/redux/action/action";
 import { useCallback } from "react";
 import NewPopUp from "components/Popup/create/NewPopUp";
 import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
@@ -96,8 +96,8 @@ export default function AllCampaignList() {
   }, []);
 
   const handleCampaignStage = useCallback(
-    async (id, navigate) => {
-      await dispatch(handleGetCampaignById(id, navigate));
+    (id, navigate) => {
+      dispatch(handleGetCampaignById(id, navigate));
     },
     [dispatch]
   );
