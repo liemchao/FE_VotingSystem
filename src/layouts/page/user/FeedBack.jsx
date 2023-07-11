@@ -45,7 +45,8 @@ const TABLE_HEAD = [
   { id: "createdAt", label: "Thời gian tạo", alignRight: false },
   { id: "updatedate", label: "Nội dung", alignRight: false },
   { id: "status", label: "Trạng thái", alignRight: false },
-  { id: "description", label: "Action", align: "center" },
+  { id: "Xóa", label: "Xóa", alignRight: false },
+  { id: "Sửa", label: "Sửa", alignRight: false },
 ];
 
 // ----------------------------------------------------------------------
@@ -175,10 +176,11 @@ export default function FeedBack() {
             {/* <Icon icon="emojione-monotone:pot-of-form" fontSize={100} /> */}
           </Typography>
           <ButtonCustomize
-            variant="contained"
-            component={RouterLink}
-            to="/dashboard/admin/newfood"
             nameButton="Export File"
+            bgColor="#FFA500"
+            hovercolor="#F7941D"
+            component={RouterLink}
+            to="#"
           />
         </Stack>
 
@@ -243,24 +245,10 @@ export default function FeedBack() {
                             <Label color="success">True</Label>
                           </div>
                         </TableCell>
-                        <TableCell sx={{ width: "10%" }}>
-                          {
-                            <Button
-                              sx={{ bgcolor: "secondary", background: "#FFA07A" }}
-                              startIcon={<DeleteOutlineIcon />}
-                            >
-                              Xoá
-                            </Button>
-                          }
-                          {
-                            <Button
-                              sx={{ marginTop: "2px", bgcolor: "secondary", background: "#71C043" }}
-                              startIcon={getIcon("material-symbols:edit")}
-                            >
-                              Sửa
-                            </Button>
-                          }
+                        <TableCell width="2%">
+                          {<IconButton>{getIcon("ic:baseline-delete")}</IconButton>}
                         </TableCell>
+                        <TableCell>{<IconButton>{getIcon("tabler:edit")}</IconButton>}</TableCell>
                       </TableRow>
                     );
                   })}

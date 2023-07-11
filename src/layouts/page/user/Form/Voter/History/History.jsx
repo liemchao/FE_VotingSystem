@@ -42,8 +42,8 @@ import Iconify from "assets/theme/components/icon/Iconify";
 const TABLE_HEAD = [
   { id: "images", name: "Hình", alignRight: false },
   { id: "name", label: "Tên người tạo", alignRight: false },
-  { id: "Loại hành động", label: "Loại hành động", alignRight: false },
-  { id: "Mô tả", label: "Mô tả", alignRight: false },
+  { id: "Loại hành động", label: "Mô tả", alignRight: false },
+  { id: "Mô tả", label: "Loại hành động", alignRight: false },
   { id: "Xóa", label: "Xóa", alignRight: false },
   { id: "Sửa", label: "Sửa", alignRight: false },
 
@@ -179,10 +179,11 @@ export default function HistoryUser() {
             {/* <Icon icon="emojione-monotone:pot-of-history" fontSize={100} /> */}
           </Typography>
           <ButtonCustomize
-            variant="contained"
-            component={RouterLink}
-            to="/dashboard/admin/newfood"
             nameButton="Export File"
+            bgColor="#FFA500"
+            hovercolor="#F7941D"
+            component={RouterLink}
+            to="#"
           />
         </Stack>
 
@@ -231,6 +232,7 @@ export default function HistoryUser() {
                             User
                           </Typography>
                         </TableCell>
+                        <TableCell align="left">{description}</TableCell>
                         <TableCell align="left">
                           {actionTypeName === "Chưa bình chọn" && (
                             <Label color="warning">Chưa bình chọn</Label>
@@ -239,7 +241,7 @@ export default function HistoryUser() {
                             <Label color="success">Đã bình chọn</Label>
                           )}
                         </TableCell>
-                        <TableCell align="left">{description}</TableCell>
+
                         <TableCell width="2%">
                           {<IconButton>{getIcon("ic:baseline-delete")}</IconButton>}
                         </TableCell>

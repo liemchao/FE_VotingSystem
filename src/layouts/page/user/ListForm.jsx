@@ -178,6 +178,8 @@ export default function ListForm() {
           </Typography>
           <ButtonCustomize
             variant="contained"
+            bgColor="#FFA500"
+            hovercolor="#F7941D"
             onClick={() => {
               handleAdd();
             }}

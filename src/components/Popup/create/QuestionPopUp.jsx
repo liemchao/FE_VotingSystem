@@ -29,6 +29,7 @@ import { Authen } from "context/authenToken/AuthenToken";
 import API from "config/axios/API/API";
 import { URL_API } from "config/axios/Url/URL";
 import { CustomizedToast } from "components/toast/ToastCustom";
+import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
 
 const schema = yup.object().shape({});
 
@@ -69,7 +70,6 @@ export default function QuestionPopUp(props) {
     }, []);
   };
   getID();
-
 
   const hanldeCheck = (e, elementId) => {
     const value = e.target.value;
@@ -126,7 +126,7 @@ export default function QuestionPopUp(props) {
         <DialogTitle>
           <PageHeader
             title="Trả lời các câu hỏi"
-            subTitle="Đưa ra các lựa chọn cho ứng cử viên"
+            subTitle=" Chọn ra các tiêu chí cho ứng cử viên"
             icon={getIcon("ph:question-bold")}
           />
         </DialogTitle>
@@ -154,7 +154,7 @@ export default function QuestionPopUp(props) {
                                   value={i.elementId}
                                   control={<Radio />}
                                   id={item.questionId}
-                                  label={i.content}
+                                  label={i.answer}
                                   onChange={(e) => {
                                     hanldeCheck(e, i.elementId);
                                   }}
@@ -169,7 +169,14 @@ export default function QuestionPopUp(props) {
                 </Card>
               );
             })}
-            <Button
+            <div style={{ marginTop: 1 }}></div>
+            <ButtonCustomize
+              nameButton="Gửi"
+              bgColor="#FFA500"
+              hovercolor="#F7941D"
+              type="submit"
+            />
+            {/* <Button
               variant="contained"
               sx={{
                 marginTop: 2,
@@ -179,7 +186,7 @@ export default function QuestionPopUp(props) {
               type="submit"
             >
               Send
-            </Button>
+            </Button> */}
           </form>
         </DialogContent>
       </Dialog>

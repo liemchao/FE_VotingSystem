@@ -1,18 +1,7 @@
 // import { filter } from "lodash";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import React, { useContext, useEffect } from "react";
-import {
-  Card,
-  Button,
-  Typography,
-  CardMedia,
-  CardContent,
-  CardActions,
-  Grid,
-  OutlinedInput,
-  InputAdornment,
-  Container,
-} from "@mui/material";
+import { TextField, Grid, OutlinedInput, InputAdornment, Container } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import Iconify from "assets/theme/components/icon/Iconify";
 import Box from "@mui/material/Box";
@@ -22,10 +11,13 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { handleGetQuestByIdCampaign } from "context/redux/action/action";
 import { Authen } from "context/authenToken/AuthenToken";
-import QuestionPopUp from "components/Popup/create/CreateQuestionPopUp";
+import QuestionPopUp from "components/Popup/create/QuestionPopUp";
 import MultipleInteractionCard from "components/Cards/CardCandidate";
 import Page from "components/Layout/Page";
 import { handleGetCandidateByIdCampaign } from "context/redux/action/action";
+import { callAPIgetListForm } from "context/redux/action/action";
+import { debounce } from "lodash";
+import { useRef } from "react";
 export default function ListCandidate() {
   const [OpenPopUp, SetOpenPopUp] = useState(false);
   // const [idForm, setIdForm] = useState();
@@ -49,12 +41,16 @@ export default function ListCandidate() {
   useEffect(() => {
     const callAPI = async () => {
       await dispatch(handleGetCandidateByIdCampaign(id, token));
+      await dispatch(callAPIgetListForm(token));
     };
     callAPI();
   }, [id]);
 
   const candidateList = useSelector((state) => {
     return state.candidateList;
+  });
+  const idForm = useSelector((state) => {
+    return state.idForm;
   });
 
   const hanlleAuthenVote = () => {
@@ -73,15 +69,8 @@ export default function ListCandidate() {
     }
   };
 
-  // lấy ID form
-  const getIdForm = () => {
-    for (let index = 0; index < state.length; index++) {
-      return state[0].formId;
-    }
-  };
-
   const hanldeGetQuestion = async (token) => {
-    await dipatch(handleGetQuestByIdCampaign(getIdForm(), token));
+    await dipatch(handleGetQuestByIdCampaign(idForm, token));
     SetOpenPopUp(true);
   };
 
@@ -90,24 +79,92 @@ export default function ListCandidate() {
     { id: "inActive", title: "Trạng thái ẩn" },
     { id: "All", title: "Không hoạt động" },
   ];
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isTyping, setIsTyping] = useState(false);
+  const candidatesPerPage = 6; // number of candidates to be displayed per page
+
+  const filteredCandidates = useSelector((state) =>
+    state.candidateList.filter((candidate) =>
+      candidate.fullName.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  );
+
+  // const debouncedFilter = debounce((value) => {
+  //   setSearchTerm(value);
+  //   setCurrentPage(1); // reset current page to 1 when search term changes
+  //   setIsTyping(false);
+  // }, 3300);
+
+  // const handleSearchChange = (event) => {
+  //   const value = event.target.value;
+  //   setSearchTerm(value);
+  //   setIsTyping(true);
+  //   if (!isTyping) {
+  //     debouncedFilter(value);
+  //   }
+  // };
+
+  const searchInputRef = useRef(null);
+  const prevSearchValueRef = useRef("");
+
+  const handleSearchChange = () => {
+    const currentValue = searchInputRef.current.value;
+    if (currentValue !== prevSearchValueRef.current) {
+      setSearchTerm(currentValue);
+      setCurrentPage(1); // reset current page to 1 when search term changes
+      prevSearchValueRef.current = currentValue;
+    }
+  };
+
+  // calculate the total number of pages
+  const totalPages = Math.ceil(filteredCandidates.length / candidatesPerPage);
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  // get the current page of candidates based on the current page number
+  const getCurrentCandidates = () => {
+    const startIndex = (currentPage - 1) * candidatesPerPage;
+    const endIndex = startIndex + candidatesPerPage;
+    return filteredCandidates.slice(startIndex, endIndex);
+  };
+
+  useEffect(() => {
+    const searchInput = searchInputRef.current;
+    searchInput.addEventListener("input", handleSearchChange);
+    return () => {
+      searchInput.removeEventListener("input", handleSearchChange);
+    };
+  }, []);
   return (
     <Page title="User">
       <Container>
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          <SearchStyle
-            value=""
-            onChange=""
-            placeholder="Tìm kiếm..."
-            startAdornment={
-              <InputAdornment position="start">
-                <Iconify
-                  icon="eva:search-fill"
-                  sx={{ color: "text.disabled", width: 20, height: 20 }}
-                />
-              </InputAdornment>
-            }
+          <Box
+            component="form"
+            sx={{
+              "& > :not(style)": { m: 1, width: "25ch" },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField
+              inputProps={{ "aria-label": "search candidate" }}
+              id="outlined-basic"
+              inputRef={searchInputRef}
+              label="Tìm kiếm..."
+              variant="outlined"
+            />
+          </Box>
+          <Pagination
+            sx={{ ml: 25 }}
+            color="primary"
+            count={totalPages}
+            page={currentPage}
+            onChange={handlePageChange}
           />
-          <Pagination sx={{ ml: 25 }} count={4} color="primary" />
 
           <Box sx={{ marginTop: "1%", marginLeft: "20%" }}>
             <Select
@@ -130,76 +187,6 @@ export default function ListCandidate() {
                   hanldeGetQuestion(token);
                 }}
               />
-              {/* <Card
-                sx={{
-                  maxWidth: 356,
-                  padding: "1rem 2rem 1rem 1rem",
-                  borderRadius: "18px",
-                  border: "1px solid #ccc",
-                }}
-              >
-                <CardMedia
-                  sx={{
-                    height: 340,
-                    display: "cover",
-                  }}
-                  image={card?.avatarUrl}
-                  title="green iguana"
-                  border="2px red"
-                />
-                <CardContent
-                  sx={{
-                    height: 120,
-                  }}
-                >
-                  <Typography gutterBottom variant="h4" component="div">
-                    {card.fullName}
-                  </Typography>
-                  <Typography variant="h6" color="text.secondary">
-                   
-                  </Typography>
-                  <Typography variant="body1" color="text.secondary">
-                  "Đẹp trai nhất lớp"
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button
-                    sx={{
-                      position: "relative",
-                      left: "-1rem",
-                      bottom: "-1rem",
-                      display: "inline - flex",
-                      width: "9rem",
-                      height: "3rem",
-                      background: "var(--10)",
-                      color: "var(--badge-text)",
-                      backgroundColor: "#ffcc33",
-                      boxShadow: "0 0 0.2rem 0.1rem var(--card-bg)",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      borderRadius: "30px",
-                      marginLeft: "1rem",
-                      fontSize: "1rem",
-                      fontWeight: "700",
-                      border: "0",
-                    }}
-                    onClick={() => {
-                      hanldeGetQuestion(token);
-                    }}
-                  >
-                    Bình chọn
-                  </Button>
-                  <Button
-                    sx={{
-                      right: "-4rem",
-                      bottom: "-1rem",
-                    }}
-                    size="small"
-                  >
-                    Chi tiết
-                  </Button>
-                </CardActions>
-              </Card> */}
             </Grid>
           ))}
         </Grid>

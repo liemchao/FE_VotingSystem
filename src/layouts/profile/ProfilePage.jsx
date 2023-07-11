@@ -36,14 +36,14 @@ const blogs = [
   },
   {
     img: liem,
-    title: "Chiến dịch mua xuân xanh",
+    title: "Chiến dịch mùa xuân xanh",
     subtitle:
       "Some quick example text to build on the card title and make up the bulk of the card's content.",
     btncolor: "warning",
   },
   {
     img: liem,
-    title: "Chiến dịch điều đào",
+    title: "Chiến dịch mùa xanh cỏ ",
     subtitle:
       "Some quick example text to build on the card title and make up the bulk of the card's content.",
     btncolor: "primary",
@@ -82,7 +82,7 @@ function ProfilePage() {
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <Card>
-          <CardHeader color="primary">
+          <CardHeader color="success">
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <Box>
                 <h4 className={classes.cardTitleWhite}>Chỉnh sửa trang cá nhân</h4>
@@ -91,13 +91,24 @@ function ProfilePage() {
               <Box>
                 <ButtonGroup>
                   <ButtonCustomize
-                    nameButton="Thêm visibale"
-                    bgColor="red"
-                    hovercolor="#2BB557"
+                    nameButton="Thêm"
+                    bgColor="#FFA500"
+                    hovercolor="#F7941D"
                     onClick={() => handleNewActivity()}
                   />
-                  <ButtonCustomize nameButton="hhahahahah" bgColor="red" />
-                  <ButtonCustomize nameButton="hhahahahah" bgColor="red" />
+
+                  <ButtonCustomize
+                    nameButton="Xem"
+                    bgColor="#FFA500"
+                    hovercolor="#F7941D"
+                    onClick={() => handleNewActivity()}
+                  />
+                  <ButtonCustomize
+                    nameButton="Xóa"
+                    bgColor="#FFA500"
+                    hovercolor="#F7941D"
+                    onClick={() => handleNewActivity()}
+                  />
                 </ButtonGroup>
               </Box>
             </Box>
@@ -107,13 +118,13 @@ function ProfilePage() {
               <Grid item xs={4}>
                 <BioCard
                   avatar="https://sohanews.sohacdn.com/thumb_w/660/160588918557773824/2020/6/26/1045888601851701862892902946201527489832653o-1593155817343264355681.jpg"
-                  name="Phan Thị Thanh Mai"
-                  sologan="Uống nhầm ánh mắt say trọn một đời"
+                  name="Nguyễn Thanh Liêm"
+                  sologan="Code ngu nhưng hay code"
                 />
               </Grid>
               <Grid item xs={4}>
                 <RecipeReviewCard
-                  name="Phan Thị Thanh Mai"
+                  name="Nguyễn Thanh Liêm"
                   phone="012548785"
                   email="abc@gmail.com"
                   address="FPT university"

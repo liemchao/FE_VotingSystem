@@ -10,12 +10,10 @@ import { CardActions } from "@mui/material";
 import IconButton from "@mui/joy/IconButton";
 import Typography from "@mui/joy/Typography";
 import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
-
+import liem from "../../assets/images/liem.jpg";
 export default function BioCard(props) {
   let { avatar, name, sologan } = props;
-  const [input, setInput] = React.useState([
-    "https://cdn.diemnhangroup.com/seoulcenter/2022/11/gai-xinh-1.jpg",
-  ]);
+  const [input, setInput] = React.useState([liem]);
 
   console.log(input);
 
@@ -111,6 +109,8 @@ export default function BioCard(props) {
               variant="contained"
               component="span"
               nameButton="Tải ảnh"
+              bgColor="#FFA500"
+              hovercolor="#F7941D"
               sx={{
                 marginLeft: "20%",
               }}

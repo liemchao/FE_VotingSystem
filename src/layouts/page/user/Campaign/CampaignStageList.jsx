@@ -12,6 +12,7 @@ import {
   Rating,
   Box,
 } from "@mui/material";
+import * as PathAction from "../../../../context/redux/PathAction";
 import { useDispatch, useSelector } from "react-redux";
 import { handleGetCandidateByIdCampaign } from "context/redux/action/action";
 import { Authen } from "context/authenToken/AuthenToken";
@@ -19,6 +20,10 @@ import { useContext } from "react";
 import { handleGetCampaignById } from "context/redux/action/action";
 import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
 import StageCard from "components/Cards/StageCard";
+
+export const createAction = ({ type, payload }) => {
+  return { type, payload };
+};
 
 export default function CampaignStageList() {
   //------------
@@ -38,9 +43,16 @@ export default function CampaignStageList() {
   const stateList = useSelector((state) => {
     return state.campaignStage;
   });
+  console.log(stateList);
 
-  const handleinvite = (id, token) => {
+  const handleinvite = (id, token, idForm) => {
     dispatch(handleGetCandidateByIdCampaign(id, token));
+    dispatch(
+      createAction({
+        type: PathAction.PUT_ID_FORM,
+        payload: idForm,
+      })
+    );
     navigate(`/user/candidate/${id}`);
   };
 
@@ -57,7 +69,7 @@ export default function CampaignStageList() {
           <StageCard
             title={card.title}
             onClickJoin={() => {
-              handleinvite(card.campaignId, token);
+              handleinvite(card.campaignId, token, card.formId);
             }}
           />
           {/* <Card

@@ -19,6 +19,7 @@ import API from "config/axios/API/API";
 import moment from "moment";
 import { GetCampaignbyUserId } from "context/redux/action/action";
 import dayjs from "dayjs";
+import { getCampaignId } from "context/redux/action/action";
 const schema = yup.object().shape({});
 
 const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
@@ -31,19 +32,12 @@ export default function UpdateCampaign(props) {
   const [display, setDisplay] = useState();
   const [dateCreate, setDayCreate] = useState();
   const [dateEnd, setDateEnd] = useState();
-  const [object, setObject] = useState({});
+  const [loading, setLoading] = useState(true);
   const formData = new FormData();
   const handleClose = () => {
     SetOpenEditCampaign(false);
   };
   const decode = jwt_decode(token);
-
-  // const value = dayjs("2023-07-06T06:30:00Z");
-  // const compareDate = dayjs("2023-07-07T06:30:00Z");
-
-  // const isBefore = value.isBefore(compareDate);
-
-  // console.log(isBefore); // Output: true if value is before compareDate, false otherwise
 
   function _treat(e) {
     const { files } = e.target;
@@ -58,11 +52,19 @@ export default function UpdateCampaign(props) {
   }
 
   useEffect(() => {
-    const getAPIcatagory = async () => {
-      await dispatch(getAllCategory(token));
+    const getAPIdata = async () => {
+      try {
+        setLoading(true);
+
+        await Promise.all([dispatch(getAllCategory(token)), dispatch(getCampaignId(id, token))]);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
     };
-    getAPIcatagory();
-  }, [dispatch]);
+    getAPIdata();
+  }, [dispatch, id, token]);
 
   const getOptions = () => [
     { id: "public", title: "Hiển thị" },
@@ -73,16 +75,14 @@ export default function UpdateCampaign(props) {
     return state.category;
   });
 
-  useEffect(() => {
-    API("GET", URL_API + `/api/v1/campaigns/${id}`, null, token)
-      .then((res) => {
-        setObject(res.data.data);
-        // formik.setFieldValue("title", res.data.data.title);
+  const object = useSelector((state) => {
+    return state.getcampaignById;
+  });
 
-        setInput(res.data.data.imgUrl);
-      })
-      .catch((err) => {});
-  }, [id]);
+  useEffect(() => {
+    setInput(object.imgUrl || []);
+  }, [object.imgUrl]);
+  // setInput(object.imgUrl);
 
   const getCategoryOption = () => {
     const CategoryOption = [];
@@ -124,9 +124,9 @@ export default function UpdateCampaign(props) {
           formData,
           token
         );
-        console.log(req);
         if (req) {
           dispatch(GetCampaignbyUserId(decode.Username, token));
+          dispatch(getCampaignId(id, token));
 
           CustomizedToast({
             message: "Chỉnh sửa chiến dịch thành công",
@@ -134,7 +134,6 @@ export default function UpdateCampaign(props) {
           });
         }
       } catch (error) {
-        console.log(error);
         CustomizedToast({
           message: "Chỉnh sửa chiến dịch thất bại",
           type: "ERROR",
@@ -143,157 +142,171 @@ export default function UpdateCampaign(props) {
     },
   });
 
-  return (
-    <Paper>
-      <Dialog maxWidth="md" open={OpenEditCampaign} onClose={handleClose}>
-        <DialogTitle>
-          <PageHeader
-            title="Chỉnh sửa chiến dịch"
-            subTitle="Cập nhật thông tin cho chiến dịch"
-            icon={getIcon("akar-icons:edit")}
-          />
-        </DialogTitle>
-        <DialogContent>
-          <form onSubmit={formik.handleSubmit}>
-            <Box
-              sx={{
-                borderRadius: 2,
-                bgcolor: "background.paper",
-                m: 1,
-                display: "flex",
-                justifyContent: "center",
-                boxShadow: 12,
-                paddingLeft: "7%",
-                maxWidth: "xl",
-              }}
-            >
+  if (!object || loading) {
+    return <div>Loading...</div>;
+  } else {
+    return (
+      <Paper>
+        <Dialog maxWidth="md" open={OpenEditCampaign} onClose={handleClose}>
+          <DialogTitle>
+            <PageHeader
+              title="Chỉnh sửa chiến dịch"
+              subTitle="Cập nhật thông tin cho chiến dịch"
+              icon={getIcon("akar-icons:edit")}
+            />
+          </DialogTitle>
+          <DialogContent>
+            <form onSubmit={formik.handleSubmit}>
               <Box
-                sx={{ float: "left", width: "60%", flexGrow: 1, mt: "2rem" }}
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
+                sx={{
+                  borderRadius: 2,
+                  bgcolor: "background.paper",
+                  m: 1,
+                  display: "flex",
+                  justifyContent: "center",
+                  boxShadow: 12,
+                  paddingLeft: "7%",
+                  maxWidth: "xl",
+                }}
               >
-                <Grid container spacing={1.5}>
-                  <Grid item xs={12}>
-                    <Input
-                      required
-                      variant="outlined"
-                      name="title"
-                      defaultValue={object.title}
-                      label="Tên Chiến Dịch"
-                      onChange={(event) => {
-                        formik.handleChange(event);
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={10}>
-                    <DateTime
-                      required
-                      variant="outlined"
-                      name="startTime"
-                      value={dayjs(object.startTime)}
-                      label="Thời gian bắt đầu"
-                      onChange={(event) => {
-                        setDayCreate(event.$d);
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={10}>
-                    <DateTime
-                      required
-                      variant="outlined"
-                      name="endTime"
-                      value={dayjs(object.endTime)}
-                      label="Thời gian kết thúc"
-                      onChange={(event) => {
-                        setDateEnd(event.$d);
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Box
-                      sx={{
-                        flexDirection: "row",
-                      }}
-                    >
-                      <Select
-                        name="categoryId"
+                <Box
+                  sx={{ float: "left", width: "60%", flexGrow: 1, mt: "2rem" }}
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  <Grid container spacing={1.5}>
+                    <Grid item xs={12}>
+                      <Input
                         required
-                        label="Loại chiến dịch"
-                        width="14rem"
-                        defaultValue={object.categoryId}
-                        height="10rem"
-                        onChange={(e) => {
-                          const a = category.find((c) => c.categoryId === e.target.value);
-                          formik.setFieldValue("categoryId", a.categoryId);
+                        variant="outlined"
+                        name="title"
+                        defaultValue={object?.title}
+                        label="Tên Chiến Dịch"
+                        onChange={(event) => {
+                          formik.handleChange(event);
                         }}
-                        options={getCategoryOption()}
+                      />
+                    </Grid>
+                    <Grid item xs={10}>
+                      <DateTime
+                        required
+                        variant="outlined"
+                        name="startTime"
+                        value={dayjs(object.startTime)}
+                        label="Thời gian bắt đầu"
+                        onChange={(event) => {
+                          setDayCreate(event.$d);
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={10}>
+                      <DateTime
+                        required
+                        variant="outlined"
+                        name="endTime"
+                        value={dayjs(object.endTime)}
+                        label="Thời gian kết thúc"
+                        onChange={(event) => {
+                          setDateEnd(event.$d);
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Box
+                        sx={{
+                          flexDirection: "row",
+                        }}
+                      >
+                        <Select
+                          name="categoryId"
+                          required
+                          label="Loại chiến dịch"
+                          width="14rem"
+                          defaultValue={object.categoryId}
+                          value={object.categoryId}
+                          height="10rem"
+                          onChange={(e) => {
+                            const a = category.find((c) => c.categoryId === e.target.value);
+                            formik.setFieldValue("categoryId", a.categoryId);
+                          }}
+                          options={getCategoryOption()}
+                        />
+                      </Box>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Box
+                        sx={{
+                          // display: "flex",
+                          flexDirection: "row",
+                        }}
+                      >
+                        <Select
+                          name="visibility"
+                          required
+                          defaultValue={object.visibility}
+                          value={object.visibility}
+                          label="Trạng thái"
+                          width="14rem"
+                          height="10rem"
+                          onChange={(e) => {
+                            setDisplay(e.target.value);
+                          }}
+                          options={getOptions()}
+                        />
+                      </Box>
+                    </Grid>
+                    <Box width="200px" marginTop={"10%"} ml={"12rem"} mb={"2rem"}>
+                      <ButtonCustomize
+                        variant="contained"
+                        type="submit"
+                        nameButton="Thêm"
+                        bgColor="#71C043"
+                        hovercolor="#2BB557"
                       />
                     </Box>
                   </Grid>
-                  <Grid item xs={12}>
-                    <Box
-                      sx={{
-                        // display: "flex",
-                        flexDirection: "row",
-                      }}
-                    >
-                      <Select
-                        name="visibility"
-                        required
-                        defaultValue={object.visibility}
-                        label="Trạng thái"
-                        width="14rem"
-                        height="10rem"
-                        onChange={(e) => {
-                          setDisplay(e.target.value);
-                        }}
-                        options={getOptions()}
-                      />
-                    </Box>
-                  </Grid>
-                  <Box width="200px" marginTop={"10%"} ml={"12rem"} mb={"2rem"}>
+                </Box>
+
+                <Box sx={{ float: "left", width: "30%", mt: "2rem" }}>
+                  <label htmlFor="contained-button-file">
+                    <input
+                      accept="image/*"
+                      id="contained-button-file"
+                      multiple
+                      type="file"
+                      onChange={_treat}
+                      style={{ display: "none" }}
+                    />
                     <ButtonCustomize
-                      variant="contained"
-                      type="submit"
-                      nameButton="Thêm"
                       bgColor="#71C043"
                       hovercolor="#2BB557"
+                      nameButton="Tải lên..."
                     />
-                  </Box>
-                </Grid>
-              </Box>
 
-              <Box sx={{ float: "left", width: "30%", mt: "2rem" }}>
-                <label htmlFor="contained-button-file">
-                  <input
-                    accept="image/*"
-                    id="contained-button-file"
-                    multiple
-                    type="file"
-                    onChange={_treat}
-                    style={{ display: "none" }}
-                  />
-                  <ButtonCustomize bgColor="#71C043" hovercolor="#2BB557" nameButton="Tải lên..." />
-
-                  <Box
-                    sx={{
-                      height: 165,
-                      width: 165,
-                      maxHeight: { xs: 233, md: 167 },
-                      maxWidth: { xs: 350, md: 250 },
-                      marginTop: "10%",
-                      marginLeft: "11%",
-                    }}
-                  >
-                    {input != null ? <img src={input} alt="hih" /> : <img src={input} alt="hihi" />}
-                  </Box>
-                </label>
+                    <Box
+                      sx={{
+                        height: 165,
+                        width: 165,
+                        maxHeight: { xs: 233, md: 167 },
+                        maxWidth: { xs: 350, md: 250 },
+                        marginTop: "10%",
+                        marginLeft: "11%",
+                      }}
+                    >
+                      {input !== null ? (
+                        <img src={input} alt="image" />
+                      ) : (
+                        <img src={input} alt="image" />
+                      )}
+                    </Box>
+                  </label>
+                </Box>
               </Box>
-            </Box>
-          </form>
-        </DialogContent>
-      </Dialog>
-    </Paper>
-  );
+            </form>
+          </DialogContent>
+        </Dialog>
+      </Paper>
+    );
+  }
 }
