@@ -27,9 +27,6 @@ export default function CampaignStageList() {
   const { id } = useParams();
   const navigate = useNavigate();
   //------------
-  const stateList = useSelector((state) => {
-    return state.campaignStage;
-  });
 
   useEffect(() => {
     const callAPIgetList = async () => {
@@ -38,9 +35,13 @@ export default function CampaignStageList() {
     callAPIgetList();
   }, [id]);
 
+  const stateList = useSelector((state) => {
+    return state.campaignStage;
+  });
+
   const handleinvite = (id, token) => {
     dispatch(handleGetCandidateByIdCampaign(id, token));
-    navigate("/user/detailcandidate");
+    navigate(`/user/candidate/${id}`);
   };
 
   return (

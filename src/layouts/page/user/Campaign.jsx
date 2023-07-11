@@ -93,8 +93,8 @@ export default function CampaignList() {
           <Typography variant="h4" gutterBottom>
             <ButtonCustomize
               nameButton="Thêm Chiến Dịch"
-              bgColor="#71C043"
-              hovercolor="#2BB557"
+              bgColor="#FFA500"
+              hovercolor="#F7941D"
               onClick={() => {
                 handleClickOpen();
               }}

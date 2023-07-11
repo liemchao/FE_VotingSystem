@@ -1,6 +1,6 @@
 // import { filter } from "lodash";
-import { useNavigate } from "react-router-dom";
-import React, { useContext } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
 import {
   Card,
   Button,
@@ -25,9 +25,12 @@ import { Authen } from "context/authenToken/AuthenToken";
 import QuestionPopUp from "components/Popup/create/CreateQuestionPopUp";
 import MultipleInteractionCard from "components/Cards/CardCandidate";
 import Page from "components/Layout/Page";
+import { handleGetCandidateByIdCampaign } from "context/redux/action/action";
 export default function ListCandidate() {
   const [OpenPopUp, SetOpenPopUp] = useState(false);
-  const [idForm, setIdForm] = useState();
+  // const [idForm, setIdForm] = useState();
+  const { id } = useParams();
+  const dispatch = useDispatch();
   const { token } = useContext(Authen);
   const dipatch = useDispatch();
   const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
@@ -42,12 +45,16 @@ export default function ListCandidate() {
       borderColor: `${theme.palette.grey[500_32]} !important`,
     },
   }));
+
+  useEffect(() => {
+    const callAPI = async () => {
+      await dispatch(handleGetCandidateByIdCampaign(id, token));
+    };
+    callAPI();
+  }, [id]);
+
   const candidateList = useSelector((state) => {
     return state.candidateList;
-  });
-
-  const state = useSelector((state) => {
-    return state.campaignStage;
   });
 
   const hanlleAuthenVote = () => {
@@ -76,11 +83,6 @@ export default function ListCandidate() {
   const hanldeGetQuestion = async (token) => {
     await dipatch(handleGetQuestByIdCampaign(getIdForm(), token));
     SetOpenPopUp(true);
-  };
-
-  const navigate = useNavigate();
-  const handleinvite = () => {
-    navigate("/user/detailcandidate");
   };
 
   const getOptions = () => [
@@ -118,10 +120,16 @@ export default function ListCandidate() {
             />
           </Box>
         </Box>
-        <Grid container  spacing={3} mt={3} bottom={2} sx={{ gap: 10 }}>
+        <Grid container spacing={3} mt={3} bottom={2} sx={{ gap: 10 }}>
           {candidateList.map((card, index) => (
             <Grid item xs={6} md={3} key={index}>
-              <MultipleInteractionCard image={card?.avatarUrl} name={card?.fullName}  />
+              <MultipleInteractionCard
+                image={card?.avatarUrl}
+                name={card?.fullName}
+                onClickVote={() => {
+                  hanldeGetQuestion(token);
+                }}
+              />
               {/* <Card
                 sx={{
                   maxWidth: 356,

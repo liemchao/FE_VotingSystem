@@ -343,6 +343,20 @@ export const getCampaignId = (id, token) => {
   };
 };
 
+export const getCampaignID = (id, token) => {
+  return async (dispatch) => {
+    try {
+      const res = await API("GET", URL_API + `/api/v1/campaigns/${id}`, null, token);
+      dispatch(
+        createAction({
+          type: PathAction.GET_CAMPAIGN_BY_ID,
+          payload: res.data.data,
+        })
+      );
+    } catch (err) {}
+  };
+};
+
 export const DeleteCampaignId = (id, data, token) => {
   return async (dispatch) => {
     try {

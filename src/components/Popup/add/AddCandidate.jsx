@@ -100,13 +100,13 @@ export default function AddCandidate(props) {
     try {
       const res = await API("POST", URL_API + "/api/v1/candidates", data, token);
       CustomizedToast({
-        message: "Đã tạo thành công",
+        message: "Thêm ứng cử viên thành công",
         type: "SUCCESS",
       });
     } catch (error) {
       console.log("🚀 ~ file: NewStage.jsx:85 ~ onSubmit: ~ error:", error);
       CustomizedToast({
-        message: "Tạo không thành công",
+        message: "Thêm ứng cử viên không thành công",
         type: "ERROR",
       });
     }
@@ -171,7 +171,7 @@ export default function AddCandidate(props) {
                 {selectedItems.map((item) => (
                   <TableRow key={item.id}>
                     <TableCell>
-                      <Avatar alt={name} src={selectedItems.avatarUrl} />
+                      <Avatar alt={name} src={item.avatarUrl} />
                     </TableCell>
                     <TableCell>{item.fullName}</TableCell>
                     <TableCell>{item.userName}</TableCell>

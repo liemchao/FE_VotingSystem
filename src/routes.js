@@ -118,10 +118,10 @@ export default function Router() {
           path: "profile",
           element: <Profile />,
         },
-        {
-          path: "test2",
-          element: <TextT />,
-        },
+        // {
+        //   path: "test2",
+        //   element: <TextT />,
+        // },
         {
           path: "test1",
           element: <MultipleInteractionCard />,
@@ -139,10 +139,10 @@ export default function Router() {
         //   path: "campaignowner",
         //   element: <CampaignOwenrList />,
         // },
-        {
-          path: "candidate",
-          element: <CandidateList />,
-        },
+        // {
+        //   path: "candidate/:id",
+        //   element: <CandidateList />,
+        // },
         {
           path: "campaign/:id",
           element: (
@@ -164,7 +164,7 @@ export default function Router() {
           element: <FeedBack />,
         },
         {
-          path: "detailcandidate",
+          path: "candidate/:id",
           element: <DetailCandidate />,
         },
         // {
@@ -173,9 +173,8 @@ export default function Router() {
         // },
         {
           path: "profilecandidate",
-          element: < ProfilePage/>,
+          element: <ProfilePage />,
         },
-
       ],
     },
   ]);

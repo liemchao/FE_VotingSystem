@@ -19,7 +19,6 @@ import API from "config/axios/API/API";
 import moment from "moment";
 import { GetCampaignbyUserId } from "context/redux/action/action";
 import dayjs from "dayjs";
-
 const schema = yup.object().shape({});
 
 const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
@@ -30,7 +29,7 @@ export default function UpdateCampaign(props) {
   const { OpenEditCampaign, SetOpenEditCampaign, id } = props;
   const [input, setInput] = useState([]);
   const [display, setDisplay] = useState();
-  const [dateCreate] = useState("07/08/2023 12:00 AM");
+  const [dateCreate, setDayCreate] = useState();
   const [dateEnd, setDateEnd] = useState();
   const [object, setObject] = useState({});
   const formData = new FormData();
@@ -63,7 +62,7 @@ export default function UpdateCampaign(props) {
       await dispatch(getAllCategory(token));
     };
     getAPIcatagory();
-  }, []);
+  }, [dispatch]);
 
   const getOptions = () => [
     { id: "public", title: "Hiển thị" },
@@ -77,15 +76,12 @@ export default function UpdateCampaign(props) {
   useEffect(() => {
     API("GET", URL_API + `/api/v1/campaigns/${id}`, null, token)
       .then((res) => {
-        console.log(res.data.data);
         setObject(res.data.data);
-        formik.setFieldValue("title", res.data.data.title);
+        // formik.setFieldValue("title", res.data.data.title);
 
         setInput(res.data.data.imgUrl);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, [id]);
 
   const getCategoryOption = () => {
@@ -195,12 +191,11 @@ export default function UpdateCampaign(props) {
                       required
                       variant="outlined"
                       name="startTime"
-                      // defaultValue={dateCreate}
                       value={dayjs(object.startTime)}
                       label="Thời gian bắt đầu"
-                      // onChange={(event) => {
-                      //   setDateCreate(event.$d);
-                      // }}
+                      onChange={(event) => {
+                        setDayCreate(event.$d);
+                      }}
                     />
                   </Grid>
                   <Grid item xs={10}>

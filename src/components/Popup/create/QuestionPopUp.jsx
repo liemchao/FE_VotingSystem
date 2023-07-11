@@ -69,7 +69,7 @@ export default function QuestionPopUp(props) {
     }, []);
   };
   getID();
-  console.log(campaignStage);
+
 
   const hanldeCheck = (e, elementId) => {
     const value = e.target.value;
