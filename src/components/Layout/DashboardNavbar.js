@@ -83,7 +83,7 @@ export default function DashboardNavbar({ onOpenSidebar, open }) {
             <Box sx={{ flexGrow: 1 }} />
 
             <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
-              <Searchbar />
+              {/* <Searchbar /> */}
               <NotificationsPopover />
               {/* <MailNotification /> */}
               <AccountPopover />

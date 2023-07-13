@@ -108,14 +108,14 @@ export default function UserCard(props) {
           <Box sx={{ display: "flex", gap: 1.5, "& > button": { flex: 1 } }}>
             <ButtonCustomize
               nameButton="Chia sẻ"
-              bgColor="#71C043"
-              hovercolor="#2BB557"
+              bgColor="#FFA500"
+              hovercolor="#F7941D"
               onClick={onClickShare}
             />
             <ButtonCustomize
               nameButton="Tham gia"
-              bgColor="#71C043"
-              hovercolor="#2BB557"
+              bgColor="#FFA500"
+              hovercolor="#F7941D"
               onClick={onClickJoin}
             />
           </Box>

@@ -4,7 +4,6 @@ import { Form, Navigate, useLocation, useNavigate, useRoutes } from "react-route
 // import Dashboard from "layouts/dashboard";
 import SignIn from "layouts/authentication/sign-in";
 // import SignUp from "layouts/authentication/sign-up";
-import HeaderOne from "layouts/page/LangdingPage";
 import jwt_decode from "jwt-decode";
 
 // @mui icons
@@ -35,10 +34,12 @@ import ListForm from "layouts/page/user/ListForm";
 import NewStage from "layouts/page/stage/NewStage";
 import ProfilePage from "layouts/profile/ProfilePage";
 import MultipleInteractionCard from "components/Cards/CardCandidate";
+import LangdingPage from "layouts/page/Langding_Page/LangdingPage";
 import CampaignOwenrList from "layouts/page/user/Campaign/CampaignOwner";
 
+
 //----------------------------------------------------------------
-// const routePublic = ["/user/campaign/"];
+
 export default function Router() {
   const ProtectedRouteAuthen = ({ roles, children }) => {
     const token = localStorage.getItem("token");
@@ -71,7 +72,7 @@ export default function Router() {
   return useRoutes([
     {
       path: "/",
-      element: <HeaderOne />,
+      element: <LangdingPage />,
     },
     {
       path: "/authentication/sign-in",
@@ -119,10 +120,10 @@ export default function Router() {
           path: "profile",
           element: <Profile />,
         },
-        {
-          path: "test2",
-          element: <TextT />,
-        },
+        // {
+        //   path: "test2",
+        //   element: <TextT />,
+        // },
         {
           path: "test1",
           element: <MultipleInteractionCard />,
@@ -140,10 +141,10 @@ export default function Router() {
         //   path: "campaignowner",
         //   element: <CampaignOwenrList />,
         // },
-        {
-          path: "candidate",
-          element: <CandidateList />,
-        },
+        // {
+        //   path: "candidate/:id",
+        //   element: <CandidateList />,
+        // },
         {
           path: "campaign/:id",
           element: (
@@ -165,7 +166,7 @@ export default function Router() {
           element: <FeedBack />,
         },
         {
-          path: "detailcandidate",
+          path: "candidate/:id",
           element: <DetailCandidate />,
         },
         // {

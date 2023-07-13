@@ -1,3 +1,4 @@
+import { id } from "date-fns/locale";
 import * as PathAction from "../PathAction";
 const initialState = {
   currentUser: [],
@@ -15,6 +16,7 @@ const initialState = {
   campaignById: [],
   getcampaignById: {},
   useToAddCandidate: [],
+  idForm: "",
 };
 
 export default function userReducer(state = initialState, { type, payload }) {
@@ -63,6 +65,10 @@ export default function userReducer(state = initialState, { type, payload }) {
       break;
     case PathAction.GET_CAMPAIGN_ID:
       state.getcampaignById = payload;
+      break;
+    case PathAction.PUT_ID_FORM:
+      state.idForm = payload;
+      console.log(state.idForm);
       break;
 
     default:

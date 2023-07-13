@@ -12,6 +12,7 @@ import {
   Rating,
   Box,
 } from "@mui/material";
+import * as PathAction from "../../../../context/redux/PathAction";
 import { useDispatch, useSelector } from "react-redux";
 import { handleGetCandidateByIdCampaign } from "context/redux/action/action";
 import { Authen } from "context/authenToken/AuthenToken";
@@ -20,6 +21,10 @@ import { handleGetCampaignById } from "context/redux/action/action";
 import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
 import StageCard from "components/Cards/StageCard";
 
+export const createAction = ({ type, payload }) => {
+  return { type, payload };
+};
+
 export default function CampaignStageList() {
   //------------
   const { token } = useContext(Authen);
@@ -27,9 +32,6 @@ export default function CampaignStageList() {
   const { id } = useParams();
   const navigate = useNavigate();
   //------------
-  const stateList = useSelector((state) => {
-    return state.campaignStage;
-  });
 
   useEffect(() => {
     const callAPIgetList = async () => {
@@ -38,9 +40,20 @@ export default function CampaignStageList() {
     callAPIgetList();
   }, [id]);
 
-  const handleinvite = (id, token) => {
+  const stateList = useSelector((state) => {
+    return state.campaignStage;
+  });
+  console.log(stateList);
+
+  const handleinvite = (id, token, idForm) => {
     dispatch(handleGetCandidateByIdCampaign(id, token));
-    navigate("/user/detailcandidate");
+    dispatch(
+      createAction({
+        type: PathAction.PUT_ID_FORM,
+        payload: idForm,
+      })
+    );
+    navigate(`/user/candidate/${id}`);
   };
 
   return (
@@ -56,7 +69,7 @@ export default function CampaignStageList() {
           <StageCard
             title={card.title}
             onClickJoin={() => {
-              handleinvite(card.campaignId, token);
+              handleinvite(card.campaignId, token, card.formId);
             }}
           />
           {/* <Card

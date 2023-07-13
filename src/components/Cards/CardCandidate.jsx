@@ -31,7 +31,7 @@ export default function MultipleInteractionCard(props) {
           size="md"
           variant="solid"
           color="success"
-          onClick={onClickVote}
+          onClick={onClickShare}
           sx={{
             position: "absolute",
             zIndex: 2,

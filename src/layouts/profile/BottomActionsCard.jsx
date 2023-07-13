@@ -10,6 +10,7 @@ import IconButton from "@mui/joy/IconButton";
 import Typography from "@mui/joy/Typography";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import { CardActions } from "@mui/material";
+import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
 
 export default function BottomActionsCard(props) {
   let { avatar, title } = props;
@@ -44,12 +45,26 @@ export default function BottomActionsCard(props) {
         <IconButton variant="outlined" color="neutral" sx={{ mr: "auto" }}>
           <FavoriteBorder />
         </IconButton>
-        <Button variant="outlined" color="neutral">
-          View
-        </Button>
-        <Button variant="solid" color="primary">
-          Join
-        </Button>
+        <ButtonCustomize
+          variant="contained"
+          component="span"
+          nameButton="Chia sẻ"
+          bgColor="#FFA500"
+          hovercolor="#F7941D"
+          sx={{
+            marginLeft: "20%",
+          }}
+        />
+        <ButtonCustomize
+          variant="contained"
+          component="span"
+          nameButton="Xem chi tiết"
+          bgColor="#FFA500"
+          hovercolor="#F7941D"
+          sx={{
+            marginLeft: "20%",
+          }}
+        />
       </CardActions>
     </Card>
   );

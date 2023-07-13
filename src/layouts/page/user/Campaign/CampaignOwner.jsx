@@ -31,6 +31,7 @@ import UpdateCampaign from "components/Popup/updatePopup/UpdateCampaign";
 import { getCampaignId } from "context/redux/action/action";
 import AlertDialog from "components/Popup/delete/Dialog";
 import AddCandidate from "components/Popup/add/AddCandidate";
+import { getCampaignID } from "context/redux/action/action";
 
 export default function CampaignOwenrList() {
   const navigate = useNavigate();
@@ -54,8 +55,8 @@ export default function CampaignOwenrList() {
   const [id, setId] = useState();
   const { token } = useContext(Authen);
   const decode = jwt_decode(token);
-
   const dispatch = useDispatch();
+  
   useEffect(() => {
     const callAPI = async () => {
       await dispatch(GetCampaignbyUserId(decode.Username, token));
@@ -85,7 +86,7 @@ export default function CampaignOwenrList() {
   const handleClickUpdate = useCallback(
     (id) => {
       setId(id);
-      dispatch(getCampaignId(id, token));
+      dispatch(getCampaignID(id, token));
       SetOpenUpdate(true);
     },
     [id]

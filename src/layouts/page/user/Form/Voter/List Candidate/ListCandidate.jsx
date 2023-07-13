@@ -1,4 +1,8 @@
 // import { filter } from "lodash";
+
+import { useParams } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { TextField, Grid, OutlinedInput, InputAdornment, Container } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import React, { useContext, useEffect } from "react";
 import {
@@ -23,15 +27,21 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { handleGetQuestByIdCampaign } from "context/redux/action/action";
 import { Authen } from "context/authenToken/AuthenToken";
-import QuestionPopUp from "components/Popup/create/CreateQuestionPopUp";
+import QuestionPopUp from "components/Popup/create/QuestionPopUp";
 import MultipleInteractionCard from "components/Cards/CardCandidate";
 import Page from "components/Layout/Page";
+import { handleGetCandidateByIdCampaign } from "context/redux/action/action";
+import { callAPIgetListForm } from "context/redux/action/action";
+import { debounce } from "lodash";
+import { useRef } from "react";
 import { debounce } from "lodash";
 import { useRef } from "react";
 
 export default function ListCandidate() {
   const [OpenPopUp, SetOpenPopUp] = useState(false);
-  const [idForm, setIdForm] = useState();
+  // const [idForm, setIdForm] = useState();
+  const { id } = useParams();
+  const dispatch = useDispatch();
   const { token } = useContext(Authen);
   const dipatch = useDispatch();
   const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
@@ -46,12 +56,20 @@ export default function ListCandidate() {
     //   borderColor: `${theme.palette.grey[500_32]} !important`,
     // },
   }));
+
+  useEffect(() => {
+    const callAPI = async () => {
+      await dispatch(handleGetCandidateByIdCampaign(id, token));
+      await dispatch(callAPIgetListForm(token));
+    };
+    callAPI();
+  }, [id]);
+
   const candidateList = useSelector((state) => {
     return state.candidateList;
   });
-
-  const state = useSelector((state) => {
-    return state.campaignStage;
+  const idForm = useSelector((state) => {
+    return state.idForm;
   });
 
   const hanlleAuthenVote = () => {
@@ -70,21 +88,9 @@ export default function ListCandidate() {
     }
   };
 
-  // lấy ID form
-  const getIdForm = () => {
-    for (let index = 0; index < state.length; index++) {
-      return state[0].formId;
-    }
-  };
-
   const hanldeGetQuestion = async (token) => {
-    await dipatch(handleGetQuestByIdCampaign(getIdForm(), token));
+    await dipatch(handleGetQuestByIdCampaign(idForm, token));
     SetOpenPopUp(true);
-  };
-
-  const navigate = useNavigate();
-  const handleinvite = () => {
-    navigate("/user/detailcandidate");
   };
 
   const getOptions = () => [
@@ -92,6 +98,7 @@ export default function ListCandidate() {
     { id: "inActive", title: "Trạng thái ẩn" },
     { id: "All", title: "Không hoạt động" },
   ];
+
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [isTyping, setIsTyping] = useState(false);
@@ -154,6 +161,7 @@ export default function ListCandidate() {
     <Page title="User">
       <Container>
         <Box sx={{ display: "flex", alignItems: "center" }}>
+
           {/* <SearchStyle
             // value={searchTerm}
             inputRef={searchInputRef}
@@ -205,13 +213,19 @@ export default function ListCandidate() {
             />
           </Box>
         </Box>
-        <Grid container spacing={3} mt={3} p={2} sx={{ gap: 10 }}>
+
+        <Grid container spacing={3} mt={3} bottom={2} sx={{ gap: 10 }}>
           {getCurrentCandidates().map((card, index) => (
-            <div key={index}>
-              <Grid item xs={6} md={3} key={index}>
-                <MultipleInteractionCard image={card?.avatarUrl} name={card?.fullName} />
-              </Grid>
-            </div>
+            <Grid item xs={6} md={3} key={index}>
+              <MultipleInteractionCard
+                image={card?.avatarUrl}
+                name={card?.fullName}
+                onClickVote={() => {
+                  hanldeGetQuestion(token);
+                }}
+              />
+            </Grid>
+
           ))}
         </Grid>
       </Container>

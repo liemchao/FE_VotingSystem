@@ -43,17 +43,19 @@ export default function StageCard(props) {
         </Typography>
       </CardContent>
       <CardOverflow>
-        <Button variant="solid" color="success" size="lg" onClick={onClickJoin}>
+        <Button
+          sx={{
+            backgroundColor: "#FFA500",
+            "&:hover": {
+              backgroundColor: "#F7941D",
+            },
+          }}
+          variant="solid"
+          size="lg"
+          onClick={onClickJoin}
+        >
           Tham gia
         </Button>
-        {/* <ButtonCustomize
-          nameButton="Chi tiết"
-          bgColor="#71C043"
-          hovercolor="#2BB557"
-          onClick={() => {
-            // handleinvite(card.campaignId, token);
-          }}
-        /> */}
       </CardOverflow>
     </Card>
   );

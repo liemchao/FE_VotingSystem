@@ -4,12 +4,9 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Avatar, Button, Container, Grid } from "@mui/material";
 import CampaignStageList from "./CampaignStageList";
-import TextField from "@mui/material/TextField";
-import Pagination from "@mui/material/Pagination";
 import Box from "@mui/material/Box";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { orange } from "@mui/material/colors";
 
 import { Authen } from "context/authenToken/AuthenToken";
 import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
@@ -57,8 +54,8 @@ export default function CampaignStage() {
           <Grid item xs={1.2} justifyContent="flex-end" mt={1} mr={0}>
             <ButtonCustomize
               nameButton=" Thêm giai đoạn"
-              bgColor="#71C043"
-              hovercolor="#2BB557"
+              bgColor="#FFA500"
+              hovercolor="#F7941D"
               onClick={() => {
                 handleNavigate();
               }}
