@@ -34,7 +34,7 @@ export default function Actions({ matches }) {
               color: matches && Colors.secondary,
             }}
           >
-            <ButtonCustomize nameButton="Giới thiệu" bgColor="#71C043" hovercolor="#2BB557" />
+            <ButtonCustomize nameButton="Giới thiệu" bgColor="#F7941D" hovercolor="#F27323" />
           </ListItemIcon>
         </ListItemButton>
         <Divider orientation="vertical" flexItem />
@@ -50,7 +50,7 @@ export default function Actions({ matches }) {
               color: matches && Colors.secondary,
             }}
           >
-            <ButtonCustomize nameButton="Chi tiết" bgColor="#71C043" hovercolor="#2BB557" />
+            <ButtonCustomize nameButton="Chi tiết" bgColor="#F7941D" hovercolor="#F27323" />
           </ListItemIcon>
         </ListItemButton>
         <Divider orientation="vertical" flexItem />
@@ -68,8 +68,8 @@ export default function Actions({ matches }) {
           >
             <ButtonCustomize
               nameButton="Đăng nhập"
-              bgColor="#71C043"
-              hovercolor="#2BB557"
+              bgColor="#F7941D"
+              hovercolor="#F27323"
               onClick={() => {
                 handleLogin();
               }}

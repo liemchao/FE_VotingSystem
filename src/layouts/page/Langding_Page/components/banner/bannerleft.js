@@ -47,7 +47,7 @@ function FeatureItem({ src, title, description, items }) {
           <Typography variant="body1" paragraph>
             {description}
           </Typography>
-          <ul>
+          <ul style={{ listStyle: "none" }}>
             {items.map((item) => (
               <li key={item}>
                 <Typography variant="body1" display="flex" alignItems="center" gutterBottom>
@@ -62,7 +62,7 @@ function FeatureItem({ src, title, description, items }) {
                       d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
                       fill="#22C55E"
                     />
-                  </svg>
+                  </svg>{" "}
                   {item}
                 </Typography>
               </li>
@@ -88,7 +88,7 @@ function FeatureItem2({ src, title, description, items }) {
           <Typography variant="body1" paragraph>
             {description}
           </Typography>
-          <ul>
+          <ul style={{ listStyle: "none" }}>
             {items.map((item) => (
               <li key={item}>
                 <Typography variant="body1" display="flex" alignItems="center" gutterBottom>
@@ -126,8 +126,8 @@ export default function MyComponent() {
     <section id="section-3" className={classes.root}>
       <Container maxWidth="lg">
         {/* Section header */}
-        <div className={classes.sectionTitle}>
-          <Typography variant="h4" component="h4" gutterBottom>
+        <div className={classes.sectionTitle} style={{ textAlign: "center" }}>
+          <Typography variant="h2" component="h2" gutterBottom>
             Sản phẩm chúng tôi cung cấp thống kê bằng bảng thông dụng
           </Typography>
           <Typography variant="body1" gutterBottom>

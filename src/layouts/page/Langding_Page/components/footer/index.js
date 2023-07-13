@@ -81,11 +81,12 @@ export default function Footer() {
         <Grid item md={6} lg={4}>
           <FooterTitle variant="body1">Liên hệ ngay</FooterTitle>
           <Stack>
-            <SubscribeTf color="primary" label="Địa chỉ email" variant="standard" />
+            <SubscribeTf label="Địa chỉ email" variant="standard" />
             <Button
               startIcon={<SendIcon sx={{ color: Colors.white }} />}
               sx={{ mt: 4, mb: 4 }}
               variant="contained"
+              color="warning"
             >
               Liên hệ
             </Button>
