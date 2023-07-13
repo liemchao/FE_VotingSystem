@@ -28,6 +28,7 @@ import NewPopUp from "components/Popup/create/NewPopUp";
 import { handleGetCampaignById } from "context/redux/action/action";
 import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
 import UpdateCampaign from "components/Popup/updatePopup/UpdateCampaign";
+import { getCampaignId } from "context/redux/action/action";
 import AlertDialog from "components/Popup/delete/Dialog";
 import AddCandidate from "components/Popup/add/AddCandidate";
 import { getCampaignID } from "context/redux/action/action";

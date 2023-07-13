@@ -1,7 +1,23 @@
 // import { filter } from "lodash";
+
 import { useParams } from "react-router-dom";
 import React, { useContext, useEffect } from "react";
 import { TextField, Grid, OutlinedInput, InputAdornment, Container } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import {
+  Card,
+  Button,
+  Typography,
+  CardMedia,
+  CardContent,
+  CardActions,
+  Grid,
+  OutlinedInput,
+  InputAdornment,
+  Container,
+  TextField,
+} from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import Iconify from "assets/theme/components/icon/Iconify";
 import Box from "@mui/material/Box";
@@ -18,6 +34,9 @@ import { handleGetCandidateByIdCampaign } from "context/redux/action/action";
 import { callAPIgetListForm } from "context/redux/action/action";
 import { debounce } from "lodash";
 import { useRef } from "react";
+import { debounce } from "lodash";
+import { useRef } from "react";
+
 export default function ListCandidate() {
   const [OpenPopUp, SetOpenPopUp] = useState(false);
   // const [idForm, setIdForm] = useState();
@@ -32,10 +51,10 @@ export default function ListCandidate() {
       duration: theme.transitions.duration.shorter,
     }),
     "&.Mui-focused": { width: 320, boxShadow: "0.7 rem" },
-    "& fieldset": {
-      borderWidth: `1px !important`,
-      borderColor: `${theme.palette.grey[500_32]} !important`,
-    },
+    // "& fieldset": {
+    //   borderWidth: `1px !important`,
+    //   borderColor: `${theme.palette.grey[500_32]} !important`,
+    // },
   }));
 
   useEffect(() => {
@@ -142,6 +161,23 @@ export default function ListCandidate() {
     <Page title="User">
       <Container>
         <Box sx={{ display: "flex", alignItems: "center" }}>
+
+          {/* <SearchStyle
+            // value={searchTerm}
+            inputRef={searchInputRef}
+            // onChange={handleSearchChange}
+            placeholder="Tìm kiếm..."
+            startAdornment={
+              <InputAdornment position="start">
+                <Iconify
+                  icon="eva:search-fill"
+                  sx={{ color: "text.disabled", width: 20, height: 20 }}
+                />
+              </InputAdornment>
+            }
+            inputProps={{ "aria-label": "search candidate" }}
+            // onChange={handleSearchChange}
+          /> */}
           <Box
             component="form"
             sx={{
@@ -158,6 +194,7 @@ export default function ListCandidate() {
               variant="outlined"
             />
           </Box>
+
           <Pagination
             sx={{ ml: 25 }}
             color="primary"
@@ -165,7 +202,6 @@ export default function ListCandidate() {
             page={currentPage}
             onChange={handlePageChange}
           />
-
           <Box sx={{ marginTop: "1%", marginLeft: "20%" }}>
             <Select
               required
@@ -177,6 +213,7 @@ export default function ListCandidate() {
             />
           </Box>
         </Box>
+
         <Grid container spacing={3} mt={3} bottom={2} sx={{ gap: 10 }}>
           {getCurrentCandidates().map((card, index) => (
             <Grid item xs={6} md={3} key={index}>
@@ -188,6 +225,7 @@ export default function ListCandidate() {
                 }}
               />
             </Grid>
+
           ))}
         </Grid>
       </Container>

@@ -29,12 +29,14 @@ import Profile from "layouts/page/profile/Profile";
 import AllCampaignList from "layouts/page/AllCampaign";
 import TextT from "layouts/page/Text";
 import ProfileCandidate from "layouts/page/user/Candidate/ProfileCandidate";
-import CampaignOwenrList from "layouts/page/user/Campaign/CampaignOwner";
+import P from "layouts/page/user/Campaign/CampaignOwner";
 import ListForm from "layouts/page/user/ListForm";
 import NewStage from "layouts/page/stage/NewStage";
 import ProfilePage from "layouts/profile/ProfilePage";
 import MultipleInteractionCard from "components/Cards/CardCandidate";
 import LangdingPage from "layouts/page/Langding_Page/LangdingPage";
+import CampaignOwenrList from "layouts/page/user/Campaign/CampaignOwner";
+
 
 //----------------------------------------------------------------
 
