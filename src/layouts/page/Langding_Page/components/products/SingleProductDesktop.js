@@ -42,13 +42,13 @@ export default function SingleProductDesktop({ product, matches }) {
         <ProductActionsWrapper show={showOptions || matches}>
           <Stack direction={matches ? "row" : "column"}>
             <ProductActionButton>
-              <Tooltip placement="left" title="share this product">
-                <ShareIcon color="primary" />
+              <Tooltip placement="left" title="Chia sẻ ứng cử viên">
+                <ShareIcon color="warning" />
               </Tooltip>
             </ProductActionButton>
             <ProductActionButton onClick={() => showProductDetailDialog()}>
-              <Tooltip placement="left" title="Full view">
-                <FitScreenIcon color="primary" />
+              <Tooltip placement="left" title="Xem chi tiết">
+                <FitScreenIcon color="warning" />
               </Tooltip>
             </ProductActionButton>
           </Stack>

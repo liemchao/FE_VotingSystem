@@ -33,7 +33,7 @@ export default function LangdingPage() {
             <Promotions />
             <SearchBox />
             <Box display="flex" justifyContent="center" sx={{ p: 4 }}>
-              <Typography variant="h4">Ứng cử viên</Typography>
+              <Typography variant="h2">Ứng cử viên</Typography>
             </Box>
             <Products />
             <Footer />

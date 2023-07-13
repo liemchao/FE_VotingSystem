@@ -1,8 +1,5 @@
 import styled from "@emotion/styled";
-import {
-  TextField,
-  Typography,
-} from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import { Colors } from "../theme";
 
 export const FooterTitle = styled(Typography)(() => ({
@@ -12,7 +9,7 @@ export const FooterTitle = styled(Typography)(() => ({
 
 export const SubscribeTf = styled(TextField)(() => ({
   ".MuiInputLabel-root": {
-    color: Colors.secondary,
+    color: Colors.orange,
   },
 
   ".MuiInput-root::before": {

@@ -16,6 +16,8 @@ export const Colors = {
   border: "#DDDFE1",
   inverse: "#2F3D4A",
   shaft: "#333",
+  orange: "#F7941D",
+  orangelight: "#FFA500",
   ///////////////
   // Grays
   ///////////////
@@ -28,6 +30,7 @@ export const Colors = {
   ///////////////
   white: "#fff",
   black: "#000",
+  red: "#FF461E",
 };
 
 const theme = createTheme({
@@ -63,20 +66,20 @@ const theme = createTheme({
     MuiDrawer: {
       styleOverrides: {
         paper: {
-          width: DrawerWidth,          
+          width: DrawerWidth,
           background: Colors.primary,
           color: Colors.secondary,
-          borderRadius: '0px 100px 0px 0px',
-          borderRight: `1px solid ${Colors.primary}`
-        }
-      }
+          borderRadius: "0px 100px 0px 0px",
+          borderRight: `1px solid ${Colors.primary}`,
+        },
+      },
     },
     MuiDivider: {
       styleOverrides: {
         root: {
-          borderColor: lighten(0.2, Colors.primary)
-        }
-      }
+          borderColor: lighten(0.2, Colors.primary),
+        },
+      },
     },
     MyShopButton: {
       styleOverrides: {
@@ -86,13 +89,13 @@ const theme = createTheme({
         primary: {
           background: Colors.primary,
           "&:hover": {
-            background: lighten(0.05, Colors.primary),
+            background: lighten(0.05, Colors.orangelight),
           },
         },
         secondary: {
           background: `${Colors.secondary}`,
           "&:hover": {
-            background: lighten(0.05, Colors.primary),
+            background: lighten(0.05, Colors.orangelight),
           },
         },
       },

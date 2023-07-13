@@ -40,13 +40,13 @@ export default function SingleProduct({ product, matches }) {
               <FavoriteIcon />
             </ProductFavButton>
             <ProductActionButton>
-              <Tooltip placement="left" title="share this product">
-                <ShareIcon color="primary" />
+              <Tooltip placement="left" title="Chia sẻ ứng cử viên">
+                <ShareIcon color="#FFA500" />
               </Tooltip>
             </ProductActionButton>
             <ProductActionButton onClick={() => showProductDetailDialog()}>
               <Tooltip placement="left" title="Full view">
-                <FitScreenIcon color="primary" />
+                <FitScreenIcon color="#FFA500" />
               </Tooltip>
             </ProductActionButton>
           </Stack>

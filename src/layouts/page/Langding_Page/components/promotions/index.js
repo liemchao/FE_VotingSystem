@@ -39,7 +39,6 @@ export default function Promotions() {
     const intervalId = setInterval(() => {
       setMessageIndex((i) => (i + 1) % cards.length);
 
-
       setShow(true);
 
       setTimeout(() => {
@@ -53,27 +52,33 @@ export default function Promotions() {
   }, []);
 
   return (
-    <PromotionsContainer ref={containerRef} overflow="hidden">
-      <Slide
-        direction={show ? "left" : "right"}
-        in={show}
-        container={containerRef.current}
-        timeout={{
-          enter: 500,
-          exit: 100,
-        }}
-      >
-        <Box display="flex" justifyContent="center" alignItems="center">
-          <UserCard
-            id={cards[messageIndex].image}
-            title={cards[messageIndex].title}
-            creater={"Moderator"}
-            url={cards[messageIndex].image}
-            // dayEnd={dayjs(item.endTime).format("DD-MM-YYYY HH:mm:ss")}
-          />
-     
-        </Box>
-      </Slide>
-    </PromotionsContainer>
+    <>
+      <div style={{ textAlign: "center" }}>
+        <Typography variant="h2" component="h2" gutterBottom>
+          Các chiến dịch tiêu biểu
+        </Typography>
+      </div>
+      <PromotionsContainer ref={containerRef} overflow="hidden">
+        <Slide
+          direction={show ? "left" : "right"}
+          in={show}
+          container={containerRef.current}
+          timeout={{
+            enter: 500,
+            exit: 100,
+          }}
+        >
+          <Box display="flex" justifyContent="center" alignItems="center">
+            <UserCard
+              id={cards[messageIndex].image}
+              title={cards[messageIndex].title}
+              creater={"Moderator"}
+              url={cards[messageIndex].image}
+              // dayEnd={dayjs(item.endTime).format("DD-MM-YYYY HH:mm:ss")}
+            />
+          </Box>
+        </Slide>
+      </PromotionsContainer>
+    </>
   );
 }
