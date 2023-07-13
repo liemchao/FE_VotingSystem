@@ -1,23 +1,8 @@
 // import { filter } from "lodash";
-
 import { useParams } from "react-router-dom";
 import React, { useContext, useEffect } from "react";
-import { TextField, Grid, OutlinedInput, InputAdornment, Container } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import React, { useContext, useEffect } from "react";
-import {
-  Card,
-  Button,
-  Typography,
-  CardMedia,
-  CardContent,
-  CardActions,
-  Grid,
-  OutlinedInput,
-  InputAdornment,
-  Container,
-  TextField,
-} from "@mui/material";
+import { Grid, OutlinedInput, InputAdornment, Container, TextField } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import Iconify from "assets/theme/components/icon/Iconify";
 import Box from "@mui/material/Box";
@@ -32,11 +17,8 @@ import MultipleInteractionCard from "components/Cards/CardCandidate";
 import Page from "components/Layout/Page";
 import { handleGetCandidateByIdCampaign } from "context/redux/action/action";
 import { callAPIgetListForm } from "context/redux/action/action";
-import { debounce } from "lodash";
 import { useRef } from "react";
 import { debounce } from "lodash";
-import { useRef } from "react";
-
 export default function ListCandidate() {
   const [OpenPopUp, SetOpenPopUp] = useState(false);
   // const [idForm, setIdForm] = useState();
@@ -161,7 +143,6 @@ export default function ListCandidate() {
     <Page title="User">
       <Container>
         <Box sx={{ display: "flex", alignItems: "center" }}>
-
           {/* <SearchStyle
             // value={searchTerm}
             inputRef={searchInputRef}
@@ -225,7 +206,6 @@ export default function ListCandidate() {
                 }}
               />
             </Grid>
-
           ))}
         </Grid>
       </Container>
