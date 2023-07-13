@@ -4,7 +4,6 @@ import { Form, Navigate, useLocation, useNavigate, useRoutes } from "react-route
 // import Dashboard from "layouts/dashboard";
 import SignIn from "layouts/authentication/sign-in";
 // import SignUp from "layouts/authentication/sign-up";
-import HeaderOne from "layouts/page/LangdingPage";
 import jwt_decode from "jwt-decode";
 
 // @mui icons
@@ -35,9 +34,10 @@ import ListForm from "layouts/page/user/ListForm";
 import NewStage from "layouts/page/stage/NewStage";
 import ProfilePage from "layouts/profile/ProfilePage";
 import MultipleInteractionCard from "components/Cards/CardCandidate";
+import LangdingPage from "layouts/page/Langding_Page/LangdingPage";
 
 //----------------------------------------------------------------
-// const routePublic = ["/user/campaign/"];
+
 export default function Router() {
   const ProtectedRouteAuthen = ({ roles, children }) => {
     const token = localStorage.getItem("token");
@@ -70,7 +70,7 @@ export default function Router() {
   return useRoutes([
     {
       path: "/",
-      element: <HeaderOne />,
+      element: <LangdingPage />,
     },
     {
       path: "/authentication/sign-in",

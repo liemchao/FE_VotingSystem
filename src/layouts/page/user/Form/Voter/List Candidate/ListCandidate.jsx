@@ -178,7 +178,7 @@ export default function ListCandidate() {
           </Box>
         </Box>
         <Grid container spacing={3} mt={3} bottom={2} sx={{ gap: 10 }}>
-          {candidateList.map((card, index) => (
+          {getCurrentCandidates().map((card, index) => (
             <Grid item xs={6} md={3} key={index}>
               <MultipleInteractionCard
                 image={card?.avatarUrl}
