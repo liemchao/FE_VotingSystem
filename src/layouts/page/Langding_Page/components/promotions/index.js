@@ -1,4 +1,4 @@
-import { CardContent, CardMedia, Slide, Typography } from "@mui/material";
+import { Slide, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useEffect, useRef, useState } from "react";
 import { PromotionsContainer } from "../../styles/promotions";
@@ -54,7 +54,7 @@ export default function Promotions() {
   return (
     <>
       <div style={{ textAlign: "center" }}>
-        <Typography variant="h2" component="h2" gutterBottom>
+        <Typography variant="h3" component="h3" gutterBottom>
           Các chiến dịch tiêu biểu
         </Typography>
       </div>

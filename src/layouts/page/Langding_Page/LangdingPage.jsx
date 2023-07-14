@@ -2,7 +2,6 @@ import * as React from "react";
 import ThemeProvider from "theme/index.js";
 import theme from "assets/theme";
 import Appbar from "./components/appbar";
-import Banner from "./components/banner";
 import Promotions from "./components/promotions";
 import SearchBox from "./components/search";
 import Products from "./components/products";
@@ -12,6 +11,7 @@ import { UIProvider } from "./context/ui";
 import Footer from "./components/footer";
 import BannerLeft from "./components/banner/bannerleft";
 import Section2 from "./components/feature";
+import PromotionCarousel from "./components/campaign";
 
 //----------------------------------------------------------------
 
@@ -30,6 +30,7 @@ export default function LangdingPage() {
             <Appbar />
             <BannerLeft />
             <Section2 />
+            <PromotionCarousel />
             <Promotions />
             <SearchBox />
             <Box display="flex" justifyContent="center" sx={{ p: 4 }}>
