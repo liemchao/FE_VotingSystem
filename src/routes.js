@@ -37,7 +37,6 @@ import MultipleInteractionCard from "components/Cards/CardCandidate";
 import LangdingPage from "layouts/page/Langding_Page/LangdingPage";
 import CampaignOwenrList from "layouts/page/user/Campaign/CampaignOwner";
 
-
 //----------------------------------------------------------------
 
 export default function Router() {

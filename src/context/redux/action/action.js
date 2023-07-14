@@ -118,7 +118,10 @@ export const callAPIgetListCandidates = (token) => {
           payload: res.data.data,
         })
       );
-    } catch (err) {}
+      console.log(res.data.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 };
 

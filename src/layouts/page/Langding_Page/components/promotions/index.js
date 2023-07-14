@@ -4,51 +4,47 @@ import { useEffect, useRef, useState } from "react";
 import { PromotionsContainer } from "../../styles/promotions";
 
 import UserCard from "components/Cards/cardCampaign";
+import { useDispatch, useSelector } from "react-redux";
+import { callAPIgetListCampaigns } from "context/redux/action/action";
+import { useContext } from "react";
+import { Authen } from "context/authenToken/AuthenToken";
 
-const cards = [
-  {
-    id: 1,
-    title: "20% off on your first order!",
-    description: "Use code FIRST20 at checkout.",
-    image:
-      "https://www.fotomoto.vn/wp-content/uploads/2022/09/sinh-nhat-fpt-photobooth-chup-anh-in-hinh-lay-lien-fotomoto-1400x640.jpg.webp",
-  },
-  {
-    id: 2,
-    title: "Summer sale starts now, visit any store.",
-    description: "Get up to 50% off on selected items.",
-    image:
-      "https://www.fotomoto.vn/wp-content/uploads/2022/09/sinh-nhat-fpt-photobooth-chup-anh-in-hinh-lay-lien-fotomoto-1400x640.jpg.webp",
-  },
-  {
-    id: 3,
-    title: "Please like and subscribe :)",
-    description: "Follow us on social media for more updates.",
-    image:
-      "https://www.fotomoto.vn/wp-content/uploads/2022/09/sinh-nhat-fpt-photobooth-chup-anh-in-hinh-lay-lien-fotomoto-1400x640.jpg.webp",
-  },
-];
 export default function Promotions() {
   const containerRef = useRef();
   const [show, setShow] = useState(true);
   const [messageIndex, setMessageIndex] = useState(0);
+  const { token } = useContext(Authen);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const callAPI = async () => {
+      await dispatch(callAPIgetListCampaigns(token));
+    };
+    callAPI();
+  }, [dispatch, token]);
+
+  const campaigns = useSelector((state) => {
+    return state.campaigns;
+  });
+
   useEffect(() => {
     setTimeout(() => {
       setShow(false);
     }, 3000);
-    const intervalId = setInterval(() => {
-      setMessageIndex((i) => (i + 1) % cards.length);
+    if (campaigns.length > 0) {
+      const intervalId = setInterval(() => {
+        setMessageIndex((i) => (i + 1) % campaigns.length);
 
-      setShow(true);
+        setShow(true);
 
-      setTimeout(() => {
-        setShow(false);
-      }, 3000);
-    }, 4000);
+        setTimeout(() => {
+          setShow(false);
+        }, 3000);
+      }, 4000);
 
-    return () => {
-      clearInterval(intervalId);
-    };
+      return () => {
+        clearInterval(intervalId);
+      };
+    }
   }, []);
 
   return (
@@ -70,11 +66,11 @@ export default function Promotions() {
         >
           <Box display="flex" justifyContent="center" alignItems="center">
             <UserCard
-              id={cards[messageIndex].image}
-              title={cards[messageIndex].title}
+              id={campaigns[messageIndex]?.campaignId}
+              title={campaigns[messageIndex]?.title}
               creater={"Moderator"}
-              url={cards[messageIndex].image}
-              // dayEnd={dayjs(item.endTime).format("DD-MM-YYYY HH:mm:ss")}
+              url={campaigns[messageIndex]?.imgUrl}
+              dayEnd={campaigns?.endTime}
             />
           </Box>
         </Slide>
