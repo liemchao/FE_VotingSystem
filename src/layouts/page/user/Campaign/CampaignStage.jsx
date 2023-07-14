@@ -12,6 +12,7 @@ import { Authen } from "context/authenToken/AuthenToken";
 import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
 import { getCampaignId } from "context/redux/action/action";
 import moment from "moment";
+import CommentForm from "layouts/page/comment";
 //----------------------------------------------------------------
 export default function CampaignStage() {
   const dispatch = useDispatch();
@@ -103,6 +104,9 @@ export default function CampaignStage() {
           />
         </Box> */}
         <CampaignStageList />
+      </Box>
+      <Box>
+        <CommentForm />
       </Box>
     </>
   );
