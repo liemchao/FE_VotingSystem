@@ -16,17 +16,14 @@ import Select from "components/Control/Select";
 import Input from "components/Control/Input";
 import PageHeader from "components/Layout/PageHeader";
 import Iconify from "assets/theme/components/icon/Iconify";
-import DateTime from "components/Control/DateTime";
 import { Authen } from "context/authenToken/AuthenToken";
 import { useContext } from "react";
 import jwt_decode from "jwt-decode";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCategory } from "context/redux/action/action";
 import { CustomizedToast } from "components/toast/ToastCustom";
 import { URL_API } from "config/axios/Url/URL";
 import API from "config/axios/API/API";
-import moment from "moment";
-import { GetCampaignbyUserId } from "context/redux/action/action";
+import { getGroupId } from "context/redux/action/action";
 
 const schema = yup.object().shape({});
 
@@ -37,6 +34,27 @@ export default function NewAccount(props) {
   const { token } = useContext(Authen);
   const { OpenPopUp, SetOpenPopUp, id } = props;
 
+  useEffect(() => {
+    const getListGroup = async () => {
+      await dispatch(getGroupId(token));
+    };
+    getListGroup();
+  }, []);
+
+  const listGroup = useSelector((state) => {
+    return state.listGroup;
+  });
+
+  const getGroupOption = () => {
+    const GroupOption = [];
+    for (var i = 0; i < listGroup.length; i++) {
+      GroupOption.push({
+        id: listGroup[i].groupId,
+        title: listGroup[i].name,
+      });
+    }
+    return GroupOption;
+  };
   const formData = new FormData();
   const handleClose = () => {
     SetOpenPopUp(false);
@@ -61,22 +79,19 @@ export default function NewAccount(props) {
         password: formik.values.password,
         fullName: formik.values.fullName,
         address: formik.values.address,
-        groupId: "ec73bf35-d867-4fb4-b73e-0d82bf63d005",
+        groupId: formik.values.groupId,
         campaignId: id,
       };
       try {
         const req = await API("POST", URL_API + `/api/v1/candidates/account`, data, token);
         console.log(req);
         if (req) {
-          // dispatch(GetCampaignbyUserId(decode.Username, token));
-
           CustomizedToast({
-            message: "Thêm tài khoản thành công thành công",
+            message: "Thêm tài khoản thành công",
             type: "SUCCESS",
           });
         }
       } catch (error) {
-        console.log(error);
         CustomizedToast({
           message: "Thêm tài khoản không thành công",
           type: "ERROR",
@@ -106,7 +121,6 @@ export default function NewAccount(props) {
                 boxShadow: 12,
                 paddingLeft: "7%",
                 maxWidth: "xl",
-                // marginLeft: "20%",
               }}
             >
               <Box
@@ -163,6 +177,26 @@ export default function NewAccount(props) {
                         formik.handleChange(event);
                       }}
                     />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Box
+                      sx={{
+                        flexDirection: "row",
+                      }}
+                    >
+                      <Select
+                        name="groupId"
+                        required
+                        label="Nhóm ứng cử viên"
+                        width="14rem"
+                        height="10rem"
+                        onChange={(e) => {
+                          const a = listGroup.find((c) => c.groupId === e.target.value);
+                          formik.setFieldValue("groupId", a.groupId);
+                        }}
+                        options={getGroupOption()}
+                      />
+                    </Box>
                   </Grid>
 
                   <Box width="200px" marginTop={"10%"} ml={"12rem"} mb={"2rem"}>

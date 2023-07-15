@@ -2,13 +2,11 @@ import { Slide, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useEffect, useRef, useState } from "react";
 import { PromotionsContainer } from "../../styles/promotions";
-
 import UserCard from "components/Cards/cardCampaign";
 import { useDispatch, useSelector } from "react-redux";
 import { callAPIgetListCampaigns } from "context/redux/action/action";
 import { useContext } from "react";
 import { Authen } from "context/authenToken/AuthenToken";
-
 export default function Promotions() {
   const containerRef = useRef();
   const [show, setShow] = useState(true);
@@ -29,13 +27,11 @@ export default function Promotions() {
   useEffect(() => {
     setTimeout(() => {
       setShow(false);
-    }, 3000);
+    }, 1500);
     if (campaigns.length > 0) {
       const intervalId = setInterval(() => {
         setMessageIndex((i) => (i + 1) % campaigns.length);
-
         setShow(true);
-
         setTimeout(() => {
           setShow(false);
         }, 3000);

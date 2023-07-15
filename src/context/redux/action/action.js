@@ -380,3 +380,18 @@ export const DeleteCampaignId = (id, data, token) => {
     }
   };
 };
+export const getGroupId = (token) => {
+  return async (dispatch) => {
+    try {
+      const res = await API("GET", URL_API + `/api/v1/groups`, null, token);
+      console.log(res);
+      dispatch(
+        createAction({
+          type: PathAction.GET_LIST_GROUP,
+          payload: res.data.data,
+        })
+      );
+    } catch (err) {
+    }
+  };
+};

@@ -146,7 +146,7 @@ export default function CampaignOwenrList() {
                     bgColor="#71C043"
                     hovercolor="#2BB557"
                     onClick={() => {
-                      // handleCampaignStage(item.campaignId, navigate);
+                      navigate("/user/result");
                     }}
                   />
 

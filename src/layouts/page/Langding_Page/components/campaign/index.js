@@ -24,29 +24,6 @@ export default function PromotionCarousel() {
     return state.campaigns;
   });
 
-  const images = [
-    {
-      src: "https://caodang.fpt.edu.vn/wp-content/uploads/900x600_happy-bee-x.png",
-      alt: "promotion1",
-    },
-    {
-      src: "https://www.fotomoto.vn/wp-content/uploads/2022/09/sinh-nhat-fpt-photobooth-chup-anh-in-hinh-lay-lien-fotomoto-1400x640.jpg.webp",
-      alt: "promotion2",
-    },
-    {
-      src: "https://www.fotomoto.vn/wp-content/uploads/2022/09/sinh-nhat-fpt-photobooth-chup-anh-in-hinh-lay-lien-fotomoto-1400x640.jpg.webp",
-      alt: "promotion3",
-    },
-    {
-      src: "https://www.fotomoto.vn/wp-content/uploads/2022/09/sinh-nhat-fpt-photobooth-chup-anh-in-hinh-lay-lien-fotomoto-1400x640.jpg.webp",
-      alt: "promotion3",
-    },
-    {
-      src: "https://www.fotomoto.vn/wp-content/uploads/2022/09/sinh-nhat-fpt-photobooth-chup-anh-in-hinh-lay-lien-fotomoto-1400x640.jpg.webp",
-      alt: "promotion3",
-    },
-  ];
-
   return (
     <>
       <div style={{ textAlign: "center" }}>
@@ -105,7 +82,7 @@ export default function PromotionCarousel() {
               id={card.imgUrl}
               title={card.title}
               creater={"Moderator"}
-              url={card.src}
+              url={card.imgUrl}
               dayEnd={card.endTime}
             />
           </Box>

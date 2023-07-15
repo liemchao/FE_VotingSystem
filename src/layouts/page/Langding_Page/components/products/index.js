@@ -48,7 +48,6 @@ export default function Products() {
   ));
   return (
     <Container>
-      <h1> em nef </h1>
       <Grid
         container
         spacing={{ xs: 2, md: 3 }}

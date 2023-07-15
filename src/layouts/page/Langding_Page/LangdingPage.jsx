@@ -28,10 +28,10 @@ export default function LangdingPage() {
         <Stack>
           <UIProvider>
             <Appbar />
-            <BannerLeft />
-            <Section2 />
             <PromotionCarousel />
             <Promotions />
+            <BannerLeft />
+            <Section2 />
             <SearchBox />
             <Box display="flex" justifyContent="center" sx={{ p: 4 }}>
               <Typography variant="h2">Ứng cử viên</Typography>

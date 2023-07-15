@@ -72,59 +72,7 @@ export default function CampaignStageList() {
               handleinvite(card.campaignId, token, card.formId);
             }}
           />
-          {/* <Card
-            sx={{
-              maxWidth: 500,
-              padding: "1rem 1rem 1rem 1rem",
-              borderRadius: "18px",
-            }}
-          >
-            <CardMedia
-              sx={{
-                height: 200,
-                display: "cover",
-              }}
-              image="https://ben.com.vn/tin-tuc/wp-content/uploads/2021/10/hinh-nen-dep-dien-thoai.jpg"
-              title="green iguana"
-            />
-            <CardContent
-              sx={{
-                height: 120,
-              }}
-            >
-              <Typography gutterBottom variant="h5" component="div">
-                {card.title}
-              </Typography>
-              <Typography variant="h6" color="text.secondary">
-                {card.subtitle}
-              </Typography>
-              <Typography variant="body1" color="text.secondary">
-                "Hãy giúp chúng tôi bình chọn 1 người xứng đáng cho vị trí lớp trưởng"
-              </Typography>
-              <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
-            </CardContent>
-            <CardActions>
-              <Box sx={{ marginTop: 2, gap: 17, display: "flex" }}>
-                <ButtonCustomize
-                  nameButton="Tham gia"
-                  bgColor="#71C043"
-                  hovercolor="#2BB557"
-                  onClick={() => {
-                    handleinvite(card.campaignId, token);
-                  }}
-                />
         
-                <ButtonCustomize
-                  nameButton="Chi tiết"
-                  bgColor="#71C043"
-                  hovercolor="#2BB557"
-                  onClick={() => {
-                    handleinvite(card.campaignId, token);
-                  }}
-                />
-              </Box>
-            </CardActions>
-          </Card> */}
         </Grid>
       ))}
     </Grid>
