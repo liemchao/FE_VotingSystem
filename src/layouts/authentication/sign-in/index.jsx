@@ -1,6 +1,11 @@
-import { useState } from "react";
+import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import CssBaseline from "@mui/material/CssBaseline";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Paper from "@mui/material/Paper";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-// react-router-dom components
 import { Link, useNavigate } from "react-router-dom";
 
 import Grid from "@mui/material/Grid";
@@ -18,11 +23,27 @@ import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
 import firebase, { auth } from "../../../config/Firebase/firebase.js";
 import GoogleButton from "components/Control/GoogleButton";
 import AdSlider from "components/Control/SilderLogin";
+import { useState } from "react";
 
 const ggProvider = new firebase.auth.GoogleAuthProvider();
-
 const schema = yup.object().shape({});
-function Basic() {
+
+function Copyright(props) {
+  return (
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+      {"Copyright © "}
+      <Link color="inherit" href="https://mui.com/">
+        Voting system
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
+
+const defaultTheme = createTheme();
+
+export default function SignInSide() {
   const [rememberMe, setRememberMe] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [idFireBase, setIdFireBase] = useState();
@@ -57,94 +78,98 @@ function Basic() {
   });
 
   return (
-    <Box height="100vh" display="flex">
-      <Grid container spacing={2}>
-        <Grid item xs={6} sx={{ backgroundColor: "#F7941D", textAlign: "center" }}>
-          <Typography sx={{ marginTop: "5%" }} variant="h2" color="white">
-            Chào mừng bạn đến với hệ thống của chúng tôi
-          </Typography>
-          <Typography sx={{ marginTop: "5%" }} variant="body1" color="white">
-            Hệ thống cung cấp hỗ trợ tạo chiến dịch dánh giá phù hợp với nhiều mục tiêu.
-          </Typography>
-          <Box>
-            <AdSlider />
-          </Box>
-          <Typography
-            sx={{ marginTop: "10%", textAlign: "center" }}
-            variant="body1"
-            color="white"
-            maxHeight={10}
+    <ThemeProvider theme={defaultTheme}>
+      <Grid container component="main" sx={{ height: "100vh" }}>
+        <CssBaseline />
+        <Grid
+          item
+          xs={false}
+          sm={4}
+          md={7}
+          sx={{
+            backgroundImage: "url(https://source.unsplash.com/random?wallpapers)",
+            backgroundRepeat: "no-repeat",
+            backgroundColor: (t) =>
+              t.palette.mode === "light" ? t.palette.grey[50] : t.palette.grey[900],
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+          <Box
+            sx={{
+              my: 8,
+              mx: 4,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
           >
-            &quot;Chúng tôi đưa ra một hệ thống bình chọn đưa ra ứng cử viên tốt nhất trong một
-            chiến dịch bình chọn.&quot;
-          </Typography>
-        </Grid>
-        <Grid item xs={6} sx={{ backgroundColor: "#FDF8EB", textAlign: "center" }}>
-          <Typography sx={{ marginTop: "5%" }} variant="h2" color="#090914">
-            Tham gia vào hệ thống
-          </Typography>
-          <Typography sx={{ marginTop: "13%" }} variant="body1" color="#090914">
-            Chào mừng bạn đến với hệ thống.
-          </Typography>
-          <form style={{ textAlign: "center", marginTop: "18%" }} onSubmit={formik.handleSubmit}>
-            <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
-              <Grid container spacing={2} sx={{ display: "flex", justifyContent: "center" }}>
-                <Grid item xs={8}>
-                  <TextField
-                    sx={{ width: "400px" }}
-                    name="userName"
-                    label="User Name"
-                    value={formik.values.userName}
-                    onChange={(e) => {
-                      formik.handleChange(e);
-                    }}
+            <Avatar sx={{ m: 2, bgcolor: "orange" }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h2">
+              Đăng nhập
+            </Typography>
+            <Box component="form" noValidate onSubmit={formik.handleSubmit} sx={{ mt: 1 }}>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="userName"
+                label="Địa chỉ email"
+                name="userName"
+                autoComplete="email"
+                autoFocus
+                value={formik.values.userName}
+                onChange={(e) => {
+                  formik.handleChange(e);
+                }}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Mật khẩu"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                value={formik.values.password}
+                onChange={(e) => {
+                  formik.handleChange(e);
+                }}
+              />
+              <Grid container>
+                <Grid item xs>
+                  <FormControlLabel
+                    control={<Checkbox value="remember" color="primary" />}
+                    label="Remember me"
                   />
                 </Grid>
-                <Grid item xs={8}>
-                  <TextField
-                    sx={{ width: "400px" }}
-                    type="password"
-                    name="password"
-                    label="Password"
-                    value={formik.values.password}
-                    onChange={(e) => {
-                      formik.handleChange(e);
-                    }}
-                  />
-                </Grid>
-                <Grid item xs={8}>
-                  <Checkbox sx={{ marginLeft: "-1%" }}></Checkbox>
-                  Remember Me
-                  <a href="#" style={{ paddingLeft: "27%" }}>
-                    Forgot Password ?
-                  </a>
-                </Grid>
-                <Grid item xs={8}>
-                  <Grid container>
-                    <Grid item xs={6}>
-                      <ButtonCustomize
-                        marginRight="12rem"
-                        marginLeft="2.7rem"
-                        nameButton="Login"
-                        bgColor="#F6911B"
-                        width="7rem"
-                        height="2.5rem"
-                        type="submit"
-                        color="#FFFFFF"
-                      />
-                    </Grid>
-                    <Grid item xs={5}>
-                      <GoogleButton onClick={hanldeLoginWithgg} />
-                    </Grid>
-                  </Grid>
+                <Grid item mt={1}>
+                  <Link href="#" variant="body1">
+                    Forgot password?
+                  </Link>
                 </Grid>
               </Grid>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                color="warning"
+              >
+                Sign In
+              </Button>
+              <Grid item xs={12} display={"flex"} justifyContent={"flex-end"}>
+                <GoogleButton onClick={hanldeLoginWithgg} />
+              </Grid>
+              <Copyright sx={{ mt: 10 }} />
             </Box>
-          </form>
+          </Box>
         </Grid>
       </Grid>
-    </Box>
+    </ThemeProvider>
   );
 }
-
-export default Basic;

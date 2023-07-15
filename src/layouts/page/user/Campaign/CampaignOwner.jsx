@@ -32,6 +32,7 @@ import { getCampaignId } from "context/redux/action/action";
 import AlertDialog from "components/Popup/delete/Dialog";
 import AddCandidate from "components/Popup/add/AddCandidate";
 import { getCampaignID } from "context/redux/action/action";
+import NewAccount from "components/Popup/create/NewAccount";
 
 export default function CampaignOwenrList() {
   const navigate = useNavigate();
@@ -52,11 +53,12 @@ export default function CampaignOwenrList() {
   const [OpenDiaLog, SetOpenDialog] = useState(false);
   const [OpenUpdate, SetOpenUpdate] = useState(false);
   const [newCandidate, setNewCandidate] = useState(false);
+  const [newAccountCandidate, setAccountNewCandidate] = useState(false);
   const [id, setId] = useState();
   const { token } = useContext(Authen);
   const decode = jwt_decode(token);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     const callAPI = async () => {
       await dispatch(GetCampaignbyUserId(decode.Username, token));
@@ -94,6 +96,11 @@ export default function CampaignOwenrList() {
   const handleClickNewUser = useCallback((id) => {
     setId(id);
     setNewCandidate(true);
+  }, []);
+
+  const handleClickNewAccontCandidate = useCallback((id) => {
+    setId(id);
+    setAccountNewCandidate(true);
   }, []);
 
   return (
@@ -139,7 +146,7 @@ export default function CampaignOwenrList() {
                     bgColor="#71C043"
                     hovercolor="#2BB557"
                     onClick={() => {
-                      // handleCampaignStage(item.campaignId, navigate);
+                      navigate("/user/result");
                     }}
                   />
 
@@ -151,15 +158,7 @@ export default function CampaignOwenrList() {
                       handleClickUpdate(item.campaignId);
                     }}
                   />
-                  {/* <Button
-                    onClick={() => {
-                      handleCampaignStage(item.campaignId, navigate);
-                    }}
-                    type="button"
-                    size="small"
-                  >
-                    <ColorButton>Cài đặt</ColorButton>
-                  </Button> */}
+
                   <ButtonCustomize
                     nameButton="Xóa"
                     bgColor="#71C043"
@@ -177,6 +176,14 @@ export default function CampaignOwenrList() {
                       handleClickNewUser(item.campaignId);
                     }}
                   />
+                  <ButtonCustomize
+                    nameButton="Thêm tài khoản"
+                    bgColor="#71C043"
+                    hovercolor="#2BB557"
+                    onClick={() => {
+                      handleClickNewAccontCandidate(item.campaignId);
+                    }}
+                  />
                 </CardActions>
               </Card>
             );
@@ -187,6 +194,7 @@ export default function CampaignOwenrList() {
       <UpdateCampaign OpenEditCampaign={OpenUpdate} SetOpenEditCampaign={SetOpenUpdate} id={id} />
       <AlertDialog OpenDialog={OpenDiaLog} SetOpenDialog={SetOpenDialog} id={id} />
       <NewPopUp OpenPopUp={OpenPopUp} SetOpenPopUp={SetOpenPopUp} />
+      <NewAccount OpenPopUp={newAccountCandidate} SetOpenPopUp={setAccountNewCandidate} id={id} />
     </Page>
   );
 }

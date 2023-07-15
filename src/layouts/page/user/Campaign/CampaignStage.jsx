@@ -12,7 +12,26 @@ import { Authen } from "context/authenToken/AuthenToken";
 import ButtonCustomize from "assets/theme/components/button/ButtonCustomize";
 import { getCampaignId } from "context/redux/action/action";
 import moment from "moment";
+import CommentForm from "layouts/page/comment";
+import CommentSection from "layouts/page/comment";
 //----------------------------------------------------------------
+const comments = [
+  {
+    author: "John",
+    content: "This is a great post!",
+    avatar: "https://picsum.photos/200",
+  },
+  {
+    author: "Jane",
+    content: "I enjoyed reading this article.",
+    avatar: "https://picsum.photos/200",
+  },
+  {
+    author: "Bob",
+    content: "Thanks for sharing!",
+    avatar: "https://picsum.photos/200",
+  },
+];
 export default function CampaignStage() {
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState("");
@@ -64,46 +83,9 @@ export default function CampaignStage() {
         </Grid>
       </Card>
       <Box sx={{ display: "flex", alignItems: "center", marginTop: "-2%" }}>
-        {/* <TextField variant="outlined" label="Search by name" sx={{ mr: 1, mt: 1 }} /> */}
-        {/* <Button variant="contained" color="primary" sx={{ mr: 1 }}>
-        Filter
-      </Button> */}
-        {/* <Pagination sx={{ ml: 21 }} count={4} color="primary" /> */}
-
-        {/* <Box sx={{ display: "flex", marginLeft: "2%", marginTop: "1%" }}>
-          <Select
-            sx={{ ml: 21, mt: 2 }}
-            name="foodCategoryId"
-            required
-            label="Trạng thái"
-            width="13rem"
-            height="10rem"
-            onChange={(e) => {}}
-            options={getOptions()}
-          />
-          <Select
-            sx={{ ml: 21, mt: 2 }}
-            name="foodCategoryId"
-            required
-            label="Trạng thái"
-            width="13rem"
-            height="10rem"
-            onChange={(e) => {}}
-            options={getOptions()}
-          />
-          <Select
-            sx={{ ml: 21, mt: 2 }}
-            name="foodCategoryId"
-            required
-            label="Trạng thái"
-            width="13rem"
-            height="10rem"
-            onChange={(e) => {}}
-            options={getOptions()}
-          />
-        </Box> */}
         <CampaignStageList />
       </Box>
+      <CommentSection />
     </>
   );
 }

@@ -36,7 +36,7 @@ import ProfilePage from "layouts/profile/ProfilePage";
 import MultipleInteractionCard from "components/Cards/CardCandidate";
 import LangdingPage from "layouts/page/Langding_Page/LangdingPage";
 import CampaignOwenrList from "layouts/page/user/Campaign/CampaignOwner";
-
+import TopAndTable from "layouts/page/rating";
 
 //----------------------------------------------------------------
 
@@ -164,6 +164,10 @@ export default function Router() {
         {
           path: "template",
           element: <FeedBack />,
+        },
+        {
+          path: "result",
+          element: <TopAndTable />,
         },
         {
           path: "candidate/:id",

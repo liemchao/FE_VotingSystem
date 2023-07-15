@@ -264,7 +264,6 @@ export default function NewPopUp(props) {
                       marginLeft: "11%",
                     }}
                   >
-                    {/* hiển thị hình lên  */}
                     {input.map((i) => (
                       <img key={i} src={i} alt="hihi" />
                     ))}

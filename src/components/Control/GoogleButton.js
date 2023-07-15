@@ -5,7 +5,7 @@ import Iconify from "assets/theme/components/icon/Iconify";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: orange[500],
+    backgroundColor: orange[800],
     height: "2.5rem",
 
     color: theme.palette.common.white,
